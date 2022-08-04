@@ -1,6 +1,7 @@
-//
-// Created by Serendipity on 2022/8/4.
-//
+/**
+ * Created by Serendipity on 2022/8/4
+ * 动态分配
+ */
 #include <stdio.h>
 #include <malloc.h>
 
@@ -32,9 +33,6 @@ void IncreaseSize(SeqList *L,int len){
 int main(){
     SeqList L;       //声明一个顺序表
     InitList(&L);  //初始化顺序表
-    L.data[1] = 1;
-    for (int i = 0; i < L.MaxSize; ++i) {
-        printf("%d\n",L.data[i]);
-    }
+
 
 }
