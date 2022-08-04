@@ -1,6 +1,6 @@
 /**
  * Created by Serendipity on 2022/8/4
- * åŠ¨æ€åˆ†é…
+ * ¶¯Ì¬·ÖÅä
  */
 #include <stdio.h>
 #include <malloc.h>
@@ -8,31 +8,40 @@
 #define InitSize 10
 #define ElemType int
 typedef struct {
-    ElemType *data;     //æŒ‡ç¤ºåŠ¨æ€åˆ†é…æ•°ç»„çš„æŒ‡é’ˆ
-    int MaxSize;        //é¡ºåºè¡¨çš„æœ€å¤§å®¹é‡
-    int length;         // é¡ºåºè¡¨çš„å½“å‰é•¿åº¦
-}SeqList;              //é¡ºåºè¡¨çš„ç±»å‹å®šä¹‰ï¼ˆåŠ¨æ€åˆ†é…æ–¹å¼ï¼‰
-//åŸºæœ¬æ“ä½œâ€”â€”åˆå§‹åŒ–ä¸€ä¸ªé¡ºåºè¡¨
+    ElemType *data;     //Ö¸Ê¾¶¯Ì¬·ÖÅäÊı×éµÄÖ¸Õë
+    int MaxSize;        //Ë³Ğò±íµÄ×î´óÈİÁ¿
+    int length;         // Ë³Ğò±íµÄµ±Ç°³¤¶È
+}SeqList;              //Ë³Ğò±íµÄÀàĞÍ¶¨Òå£¨¶¯Ì¬·ÖÅä·½Ê½£©
+//»ù±¾²Ù×÷¡ª¡ª³õÊ¼»¯Ò»¸öË³Ğò±í
 void InitList(SeqList *L){
-    //malloc å‡½æ•°è¿”å›ä¸€ä¸ªæŒ‡é’ˆï¼Œéœ€è¦å¼ºåˆ¶è½¬å‹ä¸ºä½ å®šä¹‰çš„æ•°æ®å…ƒç´ ç±»å‹æŒ‡é’ˆ
-    //InitSize  malloc å‡½æ•°çš„å‚æ•°ï¼ŒæŒ‡æ˜è¦åˆ†é…å¤šå¤§çš„è¿ç»­å†…å­˜ç©ºé—´
+    //malloc º¯Êı·µ»ØÒ»¸öÖ¸Õë£¬ĞèÒªÇ¿ÖÆ×ªĞÍÎªÄã¶¨ÒåµÄÊı¾İÔªËØÀàĞÍÖ¸Õë
+    //InitSize  malloc º¯ÊıµÄ²ÎÊı£¬Ö¸Ã÷Òª·ÖÅä¶à´óµÄÁ¬ĞøÄÚ´æ¿Õ¼ä
     L->data = (ElemType *)malloc(sizeof(ElemType) * InitSize);
-    L->length = 0;    //é¡ºåºè¡¨çš„åˆå§‹åŒ–é•¿åº¦ä¸º0
+    L->length = 0;    //Ë³Ğò±íµÄ³õÊ¼»¯³¤¶ÈÎª0
     L->MaxSize = InitSize;
 }
-//å¢åŠ åŠ¨æ€æ•°ç»„çš„é•¿åº¦
+//Ôö¼Ó¶¯Ì¬Êı×éµÄ³¤¶È
 void IncreaseSize(SeqList *L,int len){
     int *p = L->data;
     L->data = (ElemType *) malloc((L->MaxSize + len) * sizeof(ElemType));
     for (int i = 0; i < L->length; ++i) {
-        L->data[i] = p[i];        //å°†æ•°æ®å¤åˆ¶åˆ°æ–°åŒºåŸŸ
+        L->data[i] = p[i];        //½«Êı¾İ¸´ÖÆµ½ĞÂÇøÓò
     }
-    L->MaxSize = L->MaxSize + len;  //é¡ºåºè¡¨æœ€å¤§é•¿åº¦å¢åŠ len
-    free(p);               //é‡Šæ”¾åŸæ¥çš„å†…å®¹ç©ºé—´
+    L->MaxSize = L->MaxSize + len;  //Ë³Ğò±í×î´ó³¤¶ÈÔö¼Ólen
+    free(p);               //ÊÍ·ÅÔ­À´µÄÄÚÈİ¿Õ¼ä
+}
+//°´Î»²éÕÒ²Ù×÷£¬»ñÈ¡±íLÖĞµÚi¸öÎ»ÖÃµÄÔªËØµÄÖµ
+ElemType GetElem(SeqList *L,int i){
+    if(i < 1 || i > L->length)
+        return -1;
+    return L->data[i - 1];
 }
 int main(){
-    SeqList L;       //å£°æ˜ä¸€ä¸ªé¡ºåºè¡¨
-    InitList(&L);  //åˆå§‹åŒ–é¡ºåºè¡¨
+    SeqList L;       //ÉùÃ÷Ò»¸öË³Ğò±í
+    InitList(&L);  //³õÊ¼»¯Ë³Ğò±í
+
+    int result =  GetElem(&L,3);
+    printf("½á¹ûÊÇ:%d\n",result);
 
 
 }
