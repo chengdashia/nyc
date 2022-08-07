@@ -9,3 +9,4 @@ add_executable(seqList-dynamic linear/sequencetable/seqList-dynamic.c)
 
 add_executable(SingleLinkedList linear/linkedlist/SingleLinkedList.c)
 add_executable(SingleLinkedList-head linear/linkedlist/SingleLinkedList-head.c)
+add_executable(DoubleLinkedList linear/linkedlist/doublelinkedlist/DoubleLinkedList-head.c)
