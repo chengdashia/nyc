@@ -109,7 +109,38 @@ bool DeleteNode(LNode *p){
     p->next = q->next;          //将*q结点从链中断开
     free(q);           //释放后继结点的存储空间
     return true;
-
+}
+//按位查找，返回第i个元素
+LNode * GetElem(LinkList *L,int i){
+    if(i < 0)
+        return false;
+    LNode *p; //指针p指向当前扫描的结点
+    p = *L;  //L指向头结点，头结点是第0个结点(不存数据)
+    int j = 0; //当前p指向的第几个节点
+    while (p != NULL && j < i ){ //循环找到 第i个结点
+        p = p->next;
+        j++;
+    }
+    return p;
+}
+//按值查找，找到数据域==e 的结点
+LNode * LocateElem(LinkList *L,ElemType e){
+    LNode *p = (*L)->next;
+    //从第1个结点开始查找数据域为e的结点
+    while (p != NULL && p->data != e){
+        p = p->next;
+    }
+    return p;           //找到后返回该结点指针，否则返回NULL
+}
+//求表的长度
+int length(LinkList *L){
+    int len = 0;
+    LNode *p = *L;
+    while (p->next != NULL){
+        p = p->next;
+        len ++;
+    }
+    return len;
 }
 int main(){
     //声明一个指向单链表的指针
