@@ -14,3 +14,5 @@ add_executable(cycleLinkedList linear/linkedlist/doublelinkedlist/cycleSingleLin
 add_executable(cycleDoubleLinkedList linear/linkedlist/doublelinkedlist/cycleDoubleLinkedList.c)
 add_executable(StaticLinkedList linear/linkedlist/static-linkedlist/StaticLinkedList.c)
 add_executable(StaticLinkedList-guess linear/linkedlist/static-linkedlist/StaticLinkedList-guess.c)
+add_executable(question13 linear/linkedlist/application-questions/question13.c)
+add_executable(question2 linear/linkedlist/application-questions/question2.c)
