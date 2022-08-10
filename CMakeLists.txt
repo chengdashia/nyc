@@ -16,3 +16,8 @@ add_executable(StaticLinkedList linear/linkedlist/static-linkedlist/StaticLinked
 add_executable(StaticLinkedList-guess linear/linkedlist/static-linkedlist/StaticLinkedList-guess.c)
 add_executable(question13 linear/linkedlist/application-questions/question13.c)
 add_executable(question2 linear/linkedlist/application-questions/question2.c)
+add_executable(question1-DeleteMin linear/linkedlist/application-questions/question1-DeleteMin.c)
+add_executable(question3-DeleteAllSame linear/linkedlist/application-questions/question3-DeleteAllSame.c)
+add_executable(question4-DeleteBetween linear/linkedlist/application-questions/question4-OrderlyDeleteBetween.c)
+add_executable(question5-DeleteBetween2 linear/linkedlist/application-questions/question5-DeleteBetween.c)
+add_executable(question6-DuplicateRemoval linear/linkedlist/application-questions/question6-DuplicateRemoval.c)
