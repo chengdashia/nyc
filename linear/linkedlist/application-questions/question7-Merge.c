@@ -36,19 +36,19 @@ bool ListInsert(SqList *L,int i,ElemType e){
     L->length++;
     return true;
 }
-// 将两个游学顺序表合并为一个新的有序顺序表，并由函数返回结果顺序表
+// 将两个有序顺序表合并为一个新的有序顺序表，并由函数返回结果顺序表
 bool Merge(SqList L1,SqList L2,SqList *L){
-    if(L1.length == 0){
+    if(L1.length == 0){        //如有L1的长度为0则合并后的顺序表只是L2
         L->data = L2.data;
         L->length = L2.length;
         return true;
     }
-    if(L2.length == 0){
+    if(L2.length == 0){         //如有L2的长度为0则合并后的顺序表只是L1
         L->data = L1.data;
         L->length = L1.length;
         return true;
     }
-    if(L1.length + L2.length > InitSize)
+    if(L1.length + L2.length > InitSize)    //如果两个有序表的长度大于顺序表的最大长度，则不能合并
         return false;
     int i = 0,j = 0,k = 0;
     while (i < L1.length && j < L2.length){

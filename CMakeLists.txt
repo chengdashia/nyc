@@ -23,3 +23,6 @@ add_executable(question5-DeleteBetween2 linear/linkedlist/application-questions/
 add_executable(question6-DuplicateRemoval linear/linkedlist/application-questions/question6-DuplicateRemoval.c)
 add_executable(question7-Merge linear/linkedlist/application-questions/question7-Merge.c)
 add_executable(question8-ReverseLinkedListInArray linear/linkedlist/application-questions/question8-ReverseLinkedListInArray.c)
+add_executable(question9-SearchExchangeInsert linear/linkedlist/application-questions/question9-SearchExchangeInsert.c)
+add_executable(question10-CircularLeftShift linear/linkedlist/application-questions/question10-CircularLeftShift.c)
+add_executable(question11-median linear/linkedlist/application-questions/question11-median.c)

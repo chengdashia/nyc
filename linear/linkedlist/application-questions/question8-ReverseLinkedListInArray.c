@@ -2,70 +2,49 @@
 // Created by Serendipity on 2022/8/11.
 //
 /**
-* å·²çŸ¥åœ¨ä¸€ç»´æ•°ç»„A[m+n] ä¸­ä¾æ¬¡å­˜æ”¾ä¸¤ä¸ªçº¿æ€§è¡¨.
- * ç¼–å†™ä¸€ä¸ªå‡½æ•°ï¼Œå°†æ•°ç»„ä¸­ä¸¤ä¸ªé¡ºåºè¡¨çš„ä½ç½®äº’æ¢
+* ÒÑÖªÔÚÒ»Î¬Êı×éA[m+n] ÖĞÒÀ´Î´æ·ÅÁ½¸öÏßĞÔ±í.
+ * ±àĞ´Ò»¸öº¯Êı£¬½«Êı×éÖĞÁ½¸öË³Ğò±íµÄÎ»ÖÃ»¥»»
 */
 #include <stdio.h>
-#include <malloc.h>
-#include <stdbool.h>
 #define ElemType int
-#define InitSize 10
-typedef struct {
-    ElemType *data;
-    int length;
-    int MaxSize;
-}SqList;
-//åˆå§‹åŒ–ä¸€ä¸ªé¡ºåºè¡¨
-void InitList(SqList *L){
-    L->data = (ElemType*)malloc(sizeof(ElemType) * InitSize);
-    L->length = 0;
-    L->MaxSize = InitSize;
-    for (int i = 0; i < L->MaxSize; ++i) {
-        L->data[i] = 0;
+//ÔÚÊı×éÖĞ½«Á½¸öÓĞĞòË³Ğò±íÎ»ÖÃ»¥»»
+void Reverse(ElemType nums[],int left,int right,int arraySize){
+    /**
+     * Äæ×ª(aleft,aleft+1,aleft+2,...aright) Îª (aright,aright-1,...,aleft)
+     */
+    if(left >= right || right >= arraySize)
+        return;
+    int mid = left + (right - left) / 2;
+    ElemType temp;
+//    for (int i = 0; i < mid; ++i) {
+//        temp = nums[i];
+//        nums[i] = nums[mid - i -1];
+//        nums[mid - i - 1] = temp;
+//    }
+    for (int i = 0; i <= mid - left; i++) {
+        temp = nums[left + i];
+        nums[left + 1] = nums[right - i];
+        nums[right - i] = temp;
     }
 }
-//æ’å…¥
-bool ListInsert(SqList *L,int i,ElemType e){
-    if(i < 1 || i > L->length + 1)
-        return false;
-    if(L->length >= InitSize)
-        return false;
-    for (int j = L->length; j >= i ; j--) {
-        L->data[j] = L->data[j - 1];
-    }
-    L->data[i - 1] = e;
-    L->length++;
-    return true;
+void Exchange(ElemType nums[],int m,int n,int arraySize){
+    /**
+     * Êı×énums[m+n]ÖĞ£¬´Ó0µ½m-1´æ·ÅË³Ğò±í(a1,a2,a3,...,am)
+     * ´Ómµ½m+n-1´æ·ÅË³Ğò±í(b1,b2,b3...bn)
+     * Ëã·¨½«Á½¸ö±íµÄÎ»ÖÃ»¥»»
+     */
+    Reverse(nums,0,m+n-1,arraySize);
+    Reverse(nums,0,n-1,arraySize);
+    Reverse(nums,n,m+n-1,arraySize);
 }
-//åœ¨æ•°ç»„ä¸­å°†ä¸¤ä¸ªæœ‰åºé¡ºåºè¡¨ä½ç½®äº’æ¢
-bool Reverse(SqList L1,SqList L2,ElemType nums[]){
-
-
-}
-//æŸ¥çœ‹é¡ºåºè¡¨çš„æ•°æ®
-void ListPrint(SqList L){
-    for (int i = 0; i < L.length; ++i) {
-        printf("ç¬¬%dä¸ªä½ç½®,å…ƒç´ ä¸º:%d\n",i,L.data[i]);
+//²é¿´Ë³Ğò±íµÄÊı¾İ
+void ListPrint(ElemType nums[]){
+    for (int i = 0; i < 7; ++i) {
+        printf("µÚ%d¸öÎ»ÖÃ,ÔªËØÎª:%d\n",i,nums[i]);
     }
 }
 int main(){
-    SqList L1,L2,L;
-    InitList(&L1);
-    InitList(&L2);
-    InitList(&L);
-    //æ’å…¥æ¨¡æ‹Ÿæ•°æ®
-    for (int i = 1; i < 5; ++i) {
-        ListInsert(&L1,i,i+1);
-//        ListInsert(&L2,i,i+2);
-    }
-    printf("\n======L1======\n");
-    ListPrint(L1);
-    printf("\n======L2======\n");
-    ListPrint(L2);
-    //å»é‡
-    printf("\n======åˆå¹¶å======\n");
-
-    ListPrint(L);
-
-
+    int nums[] = {2,1,4,1,6,7,8};
+    Exchange(nums,3,4,7);
+    ListPrint(nums);
 }
