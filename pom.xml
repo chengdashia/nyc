@@ -31,7 +31,7 @@
         <springboot.version>2.7.2</springboot.version>
         <lombok.version>1.18.24</lombok.version>
         <fastjson.version>2.0.5</fastjson.version>
-        <druid.version>1.2.11</druid.version>
+        <druid.version>1.2.8</druid.version>
         <!--mybatis-plus-->
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
@@ -206,6 +206,12 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- MinIO -->
@@ -295,6 +301,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.2</version>
                 <configuration>
+                    <classifier>exec</classifier>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
