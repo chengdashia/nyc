@@ -26,3 +26,7 @@ add_executable(question8-ReverseLinkedListInArray linear/linkedlist/application-
 add_executable(question9-SearchExchangeInsert linear/linkedlist/application-questions/question9-SearchExchangeInsert.c)
 add_executable(question10-CircularLeftShift linear/linkedlist/application-questions/question10-CircularLeftShift.c)
 add_executable(question11-median linear/linkedlist/application-questions/question11-median.c)
+add_executable(SequenceStack-SqStack stack/sequence-stack/SequenceStack-SqStack.c)
+add_executable(SharingStack stack/sequence-stack/SharingStack.c)
+add_executable(LinkedStack stack/link-stack/LinkedStack.c)
+add_executable(LinkedStack-head stack/link-stack/LinkedStack-head.c)
