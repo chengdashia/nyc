@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @author 成大事
  * @since 2022/6/2 11:07
  */
-@ControllerAdvice("com.bds.nyc.controller")
+@ControllerAdvice("com.git.bds.nyc.controller")
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Autowired

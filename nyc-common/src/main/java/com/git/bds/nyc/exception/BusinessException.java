@@ -1,5 +1,7 @@
 package com.git.bds.nyc.exception;
 
+import com.git.bds.nyc.result.ResultCode;
+
 /**
  * @author 成大事
  * @since 2022/8/14 17:23
@@ -18,6 +20,11 @@ public class BusinessException extends RuntimeException{
 
     public BusinessException(){
 
+    }
+
+    public BusinessException(String errorMsg){
+        this.errorCode = ResultCode.WX_ERROR.getCode();
+        this.errorMsg = errorMsg;
     }
 
     public BusinessException(Integer errorCode, String errorMsg) {

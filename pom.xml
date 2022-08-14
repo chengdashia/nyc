@@ -24,6 +24,7 @@
         <module>nyc-server</module>
         <module>nyc-applet</module>
         <module>nyc-applet/nyc-applet-user</module>
+        <module>nyc-gen</module>
     </modules>
 
     <properties>
@@ -60,6 +61,8 @@
         <thumbnailator.version>0.4.17</thumbnailator.version>
         <!--easyexcel excel 工具类-->
         <easyexcel.version>3.1.1</easyexcel.version>
+        <!--wxjava-->
+        <wxjava.version>4.3.0</wxjava.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -94,11 +97,10 @@
                 <version>${nyc-project.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>com.bds</groupId>
                 <artifactId>nyc-gen</artifactId>
-                <version>${project.version}</version>
+                <version>${nyc-project.version}</version>
             </dependency>
 
             <dependency>
@@ -199,6 +201,13 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>2.3</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${wxjava.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-boot-starter -->

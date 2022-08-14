@@ -42,6 +42,9 @@ public enum ResultCode {
     NOT_PERMISSION(5006, "权限不够！"),
     /**权限不够**/
     DIS_LOGIN(5007, "账号被封禁了！"),
+
+    /**微信登录失败**/
+    WX_ERROR(5009, "微信授权登录出错"),
     /**服务器正忙，请稍后再试!**/
     SERVER_BUSY(5008,"服务器正忙，请稍后再试!");
 
