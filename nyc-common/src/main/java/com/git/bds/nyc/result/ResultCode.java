@@ -8,7 +8,8 @@ import lombok.Getter;
  */
 public enum ResultCode {
     /**操作失败**/
-    SERVICE_UNAVAILABLE(501,"系统维护,暂时无法处理客户端请求。"),
+    SERVICE_UNAVAILABLE(500,"系统维护,暂时无法处理客户端请求。"),
+    PAGE_NOT_FOUND(404,"未找到页面！"),
 
     /**操作成功**/
     SUCCESS(200,"操作成功！"),

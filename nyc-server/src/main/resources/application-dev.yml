@@ -1,9 +1,5 @@
 server:
   port: 8888
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ANT_PATH_MATCHER
   datasource:
     username: DONG(UW85ELozWYaox8TrP7aHQzpMB18cOGzR)               #数据库的用户名
     password: DONG(kf8s6DIFwLXwTL2BAId60mXbufsiBPwKXv8fVaglE1w=)           #数据库的密码

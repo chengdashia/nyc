@@ -35,8 +35,8 @@ public class UserController {
     private final UserService userService;
 
     @ApiOperation("微信登录")
-    @GetMapping("/login")
-    //@ApiImplicitParam(name = "code", value = "编号", required = true, dataTypeClass = String.class)
+    @PostMapping("/login")
+    @ApiImplicitParam(name = "code", value = "编号", required = true, dataTypeClass = String.class)
     public R<WxMaJscode2SessionResult> login(
             @RequestParam("code") String code
     ) throws WxErrorException {

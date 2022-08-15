@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolationException;
 
@@ -27,6 +28,15 @@ public class RestExceptionHandler {
     public R<String> exceptionHandler(Exception e){
         log.error("未知异常,原因是:",e);
         return R.error(ResultCode.INTERNAL_SERVER_ERROR.getCode(),ResultCode.INTERNAL_SERVER_ERROR.getMessage());
+    }
+
+    /**
+     * 路径错误
+     */
+    @ExceptionHandler(value = NoHandlerFoundException.class)
+    public R<String> noHandlerFoundException(Exception e){
+        log.error("未知异常,原因是:",e);
+        return R.error(ResultCode.PAGE_NOT_FOUND.getCode(),ResultCode.PAGE_NOT_FOUND.getMessage());
     }
 
     /**
