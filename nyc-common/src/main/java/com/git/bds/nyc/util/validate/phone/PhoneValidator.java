@@ -10,17 +10,13 @@ import java.util.regex.Pattern;
  * @date 2022/3/15 18:47
  */
 
-public class MobileValidate implements ConstraintValidator<Phone, String> {
+public class PhoneValidator implements ConstraintValidator<Phone, String> {
 
-    @Override
-    public void initialize(Phone constraintAnnotation) {}
-
+    private static final Pattern MOBILE_PATTERN = Pattern.compile("((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))$)");
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        Pattern p = Pattern.compile("^((13[0-9])|(14[5,7])|(15[^4,\\D])|(17[0,1,3,6-8])|(18[0-9])|(19[8,9])|(166))[0-9]{8}$");
-        Matcher m = p.matcher(value);
-        return m.matches();
+        return MOBILE_PATTERN.matcher(value).matches();
     }
 
 }
