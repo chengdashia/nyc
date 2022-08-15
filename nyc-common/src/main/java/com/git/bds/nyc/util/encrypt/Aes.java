@@ -1,6 +1,8 @@
-package com.git.bds.nyc.config.mybatis.encrypt;
-import com.bigdatastudio.nongyingc.exception.BaseException;
-import com.bigdatastudio.nongyingc.exception.ExceptionEnum;
+package com.git.bds.nyc.util.encrypt;
+
+
+import com.git.bds.nyc.exception.BusinessException;
+import com.git.bds.nyc.result.ResultCode;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -73,7 +75,7 @@ public class Aes {
             // 加密
             return new Base64().encodeToString(result);
         } catch (Exception e) {
-            throw new BaseException(ExceptionEnum.BODY_NOT_MATCH.getResultCode(),ExceptionEnum.BODY_NOT_MATCH.getResultMsg());
+            throw new BusinessException(ResultCode.BODY_NOT_MATCH.getCode(),ResultCode.BODY_NOT_MATCH.getMessage());
         }
     }
 

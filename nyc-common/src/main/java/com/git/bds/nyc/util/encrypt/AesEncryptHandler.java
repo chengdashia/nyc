@@ -1,4 +1,4 @@
-package com.git.bds.nyc.config.mybatis.encrypt;
+package com.git.bds.nyc.util.encrypt;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
