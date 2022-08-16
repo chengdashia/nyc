@@ -5,6 +5,12 @@ package com.git.bds.nyc.constant;
  * @since 2022/7/7 14:34
  */
 public class Constants {
+    private Constants() {
+    }
+
+    /** 分离器 */
     public static final String SEPARATOR = "/";
+    /** excel路径 */
+    public static final String EXCEL_PATH = "/excel" + SEPARATOR;
 
 }

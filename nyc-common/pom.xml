@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-       <artifactId>nyc</artifactId>
+        <artifactId>nyc</artifactId>
         <groupId>com.git.bds</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -85,6 +85,12 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
+        </dependency>
+
+        <!--excel-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>
