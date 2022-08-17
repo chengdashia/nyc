@@ -347,7 +347,7 @@ public class ExcelUtils {
         params.setTitleRows(1);
         //表头行
         params.setHeadRows(1);
-        params.setSaveUrl("/excel/");
+        params.setSaveUrl(Constants.EXCEL_PATH);
         params.setNeedSave(true);
         params.setNeedVerify(true);
         try {

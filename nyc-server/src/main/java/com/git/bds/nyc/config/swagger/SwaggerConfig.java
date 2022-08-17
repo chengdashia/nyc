@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class SwaggerConfig {
 
     /**
-     *  api的主页显示信息
+     * api的主页显示信息
      */
     private static final ApiInfo API_INFO;
 
@@ -45,8 +45,8 @@ public class SwaggerConfig {
 
     static {
         API_INFO = new ApiInfoBuilder()
-                .title("M78星云盘")
-                .description("M78星云盘API接口文档")
+                .title("农营C 农作物交易平台")
+                .description("农营C API接口文档")
                 .termsOfServiceUrl("https://blog.chengdashi.cn")
                 .contact(new Contact("成大事",
                         "https://blog.chengdashi.cn",
@@ -56,7 +56,7 @@ public class SwaggerConfig {
     }
 
 
-    /**配置swagger的Docker的bean实例*/
+    /** 配置swagger的Docker的bean实例 */
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -67,7 +67,7 @@ public class SwaggerConfig {
                 .select()
                 //RequestHandlerSelectors  配置要扫描接口的方式
                 //basePackage :指定的包
-                //any(） :扫描全部
+                //any() :扫描全部
                 //none :都不扫描
                 //withClassAnnotation :扫描类上的注解  参数是一个注解的反射对象
                 //withMethodAnnotation :扫描类上的注解
@@ -78,7 +78,7 @@ public class SwaggerConfig {
     }
 
 
-    /**如果要新增一个分组：api2*/
+    /** 如果要新增一个分组：api2 */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -88,7 +88,7 @@ public class SwaggerConfig {
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.hanliy.controller2
-                .apis(RequestHandlerSelectors.basePackage("com.example.cloudDisk.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -121,7 +121,9 @@ public class SwaggerConfig {
             private List<RequestMappingInfoHandlerMapping> getHandlerMappings(Object bean) {
                 try {
                     Field field = ReflectionUtils.findField(bean.getClass(), "handlerMappings");
-                    field.setAccessible(true);
+                    if (field != null) {
+                        field.setAccessible(true);
+                    }
                     return (List<RequestMappingInfoHandlerMapping>) field.get(bean);
                 } catch (IllegalArgumentException | IllegalAccessException e) {
                     throw new IllegalStateException(e);
@@ -129,7 +131,6 @@ public class SwaggerConfig {
             }
         };
     }
-
 
 
 }

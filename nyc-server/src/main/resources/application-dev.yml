@@ -56,7 +56,7 @@ spring:
           # 这么写会使用默认的过滤器 如果filters和filter都指定了那么filter必须设置enabled:true才生效
           #比如 下边的filter不生效
           #filters: stat
-          #filter:
+        #filter:
         #stat:
         #merge-sql: false
         #log-slow-sql: true
@@ -128,7 +128,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true                          #下划线转驼峰
     cache-enabled: true                           # 开启二级缓存
   mapper-locations: classpath*:**/xml/*.xml
-  type-aliases-package: com.bds.nyc.domain
+  type-aliases-package: com.git.bds.nyc.domain
   global-config:
     db-config:
       logic-delete-value: 0
