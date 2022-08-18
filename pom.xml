@@ -23,7 +23,6 @@
         <module>nyc-common</module>
         <module>nyc-server</module>
         <module>nyc-applet</module>
-        <module>nyc-applet/nyc-applet-user</module>
         <module>nyc-gen</module>
         <module>nyc-system</module>
     </modules>

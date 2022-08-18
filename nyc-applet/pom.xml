@@ -7,13 +7,17 @@
         <groupId>com.git.bds</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.git.bds</groupId>
+
     <artifactId>nyc-applet</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>nyc-applet</name>
     <description>nyc-applet</description>
     <!-- 父模块打包类型必须为pom -->
     <packaging>pom</packaging>
+
+    <modules>
+        <module>nyc-applet-user</module>
+    </modules>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -90,7 +94,8 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <includes> <include>**/*.yml</include>
+                <includes>
+                    <include>**/*.yml</include>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
