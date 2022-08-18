@@ -23,13 +23,16 @@ import java.util.List;
 public class MybatisPlusGeneration {
     public static void main(String[] args) {
         String databaseName = "nyc";
-        String url = "jdbc:mysql://localhost:3306/"+databaseName+"?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8";
+        String url = "jdbc:mysql://localhost:3306/" + databaseName + "?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8";
         String username = "root";
         String password = "mysql729";
 
         //表名集合
         List<String> tables = new ArrayList<>();
-        tables.add("user");
+        tables.add("sys_role");
+        tables.add("sys_permission");
+        tables.add("sys_role_permission");
+        tables.add("sys_user_role");
 
         FastAutoGenerator.create(url, username, password)
                 //全局配置
@@ -61,7 +64,7 @@ public class MybatisPlusGeneration {
                 //策略配置
                 .strategyConfig(builder -> {
                     builder.addInclude(tables)
-                            .addTablePrefix("tbl_","user_")//表名前缀，配置后生成的代码不会有此前缀
+                            .addTablePrefix("tbl_", "user_")//表名前缀，配置后生成的代码不会有此前缀
                             .addFieldPrefix("user_")
 
 

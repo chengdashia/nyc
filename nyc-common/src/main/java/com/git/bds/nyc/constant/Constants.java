@@ -13,4 +13,11 @@ public class Constants {
     /** excel路径 */
     public static final String EXCEL_PATH = "/excel" + SEPARATOR;
 
+    /** 角色 */
+    public static final String ROLE = "role";
+
+    /** 权限 */
+    public static final String PERMISSIONS = "permissions";
+
+
 }

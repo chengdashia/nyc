@@ -4,17 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.git.bds.nyc.domain.User">
-        <id column="user_id" property="id" />
-        <result column="user_openid" property="openid" />
-        <result column="user_screen_name" property="screenName" />
-        <result column="user_status" property="status" />
-        <result column="create_time" property="createTime" />
-        <result column="login_time" property="loginTime" />
+        <id column="user_id" property="id"/>
+        <result column="user_openid" property="openid"/>
+        <result column="user_screen_name" property="screenName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="login_time" property="loginTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id, user_openid, user_screen_name, user_status, create_time, login_time
+        user_id
+        , user_openid, user_screen_name, create_time, login_time
     </sql>
 
 </mapper>

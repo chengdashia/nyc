@@ -1,18 +1,15 @@
 package com.git.bds.nyc.domain;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -25,7 +22,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("user")
+@TableName("sys_user")
 @ApiModel(value = "User对象", description = "用户表")
 public class User extends Model<User> {
 
@@ -43,9 +40,6 @@ public class User extends Model<User> {
     @TableField("user_screen_name")
     private String screenName;
 
-    @ApiModelProperty("用户状态（-1:未认证；0:农户认证；1:公司认证）")
-    @TableField("user_status")
-    private Integer status;
 
     @ApiModelProperty("注册时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -55,14 +49,12 @@ public class User extends Model<User> {
     @TableField("login_time")
     private LocalDateTime loginTime;
 
-
     public static final String USER_ID = "user_id";
 
     public static final String USER_OPENID = "user_openid";
 
     public static final String USER_SCREEN_NAME = "user_screen_name";
 
-    public static final String USER_STATUS = "user_status";
 
     public static final String CREATE_TIME = "create_time";
 
