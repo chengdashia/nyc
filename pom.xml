@@ -12,7 +12,7 @@
 
     <groupId>com.git.bds</groupId>
     <artifactId>nyc</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>nyc</name>
     <description>农营C 父工程</description>
     <!-- 父模块打包类型必须为pom -->
@@ -28,7 +28,7 @@
     </modules>
 
     <properties>
-        <nyc-project.version>0.0.1-SNAPSHOT</nyc-project.version>
+        <revision>0.0.1-SNAPSHOT</revision>
         <springboot.version>2.7.2</springboot.version>
         <lombok.version>1.18.24</lombok.version>
         <fastjson.version>2.0.5</fastjson.version>
@@ -77,30 +77,30 @@
             <dependency>
                 <groupId>com.git.bds</groupId>
                 <artifactId>nyc</artifactId>
-                <version>${nyc-project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-common</artifactId>
-                <version>${nyc-project.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>nyc-applet</artifactId>
-                <version>${nyc-project.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.bds</groupId>
                 <artifactId>nyc-applet-user</artifactId>
-                <version>${nyc-project.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.bds</groupId>
                 <artifactId>nyc-gen</artifactId>
-                <version>${nyc-project.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>

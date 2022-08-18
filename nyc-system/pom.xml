@@ -5,14 +5,17 @@
     <parent>
         <artifactId>nyc</artifactId>
         <groupId>com.git.bds</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>nyc-system</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>nyc-system</name>
-    <description>nyc-system</description>
+    <name>${project.artifactId}</name>
+
+    <description>
+        系统的一些承建模块,比如权限校验
+    </description>
     <packaging>pom</packaging>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>

@@ -5,16 +5,18 @@
     <parent>
         <artifactId>nyc</artifactId>
         <groupId>com.git.bds</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
+
     <artifactId>nyc-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>nyc-server</name>
-    <description>nyc-server</description>
     <packaging>jar</packaging>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
+    <name>${project.artifactId}</name>
+    <description>
+        项目启动类，包括一些配置
+    </description>
+
+
     <dependencies>
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
