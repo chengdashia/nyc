@@ -1,4 +1,4 @@
-package com.git.bds.nyc.util;
+package com.git.bds.nyc.framework.excel.easypoi.util;
 
 import cn.afterturn.easypoi.cache.manager.POICacheManager;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
@@ -34,9 +34,9 @@ import java.util.NoSuchElementException;
  * @since 2022/8/16 9:00
  * Excel 导入导出工具类
  */
-public class ExcelUtils {
+public class EasyPoiExcelUtils {
 
-    private ExcelUtils() {
+    private EasyPoiExcelUtils() {
 
     }
 
