@@ -1,4 +1,4 @@
-package com.git.bds.nyc.util.thumbnailator;
+package com.git.bds.nyc.framework.file.core.util.thumbnailator;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;

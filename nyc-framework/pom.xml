@@ -29,6 +29,7 @@
         <module>nyc-spring-boot-starter-web</module>
         <module>nyc-spring-boot-starter-excel</module>
         <module>nyc-spring-boot-starter-redis</module>
+        <module>nyc-spring-boot-starter-file</module>
     </modules>
 
 

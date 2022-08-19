@@ -4,24 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="530b7221-ae91-4104-b06b-1e521da22e92" name="Changes" comment="增加依赖管理">
+    <list default="true" id="530b7221-ae91-4104-b06b-1e521da22e92" name="Changes" comment="增加redis模块">
+      <change afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-file/src/main/java/com/git/bds/nyc/framework/file/core/util/FileTypeUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/1/4187e8c9b9db092db0e99003731387174e2aa66c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/98efce0a89436cd37a9b6a1d5de393e67ea43c5f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/b/bb36e35845c16f121dc3d25e91fc99a528f49f8f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/0/c08197b33068f0ebc0c306024ee95d57e9890ece" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nyc-dependencies/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-dependencies/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-common/src/main/java/com/git/bds/nyc/util/redis/RedisUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-redis/src/main/java/com/git/bds/nyc/framework/redis/util/RedisUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-common/src/main/java/com/git/bds/nyc/util/minio/MinioConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-file/src/main/java/com/git/bds/nyc/framework/file/minio/MinioConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-common/src/main/java/com/git/bds/nyc/util/minio/MinioUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-file/src/main/java/com/git/bds/nyc/framework/file/minio/MinioUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-common/src/main/java/com/git/bds/nyc/util/thumbnailator/ThumbnailUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-file/src/main/java/com/git/bds/nyc/framework/file/core/util/thumbnailator/ThumbnailUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nyc-framework/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nyc-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nyc-server/src/main/java/com/git/bds/nyc/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-redis/src/main/java/com/git/bds/nyc/framework/redis/config/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nyc-system/nyc-role-permission/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-system/nyc-role-permission/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nyc-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-system/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +81,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "E:/gitProject/github/nyc/nyc-framework/nyc-spring-boot-starter-web/src/main/java/com/git/bds/nyc/framework",
+    "last_opened_file_path": "E:/gitProject/github/nyc/nyc-framework/nyc-spring-boot-starter-file/src/main/java/com/git/bds/nyc/framework/file/minio",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -102,11 +96,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\gitProject\github\nyc\nyc-framework\nyc-spring-boot-starter-file\src\main\java\com\git\bds\nyc\framework\file\minio" />
       <recent name="E:\gitProject\github\nyc\nyc-framework\nyc-spring-boot-starter-web\src\main\java\com\git\bds\nyc\framework" />
       <recent name="E:\gitProject\github\nyc\nyc-framework\nyc-spring-boot-starter-web\src\main\java\com\git\bds\nyc\framework\web\handler" />
       <recent name="E:\gitProject\github\nyc\nyc-framework\nyc-spring-boot-starter-web\src\main\java\com\git\bds\nyc\framework\web\config" />
       <recent name="E:\gitProject\github\nyc\nyc-framework\nyc-spring-boot-starter-web\src\main\java\com\git\bds\nyc\framework\jackson\config" />
-      <recent name="E:\gitProject\github\nyc\nyc-framework\nyc-spring-boot-starter-mybatis\src\main\java\com\git\bds\nyc\framework\mybatis\config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\gitProject\github\nyc\nyc-framework" />
@@ -115,11 +109,11 @@
       <recent name="E:\gitProject\github\nyc\nyc-server\src\main\resources\static\sys\exception" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.git.bds.nyc.framework.file.core.util.thumbnailator" />
+      <recent name="com.git.bds.nyc.framework.file.core.util" />
       <recent name="com.git.bds.nyc.framework.redis.config" />
       <recent name="com.git.bds.nyc.framework.redis.util" />
       <recent name="com.git.bds.nyc.framework.excel.easyexcel" />
-      <recent name="com.git.bds.nyc.gen.screw" />
-      <recent name="com.git.bds.nyc.gen.mybatis" />
     </key>
   </component>
   <component name="RestServicesNavigator">
@@ -251,6 +245,13 @@
     <configuration name="NycSpringBootStarterExcelApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="nyc-spring-boot-starter-excel" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.git.bds.nyc.framework.excel.NycSpringBootStarterExcelApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NycSpringBootStarterFileApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="nyc-spring-boot-starter-file" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.git.bds.nyc.framework.file.NycSpringBootStarterFileApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -415,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660883751505</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="增加redis模块">
+      <created>1660912247521</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1660912247521</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,7 +451,8 @@
     <MESSAGE value="优化模块管理" />
     <MESSAGE value="删除重复" />
     <MESSAGE value="增加excel 模块 包括easypoi和easyexcel" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加excel 模块 包括easypoi和easyexcel" />
+    <MESSAGE value="增加redis模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加redis模块" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

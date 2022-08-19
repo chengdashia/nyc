@@ -37,6 +37,7 @@
         <option value="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-excel/pom.xml" />
         <option value="$PROJECT_DIR$/nyc-dependencies/pom.xml" />
         <option value="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-redis/pom.xml" />
+        <option value="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-file/pom.xml" />
       </list>
     </option>
   </component>

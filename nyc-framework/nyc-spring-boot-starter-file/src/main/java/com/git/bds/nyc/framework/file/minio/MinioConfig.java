@@ -1,4 +1,4 @@
-//package com.git.bds.nyc.util.minio;
+package com.git.bds.nyc.framework.file.minio;//package com.git.bds.nyc.util.minio;
 //
 //import lombok.Data;
 //import org.springframework.boot.context.properties.ConfigurationProperties;

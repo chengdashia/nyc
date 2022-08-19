@@ -1,4 +1,4 @@
-//package com.git.bds.nyc.util.minio;
+package com.git.bds.nyc.framework.file.minio;//package com.git.bds.nyc.util.minio;
 //
 //
 //import com.git.bds.nyc.exception.BusinessException;

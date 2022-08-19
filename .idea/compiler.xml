@@ -10,6 +10,7 @@
         <module name="nyc-common" />
         <module name="nyc-role-permission" />
         <module name="nyc-spring-boot-starter-mybatis" />
+        <module name="nyc-spring-boot-starter-file" />
         <module name="nyc-applet-user" />
         <module name="nyc-gen" />
         <module name="nyc-spring-boot-starter-redis" />
@@ -31,6 +32,7 @@
       <module name="nyc-role-permission" options="" />
       <module name="nyc-server" options="" />
       <module name="nyc-spring-boot-starter-excel" options="" />
+      <module name="nyc-spring-boot-starter-file" options="" />
       <module name="nyc-spring-boot-starter-mybatis" options="" />
       <module name="nyc-spring-boot-starter-redis" options="" />
       <module name="nyc-spring-boot-starter-web" options="" />
