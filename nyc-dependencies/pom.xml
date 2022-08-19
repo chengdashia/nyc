@@ -109,12 +109,6 @@
 
             <dependency>
                 <groupId>com.git.bds</groupId>
-                <artifactId>nyc-spring-boot-starter-excel</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-role-permission</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -128,6 +122,18 @@
             <dependency>
                 <groupId>com.git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-spring-boot-starter-excel</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-spring-boot-starter-redis</artifactId>
                 <version>${revision}</version>
             </dependency>
 

@@ -1,4 +1,4 @@
-package com.git.bds.nyc.util.redis;
+package com.git.bds.nyc.framework.redis.util;
 
 import com.git.bds.nyc.exception.BusinessException;
 import org.springframework.data.redis.core.RedisTemplate;

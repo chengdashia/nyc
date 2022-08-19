@@ -4,100 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="530b7221-ae91-4104-b06b-1e521da22e92" name="Changes" comment="增加excel 模块 包括easypoi和easyexcel">
-      <change afterPath="$PROJECT_DIR$/.idea/$PROJECT_FILE$" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/qaplug_profiles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/2/0223a81f4c35fc2b0157eea49080341fffe4e90a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/5/05d5b14f96dc22e8918cf8c1d0da36a0a6da8ef0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/6/065f40694a6e44538756639b6bc0203338fdcb56" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/7/07b4ec1cc632870341d5ac17531519e24f71aaf5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/e/0ea3da5677ff6137874f053dd6b28f5bc95bb7b4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/a/1a8cd5bd1c8e2ddc6bc02eef4e7a740f5d45d98d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/b/1b0e9701a157f1de923b4ad43c011a37d815470b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/c/1c7be37359becdcc7ec644ea3621adbf0e955371" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21337ff2d6fa82cf3abdcb6d7f29195cc38b6521" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/3/236e732bf47691e62c9c119248e149591ac006fc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/4/24f111b4cd4fdf15656e7f62954c8595b8baf057" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/5/257552f1613657962eb0a68a234e05cb7ea3a3c8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/5/25fd60927bebe864191e325b7422dac290bb4ea8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/7/278137d85198ef43a72fdbc201dfe16de7d2580d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2d3bc5aea624bc58ef2a85b40508f6484a08efa9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/2/3232e675dc439245d83a728784175b107f98c67a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/4/345310fa9cd89397ef87b451b1922fc8e7788975" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/3507b3c79d2c102be36df0c0a39c6f5e68711025" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/35281ab861c7f1c16b7500b6b62546221ec6ddac" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/8/38003526c3420b90cba33d4ec5a31bbb35af565e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/39ca26d2e1c150d278929a606fa7ebb1af9d0ea1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/e/3e7c3407982bab54743978bc280ac3ac8fc40383" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/0/40c91ecbe4c13ba138dbc9faa40344a1867c1d8a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/1/4187e8c9b9db092db0e99003731387174e2aa66c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/44b5cb2d626552c9dcfcca860fc2e7c6c5b8a6f2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/6/469298093b9806d31d6370489987b1f653ee9a87" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/7/478bdb6554350d0c6260d2c861bd391784b1634a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/7/47d8515e3b3293a11c3193970c637dd3e11d7cd2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/8/489a3dcb70df300ecd4dedd08579f2a0d2e8f6d3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/1/51771e16a07ff7fedcc45c3ce1a77b2e2c0fabbf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/5942feffdecba4855a1aa30d336cbbbdc5220176" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/59f11e57514aacbc50bf1cc41254712d5149d96b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/665e9c0bdaa3b70aabdb46c27dd150a6e4f3d9d0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/7/6791cc31c8ef84bf5b7a430ea091e20eb13f01e2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/1/7103ae8d08d6607aec2242b5a45579f41b17437d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/6/765887d83a74969ec16e40ece30ca97b31ebc7be" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/8/78e60ed0a5083a035c4d7a309803ccf4b57b3fd1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/9/796267e8710de77a079377a7e5f5ed788ca41259" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/a/7a8e2c83827eec9442864e454e11645dc57a3693" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/e/7ef7e363acfb9710b5862c7f691b4e3082abb805" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/1/811903bf50637b07e727ea40a0a931730d168671" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/a/8afb90fb4d410265d75a1ee589a1f2037ac1b7ed" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/b/8bda9420fa53a28a53c1e697b70459fe1bb16ffb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/d/8dd74683feec541db1778cab9bbe2ab4d332e726" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/0/90e2fd8782e37b5c30b98bc8e63201675e3011bc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/3/9316f8b246f17eef266b12ee35f7ce9497789357" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/5/957cd2b2f064375ddc56a9c7880f338919ed728e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/7/974c6599cf8549c29fc4e01d40afdfc9b13b6d52" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/98efce0a89436cd37a9b6a1d5de393e67ea43c5f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/a/9aa1c0c9460ecfe5f50a264f8c3a3bff47779145" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/f/9f2912d877bf7c8b41b38ff0887de3e2de5a892f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/f/9f97548045f30d97d2d4d4e2766b3bb37e883d19" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/8/a882bd9df222f14ea41193a08c1fae3ec22f210f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/aba56c4093113b4126a46c2465ddb379b2d79420" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/e/aea93f7cc0cb854a1d5d8a90ad9ecea1ac374d89" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/2/b2bddc34e06bdc3da8314315920122871fb12726" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/a/ba6e830f0ff271a1c8ec1c8f581aba3ad0160ad5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/b/bb36e35845c16f121dc3d25e91fc99a528f49f8f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/d/bda94d487804f85c317f911205009d8b1fc76464" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/e/be7fcde036269643eeb3d45edb2380f4e920a983" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/0/c08197b33068f0ebc0c306024ee95d57e9890ece" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/0/c0d3e6a0d456f0eefdab3ebf1f1f35414b249bff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/2/c256dd5919981104046bc4faef0a84e94e1b7aa8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/5/c531c5005f05ca854faf113c750dc22bad51ca1a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/c/ccc5ccf5b31e2e66304f09465316905f3845c3c5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/7/d7ed92b7357bfc02216a612b102e3d83820c781d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/e/de3107c94e65abb684b67d83c9496dc2965b3a7c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/c/ecbe707942fcd0f3be5c4b9314358e25f990c67d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/d/ed5735e2040140a6c6eddbeb6a53dee9e29af0b8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/0/f014a60668ea494a03fe81c06243f5a5f9db015b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/0/f08e1eaa724dfec874f76e6e1b5f21d30e67f645" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/7/f7240cc4b7db473a3cd3d1a80152a976fffb9724" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/7/f76bd0ecbcafe67d654e7b4947c58d52c1d4ace7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/9/f9dee00119759b4028edb2e7f920d9fe77f78eac" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/d/fda9a5c7ed9ac129248cb5c9088ba450eafd33a2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/fe55e9f1beaa005e810d6cb807aab66cf8122b1d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nyc-dependencies/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="530b7221-ae91-4104-b06b-1e521da22e92" name="Changes" comment="增加依赖管理">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/1/4187e8c9b9db092db0e99003731387174e2aa66c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/98efce0a89436cd37a9b6a1d5de393e67ea43c5f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/b/bb36e35845c16f121dc3d25e91fc99a528f49f8f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/0/c08197b33068f0ebc0c306024ee95d57e9890ece" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-dependencies/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-dependencies/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-framework/nyc-common/src/main/java/com/git/bds/nyc/util/redis/RedisUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-redis/src/main/java/com/git/bds/nyc/framework/redis/util/RedisUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-framework/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-server/src/main/java/com/git/bds/nyc/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-framework/nyc-spring-boot-starter-redis/src/main/java/com/git/bds/nyc/framework/redis/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-system/nyc-role-permission/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-system/nyc-role-permission/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nyc-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nyc-system/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,33 +72,34 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Project.color&quot;: &quot;004260&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/gitProject/github/nyc/nyc-framework/nyc-spring-boot-starter-web/src/main/java/com/git/bds/nyc/framework&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;yiiguxing.plugin.translate&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;6e560156ea2c87e90afe44dd6a3c0ab9&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Project.color": "004260",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelOrder2": "2",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RequestMappingsPanelWidth2": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "last_opened_file_path": "E:/gitProject/github/nyc/nyc-framework/nyc-spring-boot-starter-web/src/main/java/com/git/bds/nyc/framework",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "yiiguxing.plugin.translate",
+    "spring.configuration.checksum": "6e560156ea2c87e90afe44dd6a3c0ab9"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\gitProject\github\nyc\nyc-framework\nyc-spring-boot-starter-web\src\main\java\com\git\bds\nyc\framework" />
@@ -190,11 +115,11 @@
       <recent name="E:\gitProject\github\nyc\nyc-server\src\main\resources\static\sys\exception" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.git.bds.nyc.framework.redis.config" />
+      <recent name="com.git.bds.nyc.framework.redis.util" />
       <recent name="com.git.bds.nyc.framework.excel.easyexcel" />
       <recent name="com.git.bds.nyc.gen.screw" />
       <recent name="com.git.bds.nyc.gen.mybatis" />
-      <recent name="com.git.bds.nyc.framework.datasource.core" />
-      <recent name="com.git.bds.nyc.framework.swagger.core" />
     </key>
   </component>
   <component name="RestServicesNavigator">
@@ -333,6 +258,13 @@
     <configuration name="NycSpringBootStarterMybatisApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="nyc-spring-boot-starter-mybatis" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.git.bds.nyc.framework.NycSpringBootStarterMybatisApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NycSpringBootStarterRedisApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="nyc-spring-boot-starter-redis" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.git.bds.nyc.framework.redis.NycSpringBootStarterRedisApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

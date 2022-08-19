@@ -1,4 +1,4 @@
-package com.git.bds.nyc.config;
+package com.git.bds.nyc.framework.redis.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

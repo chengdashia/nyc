@@ -18,21 +18,18 @@
     </description>
 
 
-
     <dependencies>
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
+        </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 
 </project>

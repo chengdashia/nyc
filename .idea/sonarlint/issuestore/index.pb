@@ -13,10 +13,6 @@ p
 @nyc-server/src/main/java/com/git/bds/nyc/config/RedisConfig.java,3\5\35281ab861c7f1c16b7500b6b62546221ec6ddac
 y
 Inyc-applet/nyc-applet-user/src/main/java/com/git/bds/nyc/dao/UserDao.java,e\c\ecbe707942fcd0f3be5c4b9314358e25f990c67d
-Ñ
-Tnyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/domain/dto/RoleDTO.java,9\8\98efce0a89436cd37a9b6a1d5de393e67ea43c5f
-Ü
-Vnyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/domain/SysPermission.java,4\1\4187e8c9b9db092db0e99003731387174e2aa66c
 Ü
 Vnyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/dao/SysPermissionDao.java,8\d\8dd74683feec541db1778cab9bbe2ab4d332e726
 é
@@ -43,8 +39,6 @@ anyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/service/impl/SysRo
 Snyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/dao/xml/SysRoleXml.xml,9\a\9aa1c0c9460ecfe5f50a264f8c3a3bff47779145
 Ñ
 Tnyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/domain/SysUserRole.java,7\e\7ef7e363acfb9710b5862c7f691b4e3082abb805
-Ñ
-Tnyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/dao/SysUserRoleDao.java,c\0\c08197b33068f0ebc0c306024ee95d57e9890ece
 å
 \nyc-system/nyc-role-permission/src/main/java/com/git/bds/nyc/service/SysUserRoleService.java,6\6\665e9c0bdaa3b70aabdb46c27dd150a6e4f3d9d0
 ï
@@ -131,8 +125,6 @@ Gnyc-server/src/test/java/com/git/bds/nyc/NycServerApplicationTests.java,0\e\0e
 Unyc-framework/nyc-common/src/main/java/com/git/bds/nyc/util/validate/phone/Phone.java,9\5\957cd2b2f064375ddc56a9c7880f338919ed728e
 é
 ^nyc-framework/nyc-common/src/main/java/com/git/bds/nyc/util/validate/phone/PhoneValidator.java,1\c\1c7be37359becdcc7ec644ea3621adbf0e955371
-B
-nyc-system/pom.xml,b\b\bb36e35845c16f121dc3d25e91fc99a528f49f8f
 t
 Dnyc-framework/nyc-common/src/main/java/com/git/bds/nyc/result/R.java,4\0\40c91ecbe4c13ba138dbc9faa40344a1867c1d8a
 Å

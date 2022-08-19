@@ -28,6 +28,7 @@
         <module>nyc-spring-boot-starter-mybatis</module>
         <module>nyc-spring-boot-starter-web</module>
         <module>nyc-spring-boot-starter-excel</module>
+        <module>nyc-spring-boot-starter-redis</module>
     </modules>
 
 
