@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+       <artifactId>nyc-framework</artifactId>
+        <groupId>com.git.bds</groupId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>nyc-spring-boot-starter-redis</artifactId>
+    <packaging>jar</packaging>
+
+
+    <name>nyc-spring-boot-starter-redis</name>
+    <description>
+        Redis 封装拓展
+    </description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

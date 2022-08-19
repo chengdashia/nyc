@@ -1,9 +1,0 @@
-
-c	java:S116"NRename this field "KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡ÿšÓ
-7
-java:S1170"!Make this final field static too.(¡ÿšÓ
-c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø½ì£
-N	java:S1066"9Replace this use of System.out or System.err by a logger.(Îõà­
-V	java:S1254"<This block of commented-out lines of code should be removed.(ðÖÈÄþÿÿÿÿ
-S	java:S1067"9Replace this use of System.out or System.err by a logger.(œ’Ê¯ýÿÿÿÿ
-Q	java:S1258"<This block of commented-out lines of code should be removed.(ŠÅ
