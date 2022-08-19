@@ -20,15 +20,15 @@
 
     <!--子模块-->
     <modules>
-        <module>nyc-common</module>
         <module>nyc-server</module>
         <module>nyc-applet</module>
         <module>nyc-gen</module>
         <module>nyc-system</module>
+        <module>nyc-framework</module>
     </modules>
 
     <properties>
-        <revision>0.0.1-SNAPSHOT</revision>
+        <revision>1.0</revision>
         <springboot.version>2.7.2</springboot.version>
         <lombok.version>1.18.24</lombok.version>
         <fastjson.version>2.0.5</fastjson.version>
@@ -39,6 +39,8 @@
         <mybatis-plus-join.version>1.2.4</mybatis-plus-join.version>
         <hutool.version>5.8.0</hutool.version>
         <knife4j.version>3.0.3</knife4j.version>
+        <!--mysql-->
+        <mysql.version>8.0.29</mysql.version>
         <!--minio-->
         <minio.version>8.3.4</minio.version>
         <!--sa-token-->
@@ -59,11 +61,11 @@
         <tika-core.version>2.4.1</tika-core.version>
         <!--图片压缩-->
         <thumbnailator.version>0.4.17</thumbnailator.version>
-        <!--easyexcel excel 工具类-->
+        <!--excel 工具类-->
         <easyexcel.version>3.1.1</easyexcel.version>
         <easypoi.version>4.4.0</easypoi.version>
         <!--wxjava-->
-        <wxjava.version>4.3.0</wxjava.version>
+        <wxjava.version>4.3.9.B</wxjava.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,21 +87,41 @@
                 <version>${revision}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.example</groupId>
-                <artifactId>nyc-applet</artifactId>
-                <version>${revision}</version>
-            </dependency>
 
             <dependency>
-                <groupId>com.bds</groupId>
+                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-applet-user</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.bds</groupId>
+                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-gen</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-framework</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-role-permission</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-spring-boot-starter-web</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -176,7 +198,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.29</version>
+                <version>${mysql.version}</version>
             </dependency>
 
             <dependency>
@@ -304,12 +326,12 @@
                 <version>${easypoi.version}</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/cn.afterturn/easypoi-base -->
             <dependency>
-                <groupId>cn.afterturn</groupId>
-                <artifactId>easypoi-base</artifactId>
-                <version>${easypoi.version}</version>
+                <groupId>cn.smallbun.screw</groupId>
+                <artifactId>screw-core</artifactId>
+                <version>${screw.version}</version>
             </dependency>
+
 
 
         </dependencies>
@@ -324,6 +346,7 @@
                 <version>2.7.2</version>
                 <configuration>
                     <classifier>exec</classifier>
+                    <skip>true</skip>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

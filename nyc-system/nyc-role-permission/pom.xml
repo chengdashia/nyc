@@ -10,14 +10,14 @@
     </parent>
 
     <artifactId>nyc-role-permission</artifactId>
+    <packaging>jar</packaging>
+
     <name>${project.artifactId}</name>
     <description>
         用户的角色、权限
     </description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-    <packaging>jar</packaging>
+
+
 
     <dependencies>
         <dependency>

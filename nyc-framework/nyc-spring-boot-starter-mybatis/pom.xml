@@ -2,44 +2,52 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <artifactId>nyc</artifactId>
+       <artifactId>nyc-framework</artifactId>
         <groupId>com.git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>nyc-system</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
+    <packaging>jar</packaging>
 
-    <name>${project.artifactId}</name>
+    <name>nyc-spring-boot-starter-mybatis</name>
     <description>
-        系统的一些承建模块,比如权限校验
+        数据库连接池、MyBatis 拓展
     </description>
 
-
-    <modules>
-        <module>nyc-role-permission</module>
-    </modules>
-
     <dependencies>
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-common</artifactId>
+        </dependency>
+        <!-- DB 相关 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.github.yulichang</groupId>
             <artifactId>mybatis-plus-join</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
+
 
 
 </project>
