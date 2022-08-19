@@ -1,0 +1,6 @@
+
+>
+java:S16042"(Make this anonymous inner class a lambda(μ™Ψ
+
+java:S1845""rRename method "mybatisPlusInterceptor" to prevent any misunderstanding/clash with method "MybatisPlusInterceptor".(µ―…‹ωÿÿÿÿ
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†γηÿÿÿÿÿ

@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>nyc-spring-boot-starter-web</artifactId>
+    <packaging>jar</packaging>
 
     <name>nyc-spring-boot-starter-web</name>
     <description>
@@ -21,11 +22,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <!-- spring boot 配置所需依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <dependency>

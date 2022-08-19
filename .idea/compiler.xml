@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="nyc-common" />
+        <module name="nyc-role-permission" />
+        <module name="nyc-spring-boot-starter-mybatis" />
+        <module name="nyc-applet-user" />
+        <module name="nyc-gen" />
+        <module name="nyc-spring-boot-starter-web" />
+        <module name="nyc-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="nyc-spring-boot-starter-excel" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="nyc" options="" />
+      <module name="nyc-applet" options="" />
+      <module name="nyc-applet-user" options="" />
+      <module name="nyc-common" options="" />
+      <module name="nyc-dependencies" options="" />
+      <module name="nyc-framework" options="" />
+      <module name="nyc-gen" options="" />
+      <module name="nyc-role-permission" options="" />
+      <module name="nyc-server" options="" />
+      <module name="nyc-spring-boot-starter-excel" options="-parameters" />
+      <module name="nyc-spring-boot-starter-mybatis" options="" />
+      <module name="nyc-spring-boot-starter-web" options="" />
+      <module name="nyc-system" options="" />
+    </option>
+  </component>
+</project>
