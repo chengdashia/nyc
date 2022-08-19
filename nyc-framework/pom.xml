@@ -27,6 +27,7 @@
         <module>nyc-common</module>
         <module>nyc-spring-boot-starter-mybatis</module>
         <module>nyc-spring-boot-starter-web</module>
+        <module>nyc-spring-boot-starter-excel</module>
     </modules>
 
 
