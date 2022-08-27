@@ -52,6 +52,16 @@ bool DeleteAllSameX(SqList *L,ElemType x){
     L->length = k;
     return true;
 }
+bool delete(SqList *L,ElemType x){
+    int k = 0;
+    for (int i = 0; i < L->length; i++) {
+        if(L->data[i] != x){
+            L->data[k++] = L->data[i];
+        }
+    }
+    L->length = k;
+    return true;
+}
 //查看顺序表的数据
 void ListPrint(SqList *L){
     for (int i = 0; i < L->length; ++i) {

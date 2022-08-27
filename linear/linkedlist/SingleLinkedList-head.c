@@ -52,7 +52,7 @@ bool  ListInsert(LinkList *L,int i ,ElemType e){
         j++;
     }
     InsertNextNode(*L,e);
-
+    return true;
 }
 //前插操作:在p结点之前插入元素e
 bool InsertPriorNode(LNode *p,ElemType e){
