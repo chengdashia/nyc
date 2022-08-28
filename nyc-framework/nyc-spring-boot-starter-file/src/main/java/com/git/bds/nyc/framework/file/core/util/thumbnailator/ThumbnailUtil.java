@@ -14,6 +14,10 @@ import java.io.IOException;
  */
 public class ThumbnailUtil {
 
+    private ThumbnailUtil(){
+
+    }
+
     /**
      * 指定比例缩放 scale(),参数小于1,缩小;大于1,放大
      *

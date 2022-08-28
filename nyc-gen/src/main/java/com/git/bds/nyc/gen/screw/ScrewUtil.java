@@ -26,7 +26,7 @@ public class ScrewUtil {
     /**可数据连接的url*/
     private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306";
     /**数据名称*/
-    private static final String DB_NAME = "nongyingc";
+    private static final String DB_NAME = "nyc";
     /**数据库用户名*/
     private static final String DB_USERNAME = "root";
     /**数据库密码*/
@@ -35,7 +35,7 @@ public class ScrewUtil {
     /**生成文件的输出路径*/
     private static final String FILE_OUTPUT_DIR = ".\\dbDoc\\";
     /**可以设置 HTML 或者 Markdown 格式*/
-    private static final EngineFileType FILE_OUTPUT_TYPE = EngineFileType.HTML;
+    private static final EngineFileType FILE_OUTPUT_TYPE = EngineFileType.MD;
     /**文档的名称*/
     private static final String DOC_FILE_NAME = "农营C";
     /**版本号*/

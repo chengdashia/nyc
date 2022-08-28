@@ -64,7 +64,6 @@ public class MybatisPlusGeneration {
                             .addTablePrefix("tbl_","user_")//表名前缀，配置后生成的代码不会有此前缀
                             .addFieldPrefix("user_")
 
-
                             //service 的配置
                             .serviceBuilder()
                             .superServiceClass(MPJBaseService.class)           //	设置 service 接口父类

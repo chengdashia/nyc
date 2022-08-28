@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 用户表 前端控制器
@@ -33,11 +35,12 @@ public class UserController {
 
     private final UserService userService;
 
+
     @ApiOperation("微信登录")
     @PostMapping("/login")
     @ApiImplicitParam(name = "code", value = "编号", required = true, dataTypeClass = String.class)
     public R<WxMaJscode2SessionResult> login(
-            @RequestParam("code") String code
+           @NotBlank @RequestParam("code") String code
     ) throws WxErrorException {
         return R.ok(userService.login(code));
     }
