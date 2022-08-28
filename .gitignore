@@ -1,2 +1,25 @@
-# Project exclude paths
-/cmake-build-debug/
+### Example user template template
+### Example user template
+
+#编译后文件
+*.class
+#日志文件
+*.log
+#包文件
+*.jar
+*.war
+#其他本地文件
+.git
+.idea
+*.iml
+.mvn
+mvnw
+*.cmd
+#配置文件，为避免提交至正式仓库，可根据需求选择性设置忽略
+#Dockerfile
+#*.yml
+#*.properties
+#.gitignore
+#pom.xml
+!/.gitignore
+
