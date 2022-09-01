@@ -1,5 +1,6 @@
 server:
   port: 8888
+
 spring:
   datasource:
     username: DONG(UW85ELozWYaox8TrP7aHQzpMB18cOGzR)               #数据库的用户名
@@ -30,7 +31,7 @@ spring:
       #归还连接时执行检测，建议关闭，影响性能
       test-on-return: false
       #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
-      pool-prepared-statements: true
+      pool-prepared-statements: false
       #开启poolPreparedStatements后生效
       max-pool-prepared-statement-per-connection-size: 20
       #配置DruidStatFilter
@@ -100,6 +101,7 @@ spring:
           result-set-log-enabled: false
           statement-sql-pretty-format: false
       use-global-data-source-stat: true
+
   # redis
   redis:
     database: 0             #redis 数据库索引（默认为0）
@@ -113,27 +115,6 @@ spring:
         max-idle: 8          #连接池最大空闲连接 默认8
         min-idle: 0          #连接池最小空闲连接 默认 0
     timeout: 3000
-  application:
-    name: nong-Ying-C
-  servlet:
-    multipart:
-      max-file-size: 100MB
-      max-request-size: 1000MB
-mybatis-plus:
-  configuration:
-    call-setters-on-nulls: true                             #如果map查出字段为空，也显示
-    #org.apache.ibatis.logging.stdout.StdOutImpl 控制台打印sql语句方便调试sql语句执行错误
-    #org.apache.ibatis.logging.log4j2.Log4j2Impl:这个不在控制台打印查询结果,但是在log4j中打印
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true                          #下划线转驼峰
-    cache-enabled: true                           # 开启二级缓存
-  mapper-locations: classpath*:**/xml/*.xml
-  type-aliases-package: com.git.bds.nyc.domain
-  global-config:
-    db-config:
-      logic-delete-value: 0
-      logic-not-delete-value: 1
-      id-type: assign_id
 
 # Sa-Token配置
 sa-token:

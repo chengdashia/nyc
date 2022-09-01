@@ -1,14 +1,56 @@
 spring:
+  application:
+    name: nyc-server
+
   profiles:
     active: dev
+
+  main:
+    allow-circular-references: true # 允许循环依赖，因为项目是三层架构，无法避免这个情况。
+
   mvc:
     pathmatch:
-      matching-strategy: ANT_PATH_MATCHER
+      matching-strategy: ANT_PATH_MATCHER #解决 SpringFox 与 SpringBoot 2.6.x 不兼容的问题，参见 SpringFoxHandlerProviderBeanPostProcessor 类
+
     #出现错误时, 直接抛出异常
     throw-exception-if-no-handler-found: true
+
   resources:
     #不要为我们工程中的资源文件建立映射
     add-mappings: false
+
+
+  # Servlet 配置
+  servlet:
+    # 文件上传相关配置项
+    multipart:
+      max-file-size: 16MB # 单个文件大小
+      max-request-size: 32MB # 设置总上传的文件大小
+
+  # Jackson 配置项
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true # 设置 Date 的格式，使用时间戳
+      write-date-timestamps-as-nanoseconds: false # 设置不使用 nanoseconds 的格式。例如说 1611460870.401，而是直接 1611460870401
+      write-durations-as-timestamps: true # 设置 Duration 的格式，使用时间戳
+      fail-on-empty-beans: false # 允许序列化无属性的 Bean
+
+# MyBatis Plus 的配置项
+mybatis-plus:
+  configuration:
+    call-setters-on-nulls: true                             #如果map查出字段为空，也显示
+    #org.apache.ibatis.logging.stdout.StdOutImpl 控制台打印sql语句方便调试sql语句执行错误
+    #org.apache.ibatis.logging.log4j2.Log4j2Impl:这个不在控制台打印查询结果,但是在log4j中打印
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true                          #下划线转驼峰
+    cache-enabled: true                           # 开启二级缓存
+  mapper-locations: classpath*:**/xml/*.xml
+  type-aliases-package: com.git.bds.nyc.domain
+  global-config:
+    db-config:
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      id-type: assign_id
 
 # MinIO 配置
 minio:
@@ -48,3 +90,4 @@ mica:
 
 #logging:
 #  config: classpath:log4j2.yml
+
