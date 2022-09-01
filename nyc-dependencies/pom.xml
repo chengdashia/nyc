@@ -146,6 +146,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-spring-boot-starter-biz-sms</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring.boot.version}</version>
