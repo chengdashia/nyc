@@ -1,6 +1,7 @@
 package com.git.bds.nyc.framework.swagger.config;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -30,28 +31,43 @@ import java.util.stream.Collectors;
  */
 @Configuration
 @EnableKnife4j
+@RequiredArgsConstructor
+//@ConditionalOnProperty(name = "knife4j.enable", havingValue = "true", matchIfMissing = true)
 public class SwaggerConfig {
 
-    /**
-     * api的主页显示信息
-     */
-    private static final ApiInfo API_INFO;
+    private final SwaggerProperties swaggerProperties;
+
+    ///**
+    // * api的主页显示信息
+    // */
+    //private static final ApiInfo API_INFO;
 
     /**
      * swagger激活环境
      */
     @Value(value = "${knife4j.enable}")
     public boolean enable;
+    //
+    //static {
+    //    //API_INFO = new ApiInfoBuilder()
+    //    //        .title("农营C 农作物交易平台")
+    //    //        .description("农营C API接口文档")
+    //    //        .termsOfServiceUrl("https://blog.chengdashi.cn")
+    //    //        .contact(new Contact("成大事",
+    //    //                "https://blog.chengdashi.cn",
+    //    //                "1847085602@qq.com"))
+    //    //        .version("1.0")
+    //    //        .build();
+    //}
 
-    static {
-        API_INFO = new ApiInfoBuilder()
-                .title("农营C 农作物交易平台")
-                .description("农营C API接口文档")
-                .termsOfServiceUrl("https://blog.chengdashi.cn")
-                .contact(new Contact("成大事",
-                        "https://blog.chengdashi.cn",
-                        "1847085602@qq.com"))
-                .version("1.0")
+    private ApiInfo info(){
+        return new ApiInfoBuilder()
+                .title(swaggerProperties.getTitle())
+                .description(swaggerProperties.getDescription())
+                .contact(new Contact(swaggerProperties.getContact().getName()
+                        ,swaggerProperties.getContact().getUrl()
+                        ,swaggerProperties.getContact().getEmail()))
+                .version(swaggerProperties.getVersion())
                 .build();
     }
 
@@ -61,7 +77,7 @@ public class SwaggerConfig {
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("api1")
-                .apiInfo(API_INFO)
+                .apiInfo(info())
                 .enable(enable)
 //                .enable(flag)   //enable 是否启动swagger，如果为false，则swagger不能浏览器中访问
                 .select()
@@ -84,7 +100,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 // 配置分组名
                 .groupName("api2")
-                .apiInfo(API_INFO)
+                .apiInfo(info())
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.hanliy.controller2
