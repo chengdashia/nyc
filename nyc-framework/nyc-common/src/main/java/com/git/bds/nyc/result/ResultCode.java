@@ -14,7 +14,7 @@ public enum ResultCode {
     /**操作成功**/
     SUCCESS(200,"操作成功！"),
     BAD_REQUEST(400,"请求参数不正确"),
-    NOT_FOUND(404,"请求参数不正确"),
+    NOT_FOUND(404,"请求不存在！！！"),
     METHOD_NOT_ALLOWED(400,"请求参数不正确"),
     /**密码错误**/
     PWD_ERROR(411,"密码错误"),

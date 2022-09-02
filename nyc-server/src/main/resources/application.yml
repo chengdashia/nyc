@@ -121,7 +121,7 @@ knife4j:
     # 描述
     description: '农营C 线上农作物交易平台'
     # 版本
-    version: '版本号: ${nyc.version}'
+    version: '${nyc.version}'
     # 作者信息
     contact:
       name: 成大事

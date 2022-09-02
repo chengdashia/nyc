@@ -29,7 +29,7 @@ public class MybatisPlusGeneration {
 
         //表名集合
         List<String> tables = new ArrayList<>();
-        tables.add("user");
+        tables.add("primary_product");
 
         FastAutoGenerator.create(url, username, password)
                 //全局配置
@@ -45,7 +45,7 @@ public class MybatisPlusGeneration {
                 })
                 //包配置
                 .packageConfig(builder -> {
-                    builder.parent("com.bds.nyc")     //父包名
+                    builder.parent("com.git.bds.nyc")     //父包名
 //                            .moduleName("demo")
                             .entity("model.domain")                 //Entity 包名
                             .service("service")             //	Service 包名
@@ -55,14 +55,14 @@ public class MybatisPlusGeneration {
                             .controller("controller")       //Controller 包名
                             .other("utils")                //自定义文件包名	输出自定义文件时所用到的包名
                             .pathInfo(Collections.singletonMap(OutputFile.xml, System.getProperty("user.dir") +
-                                    "\\nyc-gen\\src\\main\\java\\com\\bds\\nyc\\dao\\xml"));//指定xml位置
+                                    "\\nyc-gen\\src\\main\\java\\com\\git\\bds\\nyc\\dao\\xml"));//指定xml位置
                     //配置 **Mapper.xml 路径信息：项目的 resources 目录的 Mapper 目录下
                 })
                 //策略配置
                 .strategyConfig(builder -> {
                     builder.addInclude(tables)
                             .addTablePrefix("tbl_","user_")//表名前缀，配置后生成的代码不会有此前缀
-                            .addFieldPrefix("user_")
+                            //.addFieldPrefix("user_")
 
                             //service 的配置
                             .serviceBuilder()

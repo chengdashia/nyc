@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
 
     <name>nyc-dependencies</name>
+
     <description>
         基础 pom 文件，管理整个项目的依赖版本
     </description>
@@ -86,6 +87,18 @@
             <dependency>
                 <groupId>com.git.bds</groupId>
                 <artifactId>nyc-applet-user</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-applet-corp</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-applet-product-biz</artifactId>
                 <version>${revision}</version>
             </dependency>
 

@@ -2,28 +2,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <artifactId>nyc</artifactId>
+        <artifactId>nyc-applet</artifactId>
         <groupId>com.git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>nyc-applet</artifactId>
-    <!-- 父模块打包类型必须为pom -->
-    <packaging>pom</packaging>
+    <artifactId>nyc-applet-corp</artifactId>
+    <version>${revision}</version>
 
-    <name>${project.artifactId}</name>
+    <!--子模块打包为jar-->
+    <packaging>jar</packaging>
+
+    <name>nyc-applet-corp</name>
     <description>
-        微信小程序的服务
+        小程序 公司端
     </description>
 
-    <!--子模块-->
-    <modules>
-        <module>nyc-applet-user</module>
-        <module>nyc-applet-corp</module>
-        <!--产品的-->
-        <module>nyc-applet-product-biz</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-common</artifactId>
+        </dependency>
+    </dependencies>
+
 
 
 
