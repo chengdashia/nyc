@@ -87,7 +87,8 @@ public class SwaggerConfig {
                 //none :都不扫描
                 //withClassAnnotation :扫描类上的注解  参数是一个注解的反射对象
                 //withMethodAnnotation :扫描类上的注解
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.controller"))
+                //.apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.**.controller"))
+                .apis(RequestHandlerSelectors.any())
                 //path()  过滤什么路径
                 .paths(PathSelectors.any())
                 .build();
@@ -104,7 +105,7 @@ public class SwaggerConfig {
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.hanliy.controller2
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.**.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

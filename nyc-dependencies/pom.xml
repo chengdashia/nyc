@@ -25,7 +25,9 @@
         <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
         <mybatis-plus-join.version>1.2.4</mybatis-plus-join.version>
         <hutool.version>5.8.0</hutool.version>
+        <!--web 相关-->
         <knife4j.version>3.0.3</knife4j.version>
+        <swagger-annotations.version>1.6.6</swagger-annotations.version>
         <!--mysql-->
         <mysql.version>8.0.29</mysql.version>
         <!--minio-->
@@ -86,6 +88,12 @@
 
             <dependency>
                 <groupId>com.git.bds</groupId>
+                <artifactId>nyc-applet</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-applet-user</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -99,6 +107,12 @@
             <dependency>
                 <groupId>com.git.bds</groupId>
                 <artifactId>nyc-applet-product-biz</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-applet-product-api</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -294,10 +308,23 @@
                 <version>${knife4j.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>com.google.guava</groupId>
+                        <artifactId>mapstruct</artifactId>
+                        <groupId>org.mapstruct</groupId> <!-- 避免冲突 -->
+                    </exclusion>
+                    <exclusion>
                         <artifactId>guava</artifactId>
+                        <groupId>com.google.guava</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>swagger-annotations</artifactId>
+                        <groupId>io.swagger</groupId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-annotations.version}</version>
             </dependency>
 
             <!-- MinIO -->
