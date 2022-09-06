@@ -23,4 +23,13 @@ public interface PrimaryProductService extends MPJBaseService<PrimaryProduct> {
      * @return
      */
     List<PrimaryProduct> homePageProductsByPage(PageParam pageParam);
+
+
+    /**
+     * 获取产品信息
+     *
+     * @param id 商品id
+     * @return {@link PrimaryProduct}
+     */
+    PrimaryProduct getProductInfo(Long id);
 }

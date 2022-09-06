@@ -36,4 +36,9 @@ public class PrimaryProductServiceImpl extends MPJBaseServiceImpl<PrimaryProduct
                         .orderByDesc(PrimaryProduct::getCreateTime)).getRecords();
         return productList;
     }
+
+    @Override
+    public PrimaryProduct getProductInfo(Long id) {
+        return this.baseMapper.selectById(id);
+    }
 }
