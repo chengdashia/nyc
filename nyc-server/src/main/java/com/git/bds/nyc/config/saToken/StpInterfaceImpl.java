@@ -1,8 +1,8 @@
 package com.git.bds.nyc.config.saToken;////package com.example.springboot.config.saToken;
 
 import cn.dev33.satoken.stp.StpInterface;
-import com.git.bds.nyc.service.SysRolePermissionService;
-import com.git.bds.nyc.service.SysUserRoleService;
+import com.git.bds.nyc.service.rolepermission.SysRolePermissionService;
+import com.git.bds.nyc.service.userrole.SysUserRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

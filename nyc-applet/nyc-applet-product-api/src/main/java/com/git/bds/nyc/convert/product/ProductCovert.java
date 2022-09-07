@@ -3,6 +3,7 @@ package com.git.bds.nyc.convert.product;
 import com.git.bds.nyc.controller.vo.PrimaryProductInfoVO;
 import com.git.bds.nyc.controller.vo.PrimaryProductVO;
 import com.git.bds.nyc.product.model.domain.PrimaryProduct;
+import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -19,5 +20,5 @@ public interface ProductCovert {
 
     List<PrimaryProductVO> toPrimaryProductVO(List<PrimaryProduct> list);
 
-    PrimaryProductInfoVO toPrimaryProductInfoVo(PrimaryProduct product);
+    PrimaryProductInfoVO toPrimaryProductInfoVo(ProductInfoDTO product);
 }

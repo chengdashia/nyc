@@ -6,6 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author 成大事
@@ -48,5 +49,8 @@ public class PrimaryProductInfoVO implements Serializable {
 
     @ApiModelProperty("商品的发布时间")
     private LocalDateTime createTime;
+
+    @ApiModelProperty("商品图片列表")
+    private List<String> imgList;
 
 }
