@@ -2,11 +2,13 @@ package com.git.bds.nyc.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.product.dao.PrimaryProductDao;
 import com.git.bds.nyc.product.model.domain.PrimaryProduct;
 import com.git.bds.nyc.product.service.PrimaryProductService;
 import com.github.yulichang.base.MPJBaseServiceImpl;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +40,7 @@ public class PrimaryProductServiceImpl extends MPJBaseServiceImpl<PrimaryProduct
     }
 
     @Override
+    @Cacheable(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id")
     public PrimaryProduct getProductInfo(Long id) {
         return this.baseMapper.selectById(id);
     }

@@ -1,7 +1,9 @@
 package com.git.bds.nyc.controller;
 
+import cn.hutool.core.util.IdUtil;
 import com.git.bds.nyc.controller.vo.PrimaryProductInfoVO;
 import com.git.bds.nyc.convert.product.ProductCovert;
+import com.git.bds.nyc.framework.redis.util.RedisUtils;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.product.model.domain.PrimaryProduct;
 import com.git.bds.nyc.product.service.PrimaryProductService;
@@ -13,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -35,6 +34,8 @@ public class PrimaryProductController {
 
     private final PrimaryProductService productService;
 
+    private final RedisUtils redisUtils;
+
     @ApiOperation("首页商品数据")
     @GetMapping("/indexProduct")
     public R<Object> homePageProductsByPage(
@@ -45,7 +46,7 @@ public class PrimaryProductController {
     }
 
     @ApiOperation("商品的详细数据集")
-    @GetMapping("/getProductInfo/{id}")
+    @PostMapping("/getProductInfo/{id}")
     @ApiImplicitParam(name = "id", value = "商品id", required = true, dataTypeClass = Long.class)
     public R<PrimaryProductInfoVO> getProductInfo(
             @PathVariable("id") Long id
@@ -53,5 +54,26 @@ public class PrimaryProductController {
         PrimaryProduct product = productService.getProductInfo(id);
         return R.ok(ProductCovert.INSTANCE.toPrimaryProductInfoVo(product));
     }
+
+    @ApiOperation("测试redis 填充")
+    @PostMapping("/redisInsert/{id}")
+    @ApiImplicitParam(name = "id", value = "商品id", required = true, dataTypeClass = Long.class)
+    public R<String> redisInsert(
+            @PathVariable("id") Long id
+    ){
+        redisUtils.set(id.toString(),new PrimaryProduct().setId(IdUtil.getSnowflakeNextId()));
+        return R.ok();
+    }
+
+    @ApiOperation("测试redis 获取")
+    @PostMapping("/redisGet/{id}")
+    @ApiImplicitParam(name = "id", value = "商品id", required = true, dataTypeClass = Long.class)
+    public R<Object> redisGet(
+            @PathVariable("id") Long id
+    ){
+
+        return R.ok(redisUtils.get(id.toString()));
+    }
+
 
 }
