@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-07 13:55:14
  */
 @Service
-public class ProductPictureServiceImpl extends MPJBaseServiceImpl<ProductPictureDao, ProductPicture> implements ProductPictureService {
+public class PersonalProductPictureServiceImpl extends MPJBaseServiceImpl<ProductPictureDao, ProductPicture> implements PersonalProductPictureService {
 
 }

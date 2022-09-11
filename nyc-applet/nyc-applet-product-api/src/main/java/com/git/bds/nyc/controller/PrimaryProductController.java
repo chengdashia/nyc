@@ -4,9 +4,9 @@ import com.git.bds.nyc.controller.vo.PrimaryProductInfoVO;
 import com.git.bds.nyc.convert.product.ProductCovert;
 import com.git.bds.nyc.framework.redis.util.RedisUtils;
 import com.git.bds.nyc.page.PageParam;
-import com.git.bds.nyc.product.model.domain.PrimaryProduct;
+import com.git.bds.nyc.product.model.domain.PersonalPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
-import com.git.bds.nyc.product.service.primaryproduct.PrimaryProductService;
+import com.git.bds.nyc.product.service.primaryproduct.personal.PersonalPrimaryProductService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,7 +32,7 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class PrimaryProductController {
 
-    private final PrimaryProductService productService;
+    private final PersonalPrimaryProductService productService;
 
     private final RedisUtils redisUtils;
 
@@ -41,7 +41,7 @@ public class PrimaryProductController {
     public R<Object> homePageProductsByPage(
             @Valid PageParam pageParam
     ){
-        List<PrimaryProduct> productList = productService.homePageProductsByPage(pageParam);
+        List<PersonalPrimaryProduct> productList = productService.homePageProductsByPage(pageParam);
         return R.ok(ProductCovert.INSTANCE.toPrimaryProductVO(productList));
     }
 

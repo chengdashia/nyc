@@ -19,13 +19,12 @@ import java.time.LocalDateTime;
  * @author 成大事
  * @since 2022-09-02 22:02:03
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Accessors(chain = true)
-@TableName("primary_product")
-@ApiModel(value = "PrimaryProduct对象", description = "初级农产品表")
-public class PrimaryProduct extends Model<PrimaryProduct> {
+@TableName("personal_primary_product")
+@ApiModel(value = "PersonalPrimaryProduct对象", description = "农户发布的初级农产品表")
+public class PersonalPrimaryProduct extends Model<PersonalPrimaryProduct> {
 
     private static final long serialVersionUID = 1L;
 
@@ -73,9 +72,13 @@ public class PrimaryProduct extends Model<PrimaryProduct> {
     @TableField("product_status")
     private Integer productStatus;
 
-    @ApiModelProperty("审核状态(-1：未审核；0：不通过；1：审核通过)")
+    @ApiModelProperty("供销社审核状态(-1：未审核；0：不通过；1：审核通过)")
     @TableField("audit_status")
     private Integer auditStatus;
+
+    @ApiModelProperty("合作社审核状态(-1：未审核；0：不通过；1：审核通过)")
+    @TableField("coop_audit_status")
+    private Integer coopAuditStatus;
 
     @ApiModelProperty("商品的发布时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -117,6 +120,8 @@ public class PrimaryProduct extends Model<PrimaryProduct> {
     public static final String PRODUCT_STATUS = "product_status";
 
     public static final String AUDIT_STATUS = "audit_status";
+
+    public static final String COOP_AUDIT_STATUS = "coop_audit_status";
 
     public static final String CREATE_TIME = "create_time";
 
