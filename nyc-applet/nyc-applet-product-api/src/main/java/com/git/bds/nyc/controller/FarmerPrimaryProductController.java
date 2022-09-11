@@ -2,11 +2,10 @@ package com.git.bds.nyc.controller;
 
 import com.git.bds.nyc.controller.vo.PrimaryProductInfoVO;
 import com.git.bds.nyc.convert.product.ProductCovert;
-import com.git.bds.nyc.framework.redis.util.RedisUtils;
 import com.git.bds.nyc.page.PageParam;
-import com.git.bds.nyc.product.model.domain.PersonalPrimaryProduct;
+import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
-import com.git.bds.nyc.product.service.primaryproduct.personal.PersonalPrimaryProductService;
+import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -30,18 +29,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/primaryProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class PrimaryProductController {
+public class FarmerPrimaryProductController {
 
-    private final PersonalPrimaryProductService productService;
+    private final FarmerPrimaryProductService productService;
 
-    private final RedisUtils redisUtils;
 
     @ApiOperation("首页商品数据")
     @GetMapping("/indexProduct")
     public R<Object> homePageProductsByPage(
             @Valid PageParam pageParam
     ){
-        List<PersonalPrimaryProduct> productList = productService.homePageProductsByPage(pageParam);
+        List<FarmerPrimaryProduct> productList = productService.homePageProductsByPage(pageParam);
         return R.ok(ProductCovert.INSTANCE.toPrimaryProductVO(productList));
     }
 

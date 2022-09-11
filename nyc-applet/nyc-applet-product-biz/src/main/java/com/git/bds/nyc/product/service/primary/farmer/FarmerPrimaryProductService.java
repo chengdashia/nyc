@@ -1,7 +1,7 @@
-package com.git.bds.nyc.product.service.primaryproduct.personal;
+package com.git.bds.nyc.product.service.primary.farmer;
 
 import com.git.bds.nyc.page.PageParam;
-import com.git.bds.nyc.product.model.domain.PersonalPrimaryProduct;
+import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.github.yulichang.base.MPJBaseService;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @author 成大事
  * @since 2022-09-02 22:02:03
  */
-public interface PersonalPrimaryProductService extends MPJBaseService<PersonalPrimaryProduct> {
+public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimaryProduct> {
 
     /**
      * 主页产品分页
@@ -23,14 +23,14 @@ public interface PersonalPrimaryProductService extends MPJBaseService<PersonalPr
      * @param pageParam 页面参数
      * @return
      */
-    List<PersonalPrimaryProduct> homePageProductsByPage(PageParam pageParam);
+    List<FarmerPrimaryProduct> homePageProductsByPage(PageParam pageParam);
 
 
     /**
      * 获取产品信息
      *
      * @param id 商品id
-     * @return {@link PersonalPrimaryProduct}
+     * @return {@link FarmerPrimaryProduct}
      */
     ProductInfoDTO getProductInfo(Long id);
 }

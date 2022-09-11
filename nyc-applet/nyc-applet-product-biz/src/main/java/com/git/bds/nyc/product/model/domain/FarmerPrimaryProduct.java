@@ -22,9 +22,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("personal_primary_product")
+@TableName("farmer_primary_product")
 @ApiModel(value = "PersonalPrimaryProduct对象", description = "农户发布的初级农产品表")
-public class PersonalPrimaryProduct extends Model<PersonalPrimaryProduct> {
+public class FarmerPrimaryProduct extends Model<FarmerPrimaryProduct> {
 
     private static final long serialVersionUID = 1L;
 
