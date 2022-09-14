@@ -16,9 +16,8 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class LocalDateTimeSerializerConfig {
 
-    /** 注入配置文件格式化的格式
-     * @Value("${spring.jackson.date-format:yyyy-MM-dd HH:mm:ss}")
-     *private String pattern;
+    /**
+     * 注入配置文件格式化的格式
      */
     private static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 

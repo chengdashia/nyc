@@ -25,7 +25,7 @@ import java.io.Serializable;
 @Setter
 @Accessors(chain = true)
 @TableName("product_picture")
-@ApiModel(value = "ProductPicture对象", description = "")
+@ApiModel(value = "ProductPicture对象", description = "产品图片")
 public class ProductPicture extends Model<ProductPicture> {
 
     private static final long serialVersionUID = 1L;

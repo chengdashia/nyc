@@ -34,6 +34,8 @@ public enum ResultCode {
     BODY_NOT_MATCH(4000,"请求的数据格式不符!"),
     /**服务器内部错误**/
     INTERNAL_SERVER_ERROR(5000, "服务器内部错误!"),
+    /** 方法参数无效 */
+    METHOD_ARGUMENT_NOT_VALID(5001, "方法参数无效!"),
     /**参数格式不合规**/
     CONSTRAINT_VIOLATION_EXCEPTION(5002, "参数格式不合规!"),
     /**请求参数不合规**/

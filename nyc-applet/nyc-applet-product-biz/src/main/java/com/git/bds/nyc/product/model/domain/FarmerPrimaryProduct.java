@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@ToString
 @Accessors(chain = true)
 @TableName("farmer_primary_product")
 @ApiModel(value = "PersonalPrimaryProduct对象", description = "农户发布的初级农产品表")

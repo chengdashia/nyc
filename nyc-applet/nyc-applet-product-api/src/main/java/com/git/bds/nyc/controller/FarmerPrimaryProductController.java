@@ -1,6 +1,7 @@
 package com.git.bds.nyc.controller;
 
 import com.git.bds.nyc.controller.vo.PrimaryProductInfoVO;
+import com.git.bds.nyc.controller.vo.PrimaryProductVO;
 import com.git.bds.nyc.convert.product.ProductCovert;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
@@ -36,7 +37,7 @@ public class FarmerPrimaryProductController {
 
     @ApiOperation("首页商品数据")
     @GetMapping("/indexProduct")
-    public R<Object> homePageProductsByPage(
+    public R<List<PrimaryProductVO>> homePageProductsByPage(
             @Valid PageParam pageParam
     ){
         List<FarmerPrimaryProduct> productList = productService.homePageProductsByPage(pageParam);

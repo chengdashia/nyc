@@ -1,13 +1,12 @@
 package com.git.bds.nyc.controller;
 
-import com.git.bds.nyc.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
-import com.git.bds.nyc.service.user.UserService;
+import com.git.bds.nyc.valid.ValidGroup;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,33 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- * 用户表 前端控制器
- * </p>
- *
  * @author 成大事
- * @since 2022-08-14 19:28:00
+ * @since 2022/9/14 18:46
  */
-@Api(tags = "用户")
+@Api(tags = "农户 初级农产品")
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/wx/user")
+@RequestMapping("/primaryProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class UserController {
+public class PrimaryProductController {
 
-    private final UserService userService;
+    private final FarmerPrimaryProductService productService;
 
 
-    @ApiOperation("微信登录")
-    @PostMapping("/login")
-    public R<Boolean> login(
-            @RequestBody WxUserInfoDTO userInfoDTO
-    ) throws WxErrorException {
-        return R.ok(userService.login(userInfoDTO));
+    @PostMapping("/addProduct")
+    public R<Object> addProduct(
+           @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
+    ){
+        log.info("productDTO:  "+productDTO);
+        productService.releaseProduct(productDTO);
+        return R.ok();
     }
-
-
 
 
 

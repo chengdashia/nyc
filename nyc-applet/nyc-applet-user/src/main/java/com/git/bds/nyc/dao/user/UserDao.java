@@ -1,4 +1,4 @@
-package com.git.bds.nyc.dao;
+package com.git.bds.nyc.dao.user;
 
 import com.git.bds.nyc.domain.User;
 import com.github.yulichang.base.MPJBaseMapper;

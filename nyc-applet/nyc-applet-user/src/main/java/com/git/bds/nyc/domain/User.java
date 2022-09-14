@@ -29,31 +29,36 @@ public class User extends Model<User> {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")
-    @TableId(value = "user_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     @ApiModelProperty("微信用户的openid")
-    @TableField("user_openid")
+    @TableField("openid")
     private String openid;
 
     @ApiModelProperty("用户昵称")
-    @TableField("user_screen_name")
+    @TableField("screen_name")
     private String screenName;
 
+    @ApiModelProperty("头像地址")
+    @TableField("avatar")
+    private String avatar;
 
     @ApiModelProperty("注册时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     @ApiModelProperty("最后登录时间")
-    @TableField("login_time")
+    @TableField(value = "login_time",fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime loginTime;
 
-    public static final String USER_ID = "user_id";
+    public static final String USER_ID = "id";
 
-    public static final String USER_OPENID = "user_openid";
+    public static final String USER_OPENID = "openid";
 
-    public static final String USER_SCREEN_NAME = "user_screen_name";
+    public static final String USER_SCREEN_NAME = "screen_name";
+
+    public static final String AVATAR = "avatar";
 
 
     public static final String CREATE_TIME = "create_time";
