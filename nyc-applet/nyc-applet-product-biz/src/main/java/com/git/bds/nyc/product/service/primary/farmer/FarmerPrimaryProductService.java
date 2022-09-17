@@ -22,7 +22,7 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
      * 主页产品分页
      *
      * @param pageParam 页面参数
-     * @return
+     * @return {@link List}<{@link FarmerPrimaryProduct}>
      */
     List<FarmerPrimaryProduct> homePageProductsByPage(PageParam pageParam);
 
@@ -37,9 +37,25 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
 
 
     /**
-     * 发布产品
+     * 发布 在售产品
      *
      * @param productDTO 产品dto
      */
-    void releaseProduct(PrimaryProductDTO productDTO);
+    void releaseOnSellProduct(PrimaryProductDTO productDTO);
+
+
+    /**
+     * 发布预售产品
+     *
+     * @param productDTO 产品dto
+     */
+    void releasePreSellProduct(PrimaryProductDTO productDTO);
+
+    /**
+     * 根据id删除产品
+     *
+     * @param id 产品id
+     * @return {@link Boolean}
+     */
+    Boolean delProductById(Long id);
 }

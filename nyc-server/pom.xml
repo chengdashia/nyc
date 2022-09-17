@@ -59,6 +59,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-file-api</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

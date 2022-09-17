@@ -4,42 +4,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>nyc-applet</artifactId>
+        <artifactId>nyc-system</artifactId>
         <groupId>com.git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>nyc-applet-product-biz</artifactId>
+    <artifactId>nyc-file-api</artifactId>
     <version>${revision}</version>
-    <packaging>jar</packaging>
-
-    <name>nyc-applet-product-biz</name>
+    <name>nyc-file-api</name>
     <description>
-        商品的CURD
+        用于文件上传和处理
     </description>
 
     <dependencies>
         <dependency>
             <groupId>com.git.bds</groupId>
-            <artifactId>nyc-common</artifactId>
+            <artifactId>nyc-spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.git.bds</groupId>
-            <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.git.bds</groupId>
-            <artifactId>nyc-spring-boot-starter-redis</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-file</artifactId>
         </dependency>
-    </dependencies>
 
+
+    </dependencies>
 
 
 </project>

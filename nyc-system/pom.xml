@@ -20,6 +20,7 @@
 
     <modules>
         <module>nyc-role-permission</module>
+        <module>nyc-file-api</module>
     </modules>
 
 

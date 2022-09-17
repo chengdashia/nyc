@@ -36,9 +36,7 @@ public class UserController {
 
     @ApiOperation("微信登录")
     @PostMapping("/login")
-    public R<Boolean> login(
-            @RequestBody WxUserInfoDTO userInfoDTO
-    ) throws WxErrorException {
+    public R<Boolean> login(@RequestBody WxUserInfoDTO userInfoDTO) throws WxErrorException {
         return R.ok(userService.login(userInfoDTO));
     }
 

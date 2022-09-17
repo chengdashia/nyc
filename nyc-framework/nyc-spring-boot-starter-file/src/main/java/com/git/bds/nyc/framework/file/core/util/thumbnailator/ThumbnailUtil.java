@@ -2,10 +2,15 @@ package com.git.bds.nyc.framework.file.core.util.thumbnailator;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
+import org.apache.http.entity.ContentType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author 成大事
@@ -37,6 +42,25 @@ public class ThumbnailUtil {
             e.printStackTrace();
         }
         return false;
+
+    }
+
+    /**
+     * 指定比例缩放 scale(),参数小于1,缩小;大于1,放大
+     *
+     * @param file   源文件路径
+     */
+    public static MultipartFile changeScale(MultipartFile file){
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            Thumbnails.of(file.getInputStream()).scale(0.5f).outputQuality(0.50f).toOutputStream(out);
+            byte[] bytes = out.toByteArray();
+            InputStream inputStream = new ByteArrayInputStream(bytes);
+            return new MockMultipartFile(ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 

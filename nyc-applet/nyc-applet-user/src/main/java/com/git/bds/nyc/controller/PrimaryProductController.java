@@ -5,14 +5,14 @@ import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductServic
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.valid.ValidGroup;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author 成大事
@@ -22,19 +22,43 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/primaryProduct")
+@RequestMapping("/farmerPrimaryProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class PrimaryProductController {
 
     private final FarmerPrimaryProductService productService;
 
 
-    @PostMapping("/addProduct")
-    public R<Object> addProduct(
-           @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
+    /**
+     * 农户发布 在售初级产品
+     *
+     * @param productDTO 产品dto
+     * @return {@link R}<{@link Object}>
+     */
+    @PostMapping("/releaseOnSellProduct")
+    public R<Object> releaseOnSellProduct(
+           @Validated({ValidGroup.OnSell.class}) @RequestBody PrimaryProductDTO productDTO
     ){
-        log.info("productDTO:  "+productDTO);
-        productService.releaseProduct(productDTO);
+        productService.releaseOnSellProduct(productDTO);
+        return R.ok();
+    }
+
+
+
+    @PostMapping("/releasePreSellProduct")
+    public R<Object> releasePreSellProduct(
+            @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
+    ){
+        productService.releasePreSellProduct(productDTO);
+        return R.ok();
+    }
+
+    @PostMapping("/delProduct")
+    @ApiImplicitParam(name = "id", value = "产品id", required = true, example = "1", dataTypeClass = Long.class)
+    public R<Boolean> delProduct(
+            @NotNull @RequestParam("id") Long id
+    ){
+        productService.delProductById(id);
         return R.ok();
     }
 

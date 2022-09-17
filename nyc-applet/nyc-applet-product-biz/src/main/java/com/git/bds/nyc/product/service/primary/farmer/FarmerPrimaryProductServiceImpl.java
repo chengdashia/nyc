@@ -1,8 +1,11 @@
 package com.git.bds.nyc.product.service.primary.farmer;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.framework.file.minio.MinioConfig;
+import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.product.convert.PrimaryProductConvert;
@@ -15,6 +18,7 @@ import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +41,12 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
     @Resource
     private ProductPictureDao productPictureDao;
+
+    @Resource
+    private MinioUtil minioUtil;
+
+    @Resource
+    private MinioConfig minioConfig;
 
     /**
      * 主页产品按页面
@@ -87,16 +97,16 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         return productInfoDTO;
     }
 
+
     /**
-     * 发布商品
+     * 发售产品
      *
      * @param productDTO 产品dto
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void releaseProduct(PrimaryProductDTO productDTO) {
-        //long id = StpUtil.getLoginIdAsLong();
-        long id = 1L;
+    public void releaseOnSellProduct(PrimaryProductDTO productDTO) {
+        long id = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
         String coverImg = productImgList.get(0);
@@ -108,5 +118,46 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
             productPictureDao.insert(productPicture);
         }
         log.info("product:  "+product);
+    }
+
+    /**
+     * 发布预售产品
+     *
+     * @param productDTO 产品dto
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void releasePreSellProduct(PrimaryProductDTO productDTO) {
+        long id = StpUtil.getLoginIdAsLong();
+        long productId = IdUtil.getSnowflakeNextId();
+        List<String> productImgList = productDTO.getProductImgList();
+        String coverImg = productImgList.get(0);
+        FarmerPrimaryProduct product = PrimaryProductConvert.INSTANCE.toFarmerPrimaryProduct(productId,id, coverImg,productDTO);
+        this.baseMapper.insert(product);
+
+        for (String img : productImgList) {
+            ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
+            productPictureDao.insert(productPicture);
+        }
+        log.info("product:  "+product);
+    }
+
+    /**
+     * del产品按id
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    @Override
+    @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id",condition = "#result == true ")
+    public Boolean delProductById(Long id) {
+        List<ProductPicture> productPictures = productPictureDao.selectList(new LambdaQueryWrapper<ProductPicture>()
+                .select(ProductPicture::getPictureUrl,ProductPicture::getId)
+                .eq(ProductPicture::getProductId, id));
+        List<Long> imgIdList = productPictures.stream().map(ProductPicture::getId).collect(Collectors.toList());
+        List<String> imgUrlList = productPictures.stream().map(ProductPicture::getPictureUrl).collect(Collectors.toList());
+        minioUtil.removeFiles(minioConfig.getBucketName(),imgUrlList);
+        productPictureDao.deleteBatchIds(imgIdList);
+        return this.baseMapper.deleteById(id) == 1;
     }
 }
