@@ -1,8 +1,8 @@
-package com.git.bds.nyc.service.user;
+package com.git.bds.nyc.user.service.user;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
-import com.git.bds.nyc.domain.User;
-import com.git.bds.nyc.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.domain.User;
+import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.github.yulichang.base.MPJBaseService;
 import me.chanjar.weixin.common.error.WxErrorException;
 

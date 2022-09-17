@@ -1,4 +1,4 @@
-package com.git.bds.nyc.valid;
+package com.git.bds.nyc.user.valid;
 
 import javax.validation.GroupSequence;
 

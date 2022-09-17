@@ -2,13 +2,9 @@ package com.git.bds.nyc.framework.swagger.config;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.ReflectionUtils;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -16,12 +12,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.spring.web.plugins.WebFluxRequestHandlerProvider;
-import springfox.documentation.spring.web.plugins.WebMvcRequestHandlerProvider;
-
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author :成大事
@@ -32,33 +22,16 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableKnife4j
 @RequiredArgsConstructor
-//@ConditionalOnProperty(name = "knife4j.enable", havingValue = "true", matchIfMissing = true)
 public class SwaggerConfig {
 
     private final SwaggerProperties swaggerProperties;
 
-    ///**
-    // * api的主页显示信息
-    // */
-    //private static final ApiInfo API_INFO;
 
     /**
      * swagger激活环境
      */
     @Value(value = "${knife4j.enable}")
     public boolean enable;
-    //
-    //static {
-    //    //API_INFO = new ApiInfoBuilder()
-    //    //        .title("农营C 农作物交易平台")
-    //    //        .description("农营C API接口文档")
-    //    //        .termsOfServiceUrl("https://blog.chengdashi.cn")
-    //    //        .contact(new Contact("成大事",
-    //    //                "https://blog.chengdashi.cn",
-    //    //                "1847085602@qq.com"))
-    //    //        .version("1.0")
-    //    //        .build();
-    //}
 
     private ApiInfo info(){
         return new ApiInfoBuilder()
@@ -76,7 +49,7 @@ public class SwaggerConfig {
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("api1")
+                .groupName("ALL")
                 .apiInfo(info())
                 .enable(enable)
 //                .enable(flag)   //enable 是否启动swagger，如果为false，则swagger不能浏览器中访问
@@ -95,59 +68,49 @@ public class SwaggerConfig {
     }
 
 
-    /** 如果要新增一个分组：api2 */
+    /** 文件上传管理 */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 // 配置分组名
-                .groupName("api2")
+                .groupName("文件上传管理")
                 .apiInfo(info())
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.hanliy.controller2
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.**.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.file.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
-
-    /**
-     * 解决高版本的springboot的匹配路径和spring-fox的不匹配
-     */
+    /** 用户接口管理 */
     @Bean
-    public static BeanPostProcessor springfoxHandlerProviderBeanPostProcessor() {
-        return new BeanPostProcessor() {
-
-            @Override
-            public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-                if (bean instanceof WebMvcRequestHandlerProvider || bean instanceof WebFluxRequestHandlerProvider) {
-                    customizeSpringfoxHandlerMappings(getHandlerMappings(bean));
-                }
-                return bean;
-            }
-
-            private <T extends RequestMappingInfoHandlerMapping> void customizeSpringfoxHandlerMappings(List<T> mappings) {
-                List<T> copy = mappings.stream()
-                        .filter(mapping -> mapping.getPatternParser() == null)
-                        .collect(Collectors.toList());
-                mappings.clear();
-                mappings.addAll(copy);
-            }
-
-            @SuppressWarnings("unchecked")
-            private List<RequestMappingInfoHandlerMapping> getHandlerMappings(Object bean) {
-                try {
-                    Field field = ReflectionUtils.findField(bean.getClass(), "handlerMappings");
-                    if (field != null) {
-                        field.setAccessible(true);
-                    }
-                    return (List<RequestMappingInfoHandlerMapping>) field.get(bean);
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    throw new IllegalStateException(e);
-                }
-            }
-        };
+    public Docket api2() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                // 配置分组名
+                .groupName("用户接口管理")
+                .apiInfo(info())
+                .enable(enable)
+                .select()
+                // 设置扫描包的地址 : com.hanliy.controller2
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.user.controller"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
+    /** 产品接口管理 */
+    @Bean
+    public Docket api3() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                // 配置分组名
+                .groupName("产品接口管理")
+                .apiInfo(info())
+                .enable(enable)
+                .select()
+                // 设置扫描包的地址 : com.hanliy.controller2
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.product.controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }
 
 }

@@ -1,6 +1,6 @@
-package com.git.bds.nyc.dao.user;
+package com.git.bds.nyc.user.dao.user;
 
-import com.git.bds.nyc.domain.User;
+import com.git.bds.nyc.user.domain.User;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

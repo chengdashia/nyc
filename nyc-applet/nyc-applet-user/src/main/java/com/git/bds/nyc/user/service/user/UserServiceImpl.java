@@ -1,4 +1,4 @@
-package com.git.bds.nyc.service.user;
+package com.git.bds.nyc.user.service.user;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
@@ -6,10 +6,10 @@ import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.binarywang.wx.miniapp.util.WxMaConfigHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.git.bds.nyc.convert.UserConvert;
-import com.git.bds.nyc.dao.user.UserDao;
-import com.git.bds.nyc.domain.User;
-import com.git.bds.nyc.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.convert.UserConvert;
+import com.git.bds.nyc.user.dao.user.UserDao;
+import com.git.bds.nyc.user.domain.User;
+import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.git.bds.nyc.exception.BusinessException;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import lombok.SneakyThrows;

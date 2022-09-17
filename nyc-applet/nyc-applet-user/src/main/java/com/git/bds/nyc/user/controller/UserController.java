@@ -1,8 +1,8 @@
-package com.git.bds.nyc.controller;
+package com.git.bds.nyc.user.controller;
 
-import com.git.bds.nyc.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.git.bds.nyc.result.R;
-import com.git.bds.nyc.service.user.UserService;
+import com.git.bds.nyc.user.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

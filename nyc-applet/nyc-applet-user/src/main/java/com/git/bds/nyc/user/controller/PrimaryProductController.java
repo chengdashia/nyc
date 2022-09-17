@@ -1,9 +1,9 @@
-package com.git.bds.nyc.controller;
+package com.git.bds.nyc.user.controller;
 
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
-import com.git.bds.nyc.valid.ValidGroup;
+import com.git.bds.nyc.user.valid.ValidGroup;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import lombok.RequiredArgsConstructor;

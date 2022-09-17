@@ -1,7 +1,7 @@
-package com.git.bds.nyc.convert.product;
+package com.git.bds.nyc.product.convert.product;
 
-import com.git.bds.nyc.controller.vo.PrimaryProductInfoVO;
-import com.git.bds.nyc.controller.vo.PrimaryProductVO;
+import com.git.bds.nyc.product.controller.vo.PrimaryProductInfoVO;
+import com.git.bds.nyc.product.controller.vo.PrimaryProductVO;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import org.mapstruct.Mapper;

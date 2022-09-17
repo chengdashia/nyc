@@ -1,6 +1,6 @@
-package com.git.bds.nyc.convert;
+package com.git.bds.nyc.user.convert;
 
-import com.git.bds.nyc.domain.User;
+import com.git.bds.nyc.user.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
