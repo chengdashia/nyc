@@ -40,7 +40,6 @@ public class PrimaryProductFileController {
     public R<List<String>> upload(
         @RequestPart("files") MultipartFile[] uploadFiles
     ){
-
         return R.ok( productFileService.uploadFiles(uploadFiles));
     }
 }

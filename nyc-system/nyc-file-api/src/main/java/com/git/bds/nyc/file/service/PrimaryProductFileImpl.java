@@ -1,14 +1,17 @@
 package com.git.bds.nyc.file.service;
 
+import cn.hutool.core.io.FileTypeUtil;
+import com.git.bds.nyc.exception.BusinessException;
+import com.git.bds.nyc.framework.file.core.util.FileTypeUtils;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
+import com.git.bds.nyc.result.ResultCode;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,12 +37,13 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
     @SneakyThrows
     @Override
     public List<String> uploadFiles(MultipartFile[] uploadFiles) {
-        List<String> imgList = new ArrayList<>(uploadFiles.length);
         for (MultipartFile uploadFile : uploadFiles) {
-            String imgUrl = minioUtil.uploadFile(minioConfig.getBucketName(), uploadFile, 111L);
-            imgList.add(imgUrl);
+            String type = FileTypeUtil.getType(uploadFile.getInputStream());
+            if(!FileTypeUtils.SUFFIX.contains(type)){
+                throw new BusinessException(ResultCode.FILE_TYPE_ERROR.getCode(), ResultCode.FILE_TYPE_ERROR.getMessage());
+            }
         }
-
-        return imgList;
+        //long id = StpUtil.getLoginIdAsLong();
+        return minioUtil.uploadImgList(minioConfig.getBucketName(),uploadFiles, 111L);
     }
 }

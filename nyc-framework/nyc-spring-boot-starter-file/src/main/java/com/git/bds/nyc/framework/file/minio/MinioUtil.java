@@ -39,7 +39,9 @@ public class MinioUtil {
 
     private static MinioClient minioClient;
 
-    private static String BASE_URL;
+    private static String URL;
+
+    private static Long IMG_SIZE;
 
     /** 端点 */
     private String endpoint;
@@ -66,7 +68,8 @@ public class MinioUtil {
         this.imgSize = imgSize;
         this.fileSize = fileSize;
         createMinioClient();
-        BASE_URL = endpoint + SEPARATOR + bucketName + SEPARATOR;;
+        URL = endpoint + SEPARATOR + bucketName + SEPARATOR;
+        IMG_SIZE = (long) (imgSize * 1024 * 1024);
     }
 
     /**
@@ -89,13 +92,6 @@ public class MinioUtil {
         }
     }
 
-
-    /**
-     * 获取用户的路径
-     */
-    public String getUserUploadUrl(String uId, String objectName) {
-        return uId + SEPARATOR + objectName;
-    }
 
     /**
      * 用户的注册的时候，给一个根目录
@@ -121,9 +117,8 @@ public class MinioUtil {
      * 启动SpringBoot容器的时候初始化Bucket
      * 如果没有Bucket则创建
      *
-     * @throws Exception 异常
      */
-    private void createBucket(String bucketName) throws Exception {
+    private void createBucket(String bucketName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         if (!bucketExists(bucketName)) {
             minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
         }
@@ -133,9 +128,8 @@ public class MinioUtil {
      * 判断Bucket是否存在，true：存在，false：不存在
      *
      * @return boolean
-     * @throws Exception 异常
      */
-    public boolean bucketExists(String bucketName) throws Exception {
+    public boolean bucketExists(String bucketName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
     }
 
@@ -145,9 +139,8 @@ public class MinioUtil {
      *
      * @param bucketName 捅名
      * @return 桶的策略
-     * @throws Exception 异常
      */
-    public String getBucketPolicy(String bucketName) throws Exception {
+    public String getBucketPolicy(String bucketName) throws ServerException, InsufficientDataException, ErrorResponseException, BucketPolicyTooLargeException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return minioClient
                 .getBucketPolicy(
                         GetBucketPolicyArgs
@@ -161,7 +154,6 @@ public class MinioUtil {
      * 获得所有Bucket列表
      *
      * @return 所有的桶名
-     * @throws Exception 异常
      */
     public List<Bucket> getAllBuckets() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         return minioClient.listBuckets();
@@ -181,7 +173,6 @@ public class MinioUtil {
      * 根据bucketName删除Bucket，true：删除成功； false：删除失败，文件或已不存在
      *
      * @param bucketName 桶名
-     * @throws Exception 异常
      */
     public void removeBucket(String bucketName) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         minioClient.removeBucket(RemoveBucketArgs.builder().bucket(bucketName).build());
@@ -241,7 +232,6 @@ public class MinioUtil {
      * @param prefix     前缀
      * @param recursive  是否使用递归查询
      * @return MinioItem 列表
-     * @throws Exception 异常
      */
     public List<Item> getAllObjectsByPrefix(String bucketName,
                                             String prefix,
@@ -313,28 +303,31 @@ public class MinioUtil {
      * @param file       文件名
      * @throws Exception 异常
      */
-    public String uploadFile(String bucketName, MultipartFile file, Long id) throws Exception {
-        log.info("压缩后的大小：  "+ file.getSize());
-        log.info("压缩后的名称：  "+ file.getOriginalFilename());
+    public String uploadImg(String bucketName, MultipartFile file, Long id) throws Exception {
+        log.info("压缩前的大小：  "+ file.getSize());
+        log.info("压缩前的名称：  "+ file.getOriginalFilename());
         String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
         String contentType = file.getContentType();
-        MultipartFile newFile = ThumbnailUtil.changeScale(file);
-        DateTime dateTime = new DateTime(new Date());
-        String path = new StringBuilder()
-                .append(id)
-                .append(SEPARATOR)
-                .append(dateTime.year())
-                .append(SEPARATOR).append(dateTime.month())
-                .append(SEPARATOR).append(dateTime.dayOfMonth())
-                .append(SEPARATOR)
-                .append(IdUtil.getSnowflakeNextId()).append(POINT).append(suffix)
-                .toString();
 
-        log.info("压缩后的大小：  "+ newFile.getSize());
-        log.info("压缩后的名称：  "+ newFile.getOriginalFilename());
+        //压缩
+        if(file.getSize() > IMG_SIZE){
+            file = ThumbnailUtil.changeScale(file);
+        }
+        DateTime dateTime = new DateTime(new Date());
+        //拼接路径
+        String path = id +
+                SEPARATOR +
+                dateTime.year() +
+                SEPARATOR + dateTime.month() +
+                SEPARATOR + dateTime.dayOfMonth() +
+                SEPARATOR +
+                IdUtil.getSnowflakeNextId() + POINT + suffix;
+
+        log.info("压缩后的大小：  "+ file.getSize());
+        log.info("压缩后的名称：  "+ file.getOriginalFilename());
 
         log.info("contentType  :{}", contentType);
-        InputStream inputStream = newFile.getInputStream();
+        InputStream inputStream = file.getInputStream();
         minioClient.putObject(
                 PutObjectArgs.builder()
                         .bucket(bucketName)
@@ -342,7 +335,56 @@ public class MinioUtil {
                         .contentType(contentType)
                         .stream(inputStream, inputStream.available(), -1)
                         .build());
-        return BASE_URL + path;
+        return URL + path;
+    }
+
+
+    /**
+     * 上传IMG
+     *
+     * @param bucketName 桶名
+     * @param files      文件夹
+     * @param id         身份证件
+     * @return {@link List}<{@link String}>
+     * @throws Exception 例外
+     */
+    public List<String> uploadImgList(String bucketName, MultipartFile[] files, Long id) throws Exception {
+        List<String> imgList = new ArrayList<>(files.length);
+        for (MultipartFile file : files) {
+            log.info("压缩前的大小：  "+ file.getSize());
+            log.info("压缩前的名称：  "+ file.getOriginalFilename());
+            String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
+            String contentType = file.getContentType();
+
+            //压缩
+            if(file.getSize() > IMG_SIZE){
+                file = ThumbnailUtil.changeScale(file);
+            }
+            DateTime dateTime = new DateTime(new Date());
+            //拼接路径
+            String path = id +
+                    SEPARATOR +
+                    dateTime.year() +
+                    SEPARATOR + dateTime.month() +
+                    SEPARATOR + dateTime.dayOfMonth() +
+                    SEPARATOR +
+                    IdUtil.getSnowflakeNextId() + POINT + suffix;
+
+            log.info("压缩后的大小：  "+ file.getSize());
+            log.info("压缩后的名称：  "+ file.getOriginalFilename());
+
+            log.info("contentType  :{}", contentType);
+            InputStream inputStream = file.getInputStream();
+            minioClient.putObject(
+                    PutObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(path)
+                            .contentType(contentType)
+                            .stream(inputStream, inputStream.available(), -1)
+                            .build());
+            imgList.add(URL+path);
+        }
+        return imgList;
     }
 
     /**
@@ -385,7 +427,7 @@ public class MinioUtil {
      * @param bucketName 存储桶
      * @param folderPath 目录路径
      */
-    public ObjectWriteResponse createFolder(String bucketName, String folderPath) throws Exception {
+    public ObjectWriteResponse createFolder(String bucketName, String folderPath) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         if (!SEPARATOR.equals(folderPath.substring(folderPath.length() - 2))) {
             folderPath += SEPARATOR;
         }
@@ -467,7 +509,7 @@ public class MinioUtil {
     public boolean removeFile(String bucketName, String objectName) {
         boolean isDelete = true;
         try {
-            objectName = objectName.replace(StringUtils.chop(BASE_URL), "");
+            objectName = objectName.replace(StringUtils.chop(URL), "");
             if (isObjectExist(bucketName, objectName)) {
                 minioClient.removeObject(
                         RemoveObjectArgs.builder()
@@ -537,7 +579,7 @@ public class MinioUtil {
      * @return url         文件的下载链接
      */
     public String getFileUrl(String uId, String objectName) {
-        return BASE_URL + uId + SEPARATOR + objectName;
+        return URL + uId + SEPARATOR + objectName;
     }
 
     /**
