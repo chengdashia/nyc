@@ -102,7 +102,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      * 发售产品
      *
      * @param productDTO 产品dto
-     * @return
+     * @return {@link Boolean}
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -126,7 +126,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      * 发布预售产品
      *
      * @param productDTO 产品dto
-     * @return
+     * @return {@link Boolean}
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
