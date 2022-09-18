@@ -40,16 +40,18 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
      * 发布 在售产品
      *
      * @param productDTO 产品dto
+     * @return
      */
-    void releaseOnSellProduct(PrimaryProductDTO productDTO);
+    Boolean releaseOnSellProduct(PrimaryProductDTO productDTO);
 
 
     /**
      * 发布预售产品
      *
      * @param productDTO 产品dto
+     * @return
      */
-    void releasePreSellProduct(PrimaryProductDTO productDTO);
+    Boolean releasePreSellProduct(PrimaryProductDTO productDTO);
 
     /**
      * 根据id删除产品

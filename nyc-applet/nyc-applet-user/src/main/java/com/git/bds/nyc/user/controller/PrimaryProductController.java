@@ -6,6 +6,7 @@ import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.valid.ValidGroup;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,30 +37,28 @@ public class PrimaryProductController {
      * @return {@link R}<{@link Object}>
      */
     @PostMapping("/releaseOnSellProduct")
-    public R<Object> releaseOnSellProduct(
+    @ApiOperation("发布初级在售农产品")
+    public R<Boolean> releaseOnSellProduct(
            @Validated({ValidGroup.OnSell.class}) @RequestBody PrimaryProductDTO productDTO
     ){
-        productService.releaseOnSellProduct(productDTO);
-        return R.ok();
+        return R.decide(productService.releaseOnSellProduct(productDTO));
     }
 
-
-
     @PostMapping("/releasePreSellProduct")
-    public R<Object> releasePreSellProduct(
+    @ApiOperation("发布初级预售农产品")
+    public R<Boolean> releasePreSellProduct(
             @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
     ){
-        productService.releasePreSellProduct(productDTO);
-        return R.ok();
+        return R.decide(productService.releasePreSellProduct(productDTO));
     }
 
     @PostMapping("/delProduct")
+    @ApiOperation("删除农产品")
     @ApiImplicitParam(name = "id", value = "产品id", required = true, example = "1", dataTypeClass = Long.class)
     public R<Boolean> delProduct(
             @NotNull @RequestParam("id") Long id
     ){
-        productService.delProductById(id);
-        return R.ok();
+        return R.decide(productService.delProductById(id));
     }
 
 

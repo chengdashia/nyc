@@ -102,10 +102,11 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      * 发售产品
      *
      * @param productDTO 产品dto
+     * @return
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void releaseOnSellProduct(PrimaryProductDTO productDTO) {
+    public Boolean releaseOnSellProduct(PrimaryProductDTO productDTO) {
         long id = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
@@ -118,16 +119,18 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
             productPictureDao.insert(productPicture);
         }
         log.info("product:  "+product);
+        return true;
     }
 
     /**
      * 发布预售产品
      *
      * @param productDTO 产品dto
+     * @return
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void releasePreSellProduct(PrimaryProductDTO productDTO) {
+    public Boolean releasePreSellProduct(PrimaryProductDTO productDTO) {
         long id = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
@@ -140,6 +143,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
             productPictureDao.insert(productPicture);
         }
         log.info("product:  "+product);
+        return true;
     }
 
     /**
