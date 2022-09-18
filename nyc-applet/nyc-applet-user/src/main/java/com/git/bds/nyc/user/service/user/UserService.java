@@ -24,6 +24,6 @@ public interface UserService extends MPJBaseService<User> {
      * @return {@link WxMaJscode2SessionResult}
      * @throws WxErrorException wx错误异常
      */
-    Boolean login(WxUserInfoDTO wxUserInfoDTO) throws WxErrorException;
+    String login(WxUserInfoDTO wxUserInfoDTO) throws WxErrorException;
 
 }

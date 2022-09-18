@@ -44,7 +44,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserDao, User> implement
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Boolean login(WxUserInfoDTO wxUserInfoDTO) {
+    public String login(WxUserInfoDTO wxUserInfoDTO) {
         User user;
         WxMaJscode2SessionResult session = wxMaService.getUserService().getSessionInfo(wxUserInfoDTO.getCode());
         String openid = session.getOpenid();
@@ -68,7 +68,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserDao, User> implement
             this.baseMapper.updateById(user);
             StpUtil.login(user.getId());
         }
-        return true;
+        return StpUtil.getTokenValue();
     }
 
 }

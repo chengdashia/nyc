@@ -1,7 +1,6 @@
 package com.git.bds.nyc.user.controller;
 
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
-import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -36,8 +32,14 @@ public class UserController {
 
     @ApiOperation("微信登录")
     @PostMapping("/login")
-    public R<Boolean> login(@RequestBody WxUserInfoDTO userInfoDTO) throws WxErrorException {
-        return R.ok(userService.login(userInfoDTO));
+    public String login(@RequestBody WxUserInfoDTO userInfoDTO) throws WxErrorException {
+        return userService.login(userInfoDTO);
+    }
+
+    @ApiOperation("测试")
+    @GetMapping("/test")
+    public String test(){
+        return "hello world";
     }
 
 
