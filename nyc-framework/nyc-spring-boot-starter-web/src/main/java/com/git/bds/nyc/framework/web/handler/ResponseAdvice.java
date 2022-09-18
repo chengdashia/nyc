@@ -3,7 +3,6 @@ package com.git.bds.nyc.framework.web.handler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.git.bds.nyc.result.R;
-import com.git.bds.nyc.result.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -41,7 +40,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
         //处理字符串类型数据
         if(o instanceof String){
             try {
-                return objectMapper.writeValueAsString(R.ok(ResultCode.SUCCESS.getCode(),ResultCode.SUCCESS.getMessage(),o));
+                return objectMapper.writeValueAsString(R.ok(o));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
