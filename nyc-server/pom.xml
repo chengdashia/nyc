@@ -26,11 +26,6 @@
 
         <dependency>
             <groupId>com.git.bds</groupId>
-            <artifactId>nyc-spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.git.bds</groupId>
             <artifactId>nyc-applet-user</artifactId>
         </dependency>
 
@@ -47,11 +42,6 @@
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-role-permission</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>

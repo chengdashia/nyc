@@ -22,7 +22,7 @@ public interface SysRolePermissionDao extends MPJBaseMapper<SysRolePermission> {
     /**
      * 获取权限列表
      *
-     * @param loginId 登录id
+     * @param id 登录id
      * @return {@link List}<{@link String}>
      */
     @Select("SELECT\n" +
@@ -33,5 +33,5 @@ public interface SysRolePermissionDao extends MPJBaseMapper<SysRolePermission> {
             "\tLEFT JOIN sys_role r ON rp.role_id = r.id \n" +
             "WHERE\n" +
             "\tr.id = (SELECT role_id FROM sys_user_role WHERE user_id = #{id});")
-    List<String> getPermissionList(@Param("id") Object loginId);
+    List<String> getPermissionList(@Param("id") Object id);
 }
