@@ -1,12 +1,20 @@
 package com.git.bds.nyc.framework.web.config;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.Filter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -58,6 +66,51 @@ public class WebConfig implements WebMvcConfigurer {
                 ((MappingJackson2HttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8);
             }
         }
+    }
+
+    /**
+     * 创建 CorsFilter Bean，解决跨域问题
+     */
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilterBean() {
+        // 创建 CorsConfiguration 对象
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        // 设置访问源地址
+        config.addAllowedOriginPattern("*");
+        // 设置访问源请求头
+        config.addAllowedHeader("*");
+        // 设置访问源请求方法
+        config.addAllowedMethod("*");
+        // 创建 UrlBasedCorsConfigurationSource 对象
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // 对接口配置跨域设置
+        source.registerCorsConfiguration("/**", config);
+        return createFilterBean(new CorsFilter(source));
+    }
+
+    /**
+     * 创建筛选器bean
+     *
+     * @param filter 滤器
+     * @return {@link FilterRegistrationBean}<{@link T}>
+     */
+    private static <T extends Filter> FilterRegistrationBean<T> createFilterBean(T filter) {
+        FilterRegistrationBean<T> bean = new FilterRegistrationBean<>(filter);
+        bean.setOrder(Integer.MAX_VALUE);
+        return bean;
+    }
+
+
+
+    /**
+     * mybatis-plus 枚举类返回
+     *
+     * @return {@link Jackson2ObjectMapperBuilderCustomizer}
+     */
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer customizer(){
+        return builder -> builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
     }
 
 }
