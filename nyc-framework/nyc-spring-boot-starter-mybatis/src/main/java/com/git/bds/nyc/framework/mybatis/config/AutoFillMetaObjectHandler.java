@@ -17,12 +17,14 @@ public class AutoFillMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         this.setFieldValByName("createTime", LocalDateTime.now(),metaObject);
         this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
+        this.setFieldValByName("loginTime", LocalDateTime.now(),metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         // 更新时间，取当前时间，也可以自定义
         this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
+        this.setFieldValByName("loginTime", LocalDateTime.now(),metaObject);
     }
 
 }

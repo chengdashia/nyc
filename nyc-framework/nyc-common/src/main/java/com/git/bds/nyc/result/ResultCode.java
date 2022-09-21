@@ -34,6 +34,8 @@ public enum ResultCode {
     BODY_NOT_MATCH(4000,"请求的数据格式不符!"),
     /**服务器内部错误**/
     INTERNAL_SERVER_ERROR(5000, "服务器内部错误!"),
+    /** 方法参数无效 */
+    METHOD_ARGUMENT_NOT_VALID(5001, "方法参数无效!"),
     /**参数格式不合规**/
     CONSTRAINT_VIOLATION_EXCEPTION(5002, "参数格式不合规!"),
     /**请求参数不合规**/
@@ -50,7 +52,10 @@ public enum ResultCode {
     /**微信登录失败**/
     WX_ERROR(5009, "微信授权登录出错"),
     /**服务器正忙，请稍后再试!**/
-    SERVER_BUSY(5008,"服务器正忙，请稍后再试!");
+    SERVER_BUSY(5008,"服务器正忙，请稍后再试!"),
+
+    /** 文件类型错误 */
+    FILE_TYPE_ERROR(6000,"文件格式有误！请确认后上传！！！");
 
 
     /**自定义状态码**/

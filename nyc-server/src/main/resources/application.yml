@@ -36,21 +36,21 @@ spring:
       max-file-size: 16MB # 单个文件大小
       max-request-size: 32MB # 设置总上传的文件大小
 
-  # Jackson 配置项
-  jackson:
-    serialization:
-      write-dates-as-timestamps: true # 设置 Date 的格式，使用时间戳
-      write-date-timestamps-as-nanoseconds: false # 设置不使用 nanoseconds 的格式。例如说 1611460870.401，而是直接 1611460870401
-      write-durations-as-timestamps: true # 设置 Duration 的格式，使用时间戳
-      fail-on-empty-beans: false # 允许序列化无属性的 Bean
+#  # Jackson 配置项
+#  jackson:
+#    serialization:
+#      write-dates-as-timestamps: true # 设置 Date 的格式，使用时间戳
+#      write-date-timestamps-as-nanoseconds: false # 设置不使用 nanoseconds 的格式。例如说 1611460870.401，而是直接 1611460870401
+#      write-durations-as-timestamps: true # 设置 Duration 的格式，使用时间戳
+#      fail-on-empty-beans: false # 允许序列化无属性的 Bean
 
 # MyBatis Plus 的配置项
 mybatis-plus:
   # 不支持多包, 如有需要可在注解配置 或 提升扫包等级
   # 例如 com.**.**.mapper
-  mapperPackage: com.git.bds.nyc.**.mapper
+  mapperPackage: com.git.bds.nyc.**.dao
   # 对应的 XML 文件位置
-  mapperLocations: classpath*:**/xml/*.xml
+  mapperLocations: com.git.bds.nyc.**/*.xml
   # 实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.git.bds.nyc.**.domain
   # 启动时是否检查 MyBatis XML 文件的存在，默认不检查
@@ -91,8 +91,8 @@ minio:
   bucketName: img                      # 存储桶bucket名称
   accessKey: admin                         # 用户名
   secretKey: 12345678                     # 密码
-  imgSize: 1024                           # 图片大小限制，单位：m
-  fileSize: 1024                          # 文件大小限制，单位：m
+  imgSize: 2                           # 图片大小限制，单位：m
+  fileSize: 20                          # 文件大小限制，单位：m
 
 #微信小程序
 wx:

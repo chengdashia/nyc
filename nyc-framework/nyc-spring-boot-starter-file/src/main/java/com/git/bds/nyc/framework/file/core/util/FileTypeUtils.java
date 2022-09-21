@@ -4,12 +4,34 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.SneakyThrows;
 import org.apache.tika.Tika;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 文件类型 Utils
  *
  * @author 芋道源码
  */
 public class FileTypeUtils {
+
+    public static final  List<String> SUFFIX = new ArrayList<>();
+
+    static {
+        SUFFIX.add("jpg");
+        SUFFIX.add("png");
+        SUFFIX.add("ras");
+        SUFFIX.add("rgb");
+        SUFFIX.add("giff");
+        SUFFIX.add("jfif");
+        SUFFIX.add("gif");
+        SUFFIX.add("tif");
+        SUFFIX.add("pdf");
+        SUFFIX.add("ps");
+        SUFFIX.add("cod");
+        SUFFIX.add("ico");
+        SUFFIX.add("svg");
+    }
+    private FileTypeUtils(){}
 
     private static final ThreadLocal<Tika> TIKA = TransmittableThreadLocal.withInitial(Tika::new);
 

@@ -23,6 +23,7 @@
         <module>nyc-applet-corp</module>
         <!--产品的-->
         <module>nyc-applet-product-biz</module>
+        <module>nyc-applet-product-api</module>
     </modules>
 
 

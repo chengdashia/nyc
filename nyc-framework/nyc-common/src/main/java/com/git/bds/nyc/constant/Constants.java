@@ -10,6 +10,9 @@ public class Constants {
 
     /** 分离器 */
     public static final String SEPARATOR = "/";
+
+    /** 点 */
+    public static final String POINT = ".";
     /** excel路径 */
     public static final String EXCEL_PATH = "/excel" + SEPARATOR;
 
