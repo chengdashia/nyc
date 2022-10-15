@@ -1,0 +1,17 @@
+com\git\bds\nyc\dao\rolepermission\SysRolePermissionDao.class
+com\git\bds\nyc\dao\permission\SysPermissionDao.class
+com\git\bds\nyc\service\role\SysRoleServiceImpl.class
+com\git\bds\nyc\domain\SysRolePermission.class
+com\git\bds\nyc\service\rolepermission\SysRolePermissionServiceImpl.class
+com\git\bds\nyc\domain\dto\RoleDTO.class
+com\git\bds\nyc\domain\SysRole.class
+com\git\bds\nyc\service\permission\SysPermissionService.class
+com\git\bds\nyc\domain\SysPermission.class
+com\git\bds\nyc\service\userrole\SysUserRoleServiceImpl.class
+com\git\bds\nyc\service\userrole\SysUserRoleService.class
+com\git\bds\nyc\dao\role\SysRoleDao.class
+com\git\bds\nyc\service\role\SysRoleService.class
+com\git\bds\nyc\service\rolepermission\SysRolePermissionService.class
+com\git\bds\nyc\service\permission\SysPermissionServiceImpl.class
+com\git\bds\nyc\dao\userrole\SysUserRoleDao.class
+com\git\bds\nyc\domain\SysUserRole.class

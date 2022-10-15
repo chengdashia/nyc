@@ -1,0 +1,17 @@
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\permission\SysPermissionService.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\rolepermission\SysRolePermissionService.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\domain\SysRole.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\dao\userrole\SysUserRoleDao.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\domain\SysPermission.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\domain\SysRolePermission.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\userrole\SysUserRoleServiceImpl.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\permission\SysPermissionServiceImpl.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\userrole\SysUserRoleService.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\domain\SysUserRole.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\role\SysRoleServiceImpl.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\rolepermission\SysRolePermissionServiceImpl.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\service\role\SysRoleService.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\dao\rolepermission\SysRolePermissionDao.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\domain\dto\RoleDTO.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\dao\permission\SysPermissionDao.java
+E:\code-practice\nyc\nyc-system\nyc-role-permission\src\main\java\com\git\bds\nyc\dao\role\SysRoleDao.java

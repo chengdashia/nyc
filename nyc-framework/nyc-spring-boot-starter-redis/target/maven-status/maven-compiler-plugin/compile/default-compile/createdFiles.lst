@@ -1,0 +1,3 @@
+com\git\bds\nyc\framework\redis\constant\RedisConstants.class
+com\git\bds\nyc\framework\redis\util\RedisUtils.class
+com\git\bds\nyc\framework\redis\config\RedisConfig.class
