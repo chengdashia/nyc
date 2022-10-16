@@ -26,30 +26,13 @@
             <artifactId>nyc-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.github.yulichang</groupId>
-            <artifactId>mybatis-plus-join</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-annotation</artifactId>
-            <version>3.5.2</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.git.bds</groupId>
-            <artifactId>nyc-gen</artifactId>
+            <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
         </dependency>
     </dependencies>
 

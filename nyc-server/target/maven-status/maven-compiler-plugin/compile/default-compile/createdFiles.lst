@@ -1,8 +1,0 @@
-com\git\bds\nyc\config\saToken\SaTokenConfigure.class
-com\git\bds\nyc\config\wxjava\WxMaConfiguration.class
-com\git\bds\nyc\config\wxjava\WxMaProperties.class
-com\git\bds\nyc\NycServerApplication.class
-com\git\bds\nyc\config\wxjava\WxMaProperties$Config.class
-com\git\bds\nyc\config\saToken\StpInterfaceImpl.class
-com\git\bds\nyc\common\jasypt\MyJasyptConfig.class
-META-INF\spring-configuration-metadata.json
