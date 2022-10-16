@@ -34,6 +34,11 @@ public class R<T> implements Serializable {
      */
     private T data;
 
+    /***
+     * 分页总数
+     */
+    private Long total;
+
     /**
      * 时间戳
      */
@@ -76,6 +81,12 @@ public class R<T> implements Serializable {
      */
     public static <T> R<T> ok(int code, String message) {
         return ok(code, message, null);
+    }
+    /**
+     *  分页成功操作，返回分页数据和总数
+     */
+    public static <T> R<T> page(T data,Long total) {
+        return page(data,total);
     }
 
     public static <T> R<T> ok(int code, String message, T data) {

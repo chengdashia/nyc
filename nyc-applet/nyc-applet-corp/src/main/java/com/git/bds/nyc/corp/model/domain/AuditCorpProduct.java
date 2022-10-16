@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -82,9 +83,9 @@ public class AuditCorpProduct extends Model<AuditCorpProduct> {
 
     public static final String APPLY_TIMES = "apply_times";
 
-//    @Override
-//    public Serializable pkVal() {
-//        return this.id;
-//    }
+    @Override
+    public Serializable pkVal() {
+        return this.id;
+    }
 
 }

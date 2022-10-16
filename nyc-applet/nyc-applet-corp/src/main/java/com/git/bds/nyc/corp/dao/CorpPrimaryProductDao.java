@@ -1,8 +1,10 @@
 package com.git.bds.nyc.corp.dao;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.git.bds.nyc.corp.model.domain.CorpPrimaryProduct;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -14,5 +16,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CorpPrimaryProductDao extends MPJBaseMapper<CorpPrimaryProduct> {
+    /**
+     * 分页、条件查询初级农产品列表
+     *
+     * @param param 查询参数
+     * @return {@link = IPage<CorpPrimaryProduct>}
+     */
+    IPage<CorpPrimaryProduct> findPage(IPage<CorpPrimaryProduct> pageInfo, @Param(value = "param") CorpPrimaryProduct param);
 
 }
