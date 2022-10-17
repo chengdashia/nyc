@@ -1,6 +1,6 @@
-package com.git.bds.nyc.service.role;
+package com.git.bds.nyc.role.service.role;
 
-import com.git.bds.nyc.domain.SysRole;
+import com.git.bds.nyc.role.domain.SysRole;
 import com.github.yulichang.base.MPJBaseService;
 
 /**

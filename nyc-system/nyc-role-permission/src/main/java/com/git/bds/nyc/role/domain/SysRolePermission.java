@@ -1,4 +1,4 @@
-package com.git.bds.nyc.domain;
+package com.git.bds.nyc.role.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

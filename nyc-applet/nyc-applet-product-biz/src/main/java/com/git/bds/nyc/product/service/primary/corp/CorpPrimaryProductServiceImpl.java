@@ -1,16 +1,22 @@
 package com.git.bds.nyc.product.service.primary.corp;
 
+
 import cn.dev33.satoken.stp.StpUtil;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.git.bds.nyc.corp.mapper.AuditCorpProductMapper;
-import com.git.bds.nyc.corp.mapper.CorpPrimaryProductMapper;
-import com.git.bds.nyc.corp.model.domain.AuditCorpProduct;
-import com.git.bds.nyc.corp.model.domain.CorpPrimaryProduct;
+import cn.hutool.core.util.IdUtil;
+import com.git.bds.nyc.product.convert.PrimaryProductConvert;
+import com.git.bds.nyc.product.mapper.ProductPictureMapper;
+import com.git.bds.nyc.product.mapper.primary.corp.CorpPrimaryProductMapper;
+import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
+import com.git.bds.nyc.product.model.domain.ProductPicture;
+import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,65 +26,60 @@ import org.springframework.transaction.annotation.Transactional;
  * @author chnnc
  * @since 2022-10-15 18:50:50
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimaryProductMapper, CorpPrimaryProduct> implements CorpPrimaryProductService {
-    private final CorpPrimaryProductMapper corpPrimaryProductDao;
-    private final AuditCorpProductMapper auditCorpProductDao;
+
+    private final ProductPictureMapper productPictureMapper;
 
     /**
-     * 分页查询
+     * 发售在售产品
      *
-     * @param pageInfo 分页
-     * @param param 查询条件
-     * @return {@link = IPage<CorpPrimaryProduct>}
+     * @param productDTO 产品dto
+     * @return {@link Boolean}
      */
-    @Override
-    public IPage<CorpPrimaryProduct> findPage(IPage<CorpPrimaryProduct> pageInfo, CorpPrimaryProduct param) {
-        IPage<CorpPrimaryProduct> pageList = corpPrimaryProductDao.findPage(pageInfo,param);
-        return pageList;
-    }
-
-    /**
-     * 新增一个初级农产品
-     *
-     * @param corpPrimaryProduct 实体对象
-     * @return true 成功，false 失败
-     */
-    @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean save(CorpPrimaryProduct corpPrimaryProduct) {
-        corpPrimaryProductDao.insert(corpPrimaryProduct);
-        AuditCorpProduct auditCorpProduct = new AuditCorpProduct();
-        auditCorpProduct.setUserId(Long.valueOf(StpUtil.getLoginId().toString()));
-        auditCorpProduct.setProductId(corpPrimaryProduct.getId());
-        auditCorpProduct.setProductStatus(corpPrimaryProduct.getProductStatus());
-        auditCorpProduct.setAuditStatus(corpPrimaryProduct.getAuditStatus());
-        int isAuditCorpProduct = auditCorpProductDao.insert(auditCorpProduct);
-        return isAuditCorpProduct > 0;
+    @Override
+    public Boolean releaseOnSellProduct(PrimaryProductDTO productDTO) {
+        long id = StpUtil.getLoginIdAsLong();
+        long productId = IdUtil.getSnowflakeNextId();
+        List<String> productImgList = productDTO.getProductImgList();
+        String coverImg = productImgList.get(0);
+        CorpPrimaryProduct product = PrimaryProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
+        this.baseMapper.insert(product);
+
+        for (String img : productImgList) {
+            ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
+            productPictureMapper.insert(productPicture);
+        }
+        log.info("product:  "+product);
+        return true;
     }
 
     /**
-     * 根据农产品id删除
+     * 发布预售产品
      *
-     * @param corpPrimaryProductId 农产品id
-     * @return true 成功，false 失败
+     * @param productDTO 产品dto
+     * @return {@link Boolean}
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean delete(Long corpPrimaryProductId) {
-        int i = corpPrimaryProductDao.deleteById(corpPrimaryProductId);
-        return i > 0;
+    public Boolean releasePreSellProduct(PrimaryProductDTO productDTO) {
+        long id = StpUtil.getLoginIdAsLong();
+        long productId = IdUtil.getSnowflakeNextId();
+        List<String> productImgList = productDTO.getProductImgList();
+        String coverImg = productImgList.get(0);
+        CorpPrimaryProduct product = PrimaryProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
+        this.baseMapper.insert(product);
+
+        for (String img : productImgList) {
+            ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
+            productPictureMapper.insert(productPicture);
+        }
+        log.info("product:  "+product);
+        return true;
     }
 
-    /**
-     * 更新初级农产品信息
-     *
-     * @param corpPrimaryProduct  初级农产品信息
-     * @return true 成功，false 失败
-     */
-    @Override
-    public boolean modify(CorpPrimaryProduct corpPrimaryProduct) {
-        int i = corpPrimaryProductDao.updateById(corpPrimaryProduct);
-        return i > 0;
-    }
+
 }

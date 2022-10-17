@@ -1,5 +1,6 @@
 package com.git.bds.nyc.product.convert;
 
+import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import org.mapstruct.Mapper;
@@ -32,5 +33,21 @@ public interface PrimaryProductConvert {
             @Mapping(source = "coverImg",target = "productCover")
     })
     FarmerPrimaryProduct toFarmerPrimaryProduct(Long productId,Long userId,String coverImg,PrimaryProductDTO productDTO);
+
+    /**
+     * 公司初级产品
+     *
+     * @param productId  产品id
+     * @param userId     用户id
+     * @param coverImg   封面img
+     * @param productDTO 产品dto
+     * @return {@link FarmerPrimaryProduct}
+     */
+    @Mappings({
+            @Mapping(source = "productId",target = "id"),
+            @Mapping(source = "userId",target = "userId"),
+            @Mapping(source = "coverImg",target = "productCover")
+    })
+    CorpPrimaryProduct toCorpPrimaryProduct(Long productId, Long userId, String coverImg, PrimaryProductDTO productDTO);
 
 }

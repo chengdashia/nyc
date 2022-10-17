@@ -1,11 +1,11 @@
-package com.git.bds.nyc.service.userrole;
+package com.git.bds.nyc.role.service.userrole;
 
 import com.git.bds.nyc.constant.Constants;
-import com.git.bds.nyc.mapper.SysRoleMapper;
-import com.git.bds.nyc.mapper.SysUserRoleMapper;
-import com.git.bds.nyc.domain.SysRole;
-import com.git.bds.nyc.domain.SysUserRole;
-import com.git.bds.nyc.domain.dto.RoleDTO;
+import com.git.bds.nyc.role.mapper.SysRoleMapper;
+import com.git.bds.nyc.role.mapper.SysUserRoleMapper;
+import com.git.bds.nyc.role.domain.SysRole;
+import com.git.bds.nyc.role.domain.SysUserRole;
+import com.git.bds.nyc.role.domain.dto.RoleDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.extern.slf4j.Slf4j;

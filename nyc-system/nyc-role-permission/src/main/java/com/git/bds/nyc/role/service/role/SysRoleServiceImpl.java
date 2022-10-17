@@ -1,7 +1,7 @@
-package com.git.bds.nyc.service.role;
+package com.git.bds.nyc.role.service.role;
 
-import com.git.bds.nyc.domain.SysRole;
-import com.git.bds.nyc.mapper.SysRoleMapper;
+import com.git.bds.nyc.role.domain.SysRole;
+import com.git.bds.nyc.role.mapper.SysRoleMapper;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
 

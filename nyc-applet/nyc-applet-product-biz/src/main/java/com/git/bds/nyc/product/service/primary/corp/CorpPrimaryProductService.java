@@ -1,8 +1,10 @@
 package com.git.bds.nyc.product.service.primary.corp;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.git.bds.nyc.corp.model.domain.CorpPrimaryProduct;
+
+import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
+import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.github.yulichang.base.MPJBaseService;
+
 
 /**
  * <p>
@@ -13,37 +15,23 @@ import com.github.yulichang.base.MPJBaseService;
  * @since 2022-10-15 18:50:50
  */
 public interface CorpPrimaryProductService extends MPJBaseService<CorpPrimaryProduct> {
-    /**
-     * 分页、条件查询
-     *
-     * @param param 查询条件
-     * @return { @link =  R<List<CorpPrimaryProduct>> }
-     */
-    IPage<CorpPrimaryProduct> findPage(IPage<CorpPrimaryProduct> pageInfo, CorpPrimaryProduct param);
 
     /**
-     * 新增一条初级农产品
+     * 发售产品
+     * 发布 在售产品
      *
-     * @param corpPrimaryProduct 实体对象
-     * @return true 成功，false 失败
+     * @param productDTO 产品dto
+     * @return {@link Boolean}
      */
-    boolean save(CorpPrimaryProduct corpPrimaryProduct);
+    Boolean releaseOnSellProduct(PrimaryProductDTO productDTO);
+
 
     /**
-     * 根据初级农产品id删除
+     * 发布预售产品
      *
-     * @param corpPrimaryProductId
-     * @return true 成功，false 失败
+     * @param productDTO 产品dto
+     * @return {@link Boolean}
      */
-    boolean delete(Long corpPrimaryProductId);
-
-    /**
-     * 更新初级农产品信息
-     *
-     * @param corpPrimaryProduct
-     * @return true 成功，false 失败
-     */
-    boolean modify(CorpPrimaryProduct corpPrimaryProduct);
-
+    Boolean releasePreSellProduct(PrimaryProductDTO productDTO);
 
 }

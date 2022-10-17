@@ -1,7 +1,7 @@
-package com.git.bds.nyc.service.permission;
+package com.git.bds.nyc.role.service.permission;
 
-import com.git.bds.nyc.domain.SysPermission;
-import com.git.bds.nyc.mapper.SysPermissionMapper;
+import com.git.bds.nyc.role.domain.SysPermission;
+import com.git.bds.nyc.role.mapper.SysPermissionMapper;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
 

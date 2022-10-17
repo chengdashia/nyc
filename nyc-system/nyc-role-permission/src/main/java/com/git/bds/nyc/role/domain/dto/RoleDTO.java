@@ -1,4 +1,4 @@
-package com.git.bds.nyc.domain.dto;
+package com.git.bds.nyc.role.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;

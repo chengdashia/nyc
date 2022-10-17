@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPrimaryProductMapper, FarmerPrimaryProduct> implements FarmerPrimaryProductService {
 
     @Resource
-    private ProductPictureMapper productPictureDao;
+    private ProductPictureMapper productPictureMapper;
 
     @Resource
     private MinioUtil minioUtil;
@@ -99,7 +99,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
 
     /**
-     * 发售产品
+     * 发售在售产品
      *
      * @param productDTO 产品dto
      * @return {@link Boolean}
@@ -116,7 +116,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
-            productPictureDao.insert(productPicture);
+            productPictureMapper.insert(productPicture);
         }
         log.info("product:  "+product);
         return true;
@@ -140,7 +140,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
-            productPictureDao.insert(productPicture);
+            productPictureMapper.insert(productPicture);
         }
         log.info("product:  "+product);
         return true;
@@ -155,13 +155,13 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
     @Override
     @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id",condition = "#result == true ")
     public Boolean delProductById(Long id) {
-        List<ProductPicture> productPictures = productPictureDao.selectList(new LambdaQueryWrapper<ProductPicture>()
+        List<ProductPicture> productPictures = productPictureMapper.selectList(new LambdaQueryWrapper<ProductPicture>()
                 .select(ProductPicture::getPictureUrl,ProductPicture::getId)
                 .eq(ProductPicture::getProductId, id));
         List<Long> imgIdList = productPictures.stream().map(ProductPicture::getId).collect(Collectors.toList());
         List<String> imgUrlList = productPictures.stream().map(ProductPicture::getPictureUrl).collect(Collectors.toList());
         minioUtil.removeFiles(minioConfig.getBucketName(),imgUrlList);
-        productPictureDao.deleteBatchIds(imgIdList);
+        productPictureMapper.deleteBatchIds(imgIdList);
         return this.baseMapper.deleteById(id) == 1;
     }
 }

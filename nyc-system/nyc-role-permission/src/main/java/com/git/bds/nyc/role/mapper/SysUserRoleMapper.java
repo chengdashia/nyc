@@ -1,6 +1,6 @@
-package com.git.bds.nyc.mapper;
+package com.git.bds.nyc.role.mapper;
 
-import com.git.bds.nyc.domain.SysUserRole;
+import com.git.bds.nyc.role.domain.SysUserRole;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

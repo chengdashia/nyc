@@ -1,6 +1,8 @@
 package com.git.bds.nyc.corp.controller;
 
+import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.service.primary.corp.CorpPrimaryProductService;
+import com.git.bds.nyc.product.valid.ValidGroup;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -9,10 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -32,6 +31,28 @@ public class CorpPrimaryProductController {
 
     private final CorpPrimaryProductService corpPrimaryProductService;
 
+    /**
+     * 农户发布 在售初级产品
+     *
+     * @param productDTO 产品dto
+     * @return {@link R}<{@link Object}>
+     */
+    @PostMapping("/releaseOnSellProduct")
+    @ApiOperation("发布初级在售农产品")
+    public R<Boolean> releaseOnSellProduct(
+            @Validated({ValidGroup.OnSell.class}) @RequestBody PrimaryProductDTO productDTO
+    ){
+        return R.decide(corpPrimaryProductService.releaseOnSellProduct(productDTO));
+    }
+
+    @PostMapping("/releasePreSellProduct")
+    @ApiOperation("发布初级预售农产品")
+    public R<Boolean> releasePreSellProduct(
+            @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
+    ){
+        return R.decide(corpPrimaryProductService.releasePreSellProduct(productDTO));
+    }
+
 
     /**
      * 删除初级农产品
@@ -45,7 +66,7 @@ public class CorpPrimaryProductController {
             @ApiImplicitParam(name = "id", value = "id主键", dataTypeClass = Long.class, paramType = "path", example = "123456", required = true)
     })
     public R<Boolean> delete(@PathVariable(value = "id") Long id) {
-        return R.decide(corpPrimaryProductService.delete(id));
+        return R.decide(corpPrimaryProductService.removeById(id));
     }
 
 }

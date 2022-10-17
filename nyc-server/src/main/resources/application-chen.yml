@@ -1,11 +1,11 @@
 server:
-  port: 8686
+  port: 8888
 
 spring:
   datasource:
-    username: nyc               #数据库的用户名
-    password: mysql729         #数据库的密码
-    url: jdbc:mysql://82.157.157.133:3306/nyc?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8   #url
+    username: DONG(UW85ELozWYaox8TrP7aHQzpMB18cOGzR)               #数据库的用户名
+    password: DONG(kf8s6DIFwLXwTL2BAId60mXbufsiBPwKXv8fVaglE1w=)           #数据库的密码
+    url: jdbc:mysql://localhost:3306/nyc?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8   #url
     driver-class-name: com.mysql.cj.jdbc.Driver             #数据库的驱动
     type: com.alibaba.druid.pool.DruidDataSource  # 指定数据源类型
     # 连接池配置：

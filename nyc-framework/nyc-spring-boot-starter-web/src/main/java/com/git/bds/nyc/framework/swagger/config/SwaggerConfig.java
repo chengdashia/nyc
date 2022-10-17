@@ -92,7 +92,7 @@ public class SwaggerConfig {
                 .apiInfo(info())
                 .enable(enable)
                 .select()
-                // 设置扫描包的地址 : com.hanliy.controller2
+                // 设置扫描包的地址 : com.**.controller
                 .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.user.controller"))
                 .paths(PathSelectors.any())
                 .build();
@@ -107,8 +107,23 @@ public class SwaggerConfig {
                 .apiInfo(info())
                 .enable(enable)
                 .select()
-                // 设置扫描包的地址 : com.hanliy.controller2
+                // 设置扫描包的地址 : com.**.controller
                 .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.product.controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    /** 公司接口管理 */
+    @Bean
+    public Docket api4() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                // 配置分组名
+                .groupName("公司接口管理")
+                .apiInfo(info())
+                .enable(enable)
+                .select()
+                // 设置扫描包的地址 : com.**.controller
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.corp.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
