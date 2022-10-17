@@ -1,6 +1,7 @@
 package com.git.bds.nyc.user.controller;
 
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.valid.ValidGroup;
@@ -50,6 +51,20 @@ public class PrimaryProductController {
             @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
     ){
         return R.decide(productService.releasePreSellProduct(productDTO));
+    }
+
+    /**
+     * 修改产品信息
+     *
+     * @param productDTO 产品dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @PostMapping("/modifyProductInfo")
+    @ApiOperation("修改农产品信息")
+    public R<Boolean> modifyProductInfo(
+            @Validated({com.git.bds.nyc.product.valid.ValidGroup.All.class}) @RequestBody PrimaryProductModifyDTO productDTO
+    ){
+        return R.decide(productService.modifyProductInfo(productDTO));
     }
 
     @PostMapping("/delProduct")

@@ -92,6 +92,13 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
         return true;
     }
 
+    /**
+     * 修改产品信息
+     *
+     * @param productDTO 产品dto
+     * @return {@link Boolean}
+     */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean modifyProductInfo(PrimaryProductModifyDTO productDTO) {
 

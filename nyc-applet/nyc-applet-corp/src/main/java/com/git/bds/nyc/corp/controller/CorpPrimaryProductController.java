@@ -60,6 +60,12 @@ public class CorpPrimaryProductController {
         return R.decide(corpPrimaryProductService.releasePreSellProduct(productDTO));
     }
 
+    /**
+     * 修改产品信息
+     *
+     * @param productDTO 产品dto
+     * @return {@link R}<{@link Boolean}>
+     */
     @PostMapping("/modifyProductInfo")
     @ApiOperation("修改农产品信息")
     public R<Boolean> modifyProductInfo(
@@ -67,9 +73,6 @@ public class CorpPrimaryProductController {
     ){
         return R.decide(corpPrimaryProductService.modifyProductInfo(productDTO));
     }
-
-
-
 
 
     /**
