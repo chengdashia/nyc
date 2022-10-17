@@ -1,6 +1,7 @@
 package com.git.bds.nyc.corp.controller;
 
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.service.primary.corp.CorpPrimaryProductService;
 import com.git.bds.nyc.product.valid.ValidGroup;
 import com.git.bds.nyc.result.R;
@@ -45,6 +46,12 @@ public class CorpPrimaryProductController {
         return R.decide(corpPrimaryProductService.releaseOnSellProduct(productDTO));
     }
 
+    /**
+     * 发布预售产品
+     *
+     * @param productDTO 产品dto
+     * @return {@link R}<{@link Boolean}>
+     */
     @PostMapping("/releasePreSellProduct")
     @ApiOperation("发布初级预售农产品")
     public R<Boolean> releasePreSellProduct(
@@ -52,6 +59,17 @@ public class CorpPrimaryProductController {
     ){
         return R.decide(corpPrimaryProductService.releasePreSellProduct(productDTO));
     }
+
+    @PostMapping("/modifyProductInfo")
+    @ApiOperation("修改农产品信息")
+    public R<Boolean> modifyProductInfo(
+            @Validated({ValidGroup.All.class}) @RequestBody PrimaryProductModifyDTO productDTO
+    ){
+        return R.decide(corpPrimaryProductService.modifyProductInfo(productDTO));
+    }
+
+
+
 
 
     /**

@@ -3,6 +3,7 @@ package com.git.bds.nyc.product.service.primary.corp;
 
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.github.yulichang.base.MPJBaseService;
 
 
@@ -34,4 +35,11 @@ public interface CorpPrimaryProductService extends MPJBaseService<CorpPrimaryPro
      */
     Boolean releasePreSellProduct(PrimaryProductDTO productDTO);
 
+    /**
+     * 修改产品信息
+     *
+     * @param productDTO 产品dto
+     * @return {@link Boolean}
+     */
+    Boolean modifyProductInfo(PrimaryProductModifyDTO productDTO);
 }
