@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class MybatisPlusGeneration {
     public static void main(String[] args) {
+
         String databaseName = "nyc";
         String url = "jdbc:mysql://localhost:3306/"+databaseName+"?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8";
         String username = "root";
@@ -51,12 +52,12 @@ public class MybatisPlusGeneration {
                             .entity("model.domain")                 //Entity 包名
                             .service("service")             //	Service 包名
                             .serviceImpl("service.impl")    //Service Impl 包名
-                            .mapper("dao")               //Mapper 包名
-                            .xml("dao.xml")              //	Mapper XML 包名
+                            .mapper("mapper")               //Mapper 包名
+                            .xml("mapper.xml")              //	Mapper XML 包名
                             .controller("controller")       //Controller 包名
                             .other("utils")                //自定义文件包名	输出自定义文件时所用到的包名
                             .pathInfo(Collections.singletonMap(OutputFile.xml, System.getProperty("user.dir") +
-                                    "\\nyc-gen\\src\\main\\java\\com\\git\\bds\\nyc\\dao\\xml"));//指定xml位置
+                                    "\\nyc-gen\\src\\main\\java\\com\\git\\bds\\nyc\\mapper\\xml"));//指定xml位置
                     //配置 **Mapper.xml 路径信息：项目的 resources 目录的 Mapper 目录下
                 })
                 //策略配置
@@ -106,7 +107,7 @@ public class MybatisPlusGeneration {
                             .enableBaseColumnList()              //	启用 BaseColumnList
                             .enableMapperAnnotation()           //开启 @Mapper 注解
                             .superClass(MPJBaseMapper.class)    //设置父类
-                            .formatMapperFileName("%sDao")    //格式化 mapper 文件名称
+                            .formatMapperFileName("%sMapper")    //格式化 mapper 文件名称
                             .formatXmlFileName("%sXml");       //格式化 Xml 文件名称
                 })
 //                .templateEngine(new FreemarkerTemplateEngine())

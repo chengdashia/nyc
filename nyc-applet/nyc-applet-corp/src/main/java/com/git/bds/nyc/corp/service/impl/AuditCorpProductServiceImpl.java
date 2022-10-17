@@ -1,6 +1,6 @@
 package com.git.bds.nyc.corp.service.impl;
 
-import com.git.bds.nyc.corp.dao.AuditCorpProductDao;
+import com.git.bds.nyc.corp.mapper.AuditCorpProductMapper;
 import com.git.bds.nyc.corp.model.domain.AuditCorpProduct;
 import com.git.bds.nyc.corp.service.AuditCorpProductService;
 import com.github.yulichang.base.MPJBaseServiceImpl;
@@ -18,6 +18,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class AuditCorpProductServiceImpl extends MPJBaseServiceImpl<AuditCorpProductDao, AuditCorpProduct> implements AuditCorpProductService {
+public class AuditCorpProductServiceImpl extends MPJBaseServiceImpl<AuditCorpProductMapper, AuditCorpProduct> implements AuditCorpProductService {
 
 }

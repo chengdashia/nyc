@@ -1,7 +1,7 @@
 package com.git.bds.nyc.product.service.productpicture;
 
 
-import com.git.bds.nyc.product.dao.productpicture.ProductPictureDao;
+import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-07 13:55:14
  */
 @Service
-public class PersonalProductPictureServiceImpl extends MPJBaseServiceImpl<ProductPictureDao, ProductPicture> implements PersonalProductPictureService {
+public class PersonalProductPictureServiceImpl extends MPJBaseServiceImpl<ProductPictureMapper, ProductPicture> implements PersonalProductPictureService {
 
 }

@@ -25,6 +25,7 @@
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-common</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-web</artifactId>
@@ -32,7 +33,7 @@
 
         <dependency>
             <groupId>com.git.bds</groupId>
-            <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
+            <artifactId>nyc-applet-product-biz</artifactId>
         </dependency>
     </dependencies>
 

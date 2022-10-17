@@ -1,8 +1,8 @@
 package com.git.bds.nyc.service.userrole;
 
 import com.git.bds.nyc.constant.Constants;
-import com.git.bds.nyc.dao.role.SysRoleDao;
-import com.git.bds.nyc.dao.userrole.SysUserRoleDao;
+import com.git.bds.nyc.mapper.SysRoleMapper;
+import com.git.bds.nyc.mapper.SysUserRoleMapper;
 import com.git.bds.nyc.domain.SysRole;
 import com.git.bds.nyc.domain.SysUserRole;
 import com.git.bds.nyc.domain.dto.RoleDTO;
@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class SysUserRoleServiceImpl extends MPJBaseServiceImpl<SysUserRoleDao, SysUserRole> implements SysUserRoleService {
+public class SysUserRoleServiceImpl extends MPJBaseServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
 
     @Resource
-    private SysRoleDao sysRoleDao;
+    private SysRoleMapper sysRoleDao;
 
     /**
      * 获取角色列表

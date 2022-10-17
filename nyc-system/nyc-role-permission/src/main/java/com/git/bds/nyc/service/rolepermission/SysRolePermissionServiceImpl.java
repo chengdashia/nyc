@@ -1,6 +1,6 @@
 package com.git.bds.nyc.service.rolepermission;
 
-import com.git.bds.nyc.dao.rolepermission.SysRolePermissionDao;
+import com.git.bds.nyc.mapper.SysRolePermissionMapper;
 import com.git.bds.nyc.domain.SysRolePermission;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,10 @@ import java.util.List;
  * @since 2022-08-17 20:46:59
  */
 @Service
-public class SysRolePermissionServiceImpl extends MPJBaseServiceImpl<SysRolePermissionDao, SysRolePermission> implements SysRolePermissionService {
+public class SysRolePermissionServiceImpl extends MPJBaseServiceImpl<SysRolePermissionMapper, SysRolePermission> implements SysRolePermissionService {
 
     @Resource
-    private SysRolePermissionDao sysRolePermissionDao;
+    private SysRolePermissionMapper sysRolePermissionDao;
 
     /**
      * 获取权限列表

@@ -9,8 +9,8 @@ import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.product.convert.PrimaryProductConvert;
-import com.git.bds.nyc.product.dao.primary.farmer.FarmerPrimaryProductDao;
-import com.git.bds.nyc.product.dao.productpicture.ProductPictureDao;
+import com.git.bds.nyc.product.mapper.primary.farmer.FarmerPrimaryProductMapper;
+import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
@@ -37,10 +37,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPrimaryProductDao, FarmerPrimaryProduct> implements FarmerPrimaryProductService {
+public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPrimaryProductMapper, FarmerPrimaryProduct> implements FarmerPrimaryProductService {
 
     @Resource
-    private ProductPictureDao productPictureDao;
+    private ProductPictureMapper productPictureDao;
 
     @Resource
     private MinioUtil minioUtil;

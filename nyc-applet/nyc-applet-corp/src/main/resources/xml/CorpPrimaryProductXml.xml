@@ -3,7 +3,7 @@
 <mapper namespace="com.git.bds.nyc.corp.dao.CorpPrimaryProductDao">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.git.bds.nyc.corp.model.domain.CorpPrimaryProduct">
+    <resultMap id="BaseResultMap" type="com.git.bds.nyc.product.model.domain.CorpPrimaryProduct">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="contact_info_id" property="contactInfoId"/>
@@ -27,7 +27,8 @@
         id
         , user_id, contact_info_id, product_species, product_variety, product_weight, product_price, product_production_area, product_cover, product_remark, product_status, audit_status, create_time, update_time, market_time, delete_flag
     </sql>
-    <select id="findPage" resultType="com.git.bds.nyc.corp.model.domain.CorpPrimaryProduct">
+
+    <select id="findPage" resultType="com.git.bds.nyc.product.model.domain.CorpPrimaryProduct">
         SELECT * FROM corp_primary_product t1
         <where>
             <if test="param.productStatus">AND t1.product_status = #{param.productStatus}</if>

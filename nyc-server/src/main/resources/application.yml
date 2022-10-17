@@ -48,7 +48,7 @@ spring:
 mybatis-plus:
   # 不支持多包, 如有需要可在注解配置 或 提升扫包等级
   # 例如 com.**.**.mapper
-  mapperPackage: com.git.bds.nyc.**.mapper
+  mapperPackage: com.git.bds.nyc.**.dao
   # 对应的 XML 文件位置
   mapperLocations: classpath*:xml/**/*Xml.xml
   # 实体扫描，多个package用逗号或者分号分隔
