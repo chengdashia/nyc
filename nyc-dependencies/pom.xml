@@ -56,6 +56,9 @@
         <!--wxjava-->
         <wxjava.version>4.3.9.B</wxjava.version>
 
+        <!--es-->
+        <easy-es.version>1.0.2</easy-es.version>
+
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
 
         <!--commons 工具-->
@@ -152,6 +155,12 @@
             <dependency>
                 <groupId>com.git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-spring-boot-starter-es</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -438,6 +447,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId> <!-- 解决 ThreadLocal 父子线程的传值问题 -->
                 <version>${transmittable-thread-local.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.easy-es</groupId>
+                <artifactId>easy-es-boot-starter</artifactId>
+                <version>${easy-es.version}</version>
             </dependency>
 
         </dependencies>
