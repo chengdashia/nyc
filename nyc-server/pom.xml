@@ -36,11 +36,6 @@
 
         <dependency>
             <groupId>com.git.bds</groupId>
-            <artifactId>nyc-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.git.bds</groupId>
             <artifactId>nyc-role-permission</artifactId>
         </dependency>
 
@@ -52,6 +47,11 @@
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-file-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-applet-corp</artifactId>
         </dependency>
 
     </dependencies>
