@@ -40,7 +40,7 @@ public class CorpPrimaryProductController {
     private final CorpPrimaryProductService corpPrimaryProductService;
 
     /**
-     * 农户发布 在售初级产品
+     * 发布 在售初级产品
      *
      * @param productDTO 产品dto
      * @return {@link R}<{@link Object}>
