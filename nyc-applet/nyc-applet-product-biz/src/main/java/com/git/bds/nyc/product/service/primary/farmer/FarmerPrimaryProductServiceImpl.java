@@ -14,7 +14,6 @@ import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.convert.PrimaryProductConvert;
 import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.primary.farmer.FarmerPrimaryProductMapper;
-import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
@@ -239,8 +238,8 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                                 FarmerPrimaryProduct::getProductCover,
                                 FarmerPrimaryProduct::getCreateTime
                         )
-                        .eq(CorpPrimaryProduct::getProductStatus, type)
-                        .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
-                        .orderByDesc(CorpPrimaryProduct::getCreateTime));
+                        .eq(FarmerPrimaryProduct::getProductStatus, type)
+                        .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                        .orderByDesc(FarmerPrimaryProduct::getCreateTime));
     }
 }
