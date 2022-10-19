@@ -1,7 +1,12 @@
 package com.git.bds.nyc.corp.controller;
 
+import com.git.bds.nyc.corp.CorpProductConvert;
+import com.git.bds.nyc.corp.model.vo.CorpSelfPrimaryProductVO;
+import com.git.bds.nyc.page.PageParam;
+import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
+import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.service.primary.corp.CorpPrimaryProductService;
 import com.git.bds.nyc.product.valid.ValidGroup;
 import com.git.bds.nyc.result.R;
@@ -13,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -89,5 +96,26 @@ public class CorpPrimaryProductController {
     public R<Boolean> delete(@PathVariable(value = "id") Long id) {
         return R.decide(corpPrimaryProductService.removeById(id));
     }
+
+    @PostMapping("/getOnSellProductByPage")
+    @ApiOperation("公司获取发布的在售的初级产品 分页")
+    public R<PageResult<CorpSelfPrimaryProductVO>> getOnSellProductByPage(
+            @Validated PageParam pageParam
+    ){
+        PageResult<PrimaryProductSelfDTO> onSellProductByPage = corpPrimaryProductService.getOnSellProductByPage(pageParam);
+        List<CorpSelfPrimaryProductVO> selfPrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpSelfPrimaryProductVO(onSellProductByPage.getList());
+        return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
+    }
+
+    @PostMapping("/getPreSellProductByPage")
+    @ApiOperation("公司获取发布的预售的初级产品 分页")
+    public R<PageResult<CorpSelfPrimaryProductVO>> getPreSellProductByPage(
+            @Validated PageParam pageParam
+    ){
+        PageResult<PrimaryProductSelfDTO> onSellProductByPage = corpPrimaryProductService.getPreSellProductByPage(pageParam);
+        List<CorpSelfPrimaryProductVO> selfPrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpSelfPrimaryProductVO(onSellProductByPage.getList());
+        return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
+    }
+
 
 }

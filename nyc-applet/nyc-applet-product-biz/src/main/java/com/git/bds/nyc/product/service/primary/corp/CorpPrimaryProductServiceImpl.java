@@ -4,8 +4,13 @@ package com.git.bds.nyc.product.service.primary.corp;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
+import com.git.bds.nyc.page.PageParam;
+import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.convert.PrimaryProductConvert;
 import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.primary.corp.CorpPrimaryProductMapper;
@@ -13,7 +18,9 @@ import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
+import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,6 +142,35 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
             productPictureMapper.insert(productPicture);
         }
         return true;
+    }
+
+    @Override
+    public PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam) {
+        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam,ProductType.ON_SELL.getValue());
+        return new PageResult<>(page.getRecords(),page.getCurrent());
+    }
+
+    @Override
+    public PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam) {
+        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam,ProductType.PRE_SELL.getValue());
+        return new PageResult<>(page.getRecords(),page.getCurrent());
+    }
+
+    public IPage<PrimaryProductSelfDTO> getProductByPage(PageParam pageParam,int type){
+       return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                PrimaryProductSelfDTO.class,
+                new MPJLambdaWrapper<>()
+                        .select(CorpPrimaryProduct::getId,
+                                CorpPrimaryProduct::getProductSpecies,
+                                CorpPrimaryProduct::getProductVariety,
+                                CorpPrimaryProduct::getProductWeight,
+                                CorpPrimaryProduct::getProductPrice,
+                                CorpPrimaryProduct::getProductCover,
+                                CorpPrimaryProduct::getCreateTime
+                        )
+                        .eq(CorpPrimaryProduct::getProductStatus, type)
+                        .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                        .orderByDesc(CorpPrimaryProduct::getCreateTime));
     }
 
 
