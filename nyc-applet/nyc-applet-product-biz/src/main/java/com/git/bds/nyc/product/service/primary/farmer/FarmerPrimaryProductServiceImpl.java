@@ -231,13 +231,13 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 PrimaryProductSelfDTO.class,
                 new MPJLambdaWrapper<>()
-                        .select(CorpPrimaryProduct::getId,
-                                CorpPrimaryProduct::getProductSpecies,
-                                CorpPrimaryProduct::getProductVariety,
-                                CorpPrimaryProduct::getProductWeight,
-                                CorpPrimaryProduct::getProductPrice,
-                                CorpPrimaryProduct::getProductCover,
-                                CorpPrimaryProduct::getCreateTime
+                        .select(FarmerPrimaryProduct::getId,
+                                FarmerPrimaryProduct::getProductSpecies,
+                                FarmerPrimaryProduct::getProductVariety,
+                                FarmerPrimaryProduct::getProductWeight,
+                                FarmerPrimaryProduct::getProductPrice,
+                                FarmerPrimaryProduct::getProductCover,
+                                FarmerPrimaryProduct::getCreateTime
                         )
                         .eq(CorpPrimaryProduct::getProductStatus, type)
                         .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
