@@ -8,7 +8,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.user.convert.UserConvert;
-import com.git.bds.nyc.user.mapper.user.UserDao;
+import com.git.bds.nyc.user.mapper.user.UserMapper;
 import com.git.bds.nyc.user.domain.User;
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
@@ -29,7 +29,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Service
-public class UserServiceImpl extends MPJBaseServiceImpl<UserDao, User> implements UserService {
+public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implements UserService {
 
     @Resource
     private WxMaService wxMaService;
