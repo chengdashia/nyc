@@ -50,7 +50,7 @@ mybatis-plus:
   # 例如 com.**.**.mapper
   mapperPackage: com.git.bds.nyc.**.mapper
   # 对应的 XML 文件位置
-  mapperLocations: classpath*:xml/**/*Xml.xml
+  mapperLocations: classpath*:mapper/*Xml.xml
   # 实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.git.bds.nyc.**.domain
   # 启动时是否检查 MyBatis XML 文件的存在，默认不检查
