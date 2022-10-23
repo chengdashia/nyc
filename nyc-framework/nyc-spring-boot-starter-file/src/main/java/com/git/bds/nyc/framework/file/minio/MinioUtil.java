@@ -361,6 +361,7 @@ public class MinioUtil {
                 file = ThumbnailUtil.changeScale(file);
             }
             DateTime dateTime = new DateTime(new Date());
+
             //拼接路径
             String path = id +
                     SEPARATOR +

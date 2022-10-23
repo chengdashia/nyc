@@ -2,28 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <artifactId>nyc</artifactId>
+        <artifactId>nyc-system</artifactId>
         <groupId>com.git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>nyc-system</artifactId>
-    <packaging>pom</packaging>
-
-    <name>${project.artifactId}</name>
+    <artifactId>nyc-certification</artifactId>
+    <version>${revision}</version>
+    <name>nyc-certification</name>
     <description>
-        系统的一些承建模块,比如权限校验
+        角色-权限认证
     </description>
 
-
-    <modules>
-        <module>nyc-certification</module>
-        <module>nyc-role-permission</module>
-        <module>nyc-file-api</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-role-permission</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>
