@@ -29,9 +29,18 @@ public class ProductCollectionDTO {
     private String varieties;
 
     /** 封面图 */
-    private String imgUrl;
+    private String coverImg;
 
     /** 收藏时间 */
     private LocalDateTime collectionTime;
+
+
+    public static final String PRODUCT_ID = "id";
+    public static final String TYPE = "type";
+    public static final String PRICE = "price";
+    public static final String SPECIES = "species";
+    public static final String VARIETIES = "varieties";
+    public static final String COVER_URL = "coverImg";
+    public static final String COLLECTION_TIME = "collectionTime";
 
 }

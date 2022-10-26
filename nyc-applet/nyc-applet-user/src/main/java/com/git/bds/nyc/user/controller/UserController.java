@@ -1,5 +1,7 @@
 package com.git.bds.nyc.user.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
+import com.git.bds.nyc.user.domain.User;
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.git.bds.nyc.user.service.user.UserService;
 import io.swagger.annotations.Api;
@@ -29,7 +31,6 @@ public class UserController {
 
     private final UserService userService;
 
-
     @ApiOperation("微信登录")
     @PostMapping("/login")
     public String login(@RequestBody WxUserInfoDTO userInfoDTO) throws WxErrorException {
@@ -41,6 +42,19 @@ public class UserController {
     public String test(){
         return "hello world";
     }
+
+
+    @ApiOperation("测试  token")
+    @GetMapping("/loginTest")
+    public Object loginTest(){
+        User user = userService.getById(3);
+        StpUtil.login(user.getId());
+        return StpUtil.getTokenInfo();
+    }
+
+
+
+
 
 
 

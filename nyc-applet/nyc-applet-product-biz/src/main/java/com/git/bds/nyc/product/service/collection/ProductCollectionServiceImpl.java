@@ -41,33 +41,39 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
         if(type == ProductType.FARMER_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectionDTO.class, new MPJLambdaWrapper<>()
-                            .select(ProductCollection::getCreateTime)
-                            .select(FarmerPrimaryProduct::getProductPrice,
-                                    FarmerPrimaryProduct::getProductCover,
-                                    FarmerPrimaryProduct::getProductSpecies,
-                                    FarmerPrimaryProduct::getProductVariety)
+                            .select(ProductCollection::getProductId)
+                            .selectAs(ProductCollection::getCreateTime,ProductCollectionDTO.COLLECTION_TIME)
+                            .selectAs(ProductCollection::getProductStatus,ProductCollectionDTO.TYPE)
+                            .selectAs(FarmerPrimaryProduct::getProductPrice,ProductCollectionDTO.PRICE)
+                            .selectAs(FarmerPrimaryProduct::getProductCover,ProductCollectionDTO.COVER_URL)
+                            .selectAs(FarmerPrimaryProduct::getProductSpecies,ProductCollectionDTO.SPECIES)
+                            .selectAs(FarmerPrimaryProduct::getProductVariety,ProductCollectionDTO.VARIETIES)
                             .leftJoin(FarmerPrimaryProduct.class, FarmerPrimaryProduct::getId, ProductCollection::getProductId)
                             .eq(ProductCollection::getUserId, userId)
                             .eq(ProductCollection::getProductStatus, type));
         }else if (type == ProductType.CORP_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectionDTO.class, new MPJLambdaWrapper<>()
-                            .select(ProductCollection::getCreateTime)
-                            .select(CorpPrimaryProduct::getProductPrice,
-                                    CorpPrimaryProduct::getProductCover,
-                                    CorpPrimaryProduct::getProductSpecies,
-                                    CorpPrimaryProduct::getProductVariety)
+                            .select(ProductCollection::getProductId)
+                            .selectAs(ProductCollection::getCreateTime,ProductCollectionDTO.COLLECTION_TIME)
+                            .selectAs(ProductCollection::getProductStatus,ProductCollectionDTO.TYPE)
+                            .selectAs(CorpPrimaryProduct::getProductPrice,ProductCollectionDTO.PRICE)
+                            .selectAs(CorpPrimaryProduct::getProductCover,ProductCollectionDTO.COVER_URL)
+                            .selectAs(CorpPrimaryProduct::getProductSpecies,ProductCollectionDTO.SPECIES)
+                            .selectAs(CorpPrimaryProduct::getProductVariety,ProductCollectionDTO.VARIETIES)
                             .leftJoin(CorpPrimaryProduct.class, CorpPrimaryProduct::getId, ProductCollection::getProductId)
                             .eq(ProductCollection::getUserId, userId)
                             .eq(ProductCollection::getProductStatus, type));
         }else {
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectionDTO.class, new MPJLambdaWrapper<>()
-                            .select(ProductCollection::getCreateTime)
-                            .select(CorpProcessingProduct::getProductPrice,
-                                    CorpProcessingProduct::getProductCover,
-                                    CorpProcessingProduct::getProductSpecies,
-                                    CorpProcessingProduct::getProductVariety)
+                            .select(ProductCollection::getProductId)
+                            .selectAs(ProductCollection::getCreateTime,ProductCollectionDTO.COLLECTION_TIME)
+                            .selectAs(ProductCollection::getProductStatus,ProductCollectionDTO.TYPE)
+                            .selectAs(CorpProcessingProduct::getProductPrice,ProductCollectionDTO.PRICE)
+                            .selectAs(CorpProcessingProduct::getProductCover,ProductCollectionDTO.COVER_URL)
+                            .selectAs(CorpProcessingProduct::getProductSpecies,ProductCollectionDTO.SPECIES)
+                            .selectAs(CorpProcessingProduct::getProductVariety,ProductCollectionDTO.VARIETIES)
                             .leftJoin(CorpProcessingProduct.class, CorpProcessingProduct::getId, ProductCollection::getProductId)
                             .eq(ProductCollection::getUserId, userId)
                             .eq(ProductCollection::getProductStatus, type));

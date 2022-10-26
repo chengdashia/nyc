@@ -30,7 +30,7 @@ public class CorpProductCollectionVO implements Serializable {
     private String varieties;
 
     @ApiModelProperty("封面图")
-    private String imgUrl;
+    private String coverImg;
 
     @ApiModelProperty("收藏时间")
     private LocalDateTime collectionTime;
