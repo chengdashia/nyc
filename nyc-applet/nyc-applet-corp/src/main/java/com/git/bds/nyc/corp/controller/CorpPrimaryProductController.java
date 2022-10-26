@@ -1,6 +1,6 @@
 package com.git.bds.nyc.corp.controller;
 
-import com.git.bds.nyc.corp.CorpProductConvert;
+import com.git.bds.nyc.corp.convert.CorpProductConvert;
 import com.git.bds.nyc.corp.model.vo.CorpSelfPrimaryProductVO;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
@@ -81,7 +81,6 @@ public class CorpPrimaryProductController {
         return R.decide(corpPrimaryProductService.modifyProductInfo(productDTO));
     }
 
-
     /**
      * 删除初级农产品
      *
@@ -97,6 +96,12 @@ public class CorpPrimaryProductController {
         return R.decide(corpPrimaryProductService.removeById(id));
     }
 
+    /**
+     * 公司获取发布的在售的初级产品 分页
+     *
+     * @param pageParam 页面参数
+     * @return {@link R}<{@link PageResult}<{@link CorpSelfPrimaryProductVO}>>
+     */
     @PostMapping("/getOnSellProductByPage")
     @ApiOperation("公司获取发布的在售的初级产品 分页")
     public R<PageResult<CorpSelfPrimaryProductVO>> getOnSellProductByPage(
@@ -107,6 +112,12 @@ public class CorpPrimaryProductController {
         return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
     }
 
+    /**
+     * 公司获取发布的预售的初级产品 分页
+     *
+     * @param pageParam 页面参数
+     * @return {@link R}<{@link PageResult}<{@link CorpSelfPrimaryProductVO}>>
+     */
     @PostMapping("/getPreSellProductByPage")
     @ApiOperation("公司获取发布的预售的初级产品 分页")
     public R<PageResult<CorpSelfPrimaryProductVO>> getPreSellProductByPage(

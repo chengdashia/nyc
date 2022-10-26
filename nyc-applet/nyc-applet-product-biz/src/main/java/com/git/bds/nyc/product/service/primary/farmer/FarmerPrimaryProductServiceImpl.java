@@ -5,7 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.git.bds.nyc.enums.ProductType;
+import com.git.bds.nyc.enums.ProductSellType;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
@@ -216,13 +216,13 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
     @Override
     public PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam) {
-        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductType.ON_SELL.getValue());
+        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.ON_SELL.getValue());
         return new PageResult<>(page.getRecords(),page.getCurrent());
     }
 
     @Override
     public PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam) {
-        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductType.PRE_SELL.getValue());
+        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.PRE_SELL.getValue());
         return new PageResult<>(page.getRecords(),page.getCurrent());
     }
 

@@ -24,21 +24,20 @@ public class MybatisPlusGeneration {
     public static void main(String[] args) {
 
         String databaseName = "nyc";
-        String url = "jdbc:mysql://localhost:3306/"+databaseName+"?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8";
-        String username = "root";
-        String password = "root";
+        String url = "jdbc:mysql://82.157.157.133:3306/"+databaseName+"?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8";
+        String username = "nyc";
+        String password = "mysql729";
 
         //表名集合
         List<String> tables = new ArrayList<>();
-        tables.add("audit_corp_product");
-        tables.add("corp_primary_product");
+        tables.add("corp_processing_product");
 
         FastAutoGenerator.create(url, username, password)
                 //全局配置
                 .globalConfig(builder -> {
                     builder.disableOpenDir()  //禁止打开输出目录
                             .outputDir(System.getProperty("user.dir") + "\\nyc-gen\\src\\main\\java")   //指定输出目录
-                            .author("chnnc")   //作者名
+                            .author("成大事")   //作者名
 //                            .enableKotlin()      //开启 kotlin 模式
                             .enableSwagger()     //开启 swagger 模式
                             .dateType(DateType.TIME_PACK)     //时间策略  定义生成的实体类中日期的类型 TIME_PACK=LocalDateTime;ONLY_DATE=Date;
