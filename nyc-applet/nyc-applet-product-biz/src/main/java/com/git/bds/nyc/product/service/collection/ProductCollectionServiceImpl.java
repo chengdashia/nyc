@@ -37,7 +37,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
     @Override
     public PageResult<ProductCollectionDTO> getProductCollectsByPage(PageParam pageParam, int type) {
         long userId = StpUtil.getLoginIdAsLong();
-        IPage<ProductCollectionDTO> page = null;
+        IPage<ProductCollectionDTO> page;
         if(type == ProductType.FARMER_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectionDTO.class, new MPJLambdaWrapper<>()

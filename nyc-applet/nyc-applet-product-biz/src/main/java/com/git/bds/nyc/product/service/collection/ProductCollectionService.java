@@ -17,5 +17,12 @@ import com.github.yulichang.base.MPJBaseService;
  */
 public interface ProductCollectionService extends MPJBaseService<ProductCollection> {
 
+    /**
+     * 按页面获取产品集合
+     *
+     * @param pageParam 页面参数
+     * @param type      类型
+     * @return {@link PageResult}<{@link ProductCollectionDTO}>
+     */
     PageResult<ProductCollectionDTO> getProductCollectsByPage(PageParam pageParam, int type);
 }
