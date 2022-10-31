@@ -30,7 +30,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/primaryProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class FarmerPrimaryProductController {
+public class PrimaryProductController {
 
     private final FarmerPrimaryProductService productService;
 
@@ -51,7 +51,7 @@ public class FarmerPrimaryProductController {
             @PathVariable("id") Long id
     ){
         ProductInfoDTO product = productService.getProductInfo(id);
-        return R.ok(ProductCovert.INSTANCE.toPrimaryProductInfoVo(product));
+        return R.ok(ProductCovert.INSTANCE.toPrimaryProductInfoVO(product));
     }
 
 

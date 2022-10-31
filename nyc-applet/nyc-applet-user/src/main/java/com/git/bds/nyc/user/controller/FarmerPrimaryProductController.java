@@ -32,7 +32,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/farmerPrimaryProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class PrimaryProductController {
+public class FarmerPrimaryProductController {
 
     private final FarmerPrimaryProductService productService;
 

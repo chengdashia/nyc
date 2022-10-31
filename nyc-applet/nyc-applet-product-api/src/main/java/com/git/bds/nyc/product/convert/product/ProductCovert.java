@@ -18,7 +18,19 @@ public interface ProductCovert {
 
     ProductCovert INSTANCE = Mappers.getMapper(ProductCovert.class);
 
+    /**
+     * 至初级产品vo
+     *
+     * @param list 列表
+     * @return {@link List}<{@link PrimaryProductVO}>
+     */
     List<PrimaryProductVO> toPrimaryProductVO(List<FarmerPrimaryProduct> list);
 
-    PrimaryProductInfoVO toPrimaryProductInfoVo(ProductInfoDTO product);
+    /**
+     * 到主要产品信息vo
+     *
+     * @param product 产品
+     * @return {@link PrimaryProductInfoVO}
+     */
+    PrimaryProductInfoVO toPrimaryProductInfoVO(ProductInfoDTO product);
 }
