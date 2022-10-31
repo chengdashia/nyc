@@ -24,6 +24,11 @@
         <!--产品的-->
         <module>nyc-applet-product-biz</module>
         <module>nyc-applet-product-api</module>
+
+        <!--需求的-->
+        <module>nyc-applet-demand-biz</module>
+        <module>nyc-applet-demand-api</module>
+
     </modules>
 
 
