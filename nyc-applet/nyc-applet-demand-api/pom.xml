@@ -15,6 +15,13 @@
         需求接口
     </description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-applet-demand-biz</artifactId>
+        </dependency>
+    </dependencies>
+
 
 
 </project>

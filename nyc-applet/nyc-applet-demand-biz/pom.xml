@@ -14,6 +14,27 @@
         需求接口
     </description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-file</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>

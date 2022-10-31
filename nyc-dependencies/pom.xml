@@ -123,6 +123,18 @@
 
             <dependency>
                 <groupId>com.git.bds</groupId>
+                <artifactId>nyc-applet-demand-biz</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-applet-demand-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-gen</artifactId>
                 <version>${revision}</version>
             </dependency>
