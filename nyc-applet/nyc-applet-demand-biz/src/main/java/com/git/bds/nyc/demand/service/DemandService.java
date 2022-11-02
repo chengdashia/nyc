@@ -3,6 +3,8 @@ package com.git.bds.nyc.demand.service;
 import com.git.bds.nyc.demand.model.domain.Demand;
 import com.git.bds.nyc.demand.model.dto.DemandDTO;
 import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
+import com.git.bds.nyc.demand.model.dto.DemandAddDTO;
+import com.git.bds.nyc.demand.model.dto.DemandModifyDTO;
 import com.git.bds.nyc.page.PageParam;
 import com.github.yulichang.base.MPJBaseService;
 
@@ -33,4 +35,20 @@ public interface DemandService extends MPJBaseService<Demand> {
      * @return {@link DemandInfoDTO}
      */
     DemandInfoDTO getDemandInfo(Long id);
+
+    /**
+     * 发布需求
+     *
+     * @param demandAddDTO 需求操作数据
+     * @return {@link Boolean}
+     */
+    Boolean releaseDemand(DemandAddDTO demandAddDTO);
+
+    /**
+     * 修改需求信息
+     *
+     * @param demandModifyDTO 需求修改数据
+     * @return {@link Boolean}
+     */
+    Boolean modifyDemandInfo(DemandModifyDTO demandModifyDTO);
 }

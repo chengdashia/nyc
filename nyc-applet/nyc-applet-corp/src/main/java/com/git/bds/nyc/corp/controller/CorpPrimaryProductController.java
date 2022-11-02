@@ -87,7 +87,7 @@ public class CorpPrimaryProductController {
      * @param id 初级农产品id
      * @return {@link = R<Boolean>}
      */
-    @PutMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation("根据id删除初级农产品数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id主键", dataTypeClass = Long.class, paramType = "path", example = "123456", required = true)

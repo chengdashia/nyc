@@ -35,6 +35,11 @@
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-applet-product-biz</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-applet-demand-biz</artifactId>
+        </dependency>
     </dependencies>
 
 
