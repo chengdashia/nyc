@@ -20,13 +20,4 @@
         id, user_id, product_id, product_status, audit_status, audit_remark, create_time, audit_time, apply_times
     </sql>
 
-    <!-- 更新公司初级农产品审核状态 -->
-    <update id="updateCropProduct">
-        UPDATE audit_corp_product
-        SET user_id = #{auditCorpProductUpdateDTO.userId},
-            audit_status = #{auditCorpProductUpdateDTO.auditStatus}
-        WHERE
-            product_id = = #{auditCorpProductUpdateDTO.productId}
-    </update>
-
 </mapper>

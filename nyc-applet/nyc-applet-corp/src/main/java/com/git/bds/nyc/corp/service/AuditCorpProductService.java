@@ -1,6 +1,7 @@
 package com.git.bds.nyc.corp.service;
 
 import com.git.bds.nyc.corp.model.domain.AuditCorpProduct;
+import com.git.bds.nyc.corp.model.dto.AuditCorpProductUpdateDTO;
 import com.github.yulichang.base.MPJBaseService;
 
 /**
@@ -12,5 +13,12 @@ import com.github.yulichang.base.MPJBaseService;
  * @since 2022-10-15 18:50:50
  */
 public interface AuditCorpProductService extends MPJBaseService<AuditCorpProduct> {
+    /**
+     * 公司商品审核更新
+     *
+     * @param auditCorpProductUpdateDTO 更新信息
+     * @return {@link  Boolean}
+     */
+    Boolean updateCropProduct(AuditCorpProductUpdateDTO auditCorpProductUpdateDTO);
 
 }

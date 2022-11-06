@@ -1,6 +1,7 @@
 package com.git.bds.nyc.corp.mapper;
 
 import com.git.bds.nyc.corp.model.domain.AuditCorpProduct;
+import com.git.bds.nyc.corp.model.dto.AuditCorpProductUpdateDTO;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,6 +15,14 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AuditCorpProductMapper extends MPJBaseMapper<AuditCorpProduct> {
+    /**
+     * 公司商品审核更新
+     *
+     * @param auditCorpProductUpdateDTO 更新信息
+     * @return {@link  Boolean}
+     */
+    Boolean updateCropProduct(AuditCorpProductUpdateDTO auditCorpProductUpdateDTO);
+
 
 
 }

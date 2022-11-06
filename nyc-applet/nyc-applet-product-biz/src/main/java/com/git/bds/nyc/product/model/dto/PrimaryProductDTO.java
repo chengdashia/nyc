@@ -2,10 +2,12 @@ package com.git.bds.nyc.product.model.dto;
 
 
 import com.git.bds.nyc.product.valid.ValidGroup;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -17,9 +19,9 @@ import java.util.List;
  * @since 2022/9/14 18:48
  * 用户发布商品
  */
+@ApiModel(value = "数据源(新增时使用)")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 public class PrimaryProductDTO {
 
     @NotNull(groups = {ValidGroup.PreSale.class,ValidGroup.OnSell.class})

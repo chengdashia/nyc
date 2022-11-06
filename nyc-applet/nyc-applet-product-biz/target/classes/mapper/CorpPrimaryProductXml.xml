@@ -27,14 +27,7 @@
         id
         , user_id, contact_info_id, product_species, product_variety, product_weight, product_price, product_production_area, product_cover, product_remark, product_status, audit_status, create_time, update_time, market_time, delete_flag
     </sql>
-    <!-- 更新审核状态 -->
-    <update id="updateAuditStatus">
-        UPDATE corp_primary_product
-        SET audit_status = #{primaryProductUpdateDTO.auditStatus}
-        WHERE
-            product_id =  #{primaryProductUpdateDTO.id}
-    </update>
-    <!-- 分页查询数据 -->
+
     <select id="findPage" resultType="com.git.bds.nyc.product.model.domain.CorpPrimaryProduct">
         SELECT * FROM corp_primary_product t1
         <where>
