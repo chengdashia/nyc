@@ -2,6 +2,9 @@ package com.git.bds.nyc.corp.service;
 
 import com.git.bds.nyc.corp.model.domain.AuditCorpProduct;
 import com.git.bds.nyc.corp.model.dto.AuditCorpProductUpdateDTO;
+import com.git.bds.nyc.corp.model.vo.AuditCorpProductVO;
+import com.git.bds.nyc.page.PageParam;
+import com.git.bds.nyc.page.PageResult;
 import com.github.yulichang.base.MPJBaseService;
 
 /**
@@ -20,5 +23,13 @@ public interface AuditCorpProductService extends MPJBaseService<AuditCorpProduct
      * @return {@link  Boolean}
      */
     Boolean updateCropProduct(AuditCorpProductUpdateDTO auditCorpProductUpdateDTO);
+
+    /**
+     * 获取分页数据
+     *
+     * @param pageParam 分页参数
+     * @return {@link PageResult<AuditCorpProductVO>}
+     */
+    PageResult<AuditCorpProductVO> getPage(PageParam pageParam);
 
 }

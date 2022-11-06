@@ -1,7 +1,9 @@
-package com.git.bds.nyc.corp.model.domain;
+package com.git.bds.nyc.corp.model.vo;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,18 +13,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
- * 审核公司发布的农产品(包括初级和加工的商品)
- * </p>
+ * Created with IntelliJ IDEA.
  *
- * @author chnnc
- * @since 2022-10-15 18:50:50
+ * @Author: chnnc
+ * @Date: 2022/11/06/14:47
+ * @Description: 用于公司产品返回数据
  */
+@ApiModel(value = "用于公司产品返回数据")
 @Data
 @Accessors(chain = true)
-@TableName("audit_corp_product")
-@ApiModel(value = "AuditCorpProduct对象", description = "审核公司发布的农产品(包括初级和加工的商品)")
-public class AuditCorpProduct extends Model<AuditCorpProduct> {
+public class AuditCorpProductVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -61,29 +61,5 @@ public class AuditCorpProduct extends Model<AuditCorpProduct> {
     @ApiModelProperty("提交次数")
     @TableField("apply_times")
     private Integer applyTimes;
-
-
-    public static final String ID = "id";
-
-    public static final String USER_ID = "user_id";
-
-    public static final String PRODUCT_ID = "product_id";
-
-    public static final String PRODUCT_STATUS = "product_status";
-
-    public static final String AUDIT_STATUS = "audit_status";
-
-    public static final String AUDIT_REMARK = "audit_remark";
-
-    public static final String CREATE_TIME = "create_time";
-
-    public static final String AUDIT_TIME = "audit_time";
-
-    public static final String APPLY_TIMES = "apply_times";
-
-    @Override
-    public Serializable pkVal() {
-        return this.id;
-    }
 
 }
