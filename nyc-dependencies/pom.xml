@@ -24,7 +24,7 @@
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
         <mybatis-plus-join.version>1.2.4</mybatis-plus-join.version>
-        <hutool.version>5.8.0</hutool.version>
+        <hutool.version>5.8.9</hutool.version>
         <!--web 相关-->
         <knife4j.version>3.0.3</knife4j.version>
         <swagger-annotations.version>1.6.6</swagger-annotations.version>
@@ -54,7 +54,7 @@
         <easyexcel.version>3.1.1</easyexcel.version>
         <easypoi.version>4.4.0</easypoi.version>
         <!--wxjava-->
-        <wxjava.version>4.3.9.B</wxjava.version>
+        <wxjava.version>4.4.4.B</wxjava.version>
 
         <!--es-->
         <easy-es.version>1.0.2</easy-es.version>

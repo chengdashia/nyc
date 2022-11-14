@@ -41,8 +41,8 @@ public class ProductCollection extends Model<ProductCollection> {
     private Long productId;
 
     @ApiModelProperty("产品的种类(0：农户初级；1：公司初级；2：公司加工)")
-    @TableField("product_status")
-    private Integer productStatus;
+    @TableField("product_type")
+    private Integer productType;
 
     @ApiModelProperty("收藏时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -55,7 +55,7 @@ public class ProductCollection extends Model<ProductCollection> {
 
     public static final String PRODUCT_ID = "product_id";
 
-    public static final String PRODUCT_STATUS = "product_status";
+    public static final String PRODUCT_STATUS = "product_type";
 
     public static final String CREATE_TIME = "create_time";
 

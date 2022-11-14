@@ -4,7 +4,6 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
 import com.git.bds.nyc.product.service.collection.ProductCollectionService;
-import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.convert.FarmerProductConvert;
 import com.git.bds.nyc.user.domain.vo.FarmerProductCollectionVO;
@@ -25,14 +24,13 @@ import java.util.List;
  * @author 成大事
  * @since 2022/10/26 14:23
  */
-@Api(tags = "公司产品的 浏览记录和收藏记录")
+@Api(tags = "农户的 浏览记录和收藏记录")
 @Validated
 @RestController
 @RequestMapping("/farmerHistoryCollection")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FarmerHistoryCollectionController {
 
-    private final ProductHistoryService historyService;
 
     private final ProductCollectionService collectionService;
 
@@ -49,4 +47,31 @@ public class FarmerHistoryCollectionController {
         List<FarmerProductCollectionVO> productCollectionVOList = FarmerProductConvert.INSTANCE.toFarmerProductCollectionVO(page.getList());
         return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
     }
+
+    @ApiOperation(value = "产品  添加收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
+    @PostMapping("/productAddCollection")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true),
+            @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "query", example = "0", required = true)
+    })
+    public R<Boolean> productAddCollection(
+            @RequestParam("id") Long id,
+            @RequestParam("type") int type
+    ){
+        return R.decide(collectionService.productAddCollection(id,type));
+    }
+
+
+    @ApiOperation(value = "产品  取消收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
+    @PostMapping("/productCancelCollection")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "收藏的id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
+    })
+    public R<Boolean> productCancelCollection(
+            @RequestParam("id") Long id
+    ){
+        return R.decide(collectionService.removeById(id));
+    }
+
+
 }

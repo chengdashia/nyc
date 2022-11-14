@@ -25,4 +25,13 @@ public interface ProductCollectionService extends MPJBaseService<ProductCollecti
      * @return {@link PageResult}<{@link ProductCollectionDTO}>
      */
     PageResult<ProductCollectionDTO> getProductCollectsByPage(PageParam pageParam, int type);
+
+    /**
+     * 产品添加收藏
+     *
+     * @param id   产品id
+     * @param type 类型
+     * @return {@link Boolean}
+     */
+    Boolean productAddCollection(Long id, int type);
 }

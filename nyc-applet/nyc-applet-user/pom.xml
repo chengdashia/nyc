@@ -41,6 +41,7 @@
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-miniapp</artifactId>
+            <version>4.4.4.B</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bouncycastle</groupId>

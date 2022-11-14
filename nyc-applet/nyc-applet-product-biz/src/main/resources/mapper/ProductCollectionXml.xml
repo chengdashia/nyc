@@ -7,7 +7,7 @@
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
         <result column="product_id" property="productId" />
-        <result column="product_status" property="productStatus" />
+        <result column="product_status" property="productType" />
         <result column="create_time" property="createTime" />
     </resultMap>
 
