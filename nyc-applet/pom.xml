@@ -29,6 +29,9 @@
         <module>nyc-applet-demand-biz</module>
         <module>nyc-applet-demand-api</module>
 
+        <!--公共的-->
+        <module>nyc-applet-common-biz</module>
+
     </modules>
 
 

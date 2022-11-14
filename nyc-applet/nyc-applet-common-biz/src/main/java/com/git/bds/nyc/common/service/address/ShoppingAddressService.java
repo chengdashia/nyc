@@ -1,7 +1,7 @@
-package com.git.bds.nyc.product.service.address;
+package com.git.bds.nyc.common.service.address;
 
 
-import com.git.bds.nyc.product.model.domain.ShoppingAddress;
+import com.git.bds.nyc.common.model.domain.ShoppingAddress;
 import com.github.yulichang.base.MPJBaseService;
 
 /**

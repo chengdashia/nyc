@@ -1,6 +1,6 @@
-package com.git.bds.nyc.product.mapper;
+package com.git.bds.nyc.common.mapper;
 
-import com.git.bds.nyc.product.model.domain.ShoppingAddress;
+import com.git.bds.nyc.common.model.domain.ShoppingAddress;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
