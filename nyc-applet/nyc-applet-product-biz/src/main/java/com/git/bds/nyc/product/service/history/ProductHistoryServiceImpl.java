@@ -2,6 +2,7 @@ package com.git.bds.nyc.product.service.history;
 
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.enums.ProductType;
@@ -77,5 +78,21 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
                             .eq(ProductHistory::getProductType, type));
         }
         return new PageResult<>(page.getRecords(),page.getSize());
+    }
+
+    @Override
+    public Boolean addBrowsingHistory(long userId, Long id, int type) {
+        ProductHistory one = this.baseMapper.selectOne(new QueryWrapper<ProductHistory>()
+                .select(ProductHistory.ID)
+                .eq(ProductHistory.PRODUCT_ID, id)
+                .eq(ProductHistory.PRODUCT_TYPE, type));
+        if(one == null){
+            one = new ProductHistory();
+            one.setProductId(id);
+            one.setUserId(userId);
+            one.setProductType(type);
+            return this.baseMapper.insert(one) > 0;
+        }
+        return true;
     }
 }

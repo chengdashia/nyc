@@ -16,4 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ProductHistoryMapper extends MPJBaseMapper<ProductHistory> {
 
+
 }

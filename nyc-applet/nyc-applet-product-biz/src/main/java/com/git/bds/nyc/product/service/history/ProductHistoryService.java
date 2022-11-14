@@ -25,4 +25,14 @@ public interface ProductHistoryService extends MPJBaseService<ProductHistory> {
      * @return {@link PageResult}<{@link ProductCollectionDTO}>
      */
     PageResult<ProductCollectionDTO> getProductHistoryByPage(PageParam pageParam, int type);
+
+    /**
+     * 添加浏览历史记录
+     *
+     * @param userId 登录id
+     * @param id     商品id
+     * @param type   类型
+     * @return {@link Boolean}
+     */
+    Boolean addBrowsingHistory(long userId, Long id, int type);
 }

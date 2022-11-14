@@ -55,7 +55,7 @@ public class ProductHistory extends Model<ProductHistory> {
 
     public static final String PRODUCT_ID = "product_id";
 
-    public static final String PRODUCT_STATUS = "product_type";
+    public static final String PRODUCT_TYPE = "product_type";
 
     public static final String CREATE_TIME = "create_time";
 

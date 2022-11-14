@@ -16,6 +16,7 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.convert.PrimaryProductConvert;
 import com.git.bds.nyc.product.mapper.ProductCollectionMapper;
+import com.git.bds.nyc.product.mapper.ProductHistoryMapper;
 import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.primary.farmer.FarmerPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.*;
@@ -23,15 +24,17 @@ import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
+import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -46,18 +49,17 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPrimaryProductMapper, FarmerPrimaryProduct> implements FarmerPrimaryProductService {
 
-    @Resource
-    private ProductPictureMapper productPictureMapper;
+    private final ProductPictureMapper productPictureMapper;
 
-    @Resource
-    private ProductCollectionMapper productCollectionMapper;
+    private final ProductCollectionMapper productCollectionMapper;
 
-    @Resource
+    private final ProductHistoryService historyService;
+
     private MinioUtil minioUtil;
 
-    @Resource
     private MinioConfig minioConfig;
 
     /**
@@ -150,6 +152,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         }else {
             productInfoDTO.setIsCollection(CollectionType.NOT_COLLECTION.getValue());
         }
+        historyService.addBrowsingHistory(StpUtil.getLoginIdAsLong(),id,type);
         return productInfoDTO;
     }
 
