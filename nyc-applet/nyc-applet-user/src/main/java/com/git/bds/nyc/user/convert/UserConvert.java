@@ -1,9 +1,13 @@
 package com.git.bds.nyc.user.convert;
 
+import com.git.bds.nyc.common.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.user.domain.User;
+import com.git.bds.nyc.user.domain.vo.ShoppingAddressVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * @author 成大事
@@ -15,7 +19,7 @@ public interface UserConvert {
 
 
     /**
-     * 给用户
+     * 用户
      *
      * @param openid     openid
      * @param screenName 昵称
@@ -26,4 +30,12 @@ public interface UserConvert {
     @Mapping(source = "screenName",target = "screenName")
     @Mapping(source = "avatar",target = "avatar")
     User toUser(String openid,String screenName,String avatar);
+
+ /**
+  * 购物狂
+  *
+  * @param list 列表
+  * @return {@link List}<{@link ShoppingAddressVO}>
+  */
+ List<ShoppingAddressVO> toShoppingVOList(List<ShoppingAddressDTO> list);
 }

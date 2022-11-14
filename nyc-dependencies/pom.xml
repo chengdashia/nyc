@@ -135,6 +135,12 @@
 
             <dependency>
                 <groupId>com.git.bds</groupId>
+                <artifactId>nyc-applet-common-biz</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-gen</artifactId>
                 <version>${revision}</version>
             </dependency>

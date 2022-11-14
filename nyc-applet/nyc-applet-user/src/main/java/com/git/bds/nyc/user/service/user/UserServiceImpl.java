@@ -6,18 +6,22 @@ import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.binarywang.wx.miniapp.util.WxMaConfigHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.git.bds.nyc.common.model.domain.ShoppingAddress;
+import com.git.bds.nyc.common.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.user.convert.UserConvert;
 import com.git.bds.nyc.user.mapper.user.UserMapper;
 import com.git.bds.nyc.user.domain.User;
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -69,6 +73,20 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
             StpUtil.login(user.getId());
         }
         return StpUtil.getTokenValue();
+    }
+
+    @Override
+    public List<ShoppingAddressDTO> getSelfShoppingAddress() {
+       return this.baseMapper.selectJoinList(ShoppingAddressDTO.class,
+               new MPJLambdaWrapper<>()
+                       .select(ShoppingAddress::getId,
+                               ShoppingAddress::getConsignee,
+                               ShoppingAddress::getPhone,
+                               ShoppingAddress::getLocation,
+                               ShoppingAddress::getDetailedAddress,
+                               ShoppingAddress::getIsDefault)
+                       .leftJoin(ShoppingAddress.class,ShoppingAddress::getUserId,User::getId)
+                       .eq(ShoppingAddress::getUserId,StpUtil.getLoginIdAsLong()));
     }
 
 }

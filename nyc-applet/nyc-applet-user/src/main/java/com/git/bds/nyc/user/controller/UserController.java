@@ -1,8 +1,12 @@
 package com.git.bds.nyc.user.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.git.bds.nyc.common.model.dto.ShoppingAddressDTO;
+import com.git.bds.nyc.result.R;
+import com.git.bds.nyc.user.convert.UserConvert;
 import com.git.bds.nyc.user.domain.User;
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.domain.vo.ShoppingAddressVO;
 import com.git.bds.nyc.user.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +16,8 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -43,6 +49,13 @@ public class UserController {
         User user = userService.getById(22);
         StpUtil.login(user.getId());
         return StpUtil.getTokenInfo();
+    }
+
+    @ApiOperation(value = "我的 获取收货地址",notes = "")
+    @PostMapping("/getSelfShoppingAddress")
+    public R<List<ShoppingAddressVO>> getSelfShoppingAddress(){
+        List<ShoppingAddressDTO> addressDTOList = userService.getSelfShoppingAddress();
+        return R.ok(UserConvert.INSTANCE.toShoppingVOList(addressDTOList));
     }
 
 
