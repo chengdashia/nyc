@@ -93,6 +93,12 @@
 
             <dependency>
                 <groupId>com.git.bds</groupId>
+                <artifactId>nyc-admin</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-applet</artifactId>
                 <version>${revision}</version>
             </dependency>

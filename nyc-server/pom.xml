@@ -59,6 +59,11 @@
             <artifactId>nyc-applet-demand-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-admin</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
