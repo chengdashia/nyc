@@ -20,7 +20,7 @@ import javax.validation.constraints.NotBlank;
  * @author 成大事
  * @since 2022/11/14 16:39
  */
-@Api(tags = "农户的 浏览记录和收藏记录")
+@Api(tags = "管理员")
 @Validated
 @RestController
 @RequestMapping("/farmerHistoryCollection")
