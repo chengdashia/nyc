@@ -47,6 +47,11 @@
             <artifactId>nyc-applet-common-biz</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-applet-user</artifactId>
+        </dependency>
+
     </dependencies>
 
 

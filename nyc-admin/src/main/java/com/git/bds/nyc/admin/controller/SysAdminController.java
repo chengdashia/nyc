@@ -32,7 +32,7 @@ public class SysAdminController {
     /**
      * 普通登录,使用手机号+密码
      * @param account  手机号
-     * @param pwd    密码
+     * @param password    密码
      * @return  R
      */
     @ApiOperation(value = "使用手机号+密码进行登录",notes = "13885052724")
@@ -47,6 +47,11 @@ public class SysAdminController {
     ){
         return adminService.loginByPwd(account,password);
     }
+
+
+
+
+
 
 
 }

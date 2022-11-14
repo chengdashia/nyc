@@ -128,4 +128,19 @@ public class SwaggerConfig {
                 .build();
     }
 
+    /** 公司接口管理 */
+    @Bean
+    public Docket api5() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                // 配置分组名
+                .groupName("后台管理端")
+                .apiInfo(info())
+                .enable(enable)
+                .select()
+                // 设置扫描包的地址 : com.**.controller
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.admin.controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
 }
