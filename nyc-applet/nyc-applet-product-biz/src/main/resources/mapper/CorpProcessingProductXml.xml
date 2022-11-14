@@ -6,7 +6,7 @@
     <resultMap id="BaseResultMap" type="com.git.bds.nyc.product.model.domain.CorpProcessingProduct">
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
-        <result column="contact_info" property="contactInfo" />
+        <result column="contact_info" property="contactInfoId" />
         <result column="product_species" property="productSpecies" />
         <result column="product_variety" property="productVariety" />
         <result column="product_weight" property="productWeight" />
@@ -24,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, contact_info, product_species, product_variety, product_weight, product_price, product_production_area, product_cover, product_remark, product_status, audit_status, create_time, update_time, market_time, delete_flag
+        id, user_id, contact_info_id, product_species, product_variety, product_weight, product_price, product_production_area, product_cover, product_remark, product_status, audit_status, create_time, update_time, market_time, delete_flag
     </sql>
 
 </mapper>

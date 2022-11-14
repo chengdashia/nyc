@@ -52,5 +52,8 @@ public class ProductInfoDTO {
     /** img列表 */
     private List<String> imgList;
 
+    /** 是否收藏  0:未收藏 1:已收藏 */
+    private Integer isCollection;
+
 
 }

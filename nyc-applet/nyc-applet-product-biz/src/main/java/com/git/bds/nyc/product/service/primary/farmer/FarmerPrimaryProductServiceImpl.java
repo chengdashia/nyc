@@ -3,19 +3,22 @@ package com.git.bds.nyc.product.service.primary.farmer;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.enums.ProductSellType;
+import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.convert.PrimaryProductConvert;
+import com.git.bds.nyc.product.mapper.ProductCollectionMapper;
 import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.primary.farmer.FarmerPrimaryProductMapper;
-import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
-import com.git.bds.nyc.product.model.domain.ProductPicture;
+import com.git.bds.nyc.product.model.domain.*;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
@@ -30,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -46,6 +50,9 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
     @Resource
     private ProductPictureMapper productPictureMapper;
+
+    @Resource
+    private ProductCollectionMapper productCollectionMapper;
 
     @Resource
     private MinioUtil minioUtil;
@@ -79,26 +86,70 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      * 其中unless是对出参进行判断，符合条件的不缓存，不符合的缓存。
      */
     @Override
-    @Cacheable(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id",unless = "#result == null ")
-    public ProductInfoDTO getProductInfo(Long id) {
-        List<ProductInfoDTO> productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<>()
-                .select(FarmerPrimaryProduct::getId,
-                        FarmerPrimaryProduct::getProductCover,
-                        FarmerPrimaryProduct::getProductRemark,
-                        FarmerPrimaryProduct::getCreateTime,
-                        FarmerPrimaryProduct::getProductProductionArea,
-                        FarmerPrimaryProduct::getProductSpecies,
-                        FarmerPrimaryProduct::getProductWeight,
-                        FarmerPrimaryProduct::getProductVariety,
-                        FarmerPrimaryProduct::getProductPrice,
-                        FarmerPrimaryProduct::getContactInfoId,
-                        FarmerPrimaryProduct::getProductStatus)
-                .select(ProductPicture::getPictureUrl)
-                .leftJoin(ProductPicture.class, ProductPicture::getProductId, FarmerPrimaryProduct::getId)
-                .eq(FarmerPrimaryProduct::getId, id));
+    @Cacheable(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id  + #type",unless = "#result == null ")
+    public ProductInfoDTO getProductInfo(Long id, int type) {
+        List<ProductInfoDTO> productInfoDTOList ;
+        if(Objects.equals(type, ProductType.FARMER_PRIMARY.getValue())){
+            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<>()
+                    .select(FarmerPrimaryProduct::getId,
+                            FarmerPrimaryProduct::getProductCover,
+                            FarmerPrimaryProduct::getProductRemark,
+                            FarmerPrimaryProduct::getCreateTime,
+                            FarmerPrimaryProduct::getProductProductionArea,
+                            FarmerPrimaryProduct::getProductSpecies,
+                            FarmerPrimaryProduct::getProductWeight,
+                            FarmerPrimaryProduct::getProductVariety,
+                            FarmerPrimaryProduct::getProductPrice,
+                            FarmerPrimaryProduct::getContactInfoId,
+                            FarmerPrimaryProduct::getProductStatus)
+                    .select(ProductPicture::getPictureUrl)
+                    .leftJoin(ProductPicture.class, ProductPicture::getProductId, FarmerPrimaryProduct::getId)
+                    .eq(FarmerPrimaryProduct::getId, id));
+        }else if(Objects.equals(type, ProductType.CORP_PRIMARY.getValue())){
+            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<>()
+                    .select(CorpPrimaryProduct::getId,
+                            CorpPrimaryProduct::getProductCover,
+                            CorpPrimaryProduct::getProductRemark,
+                            CorpPrimaryProduct::getCreateTime,
+                            CorpPrimaryProduct::getProductProductionArea,
+                            CorpPrimaryProduct::getProductSpecies,
+                            CorpPrimaryProduct::getProductWeight,
+                            CorpPrimaryProduct::getProductVariety,
+                            CorpPrimaryProduct::getProductPrice,
+                            CorpPrimaryProduct::getContactInfoId,
+                            CorpPrimaryProduct::getProductStatus)
+                    .select(ProductPicture::getPictureUrl)
+                    .leftJoin(ProductPicture.class, ProductPicture::getProductId, CorpPrimaryProduct::getId)
+                    .eq(CorpPrimaryProduct::getId, id));
+        }else {
+            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<>()
+                    .select(CorpProcessingProduct::getId,
+                            CorpProcessingProduct::getProductCover,
+                            CorpProcessingProduct::getProductRemark,
+                            CorpProcessingProduct::getCreateTime,
+                            CorpProcessingProduct::getProductProductionArea,
+                            CorpProcessingProduct::getProductSpecies,
+                            CorpProcessingProduct::getProductWeight,
+                            CorpProcessingProduct::getProductVariety,
+                            CorpProcessingProduct::getProductPrice,
+                            CorpProcessingProduct::getContactInfoId,
+                            CorpProcessingProduct::getProductStatus)
+                    .select(ProductPicture::getPictureUrl)
+                    .leftJoin(ProductPicture.class, ProductPicture::getProductId, CorpProcessingProduct::getId)
+                    .eq(CorpProcessingProduct::getId, id));
+        }
+        ProductCollection one = productCollectionMapper.selectOne(new QueryWrapper<ProductCollection>()
+                .select(ProductCollection.PRODUCT_ID)
+                .eq(ProductCollection.PRODUCT_ID, id)
+                .eq(ProductCollection.PRODUCT_TYPE, type));
         List<String> pictureList = productInfoDTOList.stream().map(ProductInfoDTO::getPictureUrl).collect(Collectors.toList());
         ProductInfoDTO productInfoDTO = productInfoDTOList.get(0);
         productInfoDTO.setImgList(pictureList);
+        if (one == null){
+            productInfoDTO.setIsCollection(CollectionType.IS_COLLECTION.getValue());
+        }else {
+            productInfoDTO.setIsCollection(CollectionType.NOT_COLLECTION.getValue());
+        }
         return productInfoDTO;
     }
 

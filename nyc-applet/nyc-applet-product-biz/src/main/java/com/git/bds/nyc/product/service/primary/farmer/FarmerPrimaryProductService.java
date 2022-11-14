@@ -33,10 +33,11 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
     /**
      * 获取产品信息
      *
-     * @param id 商品id
+     * @param id   商品id
+     * @param type
      * @return {@link FarmerPrimaryProduct}
      */
-    ProductInfoDTO getProductInfo(Long id);
+    ProductInfoDTO getProductInfo(Long id, int type);
 
 
     /**
@@ -73,7 +74,19 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
      */
     Boolean modifyProductInfo(PrimaryProductModifyDTO productDTO);
 
+    /**
+     * 按页面销售产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
+     */
     PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam);
 
+    /**
+     * 按页面获取预售产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
+     */
     PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam);
 }

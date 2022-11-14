@@ -46,11 +46,15 @@ public class PrimaryProductInfoVO implements Serializable {
     @ApiModelProperty("状态（0：在售  1：预售）")
     private Integer productStatus;
 
-
     @ApiModelProperty("商品的发布时间")
     private LocalDateTime createTime;
 
     @ApiModelProperty("商品图片列表")
     private List<String> imgList;
+
+    @ApiModelProperty("是否收藏  0:未收藏 1:已收藏")
+    private Integer isCollection;
+
+
 
 }

@@ -10,6 +10,7 @@ import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductServic
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,12 +46,16 @@ public class PrimaryProductController {
     }
 
     @ApiOperation("商品的详细数据集")
-    @PostMapping("/getProductInfo/{id}")
-    @ApiImplicitParam(name = "id", value = "商品id", required = true, dataTypeClass = Long.class)
+    @PostMapping("/getProductInfo/{id}/{type}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "path", example = "112345646545", required = true),
+            @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)
+    })
     public R<PrimaryProductInfoVO> getProductInfo(
-            @PathVariable("id") Long id
-    ){
-        ProductInfoDTO product = productService.getProductInfo(id);
+            @PathVariable("id") Long id,
+            @PathVariable("type") int type
+            ){
+        ProductInfoDTO product = productService.getProductInfo(id,type);
         return R.ok(ProductCovert.INSTANCE.toPrimaryProductInfoVO(product));
     }
 

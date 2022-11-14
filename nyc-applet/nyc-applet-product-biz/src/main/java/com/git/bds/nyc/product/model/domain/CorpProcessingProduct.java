@@ -38,8 +38,8 @@ public class CorpProcessingProduct extends Model<CorpProcessingProduct> {
     private Long userId;
 
     @ApiModelProperty("联系信息(即发布人的联系方式，发货地址等)")
-    @TableField("contact_info")
-    private Long contactInfo;
+    @TableField("contact_info_id")
+    private Long contactInfoId;
 
     @ApiModelProperty("种类")
     @TableField("product_species")
@@ -98,7 +98,7 @@ public class CorpProcessingProduct extends Model<CorpProcessingProduct> {
 
     public static final String USER_ID = "user_id";
 
-    public static final String CONTACT_INFO = "contact_info";
+    public static final String CONTACT_INFO = "contact_info_id";
 
     public static final String PRODUCT_SPECIES = "product_species";
 
