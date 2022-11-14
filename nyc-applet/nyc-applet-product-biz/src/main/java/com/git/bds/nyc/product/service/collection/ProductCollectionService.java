@@ -33,5 +33,5 @@ public interface ProductCollectionService extends MPJBaseService<ProductCollecti
      * @param type 类型
      * @return {@link Boolean}
      */
-    Boolean productAddCollection(Long id, int type);
+    Boolean addProductCollection(Long id, int type);
 }

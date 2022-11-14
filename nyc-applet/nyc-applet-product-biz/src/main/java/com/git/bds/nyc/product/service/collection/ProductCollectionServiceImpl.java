@@ -92,7 +92,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
      * @return {@link Boolean}
      */
     @Override
-    public Boolean productAddCollection(Long id, int type) {
+    public Boolean addProductCollection(Long id, int type) {
         ProductCollection productCollection = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCollection>()
                 .select()
                 .eq(ProductCollection::getProductId, id)

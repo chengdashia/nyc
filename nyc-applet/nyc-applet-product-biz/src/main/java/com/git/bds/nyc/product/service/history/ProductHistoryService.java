@@ -1,7 +1,10 @@
 package com.git.bds.nyc.product.service.history;
 
 
+import com.git.bds.nyc.page.PageParam;
+import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.ProductHistory;
+import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
 import com.github.yulichang.base.MPJBaseService;
 
 /**
@@ -14,4 +17,12 @@ import com.github.yulichang.base.MPJBaseService;
  */
 public interface ProductHistoryService extends MPJBaseService<ProductHistory> {
 
+    /**
+     * 按页面获取产品历史记录
+     *
+     * @param pageParam 页面参数
+     * @param type      类型
+     * @return {@link PageResult}<{@link ProductCollectionDTO}>
+     */
+    PageResult<ProductCollectionDTO> getProductHistoryByPage(PageParam pageParam, int type);
 }
