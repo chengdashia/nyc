@@ -10,9 +10,9 @@ import com.git.bds.nyc.common.model.domain.ShoppingAddress;
 import com.git.bds.nyc.common.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.user.convert.UserConvert;
-import com.git.bds.nyc.user.mapper.user.UserMapper;
 import com.git.bds.nyc.user.domain.User;
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.mapper.user.UserMapper;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.SneakyThrows;
@@ -75,6 +75,11 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
         return StpUtil.getTokenValue();
     }
 
+    /**
+     * 获取自助购物地址
+     *
+     * @return {@link List}<{@link ShoppingAddressDTO}>
+     */
     @Override
     public List<ShoppingAddressDTO> getSelfShoppingAddress() {
        return this.baseMapper.selectJoinList(ShoppingAddressDTO.class,
@@ -88,5 +93,6 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
                        .leftJoin(ShoppingAddress.class,ShoppingAddress::getUserId,User::getId)
                        .eq(ShoppingAddress::getUserId,StpUtil.getLoginIdAsLong()));
     }
+
 
 }

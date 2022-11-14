@@ -36,4 +36,6 @@ public interface UserService extends MPJBaseService<User> {
      * @return {@link List}<{@link ShoppingAddress}>
      */
     List<ShoppingAddressDTO> getSelfShoppingAddress();
+
+
 }

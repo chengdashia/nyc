@@ -30,7 +30,7 @@ public class MybatisPlusGeneration {
 
         //表名集合
         List<String> tables = new ArrayList<>();
-        tables.add("shopping_address");
+        tables.add("sys_admin");
 
         FastAutoGenerator.create(url, username, password)
                 //全局配置
