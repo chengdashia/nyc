@@ -37,17 +37,10 @@ public class UserController {
         return userService.login(userInfoDTO);
     }
 
-    @ApiOperation("测试")
-    @GetMapping("/test")
-    public String test(){
-        return "hello world";
-    }
-
-
     @ApiOperation("测试  token")
     @GetMapping("/loginTest")
     public Object loginTest(){
-        User user = userService.getById(3);
+        User user = userService.getById(22);
         StpUtil.login(user.getId());
         return StpUtil.getTokenInfo();
     }
