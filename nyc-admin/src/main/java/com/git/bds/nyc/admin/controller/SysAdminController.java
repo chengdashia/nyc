@@ -35,11 +35,11 @@ public class SysAdminController {
      * @param pwd    密码
      * @return  R
      */
-    @ApiOperation(value = "使用手机号+密码 或者 邮箱+密码 进行登录",notes = "13885052724")
+    @ApiOperation(value = "使用手机号+密码进行登录",notes = "13885052724")
     @PostMapping("/loginByPassword")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query",name="account",dataTypeClass = String.class,required=true,value="用户的手机号",example = "17337995232"),
-            @ApiImplicitParam(paramType="query",name="pwd",dataTypeClass = String.class,required=true,value="用户的密码",example = "嘿嘿")
+            @ApiImplicitParam(paramType="query",name="account",dataTypeClass = String.class,required=true,value="手机号",example = "13885052724"),
+            @ApiImplicitParam(paramType="query",name="pwd",dataTypeClass = String.class,required=true,value="密码",example = "zjysb")
     })
     public String loginByPassword(
             @RequestParam("account") @Phone String account,
