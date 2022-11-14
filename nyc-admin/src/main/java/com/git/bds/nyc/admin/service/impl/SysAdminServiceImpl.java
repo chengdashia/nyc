@@ -27,17 +27,17 @@ public class SysAdminServiceImpl extends MPJBaseServiceImpl<SysAdminMapper, SysA
      * 通过密码登录
      *
      * @param account 账户
-     * @param pwd     密码
+     * @param password     密码
      * @return {@link String}
      */
     @Override
-    public String loginByPwd(String account, String pwd) {
+    public String loginByPwd(String account, String password) {
         SysAdmin admin = this.baseMapper.selectOne(new QueryWrapper<SysAdmin>()
                 .select(SysAdmin.ID, SysAdmin.PASSWORD)
                 .eq(SysAdmin.ACCOUNT, account));
         admin = Optional.ofNullable(admin)
                 .orElseThrow(() -> new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage()));
-        if(admin.getPassword().equals(pwd)){
+        if(admin.getPassword().equals(password)){
             StpUtil.login(admin.getId());
             return StpUtil.getTokenValue();
         }else {

@@ -39,13 +39,13 @@ public class SysAdminController {
     @PostMapping("/loginByPassword")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query",name="account",dataTypeClass = String.class,required=true,value="手机号",example = "13885052724"),
-            @ApiImplicitParam(paramType="query",name="pwd",dataTypeClass = String.class,required=true,value="密码",example = "zjysb")
+            @ApiImplicitParam(paramType="query",name="password",dataTypeClass = String.class,required=true,value="密码",example = "zjysb")
     })
     public String loginByPassword(
             @RequestParam("account") @Phone String account,
-            @RequestParam("userPwd") @NotBlank(message = "密码不能为空") String pwd
+            @RequestParam("password") @NotBlank(message = "密码不能为空") String password
     ){
-        return adminService.loginByPwd(account,pwd);
+        return adminService.loginByPwd(account,password);
     }
 
 
