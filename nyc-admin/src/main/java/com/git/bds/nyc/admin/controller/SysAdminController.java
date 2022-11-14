@@ -23,7 +23,7 @@ import javax.validation.constraints.NotBlank;
 @Api(tags = "管理员")
 @Validated
 @RestController
-@RequestMapping("/farmerHistoryCollection")
+@RequestMapping("/admin")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class SysAdminController {
 
