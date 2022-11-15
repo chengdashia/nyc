@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.enums.ProductSellType;
 import com.git.bds.nyc.enums.ProductType;
+import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
@@ -16,7 +17,6 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.convert.PrimaryProductConvert;
 import com.git.bds.nyc.product.mapper.ProductCollectionMapper;
-import com.git.bds.nyc.product.mapper.ProductHistoryMapper;
 import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.primary.farmer.FarmerPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.*;
@@ -25,6 +25,7 @@ import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.service.history.ProductHistoryService;
+import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -140,6 +142,8 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                     .leftJoin(ProductPicture.class, ProductPicture::getProductId, CorpProcessingProduct::getId)
                     .eq(CorpProcessingProduct::getId, id));
         }
+        productInfoDTOList = Optional.ofNullable(productInfoDTOList)
+                .orElseThrow(() -> new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage()));
         ProductCollection one = productCollectionMapper.selectOne(new QueryWrapper<ProductCollection>()
                 .select(ProductCollection.PRODUCT_ID)
                 .eq(ProductCollection.PRODUCT_ID, id)
@@ -147,7 +151,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         List<String> pictureList = productInfoDTOList.stream().map(ProductInfoDTO::getPictureUrl).collect(Collectors.toList());
         ProductInfoDTO productInfoDTO = productInfoDTOList.get(0);
         productInfoDTO.setImgList(pictureList);
-        if (one == null){
+        if (one == null || StpUtil.isLogin()){
             productInfoDTO.setIsCollection(CollectionType.IS_COLLECTION.getValue());
         }else {
             productInfoDTO.setIsCollection(CollectionType.NOT_COLLECTION.getValue());
