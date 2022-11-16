@@ -8,7 +8,7 @@ import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.product.mapper.ProductCollectionMapper;
+import com.git.bds.nyc.product.mapper.mp.ProductCollectionMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;

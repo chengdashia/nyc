@@ -7,7 +7,7 @@ import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.controller.vo.PrimaryProductInfoVO;
 import com.git.bds.nyc.product.controller.vo.PrimaryProductVO;
 import com.git.bds.nyc.product.convert.product.ProductCovert;
-import com.git.bds.nyc.product.mapper.es.ProductEsMapper;
+import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.model.es.ProductEs;
@@ -40,7 +40,7 @@ public class PrimaryProductController {
 
     private final FarmerPrimaryProductService productService;
     
-    private ProductEsMapper productEsMapper;
+    private final ProductEsMapper productEsMapper;
 
 
     @ApiOperation("首页商品数据")
@@ -57,13 +57,24 @@ public class PrimaryProductController {
     public R<PageResult<ProductEs>> homePageProductsByPageByEs(
             @Valid PageParam pageParam
     ){
+        log.info(""+pageParam);
         LambdaEsQueryWrapper<ProductEs> wrapper = new LambdaEsQueryWrapper<>();
         wrapper.matchAllQuery();
         wrapper.orderByDesc(ProductEs::getCreateTime);
-        PageInfo<ProductEs> productEsPageInfo = productEsMapper.pageQuery(wrapper, pageParam.getPageNo().intValue(), pageParam.getPageSize().intValue());
+        PageInfo<ProductEs> productEsPageInfo = productEsMapper.pageQuery(wrapper, 1, 10);
         return R.ok(new PageResult<>(productEsPageInfo.getList(),(long) productEsPageInfo.getPageSize()));
     }
 
+    @GetMapping("/select2")
+    public Object test2(
+            @RequestParam("name") String name
+    ){
+        LambdaEsQueryWrapper<ProductEs> wrapper = new LambdaEsQueryWrapper<>();
+        wrapper.matchPhrasePrefixQuery(ProductEs::getProductVariety,name);
+        PageInfo<ProductEs> productEsPageInfo = productEsMapper.pageQuery(wrapper, 1, 10);
+        log.info(productEsPageInfo+"");
+        return true;
+    }
 
     @ApiOperation("商品的详细数据集")
     @PostMapping("/getProductInfo/{id}/{type}")

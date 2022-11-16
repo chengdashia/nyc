@@ -4,7 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.demand.convert.DemandCovert;
-import com.git.bds.nyc.demand.mapper.DemandMapper;
+import com.git.bds.nyc.demand.mapper.mp.DemandMapper;
 import com.git.bds.nyc.demand.model.domain.Demand;
 import com.git.bds.nyc.demand.model.dto.DemandDTO;
 import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;

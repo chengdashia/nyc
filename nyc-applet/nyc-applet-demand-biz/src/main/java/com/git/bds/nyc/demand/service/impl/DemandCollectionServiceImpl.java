@@ -1,6 +1,6 @@
 package com.git.bds.nyc.demand.service.impl;
 
-import com.git.bds.nyc.demand.mapper.DemandCollectionMapper;
+import com.git.bds.nyc.demand.mapper.mp.DemandCollectionMapper;
 import com.git.bds.nyc.demand.model.domain.DemandCollection;
 import com.git.bds.nyc.demand.service.DemandCollectionService;
 import com.github.yulichang.base.MPJBaseServiceImpl;

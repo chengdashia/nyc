@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.product.mapper.ProductHistoryMapper;
+import com.git.bds.nyc.product.mapper.mp.ProductHistoryMapper;
 import com.git.bds.nyc.product.model.domain.*;
 import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;

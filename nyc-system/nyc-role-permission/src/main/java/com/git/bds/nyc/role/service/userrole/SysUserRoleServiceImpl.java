@@ -1,8 +1,8 @@
 package com.git.bds.nyc.role.service.userrole;
 
 import com.git.bds.nyc.constant.Constants;
-import com.git.bds.nyc.role.mapper.SysRoleMapper;
-import com.git.bds.nyc.role.mapper.SysUserRoleMapper;
+import com.git.bds.nyc.role.mapper.mp.SysRoleMapper;
+import com.git.bds.nyc.role.mapper.mp.SysUserRoleMapper;
 import com.git.bds.nyc.role.domain.SysRole;
 import com.git.bds.nyc.role.domain.SysUserRole;
 import com.git.bds.nyc.role.domain.dto.RoleDTO;

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.git.bds.nyc.**.mapper")
+@MapperScan("com.git.bds.nyc.**.mapper.mp")
 public class MyBatisPlusConfig {
 
     /**注册乐观锁*/

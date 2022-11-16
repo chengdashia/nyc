@@ -108,6 +108,24 @@ wx:
 easy-es:
   enable: true #默认为true,若为false则认为不启用本框架
   address : 82.157.157.133:9200 # es的连接地址,必须含端口 若为集群,则可以用逗号隔开 例如:127.0.0.1:9200,127.0.0.2:9200
+  banner: false # 默认为true 打印banner 若您不期望打印banner,可配置为false
+  # 拓展配置
+  keep-alive-millis: 18000 # 心跳策略时间 单位:ms
+  connectTimeout: 5000 # 连接超时时间 单位:ms
+  socketTimeout: 5000 # 通信超时时间 单位:ms
+  requestTimeout: 5000 # 请求超时时间 单位:ms
+  connectionRequestTimeout: 5000 # 连接请求超时时间 单位:ms
+  maxConnTotal: 100 # 最大连接数 单位:个
+  maxConnPerRoute: 100 # 最大连接路由数 单位:个
+  # 全局配置
+  db-config:
+    map-underscore-to-camel-case: false # 是否开启下划线转驼峰 默认为false
+    table-prefix: daily_ # 索引前缀,可用于区分环境  默认为空 用法和MP一样
+    id-type: customize # id生成策略 customize为自定义,id值由用户生成,比如取MySQL中的数据id,如缺省此项配置,则id默认策略为es自动生成
+    field-strategy: not_empty # 字段更新策略 默认为not_null
+    enable-track-total-hits: true # 默认开启,查询若指定了size超过1w条时也会自动开启,开启后查询所有匹配数据,若不开启,会导致无法获取数据总条数,其它功能不受影响.
+    refresh-policy: immediate # 数据刷新策略,默认为不刷新
+    enable-must2-filter: false # 是否全局开启must查询类型转换为filter查询类型 默认为false不转换
 
 knife4j:
   # 开启增强配置

@@ -1,7 +1,7 @@
 package com.git.bds.nyc.common.service.address;
 
 
-import com.git.bds.nyc.common.mapper.ShoppingAddressMapper;
+import com.git.bds.nyc.common.mapper.mp.ShoppingAddressMapper;
 import com.git.bds.nyc.common.model.domain.ShoppingAddress;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;

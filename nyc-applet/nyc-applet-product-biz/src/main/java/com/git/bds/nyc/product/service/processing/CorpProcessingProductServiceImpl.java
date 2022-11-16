@@ -1,7 +1,7 @@
 package com.git.bds.nyc.product.service.processing;
 
 
-import com.git.bds.nyc.product.mapper.CorpProcessingProductMapper;
+import com.git.bds.nyc.product.mapper.mp.CorpProcessingProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
