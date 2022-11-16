@@ -1,5 +1,6 @@
 package com.git.bds.nyc.product.service.primary.farmer;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -15,7 +16,7 @@ import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.product.convert.PrimaryProductConvert;
+import com.git.bds.nyc.product.convert.ProductConvert;
 import com.git.bds.nyc.product.mapper.ProductCollectionMapper;
 import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.primary.farmer.FarmerPrimaryProductMapper;
@@ -136,7 +137,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                             CorpProcessingProduct::getProductWeight,
                             CorpProcessingProduct::getProductVariety,
                             CorpProcessingProduct::getProductPrice,
-                            CorpProcessingProduct::getContactInfoId,
+                            CorpProcessingProduct::getContactInfoId, 
                             CorpProcessingProduct::getProductStatus)
                     .select(ProductPicture::getPictureUrl)
                     .leftJoin(ProductPicture.class, ProductPicture::getProductId, CorpProcessingProduct::getId)
@@ -144,6 +145,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         }
         productInfoDTOList = Optional.ofNullable(productInfoDTOList)
                 .orElseThrow(() -> new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage()));
+
         ProductCollection one = productCollectionMapper.selectOne(new QueryWrapper<ProductCollection>()
                 .select(ProductCollection.PRODUCT_ID)
                 .eq(ProductCollection.PRODUCT_ID, id)
@@ -151,10 +153,16 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         List<String> pictureList = productInfoDTOList.stream().map(ProductInfoDTO::getPictureUrl).collect(Collectors.toList());
         ProductInfoDTO productInfoDTO = productInfoDTOList.get(0);
         productInfoDTO.setImgList(pictureList);
-        if (one == null || StpUtil.isLogin()){
-            productInfoDTO.setIsCollection(CollectionType.IS_COLLECTION.getValue());
-        }else {
+        boolean isLogin = true;
+        try {
+           isLogin =  StpUtil.isLogin();
+        }catch (NotLoginException e){
+            isLogin = false;
+        }
+        if (one != null || isLogin){
             productInfoDTO.setIsCollection(CollectionType.NOT_COLLECTION.getValue());
+        }else {
+            productInfoDTO.setIsCollection(CollectionType.IS_COLLECTION.getValue());
         }
         historyService.addBrowsingHistory(StpUtil.getLoginIdAsLong(),id,type);
         return productInfoDTO;
@@ -174,7 +182,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
         String coverImg = productImgList.get(0);
-        FarmerPrimaryProduct product = PrimaryProductConvert.INSTANCE.toFarmerPrimaryProduct(productId,id, coverImg,productDTO);
+        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProduct(productId,id, coverImg,productDTO);
         this.baseMapper.insert(product);
 
         for (String img : productImgList) {
@@ -198,7 +206,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
         String coverImg = productImgList.get(0);
-        FarmerPrimaryProduct product = PrimaryProductConvert.INSTANCE.toFarmerPrimaryProduct(productId,id, coverImg,productDTO);
+        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProduct(productId,id, coverImg,productDTO);
         this.baseMapper.insert(product);
 
         for (String img : productImgList) {
@@ -245,7 +253,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         Long productId = productDTO.getId();
         //封面
         String coverImg = productImgList.get(0);
-        FarmerPrimaryProduct product = PrimaryProductConvert.INSTANCE.toFarmerPrimaryProductForUpdate(id,coverImg,productDTO);
+        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProductForUpdate(id,coverImg,productDTO);
         //更新商品的信息
         this.baseMapper.updateById(product);
         //商品原始的图片的列表

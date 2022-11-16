@@ -57,7 +57,7 @@
         <wxjava.version>4.4.4.B</wxjava.version>
 
         <!--es-->
-        <easy-es.version>1.0.2</easy-es.version>
+        <easy-es.version>1.0.3</easy-es.version>
 
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
 

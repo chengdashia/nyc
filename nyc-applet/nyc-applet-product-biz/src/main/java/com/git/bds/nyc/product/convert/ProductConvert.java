@@ -14,9 +14,9 @@ import org.mapstruct.factory.Mappers;
  * @since 2022/9/14 21:28
  */
 @Mapper
-public interface PrimaryProductConvert {
+public interface ProductConvert {
 
-    PrimaryProductConvert INSTANCE = Mappers.getMapper(PrimaryProductConvert.class);
+    ProductConvert INSTANCE = Mappers.getMapper(ProductConvert.class);
 
 
     /**

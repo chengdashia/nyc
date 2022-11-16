@@ -1,9 +1,10 @@
 package com.git.bds.nyc;
 
+import cn.easyes.starter.register.EsMapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
+@EsMapperScan("com.git.bds.nyc.**.mapper.es")
 @SpringBootApplication
 public class NycServerApplication {
 

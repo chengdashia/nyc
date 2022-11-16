@@ -11,7 +11,7 @@ import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.product.convert.PrimaryProductConvert;
+import com.git.bds.nyc.product.convert.ProductConvert;
 import com.git.bds.nyc.product.mapper.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.primary.corp.CorpPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
@@ -64,7 +64,7 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
         List<String> productImgList = productDTO.getProductImgList();
         //封面图
         String coverImg = productImgList.get(0);
-        CorpPrimaryProduct product = PrimaryProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
+        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
         this.baseMapper.insert(product);
 
         for (String img : productImgList) {
@@ -88,7 +88,7 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
         String coverImg = productImgList.get(0);
-        CorpPrimaryProduct product = PrimaryProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
+        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
         this.baseMapper.insert(product);
 
         for (String img : productImgList) {
@@ -117,7 +117,7 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
         Long productId = productDTO.getId();
         //封面
         String coverImg = productImgList.get(0);
-        CorpPrimaryProduct product = PrimaryProductConvert.INSTANCE.toCorpPrimaryProductForUpdate(id,coverImg,productDTO);
+        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProductForUpdate(id,coverImg,productDTO);
         //更新商品的信息
         this.baseMapper.updateById(product);
         //商品原始的图片的列表
