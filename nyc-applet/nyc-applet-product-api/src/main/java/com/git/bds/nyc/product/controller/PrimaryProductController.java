@@ -9,7 +9,7 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.controller.vo.PrimaryProductInfoVO;
 import com.git.bds.nyc.product.controller.vo.PrimaryProductVO;
-import com.git.bds.nyc.product.convert.product.ProductCovert;
+import com.git.bds.nyc.product.convert.product.ProductConvert;
 import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
@@ -59,7 +59,7 @@ public class PrimaryProductController {
             @Valid PageParam pageParam
     ){
         List<FarmerPrimaryProduct> productList = productService.homePageProductsByPage(pageParam);
-        return R.ok(ProductCovert.INSTANCE.toPrimaryProductVO(productList));
+        return R.ok(ProductConvert.INSTANCE.toPrimaryProductVO(productList));
     }
 
     @ApiOperation("首页商品数据 通过Es获取")
@@ -112,7 +112,7 @@ public class PrimaryProductController {
         }else {
             product.setIsCollection(CollectionType.IS_COLLECTION.getValue());
         }
-        return R.ok(ProductCovert.INSTANCE.toPrimaryProductInfoVO(product));
+        return R.ok(ProductConvert.INSTANCE.toPrimaryProductInfoVO(product));
     }
 
 
