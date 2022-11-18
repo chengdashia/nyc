@@ -1,7 +1,10 @@
 package com.git.bds.nyc.product.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.easyes.core.biz.PageInfo;
 import cn.easyes.core.conditions.LambdaEsQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.controller.vo.PrimaryProductInfoVO;
@@ -9,8 +12,11 @@ import com.git.bds.nyc.product.controller.vo.PrimaryProductVO;
 import com.git.bds.nyc.product.convert.product.ProductCovert;
 import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
+import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.model.es.ProductEs;
+import com.git.bds.nyc.product.service.collection.ProductCollectionService;
+import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
@@ -39,6 +45,10 @@ import java.util.List;
 public class PrimaryProductController {
 
     private final FarmerPrimaryProductService productService;
+
+    private final ProductCollectionService productCollectionService;
+
+    private final ProductHistoryService productHistoryService;
     
     private final ProductEsMapper productEsMapper;
 
@@ -87,6 +97,21 @@ public class PrimaryProductController {
             @PathVariable("type") int type
             ){
         ProductInfoDTO product = productService.getProductInfo(id,type);
+        ProductCollection one;
+        if(StpUtil.isLogin()){
+            one = productCollectionService.getOne(new QueryWrapper<ProductCollection>()
+                    .select(ProductCollection.PRODUCT_ID)
+                    .eq(ProductCollection.PRODUCT_ID, id)
+                    .eq(ProductCollection.PRODUCT_TYPE, type));
+            if (one != null){
+                product.setIsCollection(CollectionType.NOT_COLLECTION.getValue());
+            }else {
+                product.setIsCollection(CollectionType.IS_COLLECTION.getValue());
+            }
+            productHistoryService.addBrowsingHistory(StpUtil.getLoginIdAsLong(),id,type);
+        }else {
+            product.setIsCollection(CollectionType.IS_COLLECTION.getValue());
+        }
         return R.ok(ProductCovert.INSTANCE.toPrimaryProductInfoVO(product));
     }
 

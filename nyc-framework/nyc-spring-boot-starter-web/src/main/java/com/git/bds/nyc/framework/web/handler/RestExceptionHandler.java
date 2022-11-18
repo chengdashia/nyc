@@ -1,6 +1,6 @@
 package com.git.bds.nyc.framework.web.handler;
 
-import cn.dev33.satoken.exception.DisableLoginException;
+
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.NotPermissionException;
 import cn.dev33.satoken.exception.NotRoleException;
@@ -169,13 +169,7 @@ public class RestExceptionHandler {
         return R.error(ResultCode.NOT_PERMISSION.getCode(), ResultCode.NOT_PERMISSION.getMessage());
     }
 
-    /**
-     * 账号被封禁
-     */
-    @ExceptionHandler(value = DisableLoginException.class)
-    public R<String> disableLoginExceptionHandler(DisableLoginException e){
-        return R.error(ResultCode.DIS_LOGIN.getCode(), ResultCode.DIS_LOGIN.getMessage());
-    }
+
 
 
 

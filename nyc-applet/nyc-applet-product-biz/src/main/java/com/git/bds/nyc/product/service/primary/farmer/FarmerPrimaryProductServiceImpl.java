@@ -3,10 +3,8 @@ package com.git.bds.nyc.product.service.primary.farmer;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.enums.ProductSellType;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
@@ -19,7 +17,10 @@ import com.git.bds.nyc.product.convert.ProductConvert;
 import com.git.bds.nyc.product.mapper.mp.ProductCollectionMapper;
 import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapper;
-import com.git.bds.nyc.product.model.domain.*;
+import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
+import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
+import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
+import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
@@ -144,19 +145,9 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         if(productInfoDTOList.isEmpty()){
            throw new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage());
         }
-        ProductCollection one = productCollectionMapper.selectOne(new QueryWrapper<ProductCollection>()
-                .select(ProductCollection.PRODUCT_ID)
-                .eq(ProductCollection.PRODUCT_ID, id)
-                .eq(ProductCollection.PRODUCT_TYPE, type));
         List<String> pictureList = productInfoDTOList.stream().map(ProductInfoDTO::getPictureUrl).collect(Collectors.toList());
         ProductInfoDTO productInfoDTO = productInfoDTOList.get(0);
         productInfoDTO.setImgList(pictureList);
-        if (one != null){
-            productInfoDTO.setIsCollection(CollectionType.NOT_COLLECTION.getValue());
-        }else {
-            productInfoDTO.setIsCollection(CollectionType.IS_COLLECTION.getValue());
-        }
-        historyService.addBrowsingHistory(StpUtil.getLoginIdAsLong(),id,type);
         return productInfoDTO;
     }
 
