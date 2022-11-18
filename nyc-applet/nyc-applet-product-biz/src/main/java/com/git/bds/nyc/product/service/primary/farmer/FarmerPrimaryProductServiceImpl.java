@@ -1,6 +1,5 @@
 package com.git.bds.nyc.product.service.primary.farmer;
 
-import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -39,7 +38,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -61,9 +59,9 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
     private final ProductHistoryService historyService;
 
-    private MinioUtil minioUtil;
+    private final MinioUtil minioUtil;
 
-    private MinioConfig minioConfig;
+    private final MinioConfig minioConfig;
 
     /**
      * 主页产品按页面
@@ -143,9 +141,9 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                     .leftJoin(ProductPicture.class, ProductPicture::getProductId, CorpProcessingProduct::getId)
                     .eq(CorpProcessingProduct::getId, id));
         }
-        productInfoDTOList = Optional.ofNullable(productInfoDTOList)
-                .orElseThrow(() -> new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage()));
-
+        if(productInfoDTOList.isEmpty()){
+           throw new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage());
+        }
         ProductCollection one = productCollectionMapper.selectOne(new QueryWrapper<ProductCollection>()
                 .select(ProductCollection.PRODUCT_ID)
                 .eq(ProductCollection.PRODUCT_ID, id)
@@ -153,13 +151,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         List<String> pictureList = productInfoDTOList.stream().map(ProductInfoDTO::getPictureUrl).collect(Collectors.toList());
         ProductInfoDTO productInfoDTO = productInfoDTOList.get(0);
         productInfoDTO.setImgList(pictureList);
-        boolean isLogin = true;
-        try {
-           isLogin =  StpUtil.isLogin();
-        }catch (NotLoginException e){
-            isLogin = false;
-        }
-        if (one != null || isLogin){
+        if (one != null){
             productInfoDTO.setIsCollection(CollectionType.NOT_COLLECTION.getValue());
         }else {
             productInfoDTO.setIsCollection(CollectionType.IS_COLLECTION.getValue());
