@@ -1,5 +1,6 @@
 package com.git.bds.nyc.framework.jackson.config;
 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -59,7 +60,14 @@ public class LocalDateTimeSerializerConfig {
             builder.serializerByType(LocalDateTime.class, localDateTimeSerializer());
             //从json对象日期字符串反序列化为日期对象
             builder.deserializerByType(LocalDateTime.class, localDateTimeDeserializer());
+            //Jackson全局转化long类型为String，解决jackson序列化时long类型缺失精度问题
+            builder.serializerByType(Long.class, ToStringSerializer.instance);
+            builder.serializerByType(Long.TYPE, ToStringSerializer.instance);
         };
     }
+
+
+
+
 }
 
