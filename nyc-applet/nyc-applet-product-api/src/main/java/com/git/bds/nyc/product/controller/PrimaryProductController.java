@@ -71,19 +71,25 @@ public class PrimaryProductController {
         LambdaEsQueryWrapper<ProductEs> wrapper = new LambdaEsQueryWrapper<>();
         wrapper.matchAllQuery();
         wrapper.orderByDesc(ProductEs::getCreateTime);
-        PageInfo<ProductEs> productEsPageInfo = productEsMapper.pageQuery(wrapper, 1, 10);
+        PageInfo<ProductEs> productEsPageInfo = productEsMapper.pageQuery(wrapper, pageParam.getPageNo().intValue(), pageParam.getPageSize().intValue());
         return R.ok(new PageResult<>(productEsPageInfo.getList(),(long) productEsPageInfo.getPageSize()));
     }
 
-    @GetMapping("/select2")
-    public Object test2(
-            @RequestParam("name") String name
+    /**
+     * 搜索
+     *
+     * @param pageParam 页面参数
+     * @param key       钥匙
+     * @return {@link R}<{@link PageInfo}<{@link ProductEs}>>
+     */
+    @GetMapping("/search/{key}")
+    public R<PageInfo<ProductEs>> search(
+            @Valid PageParam pageParam,
+            @PathVariable("key") String key
     ){
         LambdaEsQueryWrapper<ProductEs> wrapper = new LambdaEsQueryWrapper<>();
-        wrapper.matchPhrasePrefixQuery(ProductEs::getProductVariety,name);
-        PageInfo<ProductEs> productEsPageInfo = productEsMapper.pageQuery(wrapper, 1, 10);
-        log.info(productEsPageInfo+"");
-        return true;
+        wrapper.matchPhrasePrefixQuery(ProductEs::getProductVariety,key);
+        return R.ok(productEsMapper.pageQuery(wrapper, pageParam.getPageNo().intValue(), pageParam.getPageSize().intValue()));
     }
 
     @ApiOperation("商品的详细数据集")
