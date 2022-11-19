@@ -1,7 +1,10 @@
 package com.git.bds.nyc.user.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
+import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
 import com.git.bds.nyc.product.service.collection.ProductCollectionService;
 import com.git.bds.nyc.product.service.history.ProductHistoryService;
@@ -80,12 +83,14 @@ public class FarmerHistoryCollectionController {
     @ApiOperation(value = "产品  取消收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/cancelProductCollection")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "收藏的id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
+            @ApiImplicitParam(name = "productId", value = "收藏的id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
     })
     public R<Boolean> cancelProductCollection(
-            @RequestParam("id") Long id
+            @RequestParam("productId") Long productId
     ){
-        return R.decide(collectionService.removeById(id));
+        return R.decide(collectionService.remove(new LambdaQueryWrapper<ProductCollection>()
+                .eq(ProductCollection::getProductId,productId)
+                .eq(ProductCollection::getUserId, StpUtil.getLoginIdAsLong())));
     }
 
 
