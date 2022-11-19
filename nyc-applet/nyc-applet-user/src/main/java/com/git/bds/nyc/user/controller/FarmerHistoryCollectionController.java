@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -73,8 +74,8 @@ public class FarmerHistoryCollectionController {
             @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "query", example = "0", required = true)
     })
     public R<Boolean> addProductCollection(
-            @RequestParam("id") Long id,
-            @RequestParam("type") int type
+            @RequestParam("id") @NotNull Long id,
+            @RequestParam("type") @Min(0) @Max(2) int type
     ){
         return R.decide(collectionService.addProductCollection(id,type));
     }
@@ -83,10 +84,10 @@ public class FarmerHistoryCollectionController {
     @ApiOperation(value = "产品  取消收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/cancelProductCollection")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "productId", value = "收藏的id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
+            @ApiImplicitParam(name = "productId", value = "产品的id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
     })
     public R<Boolean> cancelProductCollection(
-            @RequestParam("productId") Long productId
+            @RequestParam("productId") @NotNull Long productId
     ){
         return R.decide(collectionService.remove(new LambdaQueryWrapper<ProductCollection>()
                 .eq(ProductCollection::getProductId,productId)
