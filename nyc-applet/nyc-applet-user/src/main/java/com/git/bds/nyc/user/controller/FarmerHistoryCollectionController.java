@@ -81,7 +81,7 @@ public class FarmerHistoryCollectionController {
     }
 
 
-    @ApiOperation(value = "产品  取消收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
+    @ApiOperation("产品  取消收藏")
     @PostMapping("/cancelProductCollection")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId", value = "产品的id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
