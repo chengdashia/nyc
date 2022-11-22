@@ -6,7 +6,7 @@ nyc:
   version: ${revision}
   # 版权年份
   copyrightYear: 2022
-
+#spring
 spring:
   application:
     name: nyc
@@ -16,6 +16,9 @@ spring:
 
   main:
     allow-circular-references: true # 允许循环依赖，因为项目是三层架构，无法避免这个情况。
+#    lazy-initialization: true  # 配置为true 表示所有Bean 都将延迟初始化
+  jmx:
+    enabled: false   #默认会开启 JMX，可以使用 jconsole 查看，对于我们无需这些监控的话可以手动关闭它。
 
   mvc:
     pathmatch:
@@ -27,6 +30,7 @@ spring:
   resources:
     #不要为我们工程中的资源文件建立映射
     add-mappings: false
+
 
 
   # Servlet 配置
