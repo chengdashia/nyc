@@ -55,7 +55,7 @@ public class ShoppingAddress extends Model<ShoppingAddress> {
     private String detailedAddress;
 
     @ApiModelProperty("默认(0:非默认；1:默认)")
-    @TableField("default")
+    @TableField("is_default")
     private Integer isDefault;
 
 
