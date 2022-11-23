@@ -39,14 +39,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
-            <artifactId>nyc-applet-common-biz</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-miniapp</artifactId>
-            <version>4.4.4.B</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.bouncycastle</groupId>

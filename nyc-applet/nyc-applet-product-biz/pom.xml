@@ -43,6 +43,11 @@
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-es</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-applet-common-biz</artifactId>
+        </dependency>
     </dependencies>
 
 

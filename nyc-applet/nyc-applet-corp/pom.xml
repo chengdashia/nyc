@@ -41,10 +41,6 @@
             <artifactId>nyc-applet-demand-biz</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.git.bds</groupId>
-            <artifactId>nyc-applet-common-biz</artifactId>
-        </dependency>
     </dependencies>
 
 

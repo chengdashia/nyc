@@ -6,6 +6,7 @@ import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.common.service.audit.AuditCorpProductService;
 import com.git.bds.nyc.enums.ProductSellType;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
@@ -45,6 +46,8 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
 
     private final ProductPictureMapper productPictureMapper;
 
+    private final AuditCorpProductService auditCorpProductService;
+
     private final MinioConfig minioConfig;
 
     private final MinioUtil minioUtil;
@@ -58,20 +61,21 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean releaseOnSellProduct(PrimaryProductDTO productDTO) {
-        long id = StpUtil.getLoginIdAsLong();
+        long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         //新的图片列表
         List<String> productImgList = productDTO.getProductImgList();
         //封面图
         String coverImg = productImgList.get(0);
-        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
+        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProduct(productId, userId, coverImg,productDTO);
+        //插入
         this.baseMapper.insert(product);
-
+        // 添加审核
+        auditCorpProductService.addAudit(userId,productId);
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
             productPictureMapper.insert(productPicture);
         }
-        log.info("product:  "+product);
         return true;
     }
 
@@ -84,13 +88,14 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean releasePreSellProduct(PrimaryProductDTO productDTO) {
-        long id = StpUtil.getLoginIdAsLong();
+        long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
         String coverImg = productImgList.get(0);
-        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProduct(productId,id, coverImg,productDTO);
+        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProduct(productId, userId, coverImg,productDTO);
         this.baseMapper.insert(product);
-
+        // 添加审核
+        auditCorpProductService.addAudit(userId,productId);
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
             productPictureMapper.insert(productPicture);

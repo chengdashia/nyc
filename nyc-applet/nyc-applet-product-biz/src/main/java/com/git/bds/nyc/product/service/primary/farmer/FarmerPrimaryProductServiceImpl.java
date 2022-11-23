@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.common.service.audit.CoopAuditProductService;
 import com.git.bds.nyc.enums.ProductSellType;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
@@ -14,7 +15,6 @@ import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.convert.ProductConvert;
-import com.git.bds.nyc.product.mapper.mp.ProductCollectionMapper;
 import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
@@ -25,7 +25,6 @@ import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
-import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
@@ -56,9 +55,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
 
     private final ProductPictureMapper productPictureMapper;
 
-    private final ProductCollectionMapper productCollectionMapper;
-
-    private final ProductHistoryService historyService;
+    private final CoopAuditProductService coopAuditProductService;
 
     private final MinioUtil minioUtil;
 
@@ -161,18 +158,20 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean releaseOnSellProduct(PrimaryProductDTO productDTO) {
-        long id = StpUtil.getLoginIdAsLong();
+        long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
         String coverImg = productImgList.get(0);
-        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProduct(productId,id, coverImg,productDTO);
+        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProduct(productId, userId, coverImg,productDTO);
+        // 插入
         this.baseMapper.insert(product);
-
+        // 添加合作社审核
+        coopAuditProductService.addAudit(userId,productId);
+        //循环将图片插入
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
             productPictureMapper.insert(productPicture);
         }
-        log.info("product:  "+product);
         return true;
     }
 
@@ -185,13 +184,16 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean releasePreSellProduct(PrimaryProductDTO productDTO) {
-        long id = StpUtil.getLoginIdAsLong();
+        long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
         String coverImg = productImgList.get(0);
-        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProduct(productId,id, coverImg,productDTO);
+        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProduct(productId, userId, coverImg,productDTO);
+        // 插入
         this.baseMapper.insert(product);
-
+        // 添加合作社审核
+        coopAuditProductService.addAudit(userId,productId);
+        //循环将图片插入
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
             productPictureMapper.insert(productPicture);
@@ -266,7 +268,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
     @Override
     public PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam) {
         IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.ON_SELL.getValue());
-        return new PageResult<>(page.getRecords(),page.getCurrent());
+        return new PageResult<>(page.getRecords(),(long) page.getRecords().size());
     }
 
     @Override

@@ -25,6 +25,7 @@ public class AutoFillMetaObjectHandler implements MetaObjectHandler {
         // 更新时间，取当前时间，也可以自定义
         this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
         this.setFieldValByName("loginTime", LocalDateTime.now(),metaObject);
+        this.setFieldValByName("auditTime", LocalDateTime.now(),metaObject);
     }
 
 }

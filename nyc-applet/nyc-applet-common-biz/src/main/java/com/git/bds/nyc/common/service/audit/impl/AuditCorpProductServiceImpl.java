@@ -19,5 +19,16 @@ import org.springframework.stereotype.Service;
 public class AuditCorpProductServiceImpl extends MPJBaseServiceImpl<AuditCorpProductMapper, AuditCorpProduct> implements AuditCorpProductService {
 
 
-
+    /**
+     * 添加审核
+     *
+     * @param userId    用户id
+     * @param productId 产品id
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean addAudit(long userId, long productId) {
+        AuditCorpProduct auditCorpProduct = new AuditCorpProduct().setUserId(userId).setProductId(productId);
+        return this.baseMapper.insert(auditCorpProduct) > 0;
+    }
 }

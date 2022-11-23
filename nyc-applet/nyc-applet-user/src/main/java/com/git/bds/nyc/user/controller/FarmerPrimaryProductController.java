@@ -83,7 +83,7 @@ public class FarmerPrimaryProductController {
     }
 
     @PostMapping("/getOnSellProductByPage")
-    @ApiOperation("公司获取发布的在售的初级产品 分页")
+    @ApiOperation("农户获取发布的在售的初级产品 分页")
     public R<PageResult<FarmerSelfPrimaryProductVO>> getOnSellProductByPage(
             @Validated PageParam pageParam
     ){
@@ -93,7 +93,7 @@ public class FarmerPrimaryProductController {
     }
 
     @PostMapping("/getPreSellProductByPage")
-    @ApiOperation("公司获取发布的预售的初级产品 分页")
+    @ApiOperation("个人获取发布的预售的初级产品 分页")
     public R<PageResult<FarmerSelfPrimaryProductVO>> getPreSellProductByPage(
             @Validated PageParam pageParam
     ){

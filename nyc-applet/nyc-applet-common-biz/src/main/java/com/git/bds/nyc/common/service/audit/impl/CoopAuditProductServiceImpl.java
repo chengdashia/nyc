@@ -18,4 +18,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CoopAuditProductServiceImpl extends MPJBaseServiceImpl<CoopAuditProductMapper, CoopAuditProduct> implements CoopAuditProductService {
 
+    /**
+     * 添加审核
+     *
+     * @param id        身份证件
+     * @param productId 产品id
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean addAudit(long id, long productId) {
+        CoopAuditProduct coopAuditProduct = new CoopAuditProduct().setUserId(id).setProductId(productId);
+        return this.baseMapper.insert(coopAuditProduct) > 0;
+    }
 }

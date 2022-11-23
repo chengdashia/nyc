@@ -15,7 +15,12 @@ import com.github.yulichang.base.MPJBaseService;
 public interface AuditCorpProductService extends MPJBaseService<AuditCorpProduct> {
 
 
-
-
-
+    /**
+     * 添加审核
+     *
+     * @param userId    用户id
+     * @param productId 产品id
+     * @return {@link Boolean}
+     */
+    Boolean addAudit(long userId, long productId);
 }
