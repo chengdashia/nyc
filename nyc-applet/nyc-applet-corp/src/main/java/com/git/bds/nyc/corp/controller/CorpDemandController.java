@@ -27,7 +27,7 @@ public class CorpDemandController {
     private final DemandService demandService;
 
     /**
-     * 释放需求
+     * 发布需求
      *
      * @param demandAddDTO 按需添加数据
      * @return {@link R}<{@link Boolean}>

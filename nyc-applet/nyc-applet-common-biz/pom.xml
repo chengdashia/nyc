@@ -12,7 +12,7 @@
     <artifactId>nyc-applet-common-biz</artifactId>
     <name>nyc-applet-common-biz</name>
     <description>
-        公共的接口
+        公共的 类
     </description>
 
     <dependencies>

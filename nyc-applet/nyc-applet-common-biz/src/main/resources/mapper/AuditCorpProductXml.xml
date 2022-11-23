@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.git.bds.nyc.common.mapper.mp.audit.AuditCorpProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.git.bds.nyc.common.model.domain.audit.AuditCorpProduct">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="product_id" property="productId" />
+        <result column="product_status" property="productStatus" />
+        <result column="audit_status" property="auditStatus" />
+        <result column="audit_remark" property="auditRemark" />
+        <result column="create_time" property="createTime" />
+        <result column="audit_time" property="auditTime" />
+        <result column="apply_times" property="applyTimes" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, product_id, product_status, audit_status, audit_remark, create_time, audit_time, apply_times
+    </sql>
+
+
+
+</mapper>

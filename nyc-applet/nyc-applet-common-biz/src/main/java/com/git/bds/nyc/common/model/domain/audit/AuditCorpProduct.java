@@ -1,24 +1,29 @@
-package com.git.bds.nyc.corp.model.domain;
+package com.git.bds.nyc.common.model.domain.audit;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
  * 审核公司发布的农产品(包括初级和加工的商品)
  * </p>
  *
- * @author chnnc
- * @since 2022-10-15 18:50:50
+ * @author 成大事
+ * @since 2022-11-23 10:43:48
  */
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @TableName("audit_corp_product")
 @ApiModel(value = "AuditCorpProduct对象", description = "审核公司发布的农产品(包括初级和加工的商品)")
