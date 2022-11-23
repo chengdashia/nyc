@@ -22,20 +22,20 @@ import java.util.List;
  * @author 成大事
  * @since 2022/9/15 19:50
  */
-@Api(tags = "初级农产品 文件")
+@Api(tags = "产品图片")
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/primaryProductFile")
+@RequestMapping("/file")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class PrimaryProductFileController {
+public class FileController {
 
     private final PrimaryProductFileService productFileService;
 
 
     @SneakyThrows
     @PostMapping("/upload")
-    @ApiOperation("初级农产品 图片上传")
+    @ApiOperation("图片上传")
     @ApiImplicitParam(name = "files", value = "多文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
     public R<List<String>> upload(
         @RequestPart("files") MultipartFile[] uploadFiles

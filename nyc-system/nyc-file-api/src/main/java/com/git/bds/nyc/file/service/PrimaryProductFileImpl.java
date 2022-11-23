@@ -43,7 +43,6 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
                 throw new BusinessException(ResultCode.FILE_TYPE_ERROR.getCode(), ResultCode.FILE_TYPE_ERROR.getMessage());
             }
         }
-        //long id = StpUtil.getLoginIdAsLong();
         return minioUtil.uploadImgList(minioConfig.getBucketName(),uploadFiles, 111L);
     }
 }
