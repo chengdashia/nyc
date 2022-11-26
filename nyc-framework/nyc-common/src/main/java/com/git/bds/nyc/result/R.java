@@ -143,15 +143,15 @@ public class R<T> implements Serializable {
      * Boolean 返 回 操 作, 携 带 默 认 返 回 值
      */
     public static <T> R<T> decide(boolean b) {
-        return decide(b, ResultCode.FAILED.getMessage(), ResultCode.FAILED.getMessage());
+        return decide(b, ResultCode.FAILED.getMessage());
     }
 
     /**
      * Boolean 返 回 操 作, 携 带 自 定 义 消 息
      */
-    public static <T> R<T> decide(boolean b, String success, String failure) {
+    public static <T> R<T> decide(boolean b, String failure) {
         if (b) {
-            return ok(success);
+            return ok();
         } else {
             return error(failure);
         }
