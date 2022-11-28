@@ -71,7 +71,7 @@ public class ShoppingAddress extends Model<ShoppingAddress> {
 
     public static final String DETAILED_ADDRESS = "detailed_address";
 
-    public static final String DEFAULT = "isDefault";
+    public static final String isDEFAULT = "isDefault";
 
     @Override
     public Serializable pkVal() {

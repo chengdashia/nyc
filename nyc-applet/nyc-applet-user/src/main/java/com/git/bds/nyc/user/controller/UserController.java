@@ -1,12 +1,14 @@
 package com.git.bds.nyc.user.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.git.bds.nyc.common.convert.AddressConvert;
 import com.git.bds.nyc.common.model.domain.ShoppingAddress;
 import com.git.bds.nyc.common.model.dto.AddressAddDTO;
 import com.git.bds.nyc.common.model.dto.AddressModifyDTO;
 import com.git.bds.nyc.common.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.common.service.address.ShoppingAddressService;
+import com.git.bds.nyc.enums.DefaultType;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.convert.UserConvert;
 import com.git.bds.nyc.user.domain.User;
@@ -77,7 +79,7 @@ public class UserController {
         return R.decide(shoppingAddressService.save(shoppingAddress));
     }
 
-    @ApiOperation(value = "修改 收货地址")
+    @ApiOperation(value = "修改 收货地址信息")
     @PostMapping("/modifySelfShoppingAddress")
     public R<Boolean> modifySelfShoppingAddress(
             @Validated @RequestBody AddressModifyDTO addressModifyDTO
@@ -86,16 +88,40 @@ public class UserController {
         return R.decide(shoppingAddressService.updateById(shoppingAddress));
     }
 
+    @ApiOperation(value = "修改 默认收货地址")
+    @PostMapping("/modifyDefaultSelfShoppingAddress")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
+    })
+    public R<Boolean> modifyDefaultSelfShoppingAddress(
+            @RequestParam("id") @NotNull Long id
+    ){
+        long userId = StpUtil.getLoginIdAsLong();
+        //将原来默认的置于非默认
+        shoppingAddressService.update(new UpdateWrapper<ShoppingAddress>()
+               .set(ShoppingAddress.isDEFAULT, DefaultType.NOT_DEFAULT)
+               .eq(ShoppingAddress.USER_ID, userId)
+                .eq(ShoppingAddress.isDEFAULT,DefaultType.IS_DEFAULT.getValue()));
+
+        //将新选择的置为默认
+        boolean update = shoppingAddressService.update(new UpdateWrapper<ShoppingAddress>()
+                .set(ShoppingAddress.isDEFAULT, DefaultType.IS_DEFAULT)
+                .eq(ShoppingAddress.USER_ID, userId)
+                .eq(ShoppingAddress.ID, id));
+        return R.decide(update);
+    }
+
 
     @ApiOperation(value = "删除 收货地址")
     @PostMapping("/delSelfShoppingAddress")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
     })
-    public R<Boolean> delSelfShoppingAddress(
-            @RequestParam("id") @NotNull Long id){
+    public R<Boolean> delSelfShoppingAddress(@RequestParam("id") @NotNull Long id){
         return R.decide(shoppingAddressService.removeById(id));
     }
+
+
 
 
 
