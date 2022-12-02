@@ -4,16 +4,14 @@ import com.git.bds.nyc.file.service.PrimaryProductFileService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -34,12 +32,17 @@ public class FileController {
 
 
     @SneakyThrows
-    @PostMapping("/upload")
-    @ApiOperation("图片上传")
-    @ApiImplicitParam(name = "files", value = "多文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
-    public R<List<String>> upload(
-        @RequestPart("files") MultipartFile[] uploadFiles
+    @PostMapping("/upload/{type}")
+    @ApiOperation(value = "图片上传",notes = "产品分 农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2) 需求(3)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "类型", required = true,dataTypeClass = Integer.class,paramType = "path")
+    })
+
+    public R<List<String>> uploadPictures(
+        @RequestPart("files") MultipartFile[] uploadFiles,
+        @PathVariable("type") int type
     ){
-        return R.ok( productFileService.uploadFiles(uploadFiles));
+        return R.ok( productFileService.uploadPictures(uploadFiles,type));
     }
 }

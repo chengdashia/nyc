@@ -41,7 +41,12 @@ public class CorpDemandController {
     }
 
 
-
+    /**
+     * 修改需求信息
+     *
+     * @param demandModifyDTO 需求修改dto
+     * @return {@link R}<{@link Boolean}>
+     */
     @PostMapping("/modifyDemandInfo")
     @ApiOperation("修改需求信息")
     public R<Boolean> modifyDemandInfo(

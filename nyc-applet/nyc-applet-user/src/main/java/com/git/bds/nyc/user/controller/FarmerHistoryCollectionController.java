@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
+import com.git.bds.nyc.product.model.domain.ProductHistory;
 import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
 import com.git.bds.nyc.product.service.collection.ProductCollectionService;
 import com.git.bds.nyc.product.service.history.ProductHistoryService;
@@ -65,6 +66,20 @@ public class FarmerHistoryCollectionController {
         PageResult<ProductCollectionDTO> page = productHistoryService.getProductHistoryByPage(pageParam, type);
         List<ProductVO> productCollectionVOList = FarmerProductConvert.INSTANCE.toProductVO(page.getList());
         return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
+    }
+
+
+    @ApiOperation("删除浏览记录")
+    @PostMapping("/delBrowsingRecord")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
+    })
+    public R<Boolean> delBrowsingRecord(
+            @RequestParam("id") @NotNull Long productId
+    ){
+        return R.decide(productHistoryService.remove(new LambdaQueryWrapper<ProductHistory>()
+                .eq(ProductHistory::getId,productId)
+                .eq(ProductHistory::getUserId, StpUtil.getLoginIdAsLong())));
     }
 
     @ApiOperation(value = "产品  添加收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")

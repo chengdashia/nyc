@@ -1,5 +1,6 @@
 package com.git.bds.nyc.file.service;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.io.FileTypeUtil;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.core.util.FileTypeUtils;
@@ -28,21 +29,26 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
     @Resource
     private MinioConfig minioConfig;
 
+
+
     /**
-     * 上传文件
+     * 上载图片
      *
-     * @param uploadFiles 上传文件
+     * @param files 文件夹
+     * @param type
      * @return {@link List}<{@link String}>
      */
     @SneakyThrows
     @Override
-    public List<String> uploadFiles(MultipartFile[] uploadFiles) {
-        for (MultipartFile uploadFile : uploadFiles) {
-            String type = FileTypeUtil.getType(uploadFile.getInputStream());
-            if(!FileTypeUtils.SUFFIX.contains(type)){
+    public List<String> uploadPictures(MultipartFile[] files, int type) {
+        for (MultipartFile uploadFile : files) {
+            String fileType = FileTypeUtil.getType(uploadFile.getInputStream());
+            if(!FileTypeUtils.SUFFIX.contains(fileType)){
                 throw new BusinessException(ResultCode.FILE_TYPE_ERROR.getCode(), ResultCode.FILE_TYPE_ERROR.getMessage());
             }
         }
-        return minioUtil.uploadImgList(minioConfig.getBucketName(),uploadFiles, 111L);
+        return minioUtil.uploadImgList(minioConfig.getBucketName(),files, StpUtil.getLoginIdAsLong(),type);
     }
+
+
 }

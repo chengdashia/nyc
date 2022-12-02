@@ -348,7 +348,7 @@ public class MinioUtil {
      * @return {@link List}<{@link String}>
      * @throws Exception 例外
      */
-    public List<String> uploadImgList(String bucketName, MultipartFile[] files, Long id) throws Exception {
+    public List<String> uploadImgList(String bucketName, MultipartFile[] files, Long id,int type) throws Exception {
         List<String> imgList = new ArrayList<>(files.length);
         for (MultipartFile file : files) {
             log.info("压缩前的大小：  "+ file.getSize());
@@ -364,6 +364,8 @@ public class MinioUtil {
 
             //拼接路径
             String path = id +
+                    SEPARATOR +
+                    type +
                     SEPARATOR +
                     dateTime.year() +
                     SEPARATOR + dateTime.month() +

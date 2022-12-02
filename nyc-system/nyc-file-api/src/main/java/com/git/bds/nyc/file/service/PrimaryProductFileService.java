@@ -1,11 +1,7 @@
 package com.git.bds.nyc.file.service;
 
-import io.minio.errors.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -16,8 +12,11 @@ import java.util.List;
 public interface PrimaryProductFileService {
 
     /**
-     * 上传文件
+     * 上载图片
+     *
      * @param uploadFiles 上传文件
+     * @param type        类型
+     * @return {@link List}<{@link String}>
      */
-    List<String> uploadFiles(MultipartFile[] uploadFiles) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
+    List<String> uploadPictures(MultipartFile[] uploadFiles, int type);
 }
