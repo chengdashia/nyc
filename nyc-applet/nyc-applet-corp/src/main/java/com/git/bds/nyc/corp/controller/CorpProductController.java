@@ -35,7 +35,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/corpPrimaryProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class CorpPrimaryProductController {
+public class CorpProductController {
 
     private final CorpPrimaryProductService corpPrimaryProductService;
 

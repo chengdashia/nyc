@@ -61,13 +61,13 @@ public class CorpDemandController {
      * @param id 需求id
      * @return {@link = R<Boolean>}
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delDemand/{id}")
     @ApiOperation("根据id删除需求数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id主键", dataTypeClass = Long.class, paramType = "path", example = "123456", required = true)
     })
     public R<Boolean> delete(@PathVariable(value = "id") Long id) {
-        return R.decide(demandService.removeById(id));
+        return R.decide(demandService.delDemand(id));
     }
 
 

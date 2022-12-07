@@ -51,4 +51,12 @@ public interface DemandService extends MPJBaseService<Demand> {
      * @return {@link Boolean}
      */
     Boolean modifyDemandInfo(DemandModifyDTO demandModifyDTO);
+
+    /**
+     * del需求
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    Boolean delDemand(Long id);
 }

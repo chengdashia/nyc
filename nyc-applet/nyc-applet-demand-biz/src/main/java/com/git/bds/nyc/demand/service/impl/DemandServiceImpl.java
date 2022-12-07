@@ -2,19 +2,24 @@ package com.git.bds.nyc.demand.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.demand.convert.DemandCovert;
 import com.git.bds.nyc.demand.mapper.mp.DemandMapper;
 import com.git.bds.nyc.demand.model.domain.Demand;
+import com.git.bds.nyc.demand.model.dto.DemandAddDTO;
 import com.git.bds.nyc.demand.model.dto.DemandDTO;
 import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
-import com.git.bds.nyc.demand.model.dto.DemandAddDTO;
 import com.git.bds.nyc.demand.model.dto.DemandModifyDTO;
 import com.git.bds.nyc.demand.service.DemandService;
+import com.git.bds.nyc.framework.file.minio.MinioConfig;
+import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.page.PageParam;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.query.MPJQueryWrapper;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +33,12 @@ import java.util.List;
  * @since 2022-10-31 15:59:15
  */
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> implements DemandService {
+
+    private final MinioUtil minioUtil;
+
+    private final MinioConfig minioConfig;
 
     /**
      * 主页需求（按页面）
@@ -88,5 +98,20 @@ public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> 
     public Boolean modifyDemandInfo(DemandModifyDTO demandModifyDTO) {
         Demand demand = DemandCovert.INSTANCE.toDemandForModify(demandModifyDTO, StpUtil.getLoginIdAsLong());
         return this.baseMapper.updateById(demand) > 0;
+    }
+
+    /**
+     * del需求
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean delDemand(Long id) {
+        String demandCover = this.baseMapper.selectOne(new LambdaQueryWrapper<Demand>()
+                .select(Demand::getDemandCover)
+                .eq(Demand::getId, id)).getDemandCover();
+        minioUtil.removeFile(minioConfig.getBucketName(),demandCover);
+        return this.baseMapper.deleteById(id) > 0;
     }
 }
