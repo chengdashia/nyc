@@ -1,6 +1,6 @@
 package com.git.bds.nyc.corp.convert;
 
-import com.git.bds.nyc.corp.model.vo.CorpProductCollectionVO;
+import com.git.bds.nyc.corp.model.vo.CorpProductVO;
 import com.git.bds.nyc.corp.model.vo.CorpSelfPrimaryProductVO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
@@ -30,7 +30,7 @@ public interface CorpProductConvert {
      * 至产品集合vo
      *
      * @param list 列表
-     * @return {@link List}<{@link CorpProductCollectionVO}>
+     * @return {@link List}<{@link CorpProductVO}>
      */
-    List<CorpProductCollectionVO> toProductCollectionVO(List<ProductCollectionDTO> list);
+    List<CorpProductVO> toProductVO(List<ProductCollectionDTO> list);
 }

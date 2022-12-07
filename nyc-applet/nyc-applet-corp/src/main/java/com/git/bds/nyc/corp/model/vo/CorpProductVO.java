@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @since 2022/10/26 11:32
  */
 @Data
-public class CorpProductCollectionVO implements Serializable {
+public class CorpProductVO implements Serializable {
 
     @ApiModelProperty("产品id")
     private Long productId;
