@@ -20,10 +20,16 @@ public class CorpProductVO implements Serializable {
     @ApiModelProperty("类型")
     private Integer type;
 
-    @ApiModelProperty("价格")
+    @ApiModelProperty("商品重量")
+    private BigDecimal weight;
+
+    @ApiModelProperty("商品单价")
     private BigDecimal price;
 
-    @ApiModelProperty("种")
+    @ApiModelProperty("商品的生产地区")
+    private String area;
+
+    @ApiModelProperty("种类")
     private String species;
 
     @ApiModelProperty("品种")

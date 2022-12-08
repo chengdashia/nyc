@@ -10,7 +10,7 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.mapper.mp.ProductHistoryMapper;
 import com.git.bds.nyc.product.model.domain.*;
-import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
+import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import org.springframework.stereotype.Service;
@@ -31,48 +31,54 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
      *
      * @param pageParam 页面参数
      * @param type      类型
-     * @return {@link PageResult}<{@link ProductCollectionDTO}>
+     * @return {@link PageResult}<{@link ProductCollectAndHistoryDTO}>
      */
     @Override
-    public PageResult<ProductCollectionDTO> getProductHistoryByPage(PageParam pageParam, int type) {
+    public PageResult<ProductCollectAndHistoryDTO> getProductHistoryByPage(PageParam pageParam, int type) {
         long userId = StpUtil.getLoginIdAsLong();
-        IPage<ProductCollectionDTO> page;
+        IPage<ProductCollectAndHistoryDTO> page;
         if(type == ProductType.FARMER_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectionDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
                             .select(ProductHistory::getProductId)
-                            .selectAs(ProductHistory::getCreateTime,ProductCollectionDTO.COLLECTION_TIME)
-                            .selectAs(ProductHistory::getProductType,ProductCollectionDTO.TYPE)
-                            .selectAs(FarmerPrimaryProduct::getProductPrice,ProductCollectionDTO.PRICE)
-                            .selectAs(FarmerPrimaryProduct::getProductCover,ProductCollectionDTO.COVER_URL)
-                            .selectAs(FarmerPrimaryProduct::getProductSpecies,ProductCollectionDTO.SPECIES)
-                            .selectAs(FarmerPrimaryProduct::getProductVariety,ProductCollectionDTO.VARIETIES)
+                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
+                            .selectAs(FarmerPrimaryProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
+                            .selectAs(FarmerPrimaryProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
+                            .selectAs(FarmerPrimaryProduct::getProductProductionArea, ProductCollectAndHistoryDTO.AREA)
+                            .selectAs(FarmerPrimaryProduct::getProductWeight, ProductCollectAndHistoryDTO.WEIGHT)
+                            .selectAs(FarmerPrimaryProduct::getProductSpecies, ProductCollectAndHistoryDTO.SPECIES)
+                            .selectAs(FarmerPrimaryProduct::getProductVariety, ProductCollectAndHistoryDTO.VARIETIES)
                             .leftJoin(FarmerPrimaryProduct.class, FarmerPrimaryProduct::getId, ProductCollection::getProductId)
                             .eq(ProductHistory::getUserId, userId)
                             .eq(ProductHistory::getProductType, type));
         }else if (type == ProductType.CORP_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectionDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
                             .select(ProductHistory::getProductId)
-                            .selectAs(ProductHistory::getCreateTime,ProductCollectionDTO.COLLECTION_TIME)
-                            .selectAs(ProductHistory::getProductType,ProductCollectionDTO.TYPE)
-                            .selectAs(CorpPrimaryProduct::getProductPrice,ProductCollectionDTO.PRICE)
-                            .selectAs(CorpPrimaryProduct::getProductCover,ProductCollectionDTO.COVER_URL)
-                            .selectAs(CorpPrimaryProduct::getProductSpecies,ProductCollectionDTO.SPECIES)
-                            .selectAs(CorpPrimaryProduct::getProductVariety,ProductCollectionDTO.VARIETIES)
+                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
+                            .selectAs(CorpPrimaryProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
+                            .selectAs(CorpPrimaryProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
+                            .selectAs(CorpPrimaryProduct::getProductProductionArea, ProductCollectAndHistoryDTO.AREA)
+                            .selectAs(CorpPrimaryProduct::getProductWeight, ProductCollectAndHistoryDTO.WEIGHT)
+                            .selectAs(CorpPrimaryProduct::getProductSpecies, ProductCollectAndHistoryDTO.SPECIES)
+                            .selectAs(CorpPrimaryProduct::getProductVariety, ProductCollectAndHistoryDTO.VARIETIES)
                             .leftJoin(CorpPrimaryProduct.class, CorpPrimaryProduct::getId, ProductCollection::getProductId)
                             .eq(ProductHistory::getUserId, userId)
                             .eq(ProductHistory::getProductType, type));
         }else {
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectionDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
                             .select(ProductHistory::getProductId)
-                            .selectAs(ProductHistory::getCreateTime,ProductCollectionDTO.COLLECTION_TIME)
-                            .selectAs(ProductHistory::getProductType,ProductCollectionDTO.TYPE)
-                            .selectAs(CorpProcessingProduct::getProductPrice,ProductCollectionDTO.PRICE)
-                            .selectAs(CorpProcessingProduct::getProductCover,ProductCollectionDTO.COVER_URL)
-                            .selectAs(CorpProcessingProduct::getProductSpecies,ProductCollectionDTO.SPECIES)
-                            .selectAs(CorpProcessingProduct::getProductVariety,ProductCollectionDTO.VARIETIES)
+                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
+                            .selectAs(CorpProcessingProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
+                            .selectAs(CorpProcessingProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
+                            .selectAs(CorpProcessingProduct::getProductProductionArea, ProductCollectAndHistoryDTO.AREA)
+                            .selectAs(CorpProcessingProduct::getProductWeight, ProductCollectAndHistoryDTO.WEIGHT)
+                            .selectAs(CorpProcessingProduct::getProductSpecies, ProductCollectAndHistoryDTO.SPECIES)
+                            .selectAs(CorpProcessingProduct::getProductVariety, ProductCollectAndHistoryDTO.VARIETIES)
                             .leftJoin(CorpProcessingProduct.class, CorpProcessingProduct::getId, ProductCollection::getProductId)
                             .eq(ProductHistory::getUserId, userId)
                             .eq(ProductHistory::getProductType, type));

@@ -1,7 +1,7 @@
 package com.git.bds.nyc.user.convert;
 
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
-import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
+import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import com.git.bds.nyc.user.domain.FarmerSelfPrimaryProductVO;
 import com.git.bds.nyc.user.domain.vo.ProductVO;
 import org.mapstruct.Mapper;
@@ -32,5 +32,5 @@ public interface FarmerProductConvert {
      * @param list 列表
      * @return {@link List}<{@link ProductVO}>
      */
-    List<ProductVO> toProductVO(List<ProductCollectionDTO> list);
+    List<ProductVO> toProductVO(List<ProductCollectAndHistoryDTO> list);
 }

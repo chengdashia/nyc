@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 用于连表查询 收藏记录的
  */
 @Data
-public class ProductCollectionDTO {
+public class ProductCollectAndHistoryDTO {
 
     /** 产品id */
     private Long productId;
@@ -31,6 +31,13 @@ public class ProductCollectionDTO {
     /** 封面图 */
     private String coverImg;
 
+
+    /** 产品重量 */
+    private BigDecimal weight;
+
+    /** 产品生产区 */
+    private String area;
+
     /** 收藏时间 */
     private LocalDateTime collectionTime;
 
@@ -39,6 +46,8 @@ public class ProductCollectionDTO {
     public static final String TYPE = "type";
     public static final String PRICE = "price";
     public static final String SPECIES = "species";
+    public static final String AREA = "area";
+    public static final String WEIGHT = "weight";
     public static final String VARIETIES = "varieties";
     public static final String COVER_URL = "coverImg";
     public static final String COLLECTION_TIME = "collectionTime";

@@ -4,7 +4,7 @@ package com.git.bds.nyc.product.service.collection;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
-import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
+import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import com.github.yulichang.base.MPJBaseService;
 
 /**
@@ -22,9 +22,9 @@ public interface ProductCollectionService extends MPJBaseService<ProductCollecti
      *
      * @param pageParam 页面参数
      * @param type      类型
-     * @return {@link PageResult}<{@link ProductCollectionDTO}>
+     * @return {@link PageResult}<{@link ProductCollectAndHistoryDTO}>
      */
-    PageResult<ProductCollectionDTO> getProductCollectsByPage(PageParam pageParam, int type);
+    PageResult<ProductCollectAndHistoryDTO> getProductCollectsByPage(PageParam pageParam, int type);
 
     /**
      * 产品添加收藏

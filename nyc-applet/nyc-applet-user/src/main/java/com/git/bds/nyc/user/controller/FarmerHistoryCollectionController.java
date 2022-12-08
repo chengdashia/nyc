@@ -6,7 +6,7 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.domain.ProductHistory;
-import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
+import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import com.git.bds.nyc.product.service.collection.ProductCollectionService;
 import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.result.R;
@@ -47,7 +47,7 @@ public class FarmerHistoryCollectionController {
      * @param type      类型
      * @return {@link R}<{@link PageResult}<{@link ProductVO}>>
      */
-    @ApiOperation(value = "查看产品的收藏记录",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
+    @ApiOperation(value = "查看产品的收藏是 记录",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/getProductCollectsByPage/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
@@ -56,7 +56,7 @@ public class FarmerHistoryCollectionController {
             @RequestBody PageParam pageParam,
             @PathVariable("type") @Min(0) @Max(2) int type
     ){
-        PageResult<ProductCollectionDTO> page = collectionService.getProductCollectsByPage(pageParam, type);
+        PageResult<ProductCollectAndHistoryDTO> page = collectionService.getProductCollectsByPage(pageParam, type);
         List<ProductVO> productCollectionVOList = FarmerProductConvert.INSTANCE.toProductVO(page.getList());
         return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
     }
@@ -77,7 +77,7 @@ public class FarmerHistoryCollectionController {
             @RequestBody PageParam pageParam,
             @PathVariable("type") @Min(0) @Max(2) int type
     ){
-        PageResult<ProductCollectionDTO> page = productHistoryService.getProductHistoryByPage(pageParam, type);
+        PageResult<ProductCollectAndHistoryDTO> page = productHistoryService.getProductHistoryByPage(pageParam, type);
         List<ProductVO> productCollectionVOList = FarmerProductConvert.INSTANCE.toProductVO(page.getList());
         return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
     }

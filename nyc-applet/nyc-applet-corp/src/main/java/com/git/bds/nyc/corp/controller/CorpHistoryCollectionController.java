@@ -8,7 +8,7 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.domain.ProductHistory;
-import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
+import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import com.git.bds.nyc.product.service.collection.ProductCollectionService;
 import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.result.R;
@@ -50,7 +50,7 @@ public class CorpHistoryCollectionController {
             @RequestBody PageParam pageParam,
             @PathVariable("type") @Min(0) @Max(2) int type
     ){
-        PageResult<ProductCollectionDTO> page = collectionService.getProductCollectsByPage(pageParam, type);
+        PageResult<ProductCollectAndHistoryDTO> page = collectionService.getProductCollectsByPage(pageParam, type);
         List<CorpProductVO> productCollectionVOList = CorpProductConvert.INSTANCE.toProductVO(page.getList());
         return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
     }
@@ -64,7 +64,7 @@ public class CorpHistoryCollectionController {
             @RequestBody PageParam pageParam,
             @PathVariable("type") @Min(0) @Max(2) int type
     ){
-        PageResult<ProductCollectionDTO> page = productHistoryService.getProductHistoryByPage(pageParam, type);
+        PageResult<ProductCollectAndHistoryDTO> page = productHistoryService.getProductHistoryByPage(pageParam, type);
         List<CorpProductVO> productCollectionVOList = CorpProductConvert.INSTANCE.toProductVO(page.getList());
         return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
     }

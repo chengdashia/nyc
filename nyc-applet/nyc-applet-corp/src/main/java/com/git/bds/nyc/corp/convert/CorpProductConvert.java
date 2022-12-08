@@ -3,7 +3,7 @@ package com.git.bds.nyc.corp.convert;
 import com.git.bds.nyc.corp.model.vo.CorpProductVO;
 import com.git.bds.nyc.corp.model.vo.CorpSelfPrimaryProductVO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
-import com.git.bds.nyc.product.model.dto.ProductCollectionDTO;
+import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -32,5 +32,5 @@ public interface CorpProductConvert {
      * @param list 列表
      * @return {@link List}<{@link CorpProductVO}>
      */
-    List<CorpProductVO> toProductVO(List<ProductCollectionDTO> list);
+    List<CorpProductVO> toProductVO(List<ProductCollectAndHistoryDTO> list);
 }
