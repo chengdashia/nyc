@@ -40,6 +40,13 @@ public class FarmerHistoryCollectionController {
     private final ProductHistoryService productHistoryService;
     private final ProductCollectionService collectionService;
 
+    /**
+     * 按页面获取产品集合
+     *
+     * @param pageParam 页面参数
+     * @param type      类型
+     * @return {@link R}<{@link PageResult}<{@link ProductVO}>>
+     */
     @ApiOperation(value = "查看产品的收藏记录",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/getProductCollectsByPage/{type}")
     @ApiImplicitParams({
@@ -54,6 +61,13 @@ public class FarmerHistoryCollectionController {
         return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
     }
 
+    /**
+     * 按页面获取产品历史记录
+     *
+     * @param pageParam 页面参数
+     * @param type      类型
+     * @return {@link R}<{@link PageResult}<{@link ProductVO}>>
+     */
     @ApiOperation(value = "查看产品的浏览记录",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/getProductHistoryByPage/{type}")
     @ApiImplicitParams({
@@ -69,6 +83,12 @@ public class FarmerHistoryCollectionController {
     }
 
 
+    /**
+     * del浏览记录
+     *
+     * @param productId 产品id
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation("删除浏览记录")
     @PostMapping("/delBrowsingRecord")
     @ApiImplicitParams({
@@ -82,6 +102,13 @@ public class FarmerHistoryCollectionController {
                 .eq(ProductHistory::getUserId, StpUtil.getLoginIdAsLong())));
     }
 
+    /**
+     * 添加产品集合
+     *
+     * @param id   身份证件
+     * @param type 类型
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation(value = "产品  添加收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/addProductCollection")
     @ApiImplicitParams({
@@ -96,6 +123,12 @@ public class FarmerHistoryCollectionController {
     }
 
 
+    /**
+     * 取消产品集合
+     *
+     * @param productId 产品id
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation("产品  取消收藏")
     @PostMapping("/cancelProductCollection")
     @ApiImplicitParams({
