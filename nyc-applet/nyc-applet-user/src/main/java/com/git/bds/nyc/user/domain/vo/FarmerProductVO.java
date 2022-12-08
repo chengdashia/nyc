@@ -12,10 +12,7 @@ import java.time.LocalDateTime;
  * @since 2022/10/26 14:24
  */
 @Data
-public class ProductVO implements Serializable {
-
-    @ApiModelProperty("id")
-    private Long id;
+public class FarmerProductVO implements Serializable {
 
     @ApiModelProperty("产品id")
     private Long productId;
@@ -23,10 +20,16 @@ public class ProductVO implements Serializable {
     @ApiModelProperty("类型")
     private Integer type;
 
-    @ApiModelProperty("价格")
+    @ApiModelProperty("商品重量")
+    private BigDecimal weight;
+
+    @ApiModelProperty("商品单价")
     private BigDecimal price;
 
-    @ApiModelProperty("种")
+    @ApiModelProperty("商品的生产地区")
+    private String area;
+
+    @ApiModelProperty("种类")
     private String species;
 
     @ApiModelProperty("品种")
