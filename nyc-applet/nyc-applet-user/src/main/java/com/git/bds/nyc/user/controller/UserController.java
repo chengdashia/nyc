@@ -12,6 +12,7 @@ import com.git.bds.nyc.enums.DefaultType;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.convert.UserConvert;
 import com.git.bds.nyc.user.domain.User;
+import com.git.bds.nyc.user.domain.dto.UserWxInfoDTO;
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.git.bds.nyc.user.domain.vo.ShoppingAddressVO;
 import com.git.bds.nyc.user.service.user.UserService;
@@ -120,6 +121,17 @@ public class UserController {
     public R<Boolean> delSelfShoppingAddress(@RequestParam("id") @NotNull Long id){
         return R.decide(shoppingAddressService.removeById(id));
     }
+
+
+    @ApiOperation(value = "更新用户头像和昵称")
+    @PostMapping("/modifyUserWxInfo")
+    public R<Boolean> modifyUserWxInfo(@Validated @RequestBody UserWxInfoDTO userWxInfoDTO){
+        return R.decide(userService.update(new UpdateWrapper<User>()
+                .set(User.AVATAR,userWxInfoDTO.getAvatarUrl())
+                .set(User.USER_SCREEN_NAME,userWxInfoDTO.getNickName())
+                .eq(User.USER_ID,StpUtil.getLoginIdAsLong())));
+    }
+
 
 
 

@@ -16,7 +16,6 @@ public class FarmerProductVO implements Serializable {
 
     @ApiModelProperty("产品id")
     private Long productId;
-
     @ApiModelProperty("类型")
     private Integer type;
 
