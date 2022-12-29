@@ -2,12 +2,13 @@ package com.git.bds.nyc.user.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.git.bds.nyc.common.convert.AddressConvert;
-import com.git.bds.nyc.common.model.domain.ShoppingAddress;
-import com.git.bds.nyc.common.model.dto.AddressAddDTO;
-import com.git.bds.nyc.common.model.dto.AddressModifyDTO;
-import com.git.bds.nyc.common.model.dto.ShoppingAddressDTO;
-import com.git.bds.nyc.common.service.address.ShoppingAddressService;
+
+import com.git.bds.nyc.communal.convert.AddressConvert;
+import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
+import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
+import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
+import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
+import com.git.bds.nyc.communal.service.address.ShoppingAddressService;
 import com.git.bds.nyc.enums.DefaultType;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.convert.UserConvert;

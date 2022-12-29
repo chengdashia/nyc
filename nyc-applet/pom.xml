@@ -21,17 +21,7 @@
     <modules>
         <module>nyc-applet-user</module>
         <module>nyc-applet-corp</module>
-        <!--产品的-->
-        <module>nyc-applet-product-biz</module>
-        <module>nyc-applet-product-api</module>
-
-        <!--需求的-->
-        <module>nyc-applet-demand-biz</module>
-        <module>nyc-applet-demand-api</module>
-
-        <!--公共的-->
-        <module>nyc-applet-common-biz</module>
-
+        <module>nyc-applet-api</module>
     </modules>
 
 

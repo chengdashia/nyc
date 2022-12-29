@@ -22,6 +22,9 @@
         <module>nyc-certification</module>
         <module>nyc-role-permission</module>
         <module>nyc-file-api</module>
+        <module>nyc-product</module>
+        <module>nyc-demand</module>
+        <module>nyc-communal</module>
     </modules>
 
 

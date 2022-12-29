@@ -29,10 +29,6 @@
             <artifactId>nyc-applet-user</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.git.bds</groupId>
-            <artifactId>nyc-applet-product-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.git.bds</groupId>
@@ -54,10 +50,6 @@
             <artifactId>nyc-applet-corp</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.git.bds</groupId>
-            <artifactId>nyc-applet-demand-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.git.bds</groupId>

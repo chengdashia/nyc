@@ -2,6 +2,7 @@ package com.git.bds.nyc.corp.controller;
 
 import com.git.bds.nyc.corp.convert.CorpProductConvert;
 import com.git.bds.nyc.corp.model.vo.CorpSelfPrimaryProductVO;
+import com.git.bds.nyc.corp.service.CorpService;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
@@ -39,6 +40,8 @@ public class CorpProductController {
 
     private final CorpPrimaryProductService corpPrimaryProductService;
 
+    private final CorpService corpService;
+
     /**
      * 发布 在售初级产品
      *
@@ -50,7 +53,7 @@ public class CorpProductController {
     public R<Boolean> releaseOnSellProduct(
             @Validated({ValidGroup.OnSell.class}) @RequestBody PrimaryProductDTO productDTO
     ){
-        return R.decide(corpPrimaryProductService.releaseOnSellProduct(productDTO));
+        return R.decide(corpService.releaseOnSellProduct(productDTO));
     }
 
     /**
@@ -64,7 +67,7 @@ public class CorpProductController {
     public R<Boolean> releasePreSellProduct(
             @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
     ){
-        return R.decide(corpPrimaryProductService.releasePreSellProduct(productDTO));
+        return R.decide(corpService.releasePreSellProduct(productDTO));
     }
 
     /**

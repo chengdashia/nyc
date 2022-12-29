@@ -116,35 +116,6 @@
                 <version>${revision}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.git.bds</groupId>
-                <artifactId>nyc-applet-product-biz</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.git.bds</groupId>
-                <artifactId>nyc-applet-product-api</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.git.bds</groupId>
-                <artifactId>nyc-applet-demand-biz</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.git.bds</groupId>
-                <artifactId>nyc-applet-demand-api</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.git.bds</groupId>
-                <artifactId>nyc-applet-common-biz</artifactId>
-                <version>${revision}</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.git.bds</groupId>
@@ -180,6 +151,24 @@
             <dependency>
                 <groupId>com.git.bds</groupId>
                 <artifactId>nyc-file-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-product</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-demand</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.git.bds</groupId>
+                <artifactId>nyc-communal</artifactId>
                 <version>${revision}</version>
             </dependency>
 

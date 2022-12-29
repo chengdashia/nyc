@@ -1,8 +1,9 @@
 package com.git.bds.nyc.user.service.user;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
-import com.git.bds.nyc.common.model.domain.ShoppingAddress;
-import com.git.bds.nyc.common.model.dto.ShoppingAddressDTO;
+
+import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
+import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.user.domain.User;
 import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
 import com.github.yulichang.base.MPJBaseService;

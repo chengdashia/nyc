@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.git.bds.nyc.product.model.domain.CorpPrimaryProduct">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="contact_info_id" property="contactInfoId"/>
+        <result column="product_species" property="productSpecies"/>
+        <result column="product_variety" property="productVariety"/>
+        <result column="product_weight" property="productWeight"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="product_production_area" property="productProductionArea"/>
+        <result column="product_cover" property="productCover"/>
+        <result column="product_remark" property="productRemark"/>
+        <result column="product_status" property="productStatus"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="market_time" property="marketTime"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , user_id, contact_info_id, product_species, product_variety, product_weight, product_price, product_production_area, product_cover, product_remark, product_status, audit_status, create_time, update_time, market_time, delete_flag
+    </sql>
+    <!-- 更新审核状态 -->
+    <update id="updateAuditStatus">
+        UPDATE corp_primary_product
+        SET audit_status = #{primaryProductUpdateDTO.auditStatus}
+        WHERE
+            product_id =  #{primaryProductUpdateDTO.id}
+    </update>
+    <!-- 分页查询数据 -->
+    <select id="findPage" resultType="com.git.bds.nyc.product.model.domain.CorpPrimaryProduct">
+        SELECT * FROM corp_primary_product t1
+        <where>
+            <if test="param.productStatus">AND t1.product_status = #{param.productStatus}</if>
+            <if test="param.auditStatus">AND t1.audit_status = #{param.auditStatus}</if>
+            AND t1.delete_flag = 0
+        </where>
+        ORDER BY t1.id DESC
+    </select>
+
+</mapper>
