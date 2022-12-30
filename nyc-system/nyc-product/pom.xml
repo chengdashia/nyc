@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.git.bds</groupId>
+        <artifactId>nyc-system</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>nyc-product</artifactId>
+    <version>${revision}</version>
+    <name>nyc-product</name>
+    <packaging>jar</packaging>
+    <description>nyc-product</description>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-file</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-es</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

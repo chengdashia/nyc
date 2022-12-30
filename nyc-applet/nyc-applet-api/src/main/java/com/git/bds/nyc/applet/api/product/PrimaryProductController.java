@@ -4,12 +4,13 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.easyes.core.biz.PageInfo;
 import cn.easyes.core.conditions.LambdaEsQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.git.bds.nyc.applet.api.convert.product.ProductConvert;
 import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.applet.api.product.vo.PrimaryProductInfoVO;
 import com.git.bds.nyc.applet.api.product.vo.PrimaryProductVO;
-import com.git.bds.nyc.product.convert.product.ProductConvert;
+
 import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
