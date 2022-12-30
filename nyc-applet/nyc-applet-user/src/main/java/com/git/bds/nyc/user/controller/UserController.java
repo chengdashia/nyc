@@ -49,8 +49,6 @@ public class UserController {
 
     private final UserService userService;
 
-    private final ShoppingAddressService shoppingAddressService;
-
     @ApiOperation("微信登录")
     @PostMapping("/login")
     public String login(@RequestBody WxUserInfoDTO userInfoDTO) throws WxErrorException {
@@ -65,73 +63,6 @@ public class UserController {
         return StpUtil.getTokenInfo();
     }
 
-    @ApiOperation(value = "我的 获取收货地址")
-    @PostMapping("/getSelfShoppingAddress")
-    public R<List<ShoppingAddressVO>> getSelfShoppingAddress(){
-        List<ShoppingAddressDTO> addressDTOList = userService.getSelfShoppingAddress();
-        return R.ok(UserConvert.INSTANCE.toShoppingVOList(addressDTOList));
-    }
-
-    @ApiOperation(value = "添加收货地址")
-    @PostMapping("/addSelfShoppingAddress")
-    public R<Boolean> addSelfShoppingAddress(
-            @Validated @RequestBody AddressAddDTO addressAddDTO
-    ){
-        ShoppingAddress shoppingAddress = AddressConvert.INSTANCE.toShoppingAddress(addressAddDTO,StpUtil.getLoginIdAsLong());
-        return R.decide(shoppingAddressService.save(shoppingAddress));
-    }
-
-    @ApiOperation(value = "修改 收货地址信息")
-    @PostMapping("/modifySelfShoppingAddress")
-    public R<Boolean> modifySelfShoppingAddress(
-            @Validated @RequestBody AddressModifyDTO addressModifyDTO
-    ){
-        ShoppingAddress shoppingAddress = AddressConvert.INSTANCE.toShoppingAddress(addressModifyDTO,StpUtil.getLoginIdAsLong());
-        return R.decide(shoppingAddressService.updateById(shoppingAddress));
-    }
-
-    @ApiOperation(value = "修改 默认收货地址")
-    @PostMapping("/modifyDefaultSelfShoppingAddress")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
-    })
-    public R<Boolean> modifyDefaultSelfShoppingAddress(
-            @RequestParam("id") @NotNull Long id
-    ){
-        long userId = StpUtil.getLoginIdAsLong();
-        //将原来默认的置于非默认
-        shoppingAddressService.update(new UpdateWrapper<ShoppingAddress>()
-               .set(ShoppingAddress.isDEFAULT, DefaultType.NOT_DEFAULT)
-               .eq(ShoppingAddress.USER_ID, userId)
-                .eq(ShoppingAddress.isDEFAULT,DefaultType.IS_DEFAULT.getValue()));
-
-        //将新选择的置为默认
-        boolean update = shoppingAddressService.update(new UpdateWrapper<ShoppingAddress>()
-                .set(ShoppingAddress.isDEFAULT, DefaultType.IS_DEFAULT)
-                .eq(ShoppingAddress.USER_ID, userId)
-                .eq(ShoppingAddress.ID, id));
-        return R.decide(update);
-    }
-
-
-    @ApiOperation(value = "删除 收货地址")
-    @PostMapping("/delSelfShoppingAddress")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
-    })
-    public R<Boolean> delSelfShoppingAddress(@RequestParam("id") @NotNull Long id){
-        return R.decide(shoppingAddressService.removeById(id));
-    }
-
-
-    @ApiOperation(value = "更新用户头像和昵称")
-    @PostMapping("/modifyUserWxInfo")
-    public R<Boolean> modifyUserWxInfo(@Validated @RequestBody UserWxInfoDTO userWxInfoDTO){
-        return R.decide(userService.update(new UpdateWrapper<User>()
-                .set(User.AVATAR,userWxInfoDTO.getAvatarUrl())
-                .set(User.USER_SCREEN_NAME,userWxInfoDTO.getNickName())
-                .eq(User.USER_ID,StpUtil.getLoginIdAsLong())));
-    }
 
 
 
