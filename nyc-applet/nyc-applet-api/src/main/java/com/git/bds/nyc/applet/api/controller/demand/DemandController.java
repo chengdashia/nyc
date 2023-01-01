@@ -1,5 +1,7 @@
-package com.git.bds.nyc.applet.api.demand;
+package com.git.bds.nyc.applet.api.controller.demand;
 
+import com.git.bds.nyc.applet.api.controller.demand.vo.DemandInfoVO;
+import com.git.bds.nyc.applet.api.controller.demand.vo.DemandVO;
 import com.git.bds.nyc.applet.api.convert.demand.DemandConvert;
 
 

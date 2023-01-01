@@ -1,16 +1,15 @@
-package com.git.bds.nyc.applet.api.product;
+package com.git.bds.nyc.applet.api.controller.product;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.easyes.core.biz.PageInfo;
 import cn.easyes.core.conditions.LambdaEsQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.git.bds.nyc.applet.api.controller.product.vo.ProductInfoVO;
+import com.git.bds.nyc.applet.api.controller.product.vo.ProductVO;
 import com.git.bds.nyc.applet.api.convert.product.ProductConvert;
 import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.applet.api.product.vo.PrimaryProductInfoVO;
-import com.git.bds.nyc.applet.api.product.vo.PrimaryProductVO;
-
 import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
@@ -37,13 +36,13 @@ import java.util.List;
  * @author 成大事
  * @since 2022-09-02 22:02:03
  */
-@Api(tags = "初始产品")
+@Api(tags = "产品接口 ")
 @Slf4j
 @Validated
 @RestController
 @RequestMapping("/primaryProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class PrimaryProductController {
+public class ProductController {
 
     private final FarmerPrimaryProductService productService;
 
@@ -56,7 +55,7 @@ public class PrimaryProductController {
 
     @ApiOperation("首页商品数据")
     @GetMapping("/indexProduct")
-    public R<List<PrimaryProductVO>> homePageProductsByPage(
+    public R<List<ProductVO>> homePageProductsByPage(
             @Valid PageParam pageParam
     ){
         List<FarmerPrimaryProduct> productList = productService.homePageProductsByPage(pageParam);
@@ -93,16 +92,23 @@ public class PrimaryProductController {
         return R.ok(productEsMapper.pageQuery(wrapper, pageParam.getPageNo().intValue(), pageParam.getPageSize().intValue()));
     }
 
+    /**
+     * 获取产品信息
+     *
+     * @param id   产品id
+     * @param type 类型
+     * @return {@link R}<{@link ProductInfoVO}>
+     */
     @ApiOperation("商品的详细数据集")
     @PostMapping("/getProductInfo/{id}/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "path", example = "112345646545", required = true),
             @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)
     })
-    public R<PrimaryProductInfoVO> getProductInfo(
+    public R<ProductInfoVO> getProductInfo(
             @PathVariable("id") Long id,
             @PathVariable("type") int type
-            ){
+    ){
         ProductInfoDTO product = productService.getProductInfo(id,type);
         ProductCollection one;
         if(StpUtil.isLogin()){

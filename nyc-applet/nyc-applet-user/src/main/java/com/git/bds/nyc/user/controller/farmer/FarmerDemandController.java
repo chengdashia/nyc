@@ -71,4 +71,6 @@ public class FarmerDemandController {
     public R<Boolean> delete(@PathVariable(value = "id") Long id) {
         return R.decide(demandService.delDemand(id));
     }
+
+
 }

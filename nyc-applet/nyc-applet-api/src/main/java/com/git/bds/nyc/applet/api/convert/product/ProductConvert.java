@@ -1,7 +1,7 @@
 package com.git.bds.nyc.applet.api.convert.product;
 
-import com.git.bds.nyc.applet.api.product.vo.PrimaryProductInfoVO;
-import com.git.bds.nyc.applet.api.product.vo.PrimaryProductVO;
+import com.git.bds.nyc.applet.api.controller.product.vo.ProductInfoVO;
+import com.git.bds.nyc.applet.api.controller.product.vo.ProductVO;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.model.es.ProductEs;
@@ -23,17 +23,17 @@ public interface ProductConvert {
      * 至初级产品vo
      *
      * @param list 列表
-     * @return {@link List}<{@link PrimaryProductVO}>
+     * @return {@link List}<{@link ProductVO}>
      */
-    List<PrimaryProductVO> toPrimaryProductVO(List<FarmerPrimaryProduct> list);
+    List<ProductVO> toPrimaryProductVO(List<FarmerPrimaryProduct> list);
 
     /**
      * 到主要产品信息vo
      *
      * @param product 产品
-     * @return {@link PrimaryProductInfoVO}
+     * @return {@link ProductInfoVO}
      */
-    PrimaryProductInfoVO toPrimaryProductInfoVO(ProductInfoDTO product);
+    ProductInfoVO toPrimaryProductInfoVO(ProductInfoDTO product);
 
     /**
      * 到产品es

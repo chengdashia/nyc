@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.product.vo;
+package com.git.bds.nyc.applet.api.controller.product.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.List;
  * @since 2022/9/6 23:08
  */
 @Data
-public class PrimaryProductInfoVO implements Serializable {
+public class ProductInfoVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("商品id")

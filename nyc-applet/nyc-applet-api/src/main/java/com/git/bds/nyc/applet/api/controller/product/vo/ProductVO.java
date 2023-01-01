@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.product.vo;
+package com.git.bds.nyc.applet.api.controller.product.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @since 2022/9/5 18:40
  */
 @Data
-public class PrimaryProductVO implements Serializable {
+public class ProductVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
