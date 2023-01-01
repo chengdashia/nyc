@@ -1,4 +1,4 @@
-package com.git.bds.nyc.file.service;
+package com.git.bds.nyc.applet.api.service;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.io.FileTypeUtil;

@@ -42,11 +42,6 @@
 
         <dependency>
             <groupId>com.git.bds</groupId>
-            <artifactId>nyc-file-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.git.bds</groupId>
             <artifactId>nyc-applet-corp</artifactId>
         </dependency>
 

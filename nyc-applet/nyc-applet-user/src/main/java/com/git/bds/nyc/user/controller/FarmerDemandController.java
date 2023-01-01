@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @author 成大事
  * @since 2022/12/7 13:08
  */
-@Api(tags = "用户需求")
+@Api(tags = "农户的 需求接口")
 @Slf4j
 @Validated
 @RestController

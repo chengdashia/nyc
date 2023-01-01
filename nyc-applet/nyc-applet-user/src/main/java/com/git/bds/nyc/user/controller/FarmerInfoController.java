@@ -32,7 +32,7 @@ import java.util.List;
  * @author 成大事
  * @since 2022/12/30 13:30
  */
-@Api(tags = "农户")
+@Api(tags = "农户个人信息的接口")
 @Slf4j
 @Validated
 @RestController

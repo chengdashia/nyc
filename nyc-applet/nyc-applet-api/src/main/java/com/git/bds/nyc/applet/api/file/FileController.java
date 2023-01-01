@@ -1,6 +1,7 @@
-package com.git.bds.nyc.file.controller;
+package com.git.bds.nyc.applet.api.file;
 
-import com.git.bds.nyc.file.service.PrimaryProductFileService;
+
+import com.git.bds.nyc.applet.api.service.PrimaryProductFileService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

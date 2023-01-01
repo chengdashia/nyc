@@ -1,4 +1,4 @@
-package com.git.bds.nyc.file.service;
+package com.git.bds.nyc.applet.api.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

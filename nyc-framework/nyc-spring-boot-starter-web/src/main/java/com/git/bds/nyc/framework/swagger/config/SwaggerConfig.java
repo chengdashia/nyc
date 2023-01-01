@@ -68,20 +68,6 @@ public class SwaggerConfig {
     }
 
 
-    /** 文件上传管理 */
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                // 配置分组名
-                .groupName("文件上传管理")
-                .apiInfo(info())
-                .enable(enable)
-                .select()
-                // 设置扫描包的地址 : com.hanliy.controller2
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.file.controller"))
-                .paths(PathSelectors.any())
-                .build();
-    }
 
     /** 用户接口管理 */
     @Bean
@@ -94,21 +80,6 @@ public class SwaggerConfig {
                 .select()
                 // 设置扫描包的地址 : com.**.controller
                 .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.user.controller"))
-                .paths(PathSelectors.any())
-                .build();
-    }
-
-    /** 产品接口管理 */
-    @Bean
-    public Docket api3() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                // 配置分组名
-                .groupName("产品接口管理")
-                .apiInfo(info())
-                .enable(enable)
-                .select()
-                // 设置扫描包的地址 : com.**.controller
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.product.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -128,7 +99,7 @@ public class SwaggerConfig {
                 .build();
     }
 
-    /** 公司接口管理 */
+    /** 后台接口管理 */
     @Bean
     public Docket api5() {
         return new Docket(DocumentationType.SWAGGER_2)

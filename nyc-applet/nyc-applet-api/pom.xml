@@ -11,7 +11,9 @@
     <artifactId>nyc-applet-api</artifactId>
     <version>${revision}</version>
     <name>nyc-applet-api</name>
-    <description>nyc-applet-api</description>
+    <description>
+        小程序中一些通用的接口，包括商品和需求
+    </description>
 
 
     <dependencies>
@@ -29,6 +31,11 @@
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-demand</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-file</artifactId>
         </dependency>
     </dependencies>
 </project>

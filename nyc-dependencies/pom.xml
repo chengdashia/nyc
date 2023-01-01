@@ -150,12 +150,6 @@
 
             <dependency>
                 <groupId>com.git.bds</groupId>
-                <artifactId>nyc-file-api</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.git.bds</groupId>
                 <artifactId>nyc-product</artifactId>
                 <version>${revision}</version>
             </dependency>
