@@ -1,4 +1,4 @@
-package com.git.bds.nyc.user.controller;
+package com.git.bds.nyc.user.controller.farmer;
 
 import com.git.bds.nyc.demand.model.dto.DemandAddDTO;
 import com.git.bds.nyc.demand.model.dto.DemandModifyDTO;

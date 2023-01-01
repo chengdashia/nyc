@@ -1,4 +1,4 @@
-package com.git.bds.nyc.user.controller;
+package com.git.bds.nyc.user.controller.farmer;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;

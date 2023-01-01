@@ -1,4 +1,4 @@
-package com.git.bds.nyc.user.controller;
+package com.git.bds.nyc.user.controller.user;
 
 import cn.dev33.satoken.stp.StpUtil;
 

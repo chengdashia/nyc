@@ -19,7 +19,6 @@
 
 
     <modules>
-        <module>nyc-certification</module>
         <module>nyc-role-permission</module>
         <module>nyc-product</module>
         <module>nyc-demand</module>

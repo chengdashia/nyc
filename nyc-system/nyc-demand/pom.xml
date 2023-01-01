@@ -12,7 +12,7 @@
     <name>nyc-demand</name>
     <packaging>jar</packaging>
     <description>
-        需求
+        需求模块
     </description>
 
     <dependencies>

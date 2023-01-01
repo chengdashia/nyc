@@ -11,7 +11,9 @@
     <version>${revision}</version>
     <name>nyc-product</name>
     <packaging>jar</packaging>
-    <description>nyc-product</description>
+    <description>
+        产品模块
+    </description>
 
 
     <dependencies>
