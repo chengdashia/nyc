@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/farmerDemand")
+@RequestMapping("/farmer/demand")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FarmerDemandController {
 

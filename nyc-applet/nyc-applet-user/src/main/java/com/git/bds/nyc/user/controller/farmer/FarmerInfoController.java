@@ -36,7 +36,7 @@ import java.util.List;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/wx/farmer")
+@RequestMapping("/farmer/info")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FarmerInfoController {
 

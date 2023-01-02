@@ -27,13 +27,13 @@ import java.util.List;
  * @author 成大事
  * @since 2022/9/14 18:46
  */
-@Api(tags = "农户 初级农产品")
+@Api(tags = "农户 农产品")
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/farmerPrimaryProduct")
+@RequestMapping("/farmer/product")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class FarmerProductController {
+public class FarmerController {
 
     private final FarmerPrimaryProductService productService;
 

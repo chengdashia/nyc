@@ -33,7 +33,7 @@ import java.util.List;
 @Api(tags = "农户的 浏览记录和收藏记录")
 @Validated
 @RestController
-@RequestMapping("/farmerHistoryCollection")
+@RequestMapping("/farmer/historyCollection")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FarmerHistoryCollectionController {
 

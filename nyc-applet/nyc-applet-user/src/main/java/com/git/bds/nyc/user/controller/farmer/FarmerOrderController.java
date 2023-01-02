@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/farmer/order")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FarmerOrderController {
 
