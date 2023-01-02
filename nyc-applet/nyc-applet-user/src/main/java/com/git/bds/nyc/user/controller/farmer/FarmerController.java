@@ -54,6 +54,12 @@ public class FarmerController {
         return R.decide(farmerService.releaseOnSellProduct(productDTO));
     }
 
+    /**
+     * 发布预售产品
+     *
+     * @param productDTO 产品dto
+     * @return {@link R}<{@link Boolean}>
+     */
     @PostMapping("/releasePreSellProduct")
     @ApiOperation("发布初级预售农产品")
     public R<Boolean> releasePreSellProduct(
@@ -76,6 +82,12 @@ public class FarmerController {
         return R.decide(productService.modifyProductInfo(productDTO));
     }
 
+    /**
+     * del乘积
+     *
+     * @param id 身份证件
+     * @return {@link R}<{@link Boolean}>
+     */
     @PostMapping("/delProduct")
     @ApiOperation("删除农产品")
     @ApiImplicitParam(name = "id", value = "产品id", required = true, example = "1", dataTypeClass = Long.class)
@@ -85,6 +97,12 @@ public class FarmerController {
         return R.decide(productService.delProductById(id));
     }
 
+    /**
+     * 逐页销售产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link R}<{@link PageResult}<{@link FarmerSelfPrimaryProductVO}>>
+     */
     @PostMapping("/getOnSellProductByPage")
     @ApiOperation("农户获取发布的在售的初级产品 分页")
     public R<PageResult<FarmerSelfPrimaryProductVO>> getOnSellProductByPage(
@@ -95,6 +113,12 @@ public class FarmerController {
         return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
     }
 
+    /**
+     * 按页面获取预售产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link R}<{@link PageResult}<{@link FarmerSelfPrimaryProductVO}>>
+     */
     @PostMapping("/getPreSellProductByPage")
     @ApiOperation("个人获取发布的预售的初级产品 分页")
     public R<PageResult<FarmerSelfPrimaryProductVO>> getPreSellProductByPage(

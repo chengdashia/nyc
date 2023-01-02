@@ -44,6 +44,11 @@ public class FarmerInfoController {
 
     private final ShoppingAddressService shoppingAddressService;
 
+    /**
+     * 获取自助购物地址
+     *
+     * @return {@link R}<{@link List}<{@link ShoppingAddressVO}>>
+     */
     @ApiOperation(value = "我的 获取收货地址")
     @PostMapping("/getSelfShoppingAddress")
     public R<List<ShoppingAddressVO>> getSelfShoppingAddress(){
@@ -51,6 +56,12 @@ public class FarmerInfoController {
         return R.ok(UserConvert.INSTANCE.toShoppingVOList(addressDTOList));
     }
 
+    /**
+     * 添加自购地址
+     *
+     * @param addressAddDTO 地址添加数据
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation(value = "添加收货地址")
     @PostMapping("/addSelfShoppingAddress")
     public R<Boolean> addSelfShoppingAddress(
@@ -60,6 +71,12 @@ public class FarmerInfoController {
         return R.decide(shoppingAddressService.save(shoppingAddress));
     }
 
+    /**
+     * 修改自购地址
+     *
+     * @param addressModifyDTO 地址修改dto
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation(value = "修改 收货地址信息")
     @PostMapping("/modifySelfShoppingAddress")
     public R<Boolean> modifySelfShoppingAddress(
@@ -69,6 +86,12 @@ public class FarmerInfoController {
         return R.decide(shoppingAddressService.updateById(shoppingAddress));
     }
 
+    /**
+     * 修改默认自助购物地址
+     *
+     * @param id 身份证件
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation(value = "修改 默认收货地址")
     @PostMapping("/modifyDefaultSelfShoppingAddress")
     @ApiImplicitParams({
@@ -93,6 +116,12 @@ public class FarmerInfoController {
     }
 
 
+    /**
+     * del自购地址
+     *
+     * @param id 身份证件
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation(value = "删除 收货地址")
     @PostMapping("/delSelfShoppingAddress")
     @ApiImplicitParams({
@@ -103,6 +132,12 @@ public class FarmerInfoController {
     }
 
 
+    /**
+     * 修改用户wx信息
+     *
+     * @param userWxInfoDTO user wx info dto
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation(value = "更新用户头像和昵称")
     @PostMapping("/modifyUserWxInfo")
     public R<Boolean> modifyUserWxInfo(@Validated @RequestBody UserWxInfoDTO userWxInfoDTO){

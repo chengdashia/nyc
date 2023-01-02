@@ -83,6 +83,13 @@ public class CorpHistoryCollectionController {
                 .eq(ProductHistory::getUserId, StpUtil.getLoginIdAsLong())));
     }
 
+    /**
+     * 添加产品集合
+     *
+     * @param id   身份证件
+     * @param type 类型
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation(value = "产品  添加收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/addProductCollection")
     @ApiImplicitParams({
@@ -97,6 +104,12 @@ public class CorpHistoryCollectionController {
     }
 
 
+    /**
+     * 取消产品集合
+     *
+     * @param productId 产品id
+     * @return {@link R}<{@link Boolean}>
+     */
     @ApiOperation("产品  取消收藏")
     @PostMapping("/cancelProductCollection")
     @ApiImplicitParams({
