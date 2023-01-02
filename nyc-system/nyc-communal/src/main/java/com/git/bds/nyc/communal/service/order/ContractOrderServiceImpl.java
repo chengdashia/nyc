@@ -1,4 +1,4 @@
-package com.git.bds.nyc.communal.service;
+package com.git.bds.nyc.communal.service.order;
 
 import com.git.bds.nyc.communal.mapper.mp.ContractOrderMapper;
 import com.git.bds.nyc.communal.model.domain.ContractOrder;

@@ -40,6 +40,11 @@
             <artifactId>nyc-spring-boot-starter-es</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

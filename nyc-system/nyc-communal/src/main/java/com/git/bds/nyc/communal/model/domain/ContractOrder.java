@@ -45,6 +45,10 @@ public class ContractOrder extends Model<ContractOrder> {
     @TableField("product_id")
     private Long productId;
 
+    @ApiModelProperty("产品类型")
+    @TableField("type")
+    private Integer type;
+
     @ApiModelProperty("卖家的联系信息(即发布人的联系方式，发货地址等)")
     @TableField("seller_contact_info_id")
     private Long sellerContactInfoId;
@@ -65,7 +69,7 @@ public class ContractOrder extends Model<ContractOrder> {
     @TableField("unit_price")
     private BigDecimal unitPrice;
 
-    @ApiModelProperty("订单状态（1，代签字 2 ；已签字，3，拒绝签字，4交易成功）")
+    @ApiModelProperty("订单状态（1，待签字 2 ；已签字，3，拒绝签字，4交易成功）")
     @TableField("order_status")
     private Integer orderStatus;
 
