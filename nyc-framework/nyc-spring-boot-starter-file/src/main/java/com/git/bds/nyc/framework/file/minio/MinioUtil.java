@@ -295,6 +295,42 @@ public class MinioUtil {
                         .build());
     }
 
+    /**
+     * 是否需要
+     *
+     * @param file 文件
+     * @return {@link MultipartFile}
+     */
+    public MultipartFile isCompress(MultipartFile file){
+        log.info("压缩前的大小：  "+ file.getSize());
+        log.info("压缩前的名称：  "+ file.getOriginalFilename());
+        //压缩
+        if(file.getSize() > IMG_SIZE){
+            file = ThumbnailUtil.changeScale(file);
+        }
+        log.info("压缩后的大小：  "+ file.getSize());
+        return file;
+    }
+
+    /**
+     * 获取上传路径
+     *
+     * @param file 文件
+     * @param id   上传者id
+     * @return {@link String}
+     */
+    public String getUploadPath(MultipartFile file,Long id,String type){
+        //拼接路径
+        DateTime dateTime = new DateTime(new Date());
+        //获取文件后缀
+        String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
+        return id + SEPARATOR + type +
+                SEPARATOR + dateTime.year() +
+                SEPARATOR + dateTime.month() +
+                SEPARATOR + dateTime.dayOfMonth() +
+                SEPARATOR + IdUtil.getSnowflakeNextId() + POINT + suffix;
+    }
+
 
     /**
      * 使用MultipartFile进行文件上传
@@ -303,31 +339,16 @@ public class MinioUtil {
      * @param file       文件名
      * @throws Exception 异常
      */
-    public String uploadImg(String bucketName, MultipartFile file, Long id) throws Exception {
-        log.info("压缩前的大小：  "+ file.getSize());
-        log.info("压缩前的名称：  "+ file.getOriginalFilename());
-        String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
+    public String uploadImg(String bucketName, MultipartFile file, Long id,String type) throws Exception {
         String contentType = file.getContentType();
-
-        //压缩
-        if(file.getSize() > IMG_SIZE){
-            file = ThumbnailUtil.changeScale(file);
-        }
-        DateTime dateTime = new DateTime(new Date());
-        //拼接路径
-        String path = id +
-                SEPARATOR +
-                dateTime.year() +
-                SEPARATOR + dateTime.month() +
-                SEPARATOR + dateTime.dayOfMonth() +
-                SEPARATOR +
-                IdUtil.getSnowflakeNextId() + POINT + suffix;
-
-        log.info("压缩后的大小：  "+ file.getSize());
+        //是否需要压缩
+        file = isCompress(file);
+        //获取上传的文件的路径
+        String path = getUploadPath(file,id,type);
         log.info("压缩后的名称：  "+ file.getOriginalFilename());
-
-        log.info("contentType  :{}", contentType);
+        //获取流
         InputStream inputStream = file.getInputStream();
+        //上传
         minioClient.putObject(
                 PutObjectArgs.builder()
                         .bucket(bucketName)
@@ -348,36 +369,17 @@ public class MinioUtil {
      * @return {@link List}<{@link String}>
      * @throws Exception 例外
      */
-    public List<String> uploadImgList(String bucketName, MultipartFile[] files, Long id,int type) throws Exception {
+    public List<String> uploadImgList(String bucketName, MultipartFile[] files, Long id,String type) throws Exception {
         List<String> imgList = new ArrayList<>(files.length);
         for (MultipartFile file : files) {
-            log.info("压缩前的大小：  "+ file.getSize());
-            log.info("压缩前的名称：  "+ file.getOriginalFilename());
-            String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
-            String contentType = file.getContentType();
-
-            //压缩
-            if(file.getSize() > IMG_SIZE){
-                file = ThumbnailUtil.changeScale(file);
-            }
-            DateTime dateTime = new DateTime(new Date());
-
+            //是否需要压缩
+            file = isCompress(file);
             //拼接路径
-            String path = id +
-                    SEPARATOR +
-                    type +
-                    SEPARATOR +
-                    dateTime.year() +
-                    SEPARATOR + dateTime.month() +
-                    SEPARATOR + dateTime.dayOfMonth() +
-                    SEPARATOR +
-                    IdUtil.getSnowflakeNextId() + POINT + suffix;
-
-            log.info("压缩后的大小：  "+ file.getSize());
-            log.info("压缩后的名称：  "+ file.getOriginalFilename());
-
-            log.info("contentType  :{}", contentType);
+            String path = getUploadPath(file,id,type);
+            String contentType = file.getContentType();
+            //获取流
             InputStream inputStream = file.getInputStream();
+            //上传
             minioClient.putObject(
                     PutObjectArgs.builder()
                             .bucket(bucketName)

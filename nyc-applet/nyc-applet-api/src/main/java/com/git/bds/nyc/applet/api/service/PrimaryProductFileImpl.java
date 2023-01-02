@@ -2,6 +2,7 @@ package com.git.bds.nyc.applet.api.service;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.io.FileTypeUtil;
+import com.git.bds.nyc.constant.Constants;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.core.util.FileTypeUtils;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
@@ -30,24 +31,62 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
     private MinioConfig minioConfig;
 
 
-
     /**
-     * 上载图片
+     * 上载产品图片
      *
      * @param files 文件夹
-     * @param type
      * @return {@link List}<{@link String}>
      */
     @SneakyThrows
     @Override
-    public List<String> uploadPictures(MultipartFile[] files, int type) {
+    public List<String> uploadProductImg(MultipartFile[] files) {
         for (MultipartFile uploadFile : files) {
             String fileType = FileTypeUtil.getType(uploadFile.getInputStream());
             if(!FileTypeUtils.SUFFIX.contains(fileType)){
                 throw new BusinessException(ResultCode.FILE_TYPE_ERROR.getCode(), ResultCode.FILE_TYPE_ERROR.getMessage());
             }
         }
-        return minioUtil.uploadImgList(minioConfig.getBucketName(),files, StpUtil.getLoginIdAsLong(),type);
+        return minioUtil.uploadImgList(minioConfig.getBucketName(),files, StpUtil.getLoginIdAsLong(), Constants.PRODUCT);
+    }
+
+    /**
+     * 上传请求img
+     *
+     * @param files 上载文件
+     * @return {@link List}<{@link String}>
+     */
+    @SneakyThrows
+    @Override
+    public List<String> uploadDemandImg(MultipartFile[] files) {
+        for (MultipartFile uploadFile : files) {
+            String fileType = FileTypeUtil.getType(uploadFile.getInputStream());
+            if(!FileTypeUtils.SUFFIX.contains(fileType)){
+                throw new BusinessException(ResultCode.FILE_TYPE_ERROR.getCode(), ResultCode.FILE_TYPE_ERROR.getMessage());
+            }
+        }
+        return minioUtil.uploadImgList(minioConfig.getBucketName(),files, StpUtil.getLoginIdAsLong(),Constants.DEMAND);
+    }
+
+    /**
+     * 上传身份证img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link List}<{@link String}>
+     */
+    @Override
+    public List<String> uploadIdCardImg(MultipartFile[] uploadFiles) {
+        return null;
+    }
+
+    /**
+     * 上载企业许可证img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link List}<{@link String}>
+     */
+    @Override
+    public List<String> uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles) {
+        return null;
     }
 
 

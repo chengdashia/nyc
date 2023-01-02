@@ -22,5 +22,11 @@ public class Constants {
     /** 权限 */
     public static final String PERMISSIONS = "permissions";
 
+    /** 产品 */
+    public static final String PRODUCT = "product";
+
+    /** 需求 */
+    public static final String DEMAND = "demand";
+
 
 }

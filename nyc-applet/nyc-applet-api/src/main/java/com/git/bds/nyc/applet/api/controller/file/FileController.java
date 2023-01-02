@@ -32,18 +32,79 @@ public class FileController {
     private final PrimaryProductFileService productFileService;
 
 
+    /**
+     * 上载产品img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link R}<{@link List}<{@link String}>>
+     */
     @SneakyThrows
-    @PostMapping("/upload/{type}")
-    @ApiOperation(value = "图片上传",notes = "产品分 农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2) 需求(3)")
+    @PostMapping("/uploadProductImg")
+    @ApiOperation(value = "商品图片上传",notes = "产品分 农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2) 需求(3)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query"),
-            @ApiImplicitParam(name = "type", value = "类型", required = true,dataTypeClass = Integer.class,paramType = "path")
+            @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
     })
-
-    public R<List<String>> uploadPictures(
-        @RequestPart("files") MultipartFile[] uploadFiles,
-        @PathVariable("type") int type
+    public R<List<String>> uploadProductImg(
+        @RequestPart("files") MultipartFile[] uploadFiles
     ){
-        return R.ok( productFileService.uploadPictures(uploadFiles,type));
+        return R.ok( productFileService.uploadProductImg(uploadFiles));
+    }
+
+
+    /**
+     * 上传需求img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link R}<{@link List}<{@link String}>>
+     */
+    @SneakyThrows
+    @PostMapping("/uploadDemandImg")
+    @ApiOperation(value = "需求图片上传",notes = "产品分 农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2) 需求(3)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
+    })
+    public R<List<String>> uploadDemandImg(
+            @RequestPart("files") MultipartFile[] uploadFiles
+    ){
+        return R.ok( productFileService.uploadDemandImg(uploadFiles));
+    }
+
+    /**
+     * 上传身份证img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link R}<{@link List}<{@link String}>>
+     */
+    @SneakyThrows
+    @PostMapping("/uploadIdCardImg")
+    @ApiOperation(value = "上传身份证",notes = "游客通过上传身份证 进行认证")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
+    })
+    public R<List<String>> uploadIdCardImg(
+            @RequestPart("files") MultipartFile[] uploadFiles
+    ){
+
+        return R.ok(productFileService.uploadIdCardImg(uploadFiles));
+    }
+
+
+    /**
+     * 上载企业许可证img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link R}<{@link List}<{@link String}>>
+     */
+    @SneakyThrows
+    @PostMapping("/uploadEnterpriseLicenseImg")
+    @ApiOperation(value = "uploadEnterpriseLicenseImg",notes = "游客通过上传身份证 进行认证")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
+    })
+    public R<List<String>> uploadEnterpriseLicenseImg(
+            @RequestPart("files") MultipartFile[] uploadFiles
+    ){
+
+        return R.ok(productFileService.uploadEnterpriseLicenseImg(uploadFiles));
     }
 }

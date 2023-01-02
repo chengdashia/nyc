@@ -15,8 +15,31 @@ public interface PrimaryProductFileService {
      * 上载图片
      *
      * @param uploadFiles 上传文件
-     * @param type        类型
      * @return {@link List}<{@link String}>
      */
-    List<String> uploadPictures(MultipartFile[] uploadFiles, int type);
+    List<String> uploadProductImg(MultipartFile[] uploadFiles);
+
+    /**
+     * 上传请求img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link List}<{@link String}>
+     */
+    List<String>  uploadDemandImg(MultipartFile[] uploadFiles);
+
+    /**
+     * 上传身份证img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link List}<{@link String}>
+     */
+    List<String> uploadIdCardImg(MultipartFile[] uploadFiles);
+
+    /**
+     * 上载企业许可证img
+     *
+     * @param uploadFiles 上载文件
+     * @return {@link List}<{@link String}>
+     */
+    List<String> uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles);
 }

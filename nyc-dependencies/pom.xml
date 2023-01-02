@@ -498,6 +498,8 @@
                 <artifactId>itext-asian</artifactId>
                 <version>${itext-asian.version}</version>
             </dependency>
+
+            <!-- 支持中文 -->
             <!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
             <dependency>
                 <groupId>com.itextpdf</groupId>

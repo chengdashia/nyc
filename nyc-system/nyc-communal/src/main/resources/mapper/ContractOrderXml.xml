@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.git.bds.nyc.communal.mapper.mp.ContractOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.git.bds.nyc.communal.model.domain.ContractOrder">
+        <id column="id" property="id" />
+        <result column="seller_id" property="sellerId" />
+        <result column="buyer_id" property="buyerId" />
+        <result column="product_id" property="productId" />
+        <result column="seller_contact_info_id" property="sellerContactInfoId" />
+        <result column="seller_signature" property="sellerSignature" />
+        <result column="buyer_contact_info_id" property="buyerContactInfoId" />
+        <result column="buyer_signature" property="buyerSignature" />
+        <result column="unit_price" property="unitPrice" />
+        <result column="order_status" property="orderStatus" />
+        <result column="order_weight" property="orderWeight" />
+        <result column="remark" property="remark" />
+        <result column="contract_url" property="contractUrl" />
+        <result column="create_time" property="createTime" />
+        <result column="complete_time" property="completeTime" />
+        <result column="fail_feedback" property="failFeedback" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, seller_id, buyer_id, product_id, seller_contact_info_id, seller_signature, buyer_contact_info_id, buyer_signature, unit_price, order_status, order_weight, remark, contract_url, create_time, complete_time, fail_feedback
+    </sql>
+
+</mapper>
