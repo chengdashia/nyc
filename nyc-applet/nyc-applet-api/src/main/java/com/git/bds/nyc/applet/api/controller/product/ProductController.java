@@ -40,7 +40,7 @@ import java.util.List;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/Product")
+@RequestMapping("/product")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ProductController {
 
