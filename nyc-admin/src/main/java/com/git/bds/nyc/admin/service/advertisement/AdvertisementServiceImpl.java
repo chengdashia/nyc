@@ -50,7 +50,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
                         .select(Advertisement.class,i -> !Advertisement.UPDATE_TIME.equals(i.getColumn()))
                         .eq(Advertisement.STATUS, AdvertisementType.ABLE.getValue()));
         log.info(""+page);
-        return new PageResult<>(page.getRecords(),(long) page.getRecords().size());
+        return new PageResult<>(page.getRecords(),page.getTotal());
     }
 
     /**
