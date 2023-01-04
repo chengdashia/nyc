@@ -60,7 +60,7 @@ public class AdvertisementController {
      */
     @SneakyThrows
     @ApiOperation("发布广告")
-    @PostMapping("/releaseAdvertisementById")
+    @PostMapping("/releaseAdvertisement")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,paramType = "query")
     })
