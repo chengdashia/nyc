@@ -8,6 +8,10 @@ import java.math.BigDecimal;
  * BigDecimal运算工具类
  */
 public class DecimalUtils {
+
+    private DecimalUtils(){
+
+    }
     /**
      * 加法计算（result = x + y）
      *
@@ -258,33 +262,53 @@ public class DecimalUtils {
      * @param bigDecimal  金额
      * @return  人民币表述
      */
-    public static String bigDecimalToLocalStr(BigDecimal bigDecimal) {
-        String[] chinese = new String[]{"", "拾", "佰", "仟", "万", "拾", "佰", "仟", "亿", "拾", "佰", "仟", "万"};
-        String[] numChinese = new String[]{"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
-        String[] afterChinese = new String[]{"角", "分"};
-        String str = String.valueOf(bigDecimal);
-        String[] arr = str.split("\\.");
-        char[] chars = arr[0].toCharArray();
-        StringBuffer sb = new StringBuffer();
+    private static final String UNIT = "万仟佰拾亿仟佰拾万仟佰拾元角分";
+    private static final String DIGIT = "零壹贰叁肆伍陆柒捌玖";
+    private static final double MAX_VALUE = 9999999999999.99D;
 
-        for(int i = 0; i < chars.length; ++i) {
-            sb.append(numChinese[Integer.parseInt(String.valueOf(chars[i]))]).append(chinese[chars.length - i - 1]);
+    /**
+     * 将数字BigDecimal转换成中文大写
+     *
+     * @param bigDecimal 原始的金额 eg：11111.11
+     * @return 中文金额 eg: 壹万壹仟壹佰壹拾壹元壹角壹分
+     */
+    public static String bigDecimalToString(BigDecimal bigDecimal) {
+
+        double v = bigDecimal.doubleValue();
+
+        if (v < 0 || v > MAX_VALUE) {
+            return "参数非法!";
         }
-
-        if (arr.length == 1) {
-            return sb.toString() + "元整";
-        } else if (arr[1].length() > 2) {
-            throw new IllegalArgumentException("人民币大写转换BigDecimal只能保留2位小数");
-        } else {
-            sb.append("元");
-            char[] chars1 = arr[1].toCharArray();
-
-            for(int i = 0; i < chars1.length; ++i) {
-                sb.append(numChinese[Integer.parseInt(String.valueOf(chars1[i]))]).append(afterChinese[i]);
+        long l = Math.round(v * 100);
+        if (l == 0) {
+            return "零元整";
+        }
+        String strValue = l + "";
+        // i用来控制数
+        int i = 0;
+        // j用来控制单位
+        int j = UNIT.length() - strValue.length();
+        StringBuilder rs = new StringBuilder();
+        boolean isZero = false;
+        for (; i < strValue.length(); i++, j++) {
+            char ch = strValue.charAt(i);
+            if (ch == '0') {
+                isZero = true;
+                if (UNIT.charAt(j) == '亿' || UNIT.charAt(j) == '万' || UNIT.charAt(j) == '元') {
+                    rs.append(UNIT.charAt(j));
+                    isZero = false;
+                }
+            } else {
+                if (isZero) {
+                    rs.append("零");
+                    isZero = false;
+                }
+                rs.append(DIGIT.charAt(ch - '0')).append(UNIT.charAt(j));
             }
-
-            return sb.toString();
         }
+        rs = new StringBuilder(rs.toString().replaceAll("亿万", "亿"));
+        return rs.toString();
     }
+
 
 }

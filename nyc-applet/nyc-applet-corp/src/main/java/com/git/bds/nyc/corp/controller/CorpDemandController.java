@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author 成大事
  * @since 2022/11/2 10:31
  */
-@Api(tags = "公司需求")
+@Api(tags = "公司需求接口")
 @Validated
 @RestController
 @RequestMapping("/corpDemand")
