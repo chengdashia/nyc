@@ -1,4 +1,4 @@
-package com.git.bds.nyc.user.domain.vo;
+package com.git.bds.nyc.user.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

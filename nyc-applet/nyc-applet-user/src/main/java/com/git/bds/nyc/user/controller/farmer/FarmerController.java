@@ -8,7 +8,7 @@ import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.convert.FarmerProductConvert;
-import com.git.bds.nyc.user.domain.FarmerSelfPrimaryProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerSelfPrimaryProductVO;
 import com.git.bds.nyc.user.service.farmer.FarmerService;
 import com.git.bds.nyc.user.valid.ValidGroup;
 import io.swagger.annotations.Api;

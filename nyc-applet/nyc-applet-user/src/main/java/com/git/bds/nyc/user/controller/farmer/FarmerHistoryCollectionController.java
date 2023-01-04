@@ -11,7 +11,7 @@ import com.git.bds.nyc.product.service.collection.ProductCollectionService;
 import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.convert.FarmerProductConvert;
-import com.git.bds.nyc.user.domain.vo.FarmerProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerProductVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

@@ -4,8 +4,9 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 
 import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
 import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
-import com.git.bds.nyc.user.domain.User;
-import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.model.domain.User;
+import com.git.bds.nyc.user.model.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.model.vo.LoginVO;
 import com.github.yulichang.base.MPJBaseService;
 import me.chanjar.weixin.common.error.WxErrorException;
 
@@ -26,10 +27,10 @@ public interface UserService extends MPJBaseService<User> {
      * 登录
      *
      * @param wxUserInfoDTO WX用户信息DTO
-     * @return {@link WxMaJscode2SessionResult}
+     * @return {@link LoginVO}
      * @throws WxErrorException wx错误异常
      */
-    String login(WxUserInfoDTO wxUserInfoDTO) throws WxErrorException;
+    LoginVO login(WxUserInfoDTO wxUserInfoDTO) throws WxErrorException;
 
     /**
      * 获取自助购物地址

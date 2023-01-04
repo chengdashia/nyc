@@ -10,9 +10,10 @@ import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
 import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.user.convert.UserConvert;
-import com.git.bds.nyc.user.domain.User;
-import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.model.domain.User;
+import com.git.bds.nyc.user.model.dto.WxUserInfoDTO;
 import com.git.bds.nyc.user.mapper.mp.UserMapper;
+import com.git.bds.nyc.user.model.vo.LoginVO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.SneakyThrows;
@@ -48,12 +49,12 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String login(WxUserInfoDTO wxUserInfoDTO) {
+    public LoginVO login(WxUserInfoDTO wxUserInfoDTO) {
         User user;
         WxMaJscode2SessionResult session = wxMaService.getUserService().getSessionInfo(wxUserInfoDTO.getCode());
         String openid = session.getOpenid();
         user = this.baseMapper.selectOne(new LambdaQueryWrapper<User>()
-                .select(User::getId)
+                .select(User::getId,User::getAvatar,User::getScreenName)
                 .eq(User::getOpenid, openid));
         //登录
         if(user == null){
@@ -72,7 +73,11 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
             this.baseMapper.updateById(user);
             StpUtil.login(user.getId());
         }
-        return StpUtil.getTokenValue();
+        LoginVO login = new LoginVO();
+        login.setToken(StpUtil.getTokenValue());
+        login.setAvatar(user.getAvatar());
+        login.setAvatar(user.getScreenName());
+        return login;
     }
 
     /**

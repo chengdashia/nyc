@@ -1,4 +1,4 @@
-package com.git.bds.nyc.user.domain.dto;
+package com.git.bds.nyc.user.model.dto;
 
 import lombok.Data;
 

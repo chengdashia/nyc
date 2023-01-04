@@ -4,7 +4,7 @@ package com.git.bds.nyc.admin.service.advertisement;
 import com.git.bds.nyc.admin.model.domain.Advertisement;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.user.domain.dto.UserDTO;
+import com.git.bds.nyc.user.model.dto.UserDTO;
 import com.github.yulichang.base.MPJBaseService;
 import org.springframework.web.multipart.MultipartFile;
 

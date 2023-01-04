@@ -2,8 +2,8 @@ package com.git.bds.nyc.user.convert;
 
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
-import com.git.bds.nyc.user.domain.FarmerSelfPrimaryProductVO;
-import com.git.bds.nyc.user.domain.vo.FarmerProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerSelfPrimaryProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

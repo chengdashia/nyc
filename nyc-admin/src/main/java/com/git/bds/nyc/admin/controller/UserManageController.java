@@ -6,7 +6,7 @@ import com.git.bds.nyc.admin.service.admin.SysAdminService;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.R;
-import com.git.bds.nyc.user.domain.dto.UserDTO;
+import com.git.bds.nyc.user.model.dto.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

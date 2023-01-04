@@ -1,7 +1,7 @@
 package com.git.bds.nyc.admin.convert;
 
 import com.git.bds.nyc.admin.model.vo.UserVO;
-import com.git.bds.nyc.user.domain.dto.UserDTO;
+import com.git.bds.nyc.user.model.dto.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

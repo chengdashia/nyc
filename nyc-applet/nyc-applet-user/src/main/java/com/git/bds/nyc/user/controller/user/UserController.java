@@ -1,9 +1,10 @@
 package com.git.bds.nyc.user.controller.user;
 
 import cn.dev33.satoken.stp.StpUtil;
-
-import com.git.bds.nyc.user.domain.User;
-import com.git.bds.nyc.user.domain.dto.WxUserInfoDTO;
+import com.git.bds.nyc.result.R;
+import com.git.bds.nyc.user.model.domain.User;
+import com.git.bds.nyc.user.model.dto.WxUserInfoDTO;
+import com.git.bds.nyc.user.model.vo.LoginVO;
 import com.git.bds.nyc.user.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,10 +34,17 @@ public class UserController {
 
     private final UserService userService;
 
+    /**
+     * 登录
+     *
+     * @param userInfoDTO 用户信息dto
+     * @return {@link R}<{@link LoginVO}>
+     * @throws WxErrorException wx错误异常
+     */
     @ApiOperation("微信登录")
     @PostMapping("/login")
-    public String login(@RequestBody WxUserInfoDTO userInfoDTO) throws WxErrorException {
-        return userService.login(userInfoDTO);
+    public R<LoginVO> login(@RequestBody WxUserInfoDTO userInfoDTO) throws WxErrorException {
+        return R.ok(userService.login(userInfoDTO));
     }
 
     @ApiOperation("测试  token")

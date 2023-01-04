@@ -2,8 +2,8 @@ package com.git.bds.nyc.user.convert;
 
 
 import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
-import com.git.bds.nyc.user.domain.User;
-import com.git.bds.nyc.user.domain.vo.ShoppingAddressVO;
+import com.git.bds.nyc.user.model.domain.User;
+import com.git.bds.nyc.user.model.vo.ShoppingAddressVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

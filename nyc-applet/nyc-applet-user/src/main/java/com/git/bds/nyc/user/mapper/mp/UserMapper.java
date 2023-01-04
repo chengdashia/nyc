@@ -1,6 +1,6 @@
 package com.git.bds.nyc.user.mapper.mp;
 
-import com.git.bds.nyc.user.domain.User;
+import com.git.bds.nyc.user.model.domain.User;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
