@@ -39,17 +39,28 @@ public interface AdvertisementService extends MPJBaseService<Advertisement> {
     /**
      * 按id修改广告
      *
-     * @param advertisementId 广告id
-     * @param file            文件
+     * @param id    广告id
+     * @param file  文件
+     * @param title 标题
      * @return {@link Boolean}
+     * @throws Exception 例外
      */
-    Boolean modifyAdvertisementById(Long advertisementId, MultipartFile file) throws Exception;
+    Boolean modifyAdvertisementById(Long id,String title, MultipartFile file) throws Exception;
 
     /**
      * 按id删除广告
      *
-     * @param advertisementId 广告id
+     * @param id 广告id
      * @return {@link Boolean}
      */
-    Boolean delAdvertisementById(Long advertisementId);
+    Boolean delAdvertisementById(Long id);
+
+    /**
+     * 按id修改广告状态
+     *
+     * @param id     广告id
+     * @param status 状态
+     * @return {@link Boolean}
+     */
+    Boolean modifyAdvertisementStatusById(Long id, Integer status);
 }

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author 成大事
@@ -20,6 +21,12 @@ public class AdvertisementVO implements Serializable {
     @ApiModelProperty("广告的title")
     private String title;
 
+    @ApiModelProperty("状态（0：禁用；1:在用）")
+    private Integer status;
+
     @ApiModelProperty("广告的图片地址")
     private String pictureUrl;
+
+    @ApiModelProperty("发布时间")
+    private LocalDateTime createTime;
 }

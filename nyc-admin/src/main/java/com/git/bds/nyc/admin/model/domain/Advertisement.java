@@ -1,9 +1,6 @@
 package com.git.bds.nyc.admin.model.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,6 +9,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -38,16 +36,34 @@ public class Advertisement extends Model<Advertisement> {
     @TableField("title")
     private String title;
 
+    @ApiModelProperty("状态（0：禁用；1:在用）")
+    @TableField("status")
+    private Integer status;
+
     @ApiModelProperty("图片地址")
     @TableField("picture_url")
     private String pictureUrl;
+
+    @ApiModelProperty("注册时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
 
 
     public static final String ID = "id";
 
     public static final String TITLE = "title";
 
+    public static final String STATUS = "status";
+
     public static final String PICTURE_URL = "picture_url";
+
+    public static final String CREATE_TIME = "create_time";
+
+    public static final String UPDATE_TIME = "update_time";
 
     @Override
     public Serializable pkVal() {
