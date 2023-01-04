@@ -5,12 +5,13 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.git.bds.nyc.admin.model.domain.Advertisement">
         <id column="id" property="id" />
+        <result column="title" property="title" />
         <result column="picture_url" property="pictureUrl" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, picture_url
+        id, title, picture_url
     </sql>
 
 </mapper>

@@ -30,10 +30,11 @@ public interface AdvertisementService extends MPJBaseService<Advertisement> {
     /**
      * 发布广告
      *
-     * @param file 文件
+     * @param title
+     * @param file  文件
      * @return {@link Boolean}
      */
-    Boolean releaseAdvertisement(MultipartFile file) throws Exception;
+    Boolean releaseAdvertisement(String title, MultipartFile file) throws Exception;
 
     /**
      * 按id修改广告

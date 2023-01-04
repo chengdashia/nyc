@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -55,19 +56,22 @@ public class AdvertisementController {
     /**
      * 发布广告
      *
-     * @param file 文件
+     * @param file  文件
+     * @param title 标题
      * @return {@link R}<{@link Boolean}>
      */
     @SneakyThrows
     @ApiOperation("发布广告")
     @PostMapping("/releaseAdvertisement")
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "title", value = "title", dataTypeClass = String.class, paramType = "query", example = "贵理工大数据学院工作室", required = true),
             @ApiImplicitParam(name = "file", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,paramType = "query")
     })
     public R<Boolean> releaseAdvertisement(
+            @RequestParam("title") @NotNull @NotBlank(message = "title不能为空") String title,
             @RequestParam("file") MultipartFile file
     ){
-        return R.decide(advertisementService.releaseAdvertisement(file));
+        return R.decide(advertisementService.releaseAdvertisement(title,file));
     }
 
     /**

@@ -17,6 +17,9 @@ public class AdvertisementVO implements Serializable {
     @ApiModelProperty("广告id")
     private Long id;
 
+    @ApiModelProperty("广告的title")
+    private String title;
+
     @ApiModelProperty("广告的图片地址")
     private String pictureUrl;
 }
