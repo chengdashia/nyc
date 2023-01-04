@@ -1,4 +1,4 @@
-package com.git.bds.nyc.admin.service;
+package com.git.bds.nyc.admin.service.admin;
 
 import com.git.bds.nyc.admin.model.domain.SysAdmin;
 import com.git.bds.nyc.page.PageParam;
@@ -33,4 +33,12 @@ public interface SysAdminService extends MPJBaseService<SysAdmin> {
      * @return {@link PageResult}<{@link UserDTO}>
      */
     PageResult<UserDTO> getUserByPage(PageParam pageParam);
+
+    /**
+     * 按页面获取角色
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link UserDTO}>
+     */
+    PageResult<UserDTO> getRolesByPage(PageParam pageParam);
 }

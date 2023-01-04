@@ -15,38 +15,37 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
  * @author 成大事
- * @since 2022/11/14 17:46
+ * @since 2023/1/4 15:20
  */
-@Api(tags = "用户管理")
+@Api(tags = "角色权限管理")
 @Validated
 @RestController
-@RequestMapping("/admin/user")
+@RequestMapping("/admin/role-permission")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class UserManageController {
+public class RolePermissionController {
 
     private final SysAdminService adminService;
 
-
     /**
-     * 分页获取用户
+     * getRolesByPage
      *
      * @param pageParam 页面参数
      * @return {@link R}<{@link PageResult}<{@link UserVO}>>
      */
-    @ApiOperation("获取用户列表 分页")
-    @PostMapping("/getUserByPage")
-    public R<PageResult<UserVO>> getUsersByPage(
+    @ApiOperation("获取角色列表 分页")
+    @PostMapping("/getRolesByPage")
+    public R<PageResult<UserVO>> getRolesByPage(
             @Validated @RequestBody PageParam pageParam
     ){
-        PageResult<UserDTO> page = adminService.getUserByPage(pageParam);
+        PageResult<UserDTO> page = adminService.getRolesByPage(pageParam);
         List<UserVO> userVOList = AdminConvert.INSTANCE.toUserVOList(page.getList());
         return R.ok(new PageResult<>(userVOList,page.getTotal()));
     }
 }
+

@@ -1,4 +1,4 @@
-package com.git.bds.nyc.admin.service.impl;
+package com.git.bds.nyc.admin.service.admin;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.admin.mapper.mp.SysAdminMapper;
 import com.git.bds.nyc.admin.model.domain.SysAdmin;
-import com.git.bds.nyc.admin.service.SysAdminService;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
@@ -79,5 +78,10 @@ public class SysAdminServiceImpl extends MPJBaseServiceImpl<SysAdminMapper, SysA
                         .leftJoin(SysRole.class, SysRole::getId, SysUserRole::getRoleId));
         log.info("page  "+page);
         return new PageResult<>(page.getRecords(),page.getCurrent());
+    }
+
+    @Override
+    public PageResult<UserDTO> getRolesByPage(PageParam pageParam) {
+        return null;
     }
 }

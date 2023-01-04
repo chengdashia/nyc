@@ -359,6 +359,35 @@ public class MinioUtil {
         return URL + path;
     }
 
+    /**
+     * 使用MultipartFile进行文件上传
+     *
+     * @param bucketName 存储桶
+     * @param file       文件名
+     * @throws Exception 异常
+     */
+    public String uploadAdvertisementPicture(String bucketName, MultipartFile file) throws Exception {
+        String contentType = file.getContentType();
+        DateTime dateTime = new DateTime(new Date());
+        //获取文件后缀
+        String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
+        String path = "advertisement" + SEPARATOR + dateTime.year() +
+                SEPARATOR + dateTime.month() +
+                SEPARATOR + dateTime.dayOfMonth() +
+                SEPARATOR + IdUtil.getSnowflakeNextId() + POINT + suffix;
+        //获取流
+        InputStream inputStream = file.getInputStream();
+        //上传
+        minioClient.putObject(
+                PutObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(path)
+                        .contentType(contentType)
+                        .stream(inputStream, inputStream.available(), -1)
+                        .build());
+        return URL + path;
+    }
+
 
     /**
      * 上传IMG

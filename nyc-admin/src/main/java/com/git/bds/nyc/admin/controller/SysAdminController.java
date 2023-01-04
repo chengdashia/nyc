@@ -1,6 +1,6 @@
 package com.git.bds.nyc.admin.controller;
 
-import com.git.bds.nyc.admin.service.SysAdminService;
+import com.git.bds.nyc.admin.service.admin.SysAdminService;
 import com.git.bds.nyc.util.validate.phone.Phone;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
