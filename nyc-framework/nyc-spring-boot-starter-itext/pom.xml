@@ -26,6 +26,11 @@
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-common</artifactId>
+        </dependency>
     </dependencies>
 
 
