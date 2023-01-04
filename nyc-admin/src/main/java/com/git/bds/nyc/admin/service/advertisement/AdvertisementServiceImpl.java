@@ -64,7 +64,10 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
     @Override
     public Boolean releaseAdvertisement(String title, MultipartFile file) throws Exception {
         String pictureUrl = minioUtil.uploadAdvertisementPicture(minioConfig.getBucketName(), file);
-        Advertisement advertisement = new Advertisement().setPictureUrl(pictureUrl).setTitle(title);
+        Advertisement advertisement = new Advertisement()
+                .setPictureUrl(pictureUrl)
+                .setTitle(title)
+                .setStatus(AdvertisementType.ABLE.getValue());
         return this.baseMapper.insert(advertisement) > 0;
     }
 
