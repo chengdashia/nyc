@@ -120,6 +120,6 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
     public Boolean modifyAdvertisementStatusById(Long id, Integer status) {
         return this.baseMapper.update(null,new LambdaUpdateWrapper<Advertisement>()
                 .set(Advertisement::getStatus,status)
-                .eq(Advertisement::getId,status)) > 0;
+                .eq(Advertisement::getId,id)) > 0;
     }
 }
