@@ -1,6 +1,5 @@
 package com.git.bds.nyc.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.git.bds.nyc.admin.convert.AdvertisementConvert;
 import com.git.bds.nyc.admin.model.domain.Advertisement;
 import com.git.bds.nyc.admin.model.vo.AdvertisementVO;
@@ -61,7 +60,7 @@ public class AdvertisementController {
      */
     @SneakyThrows
     @ApiOperation("发布广告")
-    @PostMapping("/modifyAdvertisementById")
+    @PostMapping("/releaseAdvertisementById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,paramType = "query")
     })
