@@ -1,6 +1,6 @@
 package com.git.bds.nyc.admin.convert;
 
-import com.git.bds.nyc.admin.model.domain.Advertisement;
+import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.git.bds.nyc.admin.model.vo.AdvertisementVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

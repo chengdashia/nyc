@@ -1,24 +1,25 @@
-package com.git.bds.nyc.admin.service.advertisement;
+package com.git.bds.nyc.communal.service.advertisement;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.git.bds.nyc.admin.mapper.mp.AdvertisementMapper;
-import com.git.bds.nyc.admin.model.domain.Advertisement;
+import com.git.bds.nyc.communal.mapper.mp.AdvertisementMapper;
+import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.git.bds.nyc.enums.AdvertisementType;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.user.model.dto.UserDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -38,19 +39,30 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
     private final MinioUtil minioUtil;
 
     /**
-     * 分页获取广告
+     * 管理员端分页获取广告
      *
      * @param pageParam 页面参数
-     * @return {@link PageResult}<{@link UserDTO}>
+     * @return {@link PageResult}<{@link Advertisement}>
      */
     @Override
     public PageResult<Advertisement> getAdvertisementsByPage(PageParam pageParam) {
         Page<Advertisement> page = this.baseMapper.selectPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 new QueryWrapper<Advertisement>()
-                        .select(Advertisement.class,i -> !Advertisement.UPDATE_TIME.equals(i.getColumn()))
-                        .eq(Advertisement.STATUS, AdvertisementType.ABLE.getValue()));
+                        .select(Advertisement.class,i -> !Advertisement.UPDATE_TIME.equals(i.getColumn())));
         log.info(""+page);
         return new PageResult<>(page.getRecords(),page.getTotal());
+    }
+
+    /**
+     * 小程序端获取广告
+     *
+     * @return {@link List}<{@link Advertisement}>
+     */
+    @Override
+    public List<Advertisement> getAdvertisements() {
+        return this.baseMapper.selectList(new QueryWrapper<Advertisement>()
+                .select(Advertisement.class,i -> !Advertisement.UPDATE_TIME.equals(i.getColumn()))
+                .eq(Advertisement.STATUS, AdvertisementType.ABLE.getValue()));
     }
 
     /**
@@ -122,4 +134,6 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
                 .set(Advertisement::getStatus,status)
                 .eq(Advertisement::getId,id)) > 0;
     }
+
+
 }

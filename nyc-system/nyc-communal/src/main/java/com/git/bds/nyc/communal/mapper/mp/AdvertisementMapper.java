@@ -1,7 +1,7 @@
-package com.git.bds.nyc.admin.mapper.mp;
+package com.git.bds.nyc.communal.mapper.mp;
 
 
-import com.git.bds.nyc.admin.model.domain.Advertisement;
+import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

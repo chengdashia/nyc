@@ -1,12 +1,13 @@
-package com.git.bds.nyc.admin.service.advertisement;
+package com.git.bds.nyc.communal.service.advertisement;
 
 
-import com.git.bds.nyc.admin.model.domain.Advertisement;
+import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.user.model.dto.UserDTO;
 import com.github.yulichang.base.MPJBaseService;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,10 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 public interface AdvertisementService extends MPJBaseService<Advertisement> {
 
     /**
+     * 按页面获取广告
      * 分页获取广告
      *
      * @param pageParam 页面参数
-     * @return {@link PageResult}<{@link UserDTO}>
+     * @return {@link PageResult}<{@link Advertisement}>
      */
     PageResult<Advertisement> getAdvertisementsByPage(PageParam pageParam);
 
@@ -63,4 +65,11 @@ public interface AdvertisementService extends MPJBaseService<Advertisement> {
      * @return {@link Boolean}
      */
     Boolean modifyAdvertisementStatusById(Long id, Integer status);
+
+    /**
+     * 获取广告
+     *
+     * @return {@link List}<{@link Advertisement}>
+     */
+    List<Advertisement> getAdvertisements();
 }

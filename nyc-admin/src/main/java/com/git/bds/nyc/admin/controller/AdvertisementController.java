@@ -1,10 +1,9 @@
 package com.git.bds.nyc.admin.controller;
 
 import com.git.bds.nyc.admin.convert.AdvertisementConvert;
-import com.git.bds.nyc.admin.model.domain.Advertisement;
+import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.git.bds.nyc.admin.model.vo.AdvertisementVO;
-import com.git.bds.nyc.admin.model.vo.UserVO;
-import com.git.bds.nyc.admin.service.advertisement.AdvertisementService;
+import com.git.bds.nyc.communal.service.advertisement.AdvertisementService;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.R;
@@ -42,7 +41,7 @@ public class AdvertisementController {
      * 分页获取广告
      *
      * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link UserVO}>>
+     * @return {@link R}<{@link PageResult}<{@link AdvertisementVO}>>
      */
     @ApiOperation("获取广告列表 分页")
     @PostMapping("/getAdvertisementsByPage")
