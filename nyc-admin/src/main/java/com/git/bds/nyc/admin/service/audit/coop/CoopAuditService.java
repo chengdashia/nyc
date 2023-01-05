@@ -1,5 +1,6 @@
 package com.git.bds.nyc.admin.service.audit.coop;
 
+import com.git.bds.nyc.admin.model.AuditStatusDTO;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
@@ -18,4 +19,20 @@ public interface CoopAuditService {
      * @return {@link PageResult}<{@link AuditProductDTO}>
      */
     PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type);
+
+    /**
+     * 审核产品
+     *
+     * @param statusDTO 状态dto
+     * @return {@link Boolean}
+     */
+    Boolean toExamineProduct(AuditStatusDTO statusDTO);
+
+    /**
+     * 审核需求
+     *
+     * @param statusDTO 状态dto
+     * @return {@link Boolean}
+     */
+    Boolean toExamineDemand(AuditStatusDTO statusDTO);
 }

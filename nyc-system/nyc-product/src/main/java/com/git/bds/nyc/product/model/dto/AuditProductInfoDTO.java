@@ -14,7 +14,7 @@ import java.util.List;
 public class AuditProductInfoDTO {
 
     /** 联系信息(即发布人的联系方式，发货地址等) */
-    private Long contactInfoId;
+    private Long userId;
 
     /** 产品种类 */
     private String productSpecies;

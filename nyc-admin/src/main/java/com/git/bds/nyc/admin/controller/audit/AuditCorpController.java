@@ -1,12 +1,11 @@
 package com.git.bds.nyc.admin.controller.audit;
 
 import com.git.bds.nyc.admin.convert.AuditConvert;
+import com.git.bds.nyc.admin.model.AuditStatusDTO;
 import com.git.bds.nyc.admin.model.vo.AdvertisementVO;
 import com.git.bds.nyc.admin.model.vo.AuditProductVO;
 import com.git.bds.nyc.admin.service.audit.AuditCorpService;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
-import com.git.bds.nyc.communal.service.audit.AuditCorpDemandService;
-import com.git.bds.nyc.communal.service.audit.AuditCorpProductService;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.R;
@@ -35,10 +34,6 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AuditCorpController {
 
-    private final AuditCorpProductService auditCorpProductService;
-
-    private final AuditCorpDemandService auditCorpDemandService;
-
     private final AuditCorpService auditCorpService;
 
 
@@ -57,5 +52,51 @@ public class AuditCorpController {
         PageResult<AuditProductDTO> page = auditCorpService.getPendingAuditProductByPage(pageParam,type);
         List<AuditProductVO> userVOList = AuditConvert.INSTANCE.toAuditProductVOList(page.getList());
         return R.ok(new PageResult<>(userVOList,page.getTotal()));
+    }
+
+    /**
+     * 供销社审核公司发布的初级农产品
+     *
+     * @param statusDTO 状态dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("供销社审核公司发布的初级农产品")
+    @PostMapping("/toExamineCorpPrimaryProduct")
+    public R<Boolean> toExamineCorpPrimaryProduct(
+            @Validated @RequestBody AuditStatusDTO statusDTO
+    ){
+        return R.decide(auditCorpService.toExamineCorpPrimaryProduct(statusDTO));
+    }
+
+    /**
+     * 供销社审核公司发布的加工农产品
+     *
+     * @param statusDTO 状态dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("供销社审核公司发布的加工农产品")
+    @PostMapping("/toExamineCorpProcessingProduct")
+    public R<Boolean> toExamineCorpProcessingProduct(
+            @Validated @RequestBody AuditStatusDTO statusDTO
+    ){
+        return R.decide(auditCorpService.toExamineCorpProcessingProduct(statusDTO));
+    }
+
+
+
+
+
+    /**
+     * 审核需求
+     *
+     * @param statusDTO 状态dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("合作社 审核需求")
+    @PostMapping("/toExamineDemand")
+    public R<Boolean> toExamineDemand(
+            @Validated @RequestBody AuditStatusDTO statusDTO
+    ){
+        return R.decide(auditCorpService.toExamineDemand(statusDTO));
     }
 }

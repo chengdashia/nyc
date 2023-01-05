@@ -2,12 +2,11 @@ package com.git.bds.nyc.admin.controller.audit;
 
 
 import com.git.bds.nyc.admin.convert.AuditConvert;
+import com.git.bds.nyc.admin.model.AuditStatusDTO;
 import com.git.bds.nyc.admin.model.vo.AdvertisementVO;
 import com.git.bds.nyc.admin.model.vo.AuditProductVO;
 import com.git.bds.nyc.admin.service.audit.coop.CoopAuditService;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
-import com.git.bds.nyc.communal.service.audit.CoopAuditDemandService;
-import com.git.bds.nyc.communal.service.audit.CoopAuditProductService;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.R;
@@ -36,27 +35,58 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CoopAuditController {
 
-    private final CoopAuditProductService coopAuditProductService;
-
-    private final CoopAuditDemandService auditDemandService;
-
-    private final CoopAuditService auditService;
+    private final CoopAuditService coopAuditService;
 
     /**
-     * 合作社 分页获取农户发布的 需要审核的商品
+     * 合作社 分页获取农户发布的 需要审核的初级农产品
      *
      * @param pageParam 页面参数
      * @return {@link R}<{@link PageResult}<{@link AdvertisementVO}>>
      */
-    @ApiOperation("合作社 分页获取农户发布的 需要审核的商品")
+    @ApiOperation("合作社 分页获取农户发布的 需要审核的初级农产品")
     @GetMapping("/getPendingAuditProductByPage/{type}")
     public R<PageResult<AuditProductVO>> getPendingAuditProductByPage(
             @Validated @RequestBody PageParam pageParam,
             @PathVariable("type") @NotNull @Min(-1) @Max(1) Integer type
     ) {
-        PageResult<AuditProductDTO> page = auditService.getPendingAuditProductByPage(pageParam, type);
+        PageResult<AuditProductDTO> page = coopAuditService.getPendingAuditProductByPage(pageParam, type);
         List<AuditProductVO> userVOList = AuditConvert.INSTANCE.toAuditProductVOList(page.getList());
         return R.ok(new PageResult<>(userVOList, page.getTotal()));
     }
+
+
+    /**
+     * 合作社审核农户的初级农产品
+     *
+     * @param statusDTO 状态dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("合作社 审核农户的初级农产品")
+    @PostMapping("/toExamineProduct")
+    public R<Boolean> toExamineProduct(
+            @Validated @RequestBody AuditStatusDTO statusDTO
+    ){
+        return R.decide(coopAuditService.toExamineProduct(statusDTO));
+    }
+
+
+    /**
+     * 合作社 审核农户需求
+     *
+     * @param statusDTO 状态dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("合作社 审核农户需求")
+    @PostMapping("/toExamineDemand")
+    public R<Boolean> toExamineDemand(
+            @Validated @RequestBody AuditStatusDTO statusDTO
+    ){
+        return R.decide(coopAuditService.toExamineDemand(statusDTO));
+    }
+
+
+
+
+
 
 }

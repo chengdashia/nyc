@@ -1,12 +1,11 @@
 package com.git.bds.nyc.admin.controller.audit;
 
 import com.git.bds.nyc.admin.convert.AuditConvert;
+import com.git.bds.nyc.admin.model.AuditStatusDTO;
 import com.git.bds.nyc.admin.model.vo.AdvertisementVO;
 import com.git.bds.nyc.admin.model.vo.AuditProductVO;
 import com.git.bds.nyc.admin.service.audit.AuditFarmerService;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
-import com.git.bds.nyc.communal.service.audit.AuditFarmerDemandService;
-import com.git.bds.nyc.communal.service.audit.AuditFarmerProductService;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.R;
@@ -35,10 +34,6 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AuditFarmerController {
 
-    private final AuditFarmerProductService auditFarmerProductService;
-
-    private final AuditFarmerDemandService auditFarmerDemandService;
-
     private final AuditFarmerService auditFarmerService;
 
     /**
@@ -56,5 +51,34 @@ public class AuditFarmerController {
         PageResult<AuditProductDTO> page = auditFarmerService.getPendingAuditProductByPage(pageParam,type);
         List<AuditProductVO> userVOList = AuditConvert.INSTANCE.toAuditProductVOList(page.getList());
         return R.ok(new PageResult<>(userVOList,page.getTotal()));
+    }
+
+    /**
+     * 经销社审核农户发布的初级农产品
+     *
+     * @param statusDTO 状态dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("经销社审核农户发布的初级农产品")
+    @PostMapping("/toExamineFarmerPrimaryProduct")
+    public R<Boolean> toExamineFarmerPrimaryProduct(
+            @Validated @RequestBody AuditStatusDTO statusDTO
+    ){
+        return R.decide(auditFarmerService.toExamineFarmerPrimaryProduct(statusDTO));
+    }
+
+
+    /**
+     * 供销社审核农户发布的需求
+     *
+     * @param statusDTO 状态dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("供销社审核农户发布的需求")
+    @PostMapping("/toExamineDemand")
+    public R<Boolean> toExamineDemand(
+            @Validated @RequestBody AuditStatusDTO statusDTO
+    ){
+        return R.decide(auditFarmerService.toExamineDemand(statusDTO));
     }
 }

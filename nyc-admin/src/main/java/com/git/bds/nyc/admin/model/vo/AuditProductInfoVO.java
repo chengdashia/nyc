@@ -15,8 +15,8 @@ import java.util.List;
 @Data
 public class AuditProductInfoVO implements Serializable {
 
-    @ApiModelProperty("联系信息(即发布人的联系方式，发货地址等)")
-    private Long contactInfoId;
+    @ApiModelProperty("用户id")
+    private Long userId;
 
     @ApiModelProperty("产品种类")
     private String productSpecies;
