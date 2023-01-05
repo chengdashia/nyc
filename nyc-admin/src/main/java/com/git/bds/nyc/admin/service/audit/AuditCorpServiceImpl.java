@@ -11,6 +11,7 @@ import com.git.bds.nyc.communal.model.domain.audit.AuditCorpProduct;
 import com.git.bds.nyc.communal.model.domain.audit.CoopAuditProduct;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
 import com.git.bds.nyc.demand.mapper.mp.CorpDemandMapper;
+import com.git.bds.nyc.demand.model.domain.CorpDemand;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.mapper.mp.CorpProcessingProductMapper;
@@ -39,8 +40,7 @@ public class AuditCorpServiceImpl implements AuditCorpService{
 
     private final CorpProcessingProductMapper corpProcessingProductMapper;
 
-
-    private final CorpDemandMapper demandMapper;
+    private final CorpDemandMapper corpDemandMapper;
 
     /**
      * 按页面获取挂起审核产品
@@ -103,19 +103,23 @@ public class AuditCorpServiceImpl implements AuditCorpService{
 
 
     /**
-     * 审核需求
+     * 供销社审核公司发布的需求
      *
      * @param statusDTO 状态dto
      * @return {@link Boolean}
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean toExamineDemand(AuditStatusDTO statusDTO) {
+    public Boolean toExamineCorpDemand(AuditStatusDTO statusDTO) {
         return auditCorpDemandMapper.update(null,
                 new LambdaUpdateWrapper<AuditCorpDemand>()
                         .set(AuditCorpDemand::getAuditStatus,statusDTO.getStatus())
                         .set(AuditCorpDemand::getAuditRemark,statusDTO.getRemark())
-                        .eq(AuditCorpDemand::getId,statusDTO.getId())) > 0;
+                        .eq(AuditCorpDemand::getId,statusDTO.getId())) > 0
+                && corpDemandMapper.update(null,
+                new LambdaUpdateWrapper<CorpDemand>()
+                        .set(CorpDemand::getAuditStatus,statusDTO.getStatus())
+                        .eq(CorpDemand::getId,statusDTO.getGoodsId())) > 0;
     }
 
 

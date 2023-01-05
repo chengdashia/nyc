@@ -87,16 +87,16 @@ public class AuditCorpController {
 
 
     /**
-     * 审核需求
+     * 供销社审核公司发布的需求
      *
      * @param statusDTO 状态dto
      * @return {@link R}<{@link Boolean}>
      */
-    @ApiOperation("合作社 审核需求")
-    @PostMapping("/toExamineDemand")
-    public R<Boolean> toExamineDemand(
+    @ApiOperation("供销社审核公司发布的需求")
+    @PostMapping("/toExamineCorpDemand")
+    public R<Boolean> toExamineCorpDemand(
             @Validated @RequestBody AuditStatusDTO statusDTO
     ){
-        return R.decide(auditCorpService.toExamineDemand(statusDTO));
+        return R.decide(auditCorpService.toExamineCorpDemand(statusDTO));
     }
 }

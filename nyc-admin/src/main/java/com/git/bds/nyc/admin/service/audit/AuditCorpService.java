@@ -37,11 +37,11 @@ public interface AuditCorpService {
     Boolean toExamineCorpProcessingProduct(AuditStatusDTO statusDTO);
 
     /**
-     * 审核需求
+     * 供销社审核公司发布的需求
      *
      * @param statusDTO 状态dto
      * @return {@link Boolean}
      */
-    Boolean toExamineDemand(AuditStatusDTO statusDTO);
+    Boolean toExamineCorpDemand(AuditStatusDTO statusDTO);
 
 }
