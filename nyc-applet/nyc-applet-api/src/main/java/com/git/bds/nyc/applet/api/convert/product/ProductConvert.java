@@ -1,7 +1,7 @@
 package com.git.bds.nyc.applet.api.convert.product;
 
-import com.git.bds.nyc.applet.api.controller.product.vo.ProductInfoVO;
-import com.git.bds.nyc.applet.api.controller.product.vo.ProductVO;
+import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
+import com.git.bds.nyc.applet.api.model.vo.product.ProductVO;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.model.es.ProductEs;

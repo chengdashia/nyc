@@ -1,7 +1,7 @@
 package com.git.bds.nyc.applet.api.convert.demand;
 
-import com.git.bds.nyc.applet.api.controller.demand.vo.DemandInfoVO;
-import com.git.bds.nyc.applet.api.controller.demand.vo.DemandVO;
+import com.git.bds.nyc.applet.api.model.vo.demand.DemandInfoVO;
+import com.git.bds.nyc.applet.api.model.vo.demand.DemandVO;
 import com.git.bds.nyc.demand.model.dto.DemandDTO;
 import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
 import org.mapstruct.Mapper;

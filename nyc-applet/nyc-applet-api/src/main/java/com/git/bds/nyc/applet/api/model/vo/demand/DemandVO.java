@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller.demand.vo;
+package com.git.bds.nyc.applet.api.model.vo.demand;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

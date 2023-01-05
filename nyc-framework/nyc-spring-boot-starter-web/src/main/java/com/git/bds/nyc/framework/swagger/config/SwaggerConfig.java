@@ -68,6 +68,21 @@ public class SwaggerConfig {
     }
 
 
+    /** 小程序 接口管理 */
+    @Bean
+    public Docket api1() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                // 配置分组名
+                .groupName("小程序 接口管理")
+                .apiInfo(info())
+                .enable(enable)
+                .select()
+                // 设置扫描包的地址 : com.**.controller
+                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.applet.api.controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
 
     /** 用户接口管理 */
     @Bean
