@@ -70,13 +70,13 @@ public class IndexController {
     private final DemandService demandService;
 
     /**
-     * 分页获取广告
+     * 获取广告
      *
      * @return {@link R}<{@link List}<{@link IndexAdvertisementVO}>>
      */
-    @ApiOperation("获取广告列表 分页")
+    @ApiOperation("获取广告列表")
     @GetMapping("/getAdvertisements")
-    public R<List<IndexAdvertisementVO>> getAdvertisementsByPage(){
+    public R<List<IndexAdvertisementVO>> getAdvertisements(){
         List<Advertisement> list = advertisementService.getAdvertisements();
         List<IndexAdvertisementVO> voList = IndexConvert.INSTANCE.toAdvertisementVOList(list);
         return R.ok(voList);
