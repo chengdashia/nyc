@@ -10,7 +10,7 @@ import com.git.bds.nyc.communal.model.domain.audit.AuditFarmerDemand;
 import com.git.bds.nyc.communal.model.domain.audit.AuditFarmerProduct;
 import com.git.bds.nyc.communal.model.domain.audit.CoopAuditProduct;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
-import com.git.bds.nyc.demand.mapper.mp.DemandMapper;
+import com.git.bds.nyc.demand.mapper.mp.CorpDemandMapper;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapper;
@@ -34,7 +34,7 @@ public class AuditFarmerServiceImpl implements AuditFarmerService{
 
     private final FarmerPrimaryProductMapper farmerPrimaryProductMapper;
 
-    private final DemandMapper demandMapper;
+    private final CorpDemandMapper demandMapper;
 
     /**
      * 按页面获取挂起审核产品

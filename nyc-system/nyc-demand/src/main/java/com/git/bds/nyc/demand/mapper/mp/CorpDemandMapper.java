@@ -1,6 +1,6 @@
 package com.git.bds.nyc.demand.mapper.mp;
 
-import com.git.bds.nyc.demand.model.domain.Demand;
+import com.git.bds.nyc.demand.model.domain.CorpDemand;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-10-31 15:59:15
  */
 @Mapper
-public interface DemandMapper extends MPJBaseMapper<Demand> {
+public interface CorpDemandMapper extends MPJBaseMapper<CorpDemand> {
 
 }

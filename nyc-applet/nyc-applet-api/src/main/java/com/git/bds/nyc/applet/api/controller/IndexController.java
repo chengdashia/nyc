@@ -16,7 +16,7 @@ import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.git.bds.nyc.communal.service.advertisement.AdvertisementService;
 import com.git.bds.nyc.demand.model.dto.DemandDTO;
 import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
-import com.git.bds.nyc.demand.service.DemandService;
+import com.git.bds.nyc.demand.service.CorpDemandService;
 import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResponse;
@@ -67,7 +67,7 @@ public class IndexController {
 
     private final ProductEsMapper productEsMapper;
 
-    private final DemandService demandService;
+    private final CorpDemandService demandService;
 
     /**
      * 获取广告

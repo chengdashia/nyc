@@ -1,6 +1,6 @@
 package com.git.bds.nyc.demand.convert;
 
-import com.git.bds.nyc.demand.model.domain.Demand;
+import com.git.bds.nyc.demand.model.domain.CorpDemand;
 import com.git.bds.nyc.demand.model.dto.DemandAddDTO;
 import com.git.bds.nyc.demand.model.dto.DemandModifyDTO;
 import org.mapstruct.Mapper;
@@ -22,19 +22,19 @@ public interface DemandCovert {
      * @param demandAddDTO 需求操作数据
      * @param userId           用户id
      * @param demandId         需求id
-     * @return {@link Demand}
+     * @return {@link CorpDemand}
      */
     @Mapping(source = "userId",target = "userId")
     @Mapping(source = "demandId",target = "id")
-    Demand toDemandForAdd(DemandAddDTO demandAddDTO, Long userId, Long demandId);
+    CorpDemand toDemandForAdd(DemandAddDTO demandAddDTO, Long userId, Long demandId);
 
     /**
      * 要求修改
      *
      * @param userId          用户id
      * @param demandModifyDTO 需求修改数据
-     * @return {@link Demand}
+     * @return {@link CorpDemand}
      */
     @Mapping(source = "userId",target = "userId")
-    Demand toDemandForModify(DemandModifyDTO demandModifyDTO, Long userId);
+    CorpDemand toDemandForModify(DemandModifyDTO demandModifyDTO, Long userId);
 }

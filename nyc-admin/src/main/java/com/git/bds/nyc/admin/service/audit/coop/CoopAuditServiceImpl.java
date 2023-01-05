@@ -11,7 +11,7 @@ import com.git.bds.nyc.communal.model.domain.audit.AuditFarmerProduct;
 import com.git.bds.nyc.communal.model.domain.audit.CoopAuditDemand;
 import com.git.bds.nyc.communal.model.domain.audit.CoopAuditProduct;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
-import com.git.bds.nyc.demand.mapper.mp.DemandMapper;
+import com.git.bds.nyc.demand.mapper.mp.CorpDemandMapper;
 import com.git.bds.nyc.enums.AuditType;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
@@ -37,7 +37,7 @@ public class CoopAuditServiceImpl implements CoopAuditService{
 
     private final FarmerPrimaryProductMapper farmerPrimaryProductMapper;
 
-    private final DemandMapper demandMapper;
+    private final CorpDemandMapper demandMapper;
 
     private final AuditFarmerProductMapper auditFarmerProductMapper;
     /**

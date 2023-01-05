@@ -5,13 +5,13 @@ import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.demand.convert.DemandCovert;
-import com.git.bds.nyc.demand.mapper.mp.DemandMapper;
-import com.git.bds.nyc.demand.model.domain.Demand;
+import com.git.bds.nyc.demand.mapper.mp.CorpDemandMapper;
+import com.git.bds.nyc.demand.model.domain.CorpDemand;
 import com.git.bds.nyc.demand.model.dto.DemandAddDTO;
 import com.git.bds.nyc.demand.model.dto.DemandDTO;
 import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
 import com.git.bds.nyc.demand.model.dto.DemandModifyDTO;
-import com.git.bds.nyc.demand.service.DemandService;
+import com.git.bds.nyc.demand.service.CorpDemandService;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.page.PageParam;
@@ -34,7 +34,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> implements DemandService {
+public class CorpDemandServiceImpl extends MPJBaseServiceImpl<CorpDemandMapper, CorpDemand> implements CorpDemandService {
 
     private final MinioUtil minioUtil;
 
@@ -51,14 +51,14 @@ public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> 
 
         return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),DemandDTO.class,
                 new MPJLambdaWrapper<>()
-                        .select(Demand::getId
-                                , Demand::getDemandSpecies
-                                , Demand::getDemandVariety
-                                , Demand::getDemandWeight
-                                , Demand::getDemandPrice
-                                , Demand::getDetailedAddress
-                                , Demand::getDemandCover)
-                        .orderByDesc(Demand::getCreateTime)).getRecords();
+                        .select(CorpDemand::getId
+                                , CorpDemand::getDemandSpecies
+                                , CorpDemand::getDemandVariety
+                                , CorpDemand::getDemandWeight
+                                , CorpDemand::getDemandPrice
+                                , CorpDemand::getDetailedAddress
+                                , CorpDemand::getDemandCover)
+                        .orderByDesc(CorpDemand::getCreateTime)).getRecords();
     }
 
     /**
@@ -70,9 +70,9 @@ public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> 
     @Override
     public DemandInfoDTO getDemandInfo(Long id) {
         return this.baseMapper.selectJoinOne(DemandInfoDTO.class,
-                new MPJQueryWrapper<Demand>()
-                        .select(Demand.class,i->!i.getColumn().equals(Demand.USER_ID))
-                        .eq(Demand.ID,id)
+                new MPJQueryWrapper<CorpDemand>()
+                        .select(CorpDemand.class,i->!i.getColumn().equals(CorpDemand.USER_ID))
+                        .eq(CorpDemand.ID,id)
         );
     }
 
@@ -84,7 +84,7 @@ public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> 
      */
     @Override
     public Boolean releaseDemand(DemandAddDTO demandAddDTO) {
-        Demand demand = DemandCovert.INSTANCE.toDemandForAdd(demandAddDTO, StpUtil.getLoginIdAsLong(), IdUtil.getSnowflakeNextId());
+        CorpDemand demand = DemandCovert.INSTANCE.toDemandForAdd(demandAddDTO, StpUtil.getLoginIdAsLong(), IdUtil.getSnowflakeNextId());
         return this.baseMapper.insert(demand) > 0;
     }
 
@@ -96,7 +96,7 @@ public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> 
      */
     @Override
     public Boolean modifyDemandInfo(DemandModifyDTO demandModifyDTO) {
-        Demand demand = DemandCovert.INSTANCE.toDemandForModify(demandModifyDTO, StpUtil.getLoginIdAsLong());
+        CorpDemand demand = DemandCovert.INSTANCE.toDemandForModify(demandModifyDTO, StpUtil.getLoginIdAsLong());
         return this.baseMapper.updateById(demand) > 0;
     }
 
@@ -108,9 +108,9 @@ public class DemandServiceImpl extends MPJBaseServiceImpl<DemandMapper, Demand> 
      */
     @Override
     public Boolean delDemand(Long id) {
-        String demandCover = this.baseMapper.selectOne(new LambdaQueryWrapper<Demand>()
-                .select(Demand::getDemandCover)
-                .eq(Demand::getId, id)).getDemandCover();
+        String demandCover = this.baseMapper.selectOne(new LambdaQueryWrapper<CorpDemand>()
+                .select(CorpDemand::getDemandCover)
+                .eq(CorpDemand::getId, id)).getDemandCover();
         minioUtil.removeFile(minioConfig.getBucketName(),demandCover);
         return this.baseMapper.deleteById(id) > 0;
     }

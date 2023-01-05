@@ -23,9 +23,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("demand")
+@TableName("corp_demand")
 @ApiModel(value = "Demand对象", description = "需求表")
-public class Demand extends Model<Demand> {
+public class CorpDemand extends Model<CorpDemand> {
 
     private static final long serialVersionUID = 1L;
 
@@ -65,6 +65,10 @@ public class Demand extends Model<Demand> {
     @TableField("demand_remark")
     private String demandRemark;
 
+    @ApiModelProperty("审核状态(-1：未审核；0：不通过；1：审核通过)")
+    @TableField("audit_status")
+    private Integer auditStatus;
+
     @ApiModelProperty("发布时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
@@ -91,6 +95,8 @@ public class Demand extends Model<Demand> {
     public static final String DEMAND_COVER = "demand_cover";
 
     public static final String DEMAND_REMARK = "demand_remark";
+
+    public static final String AUDIT_STATUS = "audit_status";
 
     public static final String CREATE_TIME = "create_time";
 

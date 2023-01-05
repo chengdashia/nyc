@@ -2,7 +2,7 @@ package com.git.bds.nyc.user.controller.farmer;
 
 import com.git.bds.nyc.demand.model.dto.DemandAddDTO;
 import com.git.bds.nyc.demand.model.dto.DemandModifyDTO;
-import com.git.bds.nyc.demand.service.DemandService;
+import com.git.bds.nyc.demand.service.CorpDemandService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FarmerDemandController {
 
-    private final DemandService demandService;
+    private final CorpDemandService demandService;
 
     /**
      * 发布需求

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.git.bds.nyc.demand.mapper.mp.DemandMapper">
+<mapper namespace="com.git.bds.nyc.demand.mapper.mp.CorpDemandMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.git.bds.nyc.demand.model.domain.Demand">
+    <resultMap id="BaseResultMap" type="com.git.bds.nyc.demand.model.domain.CorpDemand">
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
         <result column="demand_species" property="demandSpecies" />
@@ -13,13 +13,14 @@
         <result column="detailed_address" property="detailedAddress" />
         <result column="demand_cover" property="demandCover" />
         <result column="demand_remark" property="demandRemark" />
+        <result column="audit_status" property="auditStatus" />
         <result column="create_time" property="createTime" />
         <result column="expiration_date" property="expirationDate" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, demand_species, demand_variety, demand_weight, demand_price, detailed_address, demand_cover, demand_remark, create_time, expiration_date
+        id, user_id, demand_species, demand_variety, demand_weight, demand_price, detailed_address, demand_cover, demand_remark, audit_status, create_time, expiration_date
     </sql>
 
 </mapper>
