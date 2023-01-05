@@ -43,12 +43,12 @@ public class AuditCorpController {
 
 
     /**
-     * 分页获取公司发布的 需要审核的商品
+     * 供销社 分页获取公司发布的 需要审核的商品
      *
      * @param pageParam 页面参数
      * @return {@link R}<{@link PageResult}<{@link AdvertisementVO}>>
      */
-    @ApiOperation("分页获取公司发布的 需要审核的商品")
+    @ApiOperation("供销社 分页获取公司发布的 需要审核的商品")
     @GetMapping("/getPendingAuditProductByPage/{type}")
     public R<PageResult<AuditProductVO>> getPendingAuditProductByPage(
             @Validated @RequestBody PageParam pageParam,

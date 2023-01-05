@@ -1,8 +1,10 @@
 package com.git.bds.nyc.admin.convert;
 
+import com.git.bds.nyc.admin.model.vo.AuditDemandVO;
 import com.git.bds.nyc.admin.model.vo.AuditProductInfoVO;
 import com.git.bds.nyc.admin.model.vo.AuditProductVO;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
+import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
 import com.git.bds.nyc.product.model.dto.AuditProductInfoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -33,4 +35,13 @@ public interface AuditConvert {
      * @return {@link AuditProductInfoVO}
      */
     AuditProductInfoVO toAuditProductInfoVO(AuditProductInfoDTO productInfoDTO);
+
+
+    /**
+     * 审核需求信息vo
+     *
+     * @param demandDTO 需求dto
+     * @return {@link AuditDemandVO}
+     */
+    AuditDemandVO toAuditDemandInfoVO(DemandInfoDTO demandDTO);
 }

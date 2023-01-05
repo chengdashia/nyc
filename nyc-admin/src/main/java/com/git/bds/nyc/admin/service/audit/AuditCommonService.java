@@ -1,5 +1,7 @@
 package com.git.bds.nyc.admin.service.audit;
 
+import com.git.bds.nyc.demand.model.dto.DemandDTO;
+import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
 import com.git.bds.nyc.product.model.dto.AuditProductInfoDTO;
 
 /**
@@ -15,4 +17,12 @@ public interface AuditCommonService {
      * @return {@link AuditProductInfoDTO}
      */
     AuditProductInfoDTO getAuditProductInfo(Long id, Integer type);
+
+    /**
+     * 获取审核需求信息
+     *
+     * @param id 需求id
+     * @return {@link DemandDTO}
+     */
+    DemandInfoDTO getAuditDemandInfo(Long id);
 }

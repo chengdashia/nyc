@@ -43,12 +43,12 @@ public class CoopAuditController {
     private final CoopAuditService auditService;
 
     /**
-     * 分页获取农户发布的 需要审核的商品
+     * 合作社 分页获取农户发布的 需要审核的商品
      *
      * @param pageParam 页面参数
      * @return {@link R}<{@link PageResult}<{@link AdvertisementVO}>>
      */
-    @ApiOperation("分页获取农户发布的 需要审核的商品")
+    @ApiOperation("合作社 分页获取农户发布的 需要审核的商品")
     @GetMapping("/getPendingAuditProductByPage/{type}")
     public R<PageResult<AuditProductVO>> getPendingAuditProductByPage(
             @Validated @RequestBody PageParam pageParam,

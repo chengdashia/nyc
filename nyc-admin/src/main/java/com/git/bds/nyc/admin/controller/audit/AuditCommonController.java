@@ -1,9 +1,11 @@
 package com.git.bds.nyc.admin.controller.audit;
 
 import com.git.bds.nyc.admin.convert.AuditConvert;
+import com.git.bds.nyc.admin.model.vo.AuditDemandVO;
 import com.git.bds.nyc.admin.model.vo.AuditProductInfoVO;
 import com.git.bds.nyc.admin.model.vo.AuditProductVO;
 import com.git.bds.nyc.admin.service.audit.AuditCommonService;
+import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
 import com.git.bds.nyc.product.model.dto.AuditProductInfoDTO;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
@@ -39,7 +41,7 @@ public class AuditCommonController {
      * @param id 产品id
      * @return {@link R}<{@link AuditProductVO}>
      */
-    @ApiOperation("获取审核产品信息")
+    @ApiOperation("获取审核产品详细信息")
     @PostMapping("/getAuditProductInfo/{id}/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "path", example = "112345646545", required = true),
@@ -51,5 +53,24 @@ public class AuditCommonController {
     ){
         AuditProductInfoDTO auditProductInfoDTO = auditCommonService.getAuditProductInfo(id,type);
         return R.ok(AuditConvert.INSTANCE.toAuditProductInfoVO(auditProductInfoDTO));
+    }
+
+
+    /**
+     * 获取审核产品信息
+     *
+     * @param id 需求id
+     * @return {@link R}<{@link AuditProductVO}>
+     */
+    @ApiOperation("获取审核需求详细信息")
+    @PostMapping("/getAuditDemandInfo/{id}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "需求id", dataTypeClass = Long.class, paramType = "path", example = "112345646545", required = true)
+    })
+    public R<AuditDemandVO> getAuditDemandInfo(
+            @PathVariable("id") Long id
+    ){
+        DemandInfoDTO auditDemandInfo = auditCommonService.getAuditDemandInfo(id);
+        return R.ok(AuditConvert.INSTANCE.toAuditDemandInfoVO(auditDemandInfo));
     }
 }

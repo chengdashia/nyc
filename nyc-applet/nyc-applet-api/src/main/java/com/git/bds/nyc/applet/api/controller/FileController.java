@@ -97,7 +97,7 @@ public class FileController {
      */
     @SneakyThrows
     @PostMapping("/uploadEnterpriseLicenseImg")
-    @ApiOperation(value = "uploadEnterpriseLicenseImg",notes = "游客通过上传身份证 进行认证")
+    @ApiOperation(value = "上载企业许可证img",notes = "游客通过上传身份证 进行认证")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
     })

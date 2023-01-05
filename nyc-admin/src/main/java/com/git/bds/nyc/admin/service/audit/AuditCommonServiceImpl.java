@@ -1,5 +1,8 @@
 package com.git.bds.nyc.admin.service.audit;
 
+import com.git.bds.nyc.demand.mapper.mp.DemandMapper;
+import com.git.bds.nyc.demand.model.domain.Demand;
+import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.product.mapper.mp.CorpProcessingProductMapper;
@@ -32,6 +35,8 @@ public class AuditCommonServiceImpl implements AuditCommonService{
     private final CorpPrimaryProductMapper corpPrimaryProductMapper;
 
     private final CorpProcessingProductMapper corpProcessingProductMapper;
+
+    private final DemandMapper demandMapper;
 
     /**
      * 获取审核产品信息
@@ -82,5 +87,20 @@ public class AuditCommonServiceImpl implements AuditCommonService{
         AuditProductInfoDTO auditProductInfoDTO = infoDTOList.get(0);
         auditProductInfoDTO.setImgList(collect);
         return auditProductInfoDTO;
+    }
+
+    /**
+     * 获取审核需求信息
+     *
+     * @param id 需求id
+     * @return {@link DemandInfoDTO}
+     */
+    @Override
+    public DemandInfoDTO getAuditDemandInfo(Long id) {
+        return demandMapper.selectJoinOne(DemandInfoDTO.class,
+                new MPJLambdaWrapper<DemandInfoDTO>()
+                        .select(Demand.class,i->!i.getColumn().equals(Demand.USER_ID))
+                        .eq(Demand::getId,id)
+        );
     }
 }
