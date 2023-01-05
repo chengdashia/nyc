@@ -83,6 +83,12 @@ public class IndexController {
     }
 
 
+    /**
+     * 主页产品（按页面）
+     *
+     * @param pageParam 页面参数
+     * @return {@link R}<{@link List}<{@link ProductVO}>>
+     */
     @ApiOperation("首页商品数据")
     @GetMapping("/getProductData")
     public R<List<ProductVO>> homePageProductsByPage(
@@ -92,6 +98,12 @@ public class IndexController {
         return R.ok(ProductConvert.INSTANCE.toPrimaryProductVO(productList));
     }
 
+    /**
+     * 主页产品按页面按es
+     *
+     * @param pageParam 页面参数
+     * @return {@link R}<{@link PageResult}<{@link ProductEs}>>
+     */
     @ApiOperation("首页商品数据 通过Es获取")
     @GetMapping("/getProductByEs")
     public R<PageResult<ProductEs>> homePageProductsByPageByEs(

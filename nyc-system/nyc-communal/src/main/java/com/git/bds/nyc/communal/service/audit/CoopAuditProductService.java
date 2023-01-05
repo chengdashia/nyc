@@ -22,4 +22,6 @@ public interface CoopAuditProductService extends MPJBaseService<CoopAuditProduct
      * @return {@link Boolean}
      */
     Boolean addAudit(long id, long productId);
+
+
 }

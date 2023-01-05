@@ -30,4 +30,5 @@ public class CoopAuditProductServiceImpl extends MPJBaseServiceImpl<CoopAuditPro
         CoopAuditProduct coopAuditProduct = new CoopAuditProduct().setUserId(id).setProductId(productId);
         return this.baseMapper.insert(coopAuditProduct) > 0;
     }
+
 }
