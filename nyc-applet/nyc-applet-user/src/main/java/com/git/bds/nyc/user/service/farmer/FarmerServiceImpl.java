@@ -4,17 +4,18 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.git.bds.nyc.communal.service.audit.CoopAuditProductService;
 import com.git.bds.nyc.product.convert.ProductConvert;
-import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.service.productpicture.ProductPictureService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class FarmerServiceImpl implements FarmerService{
 
     private final FarmerPrimaryProductMapper productMapper;
 
-    private final ProductPictureMapper productPictureMapper;
+    private final ProductPictureService productPictureService;
 
     private final CoopAuditProductService coopAuditProductService;
 
@@ -51,10 +52,12 @@ public class FarmerServiceImpl implements FarmerService{
         // 添加合作社审核
         coopAuditProductService.addAudit(userId,productId);
         //循环将图片插入
+        List<ProductPicture> productPictureList = new ArrayList<>(productImgList.size());
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
-            productPictureMapper.insert(productPicture);
+            productPictureList.add(productPicture);
         }
+        productPictureService.saveBatch(productPictureList);
         return true;
     }
 
@@ -77,11 +80,12 @@ public class FarmerServiceImpl implements FarmerService{
         // 添加合作社审核
         coopAuditProductService.addAudit(userId,productId);
         //循环将图片插入
+        List<ProductPicture> productPictureList = new ArrayList<>(productImgList.size());
         for (String img : productImgList) {
             ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
-            productPictureMapper.insert(productPicture);
+            productPictureList.add(productPicture);
         }
-        log.info("product:  "+product);
+        productPictureService.saveBatch(productPictureList);
         return true;
     }
 }

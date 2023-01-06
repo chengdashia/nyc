@@ -33,7 +33,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/farmer/product")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class FarmerController {
+public class FarmerProductController {
 
     private final FarmerPrimaryProductService productService;
 

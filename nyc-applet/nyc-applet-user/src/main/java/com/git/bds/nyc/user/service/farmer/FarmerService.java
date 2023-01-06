@@ -9,7 +9,6 @@ import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 public interface FarmerService {
 
     /**
-     * 发售产品
      * 发布 在售产品
      *
      * @param productDTO 产品dto
