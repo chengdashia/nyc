@@ -30,7 +30,8 @@ public class MybatisPlusGeneration {
 
         //表名集合
         List<String> tables = new ArrayList<>();
-        tables.add("coop_audit_demand");
+        tables.add("coop_info");
+        tables.add("coop_user");
 
         FastAutoGenerator.create(url, username, password)
                 //全局配置

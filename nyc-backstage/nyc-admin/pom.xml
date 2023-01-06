@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>nyc</artifactId>
+        <artifactId>nyc-backstage</artifactId>
         <groupId>com.git.bds</groupId>
         <version>${revision}</version>
     </parent>
@@ -11,8 +11,9 @@
     <artifactId>nyc-admin</artifactId>
     <version>${revision}</version>
     <name>nyc-admin</name>
+    <packaging>jar</packaging>
     <description>
-        农营C 管理端
+        农营C 供销社管理端
     </description>
 
     <dependencies>

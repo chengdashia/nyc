@@ -28,6 +28,12 @@ public class FarmerOrderController {
 
     private final FarmerOrderService farmerOrderService;
 
+    /**
+     * 下单
+     *
+     * @param orderDTO 订单dto
+     * @return {@link R}<{@link Boolean}>
+     */
     @PostMapping("/placeOrder")
     @ApiOperation("下订单")
     public R<Boolean> placeOrder(
