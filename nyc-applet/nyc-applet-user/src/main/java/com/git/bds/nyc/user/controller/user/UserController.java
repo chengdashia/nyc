@@ -50,7 +50,7 @@ public class UserController {
     @ApiOperation("测试  token")
     @GetMapping("/loginTest")
     public Object loginTest(){
-        User user = userService.getById(22);
+        User user = userService.getById(2);
         StpUtil.login(user.getId());
         return StpUtil.getTokenInfo();
     }

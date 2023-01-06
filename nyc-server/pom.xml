@@ -54,7 +54,6 @@
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-applet-api</artifactId>
-            <version>1.0</version>
         </dependency>
 
         <!--

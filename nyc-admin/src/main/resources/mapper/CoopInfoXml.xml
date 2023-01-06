@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.git.bds.nyc.admin.mapper.mp.CoopInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.git.bds.nyc.admin.model.domain.CoopInfo">
+        <id column="id" property="id" />
+        <result column="coop_name" property="coopName" />
+        <result column="coop_address" property="coopAddress" />
+        <result column="coop_info" property="coopInfo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, coop_name, coop_address, coop_info
+    </sql>
+
+</mapper>
