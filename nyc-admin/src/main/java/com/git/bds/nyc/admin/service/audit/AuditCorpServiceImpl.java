@@ -1,8 +1,11 @@
 package com.git.bds.nyc.admin.service.audit;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.admin.convert.DemandConvert;
+import com.git.bds.nyc.admin.convert.ProductConvert;
 import com.git.bds.nyc.admin.model.AuditStatusDTO;
 import com.git.bds.nyc.communal.mapper.mp.audit.AuditCorpDemandMapper;
 import com.git.bds.nyc.communal.mapper.mp.audit.AuditCorpProductMapper;
@@ -10,14 +13,21 @@ import com.git.bds.nyc.communal.model.domain.audit.AuditCorpDemand;
 import com.git.bds.nyc.communal.model.domain.audit.AuditCorpProduct;
 import com.git.bds.nyc.communal.model.domain.audit.CoopAuditProduct;
 import com.git.bds.nyc.communal.model.dto.AuditProductDTO;
+import com.git.bds.nyc.demand.mapper.ee.DemandEsMapper;
 import com.git.bds.nyc.demand.mapper.mp.CorpDemandMapper;
 import com.git.bds.nyc.demand.model.domain.CorpDemand;
+import com.git.bds.nyc.demand.model.ee.DemandEs;
+import com.git.bds.nyc.enums.AuditType;
+import com.git.bds.nyc.enums.DemandType;
+import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
+import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.mapper.mp.CorpProcessingProductMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
+import com.git.bds.nyc.product.model.es.ProductEs;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +51,10 @@ public class AuditCorpServiceImpl implements AuditCorpService{
     private final CorpProcessingProductMapper corpProcessingProductMapper;
 
     private final CorpDemandMapper corpDemandMapper;
+
+    private final ProductEsMapper productEsMapper;
+
+    private final DemandEsMapper demandEsMapper;
 
     /**
      * 按页面获取挂起审核产品
@@ -70,15 +84,35 @@ public class AuditCorpServiceImpl implements AuditCorpService{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean toExamineCorpPrimaryProduct(AuditStatusDTO statusDTO) {
-        return auditCorpProductMapper.update(null,
+        //更新审核表
+        auditCorpProductMapper.update(null,
                 new LambdaUpdateWrapper<AuditCorpProduct>()
                         .set(AuditCorpProduct::getAuditStatus,statusDTO.getStatus())
                         .set(AuditCorpProduct::getAuditRemark,statusDTO.getRemark())
-                        .eq(AuditCorpProduct::getId,statusDTO.getId())) > 0
-                && corpPrimaryProductMapper.update(null,
+                        .eq(AuditCorpProduct::getId,statusDTO.getId()));
+        //更新公司初级农产品的表
+        corpPrimaryProductMapper.update(null,
                 new LambdaUpdateWrapper<CorpPrimaryProduct>()
                         .set(CorpPrimaryProduct::getAuditStatus,statusDTO.getStatus())
-                        .eq(CorpPrimaryProduct::getId,statusDTO.getGoodsId())) > 0;
+                        .eq(CorpPrimaryProduct::getId,statusDTO.getGoodsId()));
+        if(AuditType.PASS.getValue().equals(statusDTO.getStatus())){
+            CorpPrimaryProduct corpPrimaryProduct = corpPrimaryProductMapper.selectOne(new LambdaQueryWrapper<CorpPrimaryProduct>()
+                    .select(
+                            CorpPrimaryProduct::getId,
+                            CorpPrimaryProduct::getProductSpecies,
+                            CorpPrimaryProduct::getProductVariety,
+                            CorpPrimaryProduct::getProductPrice,
+                            CorpPrimaryProduct::getProductProductionArea,
+                            CorpPrimaryProduct::getProductCover,
+                            CorpPrimaryProduct::getAuditStatus,
+                            CorpPrimaryProduct::getMarketTime,
+                            CorpPrimaryProduct::getMarketTime
+                    )
+                    .eq(CorpPrimaryProduct::getId, statusDTO.getGoodsId()));
+            ProductEs productEs = ProductConvert.INSTANCE.toProductEs(corpPrimaryProduct, ProductType.CORP_PRIMARY.getValue());
+            productEsMapper.insert(productEs);
+        }
+        return true;
     }
 
     /**
@@ -90,15 +124,33 @@ public class AuditCorpServiceImpl implements AuditCorpService{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean toExamineCorpProcessingProduct(AuditStatusDTO statusDTO) {
-        return auditCorpProductMapper.update(null,
+         auditCorpProductMapper.update(null,
                 new LambdaUpdateWrapper<AuditCorpProduct>()
                         .set(AuditCorpProduct::getAuditStatus,statusDTO.getStatus())
                         .set(AuditCorpProduct::getAuditRemark,statusDTO.getRemark())
-                        .eq(AuditCorpProduct::getId,statusDTO.getId())) > 0
-                && corpProcessingProductMapper.update(null,
+                        .eq(AuditCorpProduct::getId,statusDTO.getId()));
+         corpProcessingProductMapper.update(null,
                 new LambdaUpdateWrapper<CorpProcessingProduct>()
                         .set(CorpProcessingProduct::getAuditStatus,statusDTO.getStatus())
-                        .eq(CorpProcessingProduct::getId,statusDTO.getGoodsId())) > 0;
+                        .eq(CorpProcessingProduct::getId,statusDTO.getGoodsId()));
+        if(AuditType.PASS.getValue().equals(statusDTO.getStatus())){
+            CorpProcessingProduct corpProcessingProduct = corpProcessingProductMapper.selectOne(new LambdaQueryWrapper<CorpProcessingProduct>()
+                    .select(
+                            CorpProcessingProduct::getId,
+                            CorpProcessingProduct::getProductSpecies,
+                            CorpProcessingProduct::getProductVariety,
+                            CorpProcessingProduct::getProductPrice,
+                            CorpProcessingProduct::getProductProductionArea,
+                            CorpProcessingProduct::getProductCover,
+                            CorpProcessingProduct::getAuditStatus,
+                            CorpProcessingProduct::getMarketTime,
+                            CorpProcessingProduct::getMarketTime
+                    )
+                    .eq(CorpProcessingProduct::getId, statusDTO.getGoodsId()));
+            ProductEs productEs = ProductConvert.INSTANCE.toProductEs(corpProcessingProduct, ProductType.CORP_PROCESSING.getValue());
+            productEsMapper.insert(productEs);
+        }
+        return true;
     }
 
 
@@ -111,15 +163,28 @@ public class AuditCorpServiceImpl implements AuditCorpService{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean toExamineCorpDemand(AuditStatusDTO statusDTO) {
-        return auditCorpDemandMapper.update(null,
+        auditCorpDemandMapper.update(null,
                 new LambdaUpdateWrapper<AuditCorpDemand>()
                         .set(AuditCorpDemand::getAuditStatus,statusDTO.getStatus())
                         .set(AuditCorpDemand::getAuditRemark,statusDTO.getRemark())
-                        .eq(AuditCorpDemand::getId,statusDTO.getId())) > 0
-                && corpDemandMapper.update(null,
+                        .eq(AuditCorpDemand::getId,statusDTO.getId()));
+        corpDemandMapper.update(null,
                 new LambdaUpdateWrapper<CorpDemand>()
                         .set(CorpDemand::getAuditStatus,statusDTO.getStatus())
-                        .eq(CorpDemand::getId,statusDTO.getGoodsId())) > 0;
+                        .eq(CorpDemand::getId,statusDTO.getGoodsId()));
+        if(AuditType.PASS.getValue().equals(statusDTO.getStatus())){
+            CorpDemand corpDemand = corpDemandMapper.selectOne(new LambdaQueryWrapper<CorpDemand>()
+                    .select(
+                            CorpDemand.class, i -> !i.getColumn().equals(CorpDemand.USER_ID)
+                                    && !i.getColumn().equals(CorpDemand.DEMAND_REMARK)
+                                    && !i.getColumn().equals(CorpDemand.AUDIT_STATUS)
+                                    && !i.getColumn().equals(CorpDemand.EXPIRATION_DATE)
+                    )
+                    .eq(CorpDemand::getId, statusDTO.getGoodsId()));
+            DemandEs demandEs = DemandConvert.INSTANCE.toDemandEs(corpDemand, DemandType.CORP_DEMAND.getValue());
+            demandEsMapper.insert(demandEs);
+        }
+        return true;
     }
 
 
