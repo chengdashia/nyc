@@ -307,8 +307,8 @@ public class MinioUtil {
         //压缩
         if(file.getSize() > IMG_SIZE){
             file = ThumbnailUtil.changeScale(file);
+            log.info("压缩后的大小：  "+ file.getSize());
         }
-        log.info("压缩后的大小：  "+ file.getSize());
         return file;
     }
 
@@ -326,7 +326,7 @@ public class MinioUtil {
         String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
         return id + SEPARATOR + type +
                 SEPARATOR + dateTime.year() +
-                SEPARATOR + dateTime.month() +
+                SEPARATOR + (dateTime.month() + 1) +
                 SEPARATOR + dateTime.dayOfMonth() +
                 SEPARATOR + IdUtil.getSnowflakeNextId() + POINT + suffix;
     }
@@ -345,7 +345,7 @@ public class MinioUtil {
         file = isCompress(file);
         //获取上传的文件的路径
         String path = getUploadPath(file,id,type);
-        log.info("压缩后的名称：  "+ file.getOriginalFilename());
+        log.info("上传路径：  "+ path);
         //获取流
         InputStream inputStream = file.getInputStream();
         //上传
@@ -406,6 +406,7 @@ public class MinioUtil {
             //拼接路径
             String path = getUploadPath(file,id,type);
             String contentType = file.getContentType();
+            log.info("contentType:  "+contentType);
             //获取流
             InputStream inputStream = file.getInputStream();
             //上传

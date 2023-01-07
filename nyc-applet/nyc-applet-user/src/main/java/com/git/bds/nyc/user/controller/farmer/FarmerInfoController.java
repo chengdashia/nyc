@@ -1,6 +1,7 @@
 package com.git.bds.nyc.user.controller.farmer;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.git.bds.nyc.communal.convert.AddressConvert;
 import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
@@ -22,6 +23,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -93,6 +95,7 @@ public class FarmerInfoController {
      * @return {@link R}<{@link Boolean}>
      */
     @ApiOperation(value = "修改 默认收货地址")
+    @Transactional(rollbackFor = Exception.class)
     @PostMapping("/modifyDefaultSelfShoppingAddress")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
@@ -102,16 +105,16 @@ public class FarmerInfoController {
     ){
         long userId = StpUtil.getLoginIdAsLong();
         //将原来默认的置于非默认
-        shoppingAddressService.update(new UpdateWrapper<ShoppingAddress>()
-                .set(ShoppingAddress.isDEFAULT, DefaultType.NOT_DEFAULT)
-                .eq(ShoppingAddress.USER_ID, userId)
-                .eq(ShoppingAddress.isDEFAULT,DefaultType.IS_DEFAULT.getValue()));
+        shoppingAddressService.update(new LambdaUpdateWrapper<ShoppingAddress>()
+                .set(ShoppingAddress::getIsDefault, DefaultType.NOT_DEFAULT)
+                .eq(ShoppingAddress::getUserId, userId)
+                .eq(ShoppingAddress::getIsDefault,DefaultType.IS_DEFAULT.getValue()));
 
         //将新选择的置为默认
-        boolean update = shoppingAddressService.update(new UpdateWrapper<ShoppingAddress>()
-                .set(ShoppingAddress.isDEFAULT, DefaultType.IS_DEFAULT)
-                .eq(ShoppingAddress.USER_ID, userId)
-                .eq(ShoppingAddress.ID, id));
+        boolean update = shoppingAddressService.update(new LambdaUpdateWrapper<ShoppingAddress>()
+                .set(ShoppingAddress::getIsDefault, DefaultType.IS_DEFAULT)
+                .eq(ShoppingAddress::getUserId, userId)
+                .eq(ShoppingAddress::getId, id));
         return R.decide(update);
     }
 

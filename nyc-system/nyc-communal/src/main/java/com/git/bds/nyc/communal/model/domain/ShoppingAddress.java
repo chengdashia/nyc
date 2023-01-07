@@ -67,11 +67,11 @@ public class ShoppingAddress extends Model<ShoppingAddress> {
 
     public static final String PHONE = "phone";
 
-    public static final String LOCALTION = "location";
+    public static final String LOCATION = "location";
 
     public static final String DETAILED_ADDRESS = "detailed_address";
 
-    public static final String isDEFAULT = "isDefault";
+    public static final String isDEFAULT = "is_default";
 
     @Override
     public Serializable pkVal() {
