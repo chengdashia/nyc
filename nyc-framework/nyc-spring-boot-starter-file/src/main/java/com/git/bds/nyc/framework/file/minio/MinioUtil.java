@@ -460,7 +460,7 @@ public class MinioUtil {
                         .stream(inputStream, inputStream.available(), -1)
                         .build());
 
-        return path;
+        return URL + path;
     }
 
     /**
