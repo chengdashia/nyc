@@ -10,7 +10,9 @@ import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
 import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.communal.service.address.ShoppingAddressService;
 import com.git.bds.nyc.enums.DefaultType;
+import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.result.R;
+import com.git.bds.nyc.result.ResultCode;
 import com.git.bds.nyc.user.convert.UserConvert;
 import com.git.bds.nyc.user.model.domain.User;
 import com.git.bds.nyc.user.model.dto.UserWxInfoDTO;
@@ -104,15 +106,18 @@ public class FarmerInfoController {
             @RequestParam("id") @NotNull Long id
     ){
         long userId = StpUtil.getLoginIdAsLong();
+        if(shoppingAddressService.getById(id) == null){
+            throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+        }
         //将原来默认的置于非默认
         shoppingAddressService.update(new LambdaUpdateWrapper<ShoppingAddress>()
-                .set(ShoppingAddress::getIsDefault, DefaultType.NOT_DEFAULT)
+                .set(ShoppingAddress::getIsDefault, DefaultType.NOT_DEFAULT.getValue())
                 .eq(ShoppingAddress::getUserId, userId)
                 .eq(ShoppingAddress::getIsDefault,DefaultType.IS_DEFAULT.getValue()));
 
         //将新选择的置为默认
         boolean update = shoppingAddressService.update(new LambdaUpdateWrapper<ShoppingAddress>()
-                .set(ShoppingAddress::getIsDefault, DefaultType.IS_DEFAULT)
+                .set(ShoppingAddress::getIsDefault, DefaultType.IS_DEFAULT.getValue())
                 .eq(ShoppingAddress::getUserId, userId)
                 .eq(ShoppingAddress::getId, id));
         return R.decide(update);
