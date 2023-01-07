@@ -1,6 +1,7 @@
 package com.git.bds.nyc.user.controller.farmer;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.git.bds.nyc.communal.convert.AddressConvert;
@@ -106,7 +107,10 @@ public class FarmerInfoController {
             @RequestParam("id") @NotNull Long id
     ){
         long userId = StpUtil.getLoginIdAsLong();
-        if(shoppingAddressService.getById(id) == null){
+        ShoppingAddress one = shoppingAddressService.getOne(new LambdaQueryWrapper<ShoppingAddress>()
+                .eq(ShoppingAddress::getId, id)
+                .eq(ShoppingAddress::getUserId, userId));
+        if(one == null){
             throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
         }
         //将原来默认的置于非默认

@@ -76,7 +76,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
         LoginVO login = new LoginVO();
         login.setToken(StpUtil.getTokenValue());
         login.setAvatar(user.getAvatar());
-        login.setAvatar(user.getScreenName());
+        login.setScreenName(user.getScreenName());
         return login;
     }
 
