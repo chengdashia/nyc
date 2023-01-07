@@ -8,12 +8,13 @@ import com.git.bds.nyc.framework.file.core.util.FileTypeUtils;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.result.ResultCode;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,13 +23,13 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class PrimaryProductFileImpl implements PrimaryProductFileService{
 
-    @Resource
-    private MinioUtil minioUtil;
 
-    @Resource
-    private MinioConfig minioConfig;
+    private final MinioUtil minioUtil;
+
+    private final MinioConfig minioConfig;
 
 
     /**
@@ -89,5 +90,20 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
         return null;
     }
 
+    /**
+     * 上传头像
+     *
+     * @param file 文件
+     * @return {@link String}
+     */
+    @Override
+    @SneakyThrows
+    public String uploadAvatar(MultipartFile file) {
+        String fileType = FileTypeUtil.getType(file.getInputStream());
+        if(!FileTypeUtils.SUFFIX.contains(fileType)){
+            throw new BusinessException(ResultCode.FILE_TYPE_ERROR.getCode(), ResultCode.FILE_TYPE_ERROR.getMessage());
+        }
+        return minioUtil.uploadAvatar(minioConfig.getBucketName(),file, StpUtil.getLoginIdAsLong());
+    }
 
 }

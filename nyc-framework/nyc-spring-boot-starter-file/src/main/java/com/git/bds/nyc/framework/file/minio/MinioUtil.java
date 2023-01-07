@@ -331,6 +331,19 @@ public class MinioUtil {
                 SEPARATOR + IdUtil.getSnowflakeNextId() + POINT + suffix;
     }
 
+    /**
+     * 获取头像路径
+     *
+     * @param file 文件
+     * @param id   上传者id
+     * @return {@link String}
+     */
+    public String getAvatarPath(MultipartFile file,Long id){
+        //获取文件后缀
+        String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
+        return id + SEPARATOR + "avatar" + SEPARATOR + IdUtil.getSnowflakeNextId() + POINT + suffix;
+    }
+
 
     /**
      * 使用MultipartFile进行文件上传
@@ -420,6 +433,34 @@ public class MinioUtil {
             imgList.add(URL+path);
         }
         return imgList;
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param bucketName 桶名
+     * @param id         身份证件
+     * @param file       文件
+     * @return {@link String}
+     * @throws Exception 例外
+     */
+    public String uploadAvatar(String bucketName, MultipartFile file, Long id) throws Exception {
+        //拼接路径
+        String path = getAvatarPath(file,id);
+        String contentType = file.getContentType();
+        log.info("contentType:  "+contentType);
+        //获取流
+        InputStream inputStream = file.getInputStream();
+        //上传
+        minioClient.putObject(
+                PutObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(path)
+                        .contentType(contentType)
+                        .stream(inputStream, inputStream.available(), -1)
+                        .build());
+
+        return path;
     }
 
     /**

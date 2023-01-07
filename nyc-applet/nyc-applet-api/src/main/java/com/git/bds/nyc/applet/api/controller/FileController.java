@@ -21,7 +21,7 @@ import java.util.List;
  * @author 成大事
  * @since 2022/9/15 19:50
  */
-@Api(tags = "产品图片")
+@Api(tags = "文件上传")
 @Slf4j
 @Validated
 @RestController
@@ -67,6 +67,24 @@ public class FileController {
             @RequestPart("files") MultipartFile[] uploadFiles
     ){
         return R.ok( productFileService.uploadDemandImg(uploadFiles));
+    }
+
+    /**
+     * 上传用户头像
+     *
+     * @param file 上载文件
+     * @return {@link R}<{@link String}>
+     */
+    @SneakyThrows
+    @PostMapping("/uploadAvatar")
+    @ApiOperation(value = "上传用户头像",notes = "微信用户可以选择使用自己的微信头像或者选择其他的")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "file", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
+    })
+    public R<String> uploadAvatar(
+            @RequestPart("file") MultipartFile file
+    ){
+        return R.ok( productFileService.uploadAvatar(file));
     }
 
     /**

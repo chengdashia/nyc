@@ -42,4 +42,12 @@ public interface PrimaryProductFileService {
      * @return {@link List}<{@link String}>
      */
     List<String> uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles);
+
+    /**
+     * 上传头像
+     *
+     * @param file 文件
+     * @return {@link String}
+     */
+    String uploadAvatar(MultipartFile file);
 }
