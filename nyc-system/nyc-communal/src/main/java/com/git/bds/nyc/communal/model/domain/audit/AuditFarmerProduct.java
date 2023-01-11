@@ -56,7 +56,7 @@ public class AuditFarmerProduct extends Model<AuditFarmerProduct> {
     private LocalDateTime createTime;
 
     @ApiModelProperty("审核时间")
-    @TableField("audit_time")
+    @TableField(value = "audit_time",fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime auditTime;
 
     @ApiModelProperty("提交次数")
