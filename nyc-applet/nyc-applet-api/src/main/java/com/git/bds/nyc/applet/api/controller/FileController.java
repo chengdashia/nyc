@@ -81,10 +81,10 @@ public class FileController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
     })
-    public R<String> uploadAvatar(
+    public String uploadAvatar(
             @RequestPart("file") MultipartFile file
     ){
-        return R.ok( productFileService.uploadAvatar(file));
+        return productFileService.uploadAvatar(file);
     }
 
     /**

@@ -36,7 +36,6 @@ public class AuditCorpController {
 
     private final AuditCorpService auditCorpService;
 
-
     /**
      * 供销社 分页获取公司发布的 需要审核的商品
      *
@@ -81,9 +80,6 @@ public class AuditCorpController {
     ){
         return R.decide(auditCorpService.toExamineCorpProcessingProduct(statusDTO));
     }
-
-
-
 
 
     /**

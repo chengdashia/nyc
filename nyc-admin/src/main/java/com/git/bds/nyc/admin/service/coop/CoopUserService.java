@@ -2,6 +2,9 @@ package com.git.bds.nyc.admin.service.coop;
 
 
 import com.git.bds.nyc.admin.model.domain.CoopUser;
+import com.git.bds.nyc.admin.model.dto.CoopUserDTO;
+import com.git.bds.nyc.page.PageParam;
+import com.git.bds.nyc.page.PageResult;
 import com.github.yulichang.base.MPJBaseService;
 
 /**
@@ -14,4 +17,12 @@ import com.github.yulichang.base.MPJBaseService;
  */
 public interface CoopUserService extends MPJBaseService<CoopUser> {
 
+    /**
+     * 通过合作社id获取下级农民
+     *
+     * @param pageParam
+     * @param id        合作社id
+     * @return {@link PageResult}<{@link CoopUserDTO}>
+     */
+    PageResult<CoopUserDTO> getSubordinateFarmerByCoopId(PageParam pageParam, Long id);
 }

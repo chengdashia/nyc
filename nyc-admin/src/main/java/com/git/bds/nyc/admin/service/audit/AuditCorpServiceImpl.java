@@ -57,7 +57,7 @@ public class AuditCorpServiceImpl implements AuditCorpService{
     private final DemandEsMapper demandEsMapper;
 
     /**
-     * 按页面获取挂起审核产品
+     * 按页面获取需要审核产品
      *
      * @param pageParam 页面参数
      * @param type      类型
@@ -110,6 +110,7 @@ public class AuditCorpServiceImpl implements AuditCorpService{
                     )
                     .eq(CorpPrimaryProduct::getId, statusDTO.getGoodsId()));
             ProductEs productEs = ProductConvert.INSTANCE.toProductEs(corpPrimaryProduct, ProductType.CORP_PRIMARY.getValue());
+            //将数据插入es
             productEsMapper.insert(productEs);
         }
         return true;
@@ -148,6 +149,7 @@ public class AuditCorpServiceImpl implements AuditCorpService{
                     )
                     .eq(CorpProcessingProduct::getId, statusDTO.getGoodsId()));
             ProductEs productEs = ProductConvert.INSTANCE.toProductEs(corpProcessingProduct, ProductType.CORP_PROCESSING.getValue());
+            //将数据插入es
             productEsMapper.insert(productEs);
         }
         return true;
@@ -182,6 +184,7 @@ public class AuditCorpServiceImpl implements AuditCorpService{
                     )
                     .eq(CorpDemand::getId, statusDTO.getGoodsId()));
             DemandEs demandEs = DemandConvert.INSTANCE.toDemandEs(corpDemand, DemandType.CORP_DEMAND.getValue());
+            //将数据插入es
             demandEsMapper.insert(demandEs);
         }
         return true;
