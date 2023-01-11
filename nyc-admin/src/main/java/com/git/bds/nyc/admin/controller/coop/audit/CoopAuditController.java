@@ -44,7 +44,7 @@ public class CoopAuditController {
      * @return {@link R}<{@link PageResult}<{@link AdvertisementVO}>>
      */
     @ApiOperation("合作社 分页获取农户发布的 需要审核的初级农产品")
-    @GetMapping("/getPendingAuditProductByPage/{type}")
+    @PostMapping("/getPendingAuditProductByPage/{type}")
     public R<PageResult<AuditProductVO>> getPendingAuditProductByPage(
             @Validated @RequestBody PageParam pageParam,
             @PathVariable("type") @NotNull @Min(-1) @Max(1) Integer type
