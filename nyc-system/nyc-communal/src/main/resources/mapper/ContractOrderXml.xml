@@ -8,6 +8,8 @@
         <result column="seller_id" property="sellerId" />
         <result column="buyer_id" property="buyerId" />
         <result column="product_id" property="productId" />
+        <result column="product_species" property="productSpecies" />
+        <result column="product_varieties" property="productVarieties" />
         <result column="seller_contact_info_id" property="sellerContactInfoId" />
         <result column="seller_signature" property="sellerSignature" />
         <result column="buyer_contact_info_id" property="buyerContactInfoId" />

@@ -2,7 +2,8 @@ package com.git.bds.nyc.communal.model.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -13,7 +14,8 @@ import java.math.BigDecimal;
  * @since 2023/1/2 14:17
  * 订单信息表
  */
-@Data
+@Setter
+@Getter
 @ApiModel("订单的model")
 public class OrderDTO implements Serializable {
 

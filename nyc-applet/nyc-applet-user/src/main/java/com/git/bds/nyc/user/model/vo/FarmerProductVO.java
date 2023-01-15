@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @Data
 public class FarmerProductVO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty("产品id")
     private Long productId;
     @ApiModelProperty("类型")

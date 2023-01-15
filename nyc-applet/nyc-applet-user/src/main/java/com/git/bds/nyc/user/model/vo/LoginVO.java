@@ -14,6 +14,8 @@ import java.io.Serializable;
 @ApiModel("登录成功后的vo")
 public class LoginVO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty("token")
     private String token;
 

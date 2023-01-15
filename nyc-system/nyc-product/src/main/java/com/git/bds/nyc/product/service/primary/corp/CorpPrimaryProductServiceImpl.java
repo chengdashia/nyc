@@ -2,11 +2,9 @@ package com.git.bds.nyc.product.service.primary.corp;
 
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
 import com.git.bds.nyc.enums.ProductSellType;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
@@ -17,7 +15,6 @@ import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
@@ -45,6 +42,7 @@ import java.util.stream.Collectors;
 public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimaryProductMapper, CorpPrimaryProduct> implements CorpPrimaryProductService {
 
     private final ProductPictureMapper productPictureMapper;
+
     private final MinioConfig minioConfig;
 
     private final MinioUtil minioUtil;
@@ -95,18 +93,42 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
         return true;
     }
 
+    /**
+     * 逐页销售产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
+     */
     @Override
     public PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam) {
         IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.ON_SELL.getValue());
         return new PageResult<>(page.getRecords(),page.getCurrent());
     }
 
+    /**
+     * 按页面获取预售产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
+     */
     @Override
     public PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam) {
         IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.PRE_SELL.getValue());
         return new PageResult<>(page.getRecords(),page.getCurrent());
     }
 
+    @Override
+    public Boolean deleteProductById(Long id, int type) {
+        return null;
+    }
+
+    /**
+     * 按页面获取产品
+     *
+     * @param pageParam 页面参数
+     * @param type      类型
+     * @return {@link IPage}<{@link PrimaryProductSelfDTO}>
+     */
     public IPage<PrimaryProductSelfDTO> getProductByPage(PageParam pageParam,int type){
        return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 PrimaryProductSelfDTO.class,

@@ -4,7 +4,6 @@ package com.git.bds.nyc.product.service.primary.corp;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.github.yulichang.base.MPJBaseService;
@@ -44,4 +43,6 @@ public interface CorpPrimaryProductService extends MPJBaseService<CorpPrimaryPro
      * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
      */
     PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam);
+
+
 }

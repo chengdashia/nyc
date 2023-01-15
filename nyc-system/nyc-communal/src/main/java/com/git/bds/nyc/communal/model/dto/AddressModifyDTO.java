@@ -3,6 +3,8 @@ package com.git.bds.nyc.communal.model.dto;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -10,7 +12,8 @@ import java.io.Serializable;
  * @author 成大事
  * @since 2022/11/26 19:25
  */
-@Data
+@Setter
+@Getter
 public class AddressModifyDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

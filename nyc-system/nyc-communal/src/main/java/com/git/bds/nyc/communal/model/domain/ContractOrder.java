@@ -45,6 +45,13 @@ public class ContractOrder extends Model<ContractOrder> {
     @TableField("product_id")
     private Long productId;
 
+    @ApiModelProperty("产品品种")
+    @TableField("product_species")
+    private String productSpecies;
+    @ApiModelProperty("产品种类")
+    @TableField("product_varieties")
+    private String productVarieties;
+
     @ApiModelProperty("产品类型")
     @TableField("type")
     private Integer type;
@@ -105,6 +112,8 @@ public class ContractOrder extends Model<ContractOrder> {
     public static final String BUYER_ID = "buyer_id";
 
     public static final String PRODUCT_ID = "product_id";
+    public static final String PRODUCT_SPECIES = "product_species";
+    public static final String PRODUCT_VARIETIES = "product_varieties";
 
     public static final String SELLER_CONTACT_INFO_ID = "seller_contact_info_id";
 

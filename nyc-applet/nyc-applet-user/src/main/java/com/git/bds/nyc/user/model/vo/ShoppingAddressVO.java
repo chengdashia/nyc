@@ -12,6 +12,8 @@ import java.io.Serializable;
 @Data
 public class ShoppingAddressVO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty("地址id")
     private Long id;
 

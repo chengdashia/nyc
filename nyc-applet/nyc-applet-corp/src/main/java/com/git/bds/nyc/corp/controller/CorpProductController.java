@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 
@@ -85,18 +87,22 @@ public class CorpProductController {
     }
 
     /**
-     * 删除初级农产品
+     * 删除 农产品
      *
-     * @param id 初级农产品id
+     * @param id 农产品id
      * @return {@link = R<Boolean>}
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{type}/{id}")
     @ApiOperation("根据id删除初级农产品数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id主键", dataTypeClass = Long.class, paramType = "path", example = "123456", required = true)
+            @ApiImplicitParam(name = "id", value = "id主键", dataTypeClass = Long.class, paramType = "path", example = "123456", required = true),
+            @ApiImplicitParam(name = "type", value = "id主键", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
-    public R<Boolean> delete(@PathVariable(value = "id") Long id) {
-        return R.decide(corpPrimaryProductService.removeById(id));
+    public R<Boolean> delete(
+            @PathVariable(value = "id") Long id,
+            @PathVariable(value = "type") @Min(1) @Max(2) int type
+    ) {
+        return R.decide(corpService.deleteProductById(id,type));
     }
 
     /**

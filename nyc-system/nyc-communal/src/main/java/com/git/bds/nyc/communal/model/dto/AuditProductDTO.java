@@ -1,6 +1,7 @@
 package com.git.bds.nyc.communal.model.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
  * @since 2023/1/5 15:08
  * 待定审核的商品的
  */
-@Data
+@Setter
+@Getter
 public class AuditProductDTO implements Serializable {
 
 

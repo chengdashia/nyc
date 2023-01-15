@@ -2,7 +2,8 @@ package com.git.bds.nyc.communal.model.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
@@ -17,7 +18,8 @@ import java.io.Serializable;
  * @Description:  用于公司产品审核更新
  */
 @ApiModel(value = "用于公司产品审核更新(更新时使用)")
-@Data
+@Setter
+@Getter
 @Accessors(chain = true)
 public class AuditCorpProductUpdateDTO implements Serializable {
     private static final long serialVersionUID = 1L;

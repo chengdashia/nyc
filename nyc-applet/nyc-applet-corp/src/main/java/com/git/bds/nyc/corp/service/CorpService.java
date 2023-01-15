@@ -25,4 +25,12 @@ public interface CorpService {
      */
     Boolean releasePreSellProduct(PrimaryProductDTO productDTO);
 
+    /**
+     * 按id删除产品
+     *
+     * @param id   身份证件
+     * @param type 类型
+     * @return {@link Boolean}
+     */
+    Boolean deleteProductById(Long id, int type);
 }
