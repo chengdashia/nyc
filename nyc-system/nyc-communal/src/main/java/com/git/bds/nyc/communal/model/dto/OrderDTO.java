@@ -29,9 +29,12 @@ public class OrderDTO implements Serializable {
     private Long productId;
 
     @NotNull
+    @ApiModelProperty("卖家id")
+    private Long sellerId;
+
+    @NotNull
     @ApiModelProperty("卖家联系信息id")
     private Long sellerContactInfoId;
-
     @NotNull
     @Digits(integer = 10,fraction = 2)
     @ApiModelProperty("下单重量")
@@ -43,6 +46,6 @@ public class OrderDTO implements Serializable {
     @NotNull
     @Min(0)
     @Max(3)
-    @ApiModelProperty("类型 农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2) 需求(3)")
+    @ApiModelProperty("类型 农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2) 农户需求(3) 公司需求(4)")
     private Integer type;
 }

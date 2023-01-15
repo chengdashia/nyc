@@ -344,6 +344,18 @@ public class MinioUtil {
         return id + SEPARATOR + "avatar" + SEPARATOR + IdUtil.getSnowflakeNextId() + POINT + suffix;
     }
 
+    /**
+     * 获取签名路径
+     *
+     * @param id 上传者id
+     * @return {@link String}
+     */
+    public String getSignPath(Long id){
+        //获取文件后缀
+        return id + SEPARATOR + "sign" +
+                SEPARATOR + IdUtil.getSnowflakeNextId() + ".png";
+    }
+
 
     /**
      * 使用MultipartFile进行文件上传
@@ -436,6 +448,25 @@ public class MinioUtil {
     }
 
     /**
+     * 上传签名
+     *
+     * @param bucketName  存储桶
+     * @param inputStream 文件流
+     * @param id          身份证件
+     * @return {@link String}
+     */
+    public String uploadSign(String bucketName,InputStream inputStream,Long id) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        String signPath = getSignPath(id);
+        minioClient.putObject(
+                PutObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(signPath)
+                        .stream(inputStream, inputStream.available(), -1)
+                        .build());
+        return signPath;
+    }
+
+    /**
      * 上传头像
      *
      * @param bucketName 桶名
@@ -494,6 +525,8 @@ public class MinioUtil {
                         .stream(inputStream, inputStream.available(), -1)
                         .build());
     }
+
+
 
 
 

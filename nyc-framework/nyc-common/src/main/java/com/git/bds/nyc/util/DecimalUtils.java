@@ -12,6 +12,40 @@ public class DecimalUtils {
     private DecimalUtils(){
 
     }
+
+    /**
+     * 大于
+     *
+     * @param x x（x）
+     * @param y y
+     * @return {@link Boolean}
+     */
+    public static Boolean greaterThan(BigDecimal x,BigDecimal y){
+        return x.compareTo(y) > 0;
+    }
+
+    /**
+     * 少于
+     *
+     * @param x x（x）
+     * @param y y
+     * @return {@link Boolean}
+     */
+    public static Boolean lessThan(BigDecimal x,BigDecimal y){
+        return x.compareTo(y) < 0;
+    }
+
+    /**
+     * 相同
+     *
+     * @param x x（x）
+     * @param y y
+     * @return {@link Boolean}
+     */
+    public static Boolean equal(BigDecimal x,BigDecimal y){
+        return x.compareTo(y) == 0;
+    }
+
     /**
      * 加法计算（result = x + y）
      *
@@ -256,6 +290,8 @@ public class DecimalUtils {
         }
         return x.stripTrailingZeros();
     }
+
+
 
     /**
      * 将BigDecimal 转成人民币 并格式化

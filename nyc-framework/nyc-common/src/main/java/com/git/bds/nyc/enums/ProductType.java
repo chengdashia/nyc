@@ -10,7 +10,11 @@ public enum ProductType {
     /** 预售 */
     CORP_PRIMARY(1,"公司初级"),
     /** 公司加工 */
-    CORP_PROCESSING(2,"公司加工");
+    CORP_PROCESSING(2,"公司加工"),
+    /** 农民需求 */
+    FARMER_DEMAND(3,"农户需求"),
+    /** 企业需求 */
+    CORP_DEMAND(4,"公司需求");
 
     private final Integer value;
     private final String msg;

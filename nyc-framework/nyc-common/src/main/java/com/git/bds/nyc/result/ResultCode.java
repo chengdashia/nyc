@@ -7,12 +7,10 @@ import lombok.Getter;
  * @since 2022/6/2 11:12
  */
 public enum ResultCode {
-    /** code：2xx **/
-    /**操作成功**/
+    /**code：2xx 操作成功**/
     SUCCESS(200,"操作成功！"),
 
-    /** code：4xx **/
-    /** 客户端错误 **/
+    /** code：4xx 客户端错误 **/
 
     /**请求的数据格式不符**/
     BODY_NOT_MATCH(400,"请求的数据格式不符!"),
@@ -53,8 +51,7 @@ public enum ResultCode {
     /** 文件类型错误 */
     FILE_TYPE_ERROR(415,"文件格式有误！请确认后上传！！！"),
 
-    /** code：5xx **/
-    /**服务器错误**/
+    /** code：5xx 服务器错误**/
 
     /**操作失败**/
     SERVICE_UNAVAILABLE(500,"系统维护,暂时无法处理客户端请求。"),
@@ -63,7 +60,14 @@ public enum ResultCode {
     /**服务器内部错误**/
     INTERNAL_SERVER_ERROR(500, "服务器内部错误!"),
     /**服务器正忙，请稍后再试!**/
-    SERVER_BUSY(504,"服务器正忙，请稍后再试!");
+    SERVER_BUSY(504,"服务器正忙，请稍后再试!"),
+
+
+
+
+    /** code：100x 自定义业务异常**/
+    INSUFFICIENT_STOCK(1000,"库存不足！")
+    ;
 
 
 

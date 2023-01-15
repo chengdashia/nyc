@@ -67,5 +67,10 @@
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.70</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-spring-boot-starter-itext</artifactId>
+        </dependency>
     </dependencies>
 </project>
