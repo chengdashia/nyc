@@ -59,7 +59,7 @@ public class FarmerOrderController {
     @PostMapping("/getOrderList/{type}")
     @ApiOperation("查看别人 下单自己产品的订单list")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "id主键", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+            @ApiImplicitParam(name = "type", value = "类型(1:待签字、2:已签字、3:拒绝签字、4:交易成功", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
     public R<PageResult<OrderShowVO>> getOrderList(
             @RequestBody @Validated PageParam pageParam,

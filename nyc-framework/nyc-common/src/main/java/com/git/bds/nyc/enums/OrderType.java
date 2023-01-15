@@ -12,7 +12,7 @@ public enum OrderType {
     /** 拒绝签字 */
     REFUSE_TO_SIGN(3,"拒绝签字"),
     /** 交易成功 */
-    SUCCESSFUL_TRADE(4,"拒绝签字");
+    SUCCESSFUL_TRADE(4,"交易成功");
 
     private final Integer value;
     private final String msg;

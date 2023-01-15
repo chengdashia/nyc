@@ -117,11 +117,6 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
         return new PageResult<>(page.getRecords(),page.getCurrent());
     }
 
-    @Override
-    public Boolean deleteProductById(Long id, int type) {
-        return null;
-    }
-
     /**
      * 按页面获取产品
      *
