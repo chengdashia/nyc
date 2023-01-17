@@ -67,7 +67,7 @@ public class AuditCorpServiceImpl implements AuditCorpService{
      */
     @Override
     public PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type) {
-        IPage<AuditProductDTO> page = auditCorpProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize(),false),
+        IPage<AuditProductDTO> page = auditCorpProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 AuditProductDTO.class,
                 new MPJLambdaWrapper<AuditCorpProduct>()
                         .select(AuditCorpProduct::getId, AuditCorpProduct::getProductId, AuditCorpProduct::getApplyTimes, AuditCorpProduct::getCreateTime)
