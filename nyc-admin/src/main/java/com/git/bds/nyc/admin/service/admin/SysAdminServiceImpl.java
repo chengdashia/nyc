@@ -71,7 +71,7 @@ public class SysAdminServiceImpl extends MPJBaseServiceImpl<SysAdminMapper, SysA
     public PageResult<UserDTO> getUserByPage(PageParam pageParam) {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(pageParam.getPageNo(),
                         pageParam.getPageSize()), UserDTO.class,
-                new MPJLambdaWrapper<>()
+                new MPJLambdaWrapper<User>()
                         .select(User::getId, User::getAvatar, User::getCreateTime, User::getLoginTime)
                         .select(SysRole::getRoleName)
                         .leftJoin(SysUserRole.class, SysUserRole::getUserId, User::getId)

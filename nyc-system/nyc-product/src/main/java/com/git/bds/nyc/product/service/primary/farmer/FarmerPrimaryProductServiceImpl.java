@@ -1,7 +1,6 @@
 package com.git.bds.nyc.product.service.primary.farmer;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -20,7 +19,6 @@ import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
@@ -88,7 +86,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
     public ProductInfoDTO getProductInfo(Long id, int type) {
         List<ProductInfoDTO> productInfoDTOList ;
         if(Objects.equals(type, ProductType.FARMER_PRIMARY.getValue())){
-            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<>()
+            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<FarmerPrimaryProduct>()
                     .select(FarmerPrimaryProduct::getId,
                             FarmerPrimaryProduct::getProductCover,
                             FarmerPrimaryProduct::getProductRemark,
@@ -104,7 +102,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                     .leftJoin(ProductPicture.class, ProductPicture::getProductId, FarmerPrimaryProduct::getId)
                     .eq(FarmerPrimaryProduct::getId, id));
         }else if(Objects.equals(type, ProductType.CORP_PRIMARY.getValue())){
-            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<>()
+            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<FarmerPrimaryProduct>()
                     .select(CorpPrimaryProduct::getId,
                             CorpPrimaryProduct::getProductCover,
                             CorpPrimaryProduct::getProductRemark,
@@ -120,7 +118,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                     .leftJoin(ProductPicture.class, ProductPicture::getProductId, CorpPrimaryProduct::getId)
                     .eq(CorpPrimaryProduct::getId, id));
         }else {
-            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<>()
+            productInfoDTOList = this.baseMapper.selectJoinList(ProductInfoDTO.class, new MPJLambdaWrapper<FarmerPrimaryProduct>()
                     .select(CorpProcessingProduct::getId,
                             CorpProcessingProduct::getProductCover,
                             CorpProcessingProduct::getProductRemark,
@@ -224,7 +222,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
     public IPage<PrimaryProductSelfDTO> getProductByPage(PageParam pageParam, int type){
         return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 PrimaryProductSelfDTO.class,
-                new MPJLambdaWrapper<>()
+                new MPJLambdaWrapper<FarmerPrimaryProduct>()
                         .select(FarmerPrimaryProduct::getId,
                                 FarmerPrimaryProduct::getProductSpecies,
                                 FarmerPrimaryProduct::getProductVariety,

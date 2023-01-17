@@ -23,7 +23,7 @@
         <!--mybatis-plus-->
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
-        <mybatis-plus-join.version>1.2.4</mybatis-plus-join.version>
+        <mybatis-plus-join.version>1.4.2.2</mybatis-plus-join.version>
         <hutool.version>5.8.9</hutool.version>
         <!--web 相关-->
         <knife4j.version>3.0.3</knife4j.version>

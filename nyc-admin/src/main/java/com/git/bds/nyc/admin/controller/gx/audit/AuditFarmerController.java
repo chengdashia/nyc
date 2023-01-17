@@ -10,6 +10,8 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,9 +46,12 @@ public class AuditFarmerController {
      */
     @ApiOperation("供销社 分页获取农户发布的 需要审核的商品")
     @GetMapping("/getPendingAuditProductByPage/{type}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "type", value = "审核状态(-1：未审核；0：不通过；1：审核通过)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+    })
     public R<PageResult<AuditProductVO>> getPendingAuditProductByPage(
             @Validated @RequestBody PageParam pageParam,
-            @PathVariable("type") @NotNull @Min(-1) @Max(1) Integer type
+            @PathVariable("type") @NotNull @Min(-1) @Max(1) int type
     ){
         PageResult<AuditProductDTO> page = auditFarmerService.getPendingAuditProductByPage(pageParam,type);
         List<AuditProductVO> userVOList = AuditConvert.INSTANCE.toAuditProductVOList(page.getList());

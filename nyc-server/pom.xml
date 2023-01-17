@@ -61,6 +61,7 @@
             <artifactId>nyc-applet-api</artifactId>
         </dependency>
 
+
         <!--
         spring-context-indexer功能，主要作用是解决在类扫描的时候避免类过多导致的扫描速度过慢的问题。
         使用方法也很简单，导入依赖，然后在启动类打上@Indexed注解，这样在程序编译打包之后会生成META-INT/spring.components文件，

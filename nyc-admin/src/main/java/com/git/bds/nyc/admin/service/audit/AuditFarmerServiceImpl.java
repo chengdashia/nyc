@@ -57,7 +57,7 @@ public class AuditFarmerServiceImpl implements AuditFarmerService{
     public PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type) {
         IPage<AuditProductDTO> page = auditFarmerProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 AuditProductDTO.class,
-                new MPJLambdaWrapper<AuditProductDTO>()
+                new MPJLambdaWrapper<AuditFarmerProduct>()
                         .select(AuditFarmerProduct::getId, AuditFarmerProduct::getProductId, AuditFarmerProduct::getApplyTimes, AuditFarmerProduct::getCreateTime)
                         .select(FarmerPrimaryProduct::getProductVariety, FarmerPrimaryProduct::getProductSpecies, FarmerPrimaryProduct::getProductCover)
                         .leftJoin(FarmerPrimaryProduct.class, FarmerPrimaryProduct::getId, CoopAuditProduct::getProductId)

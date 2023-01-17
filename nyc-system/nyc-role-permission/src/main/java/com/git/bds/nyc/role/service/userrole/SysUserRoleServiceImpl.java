@@ -1,11 +1,11 @@
 package com.git.bds.nyc.role.service.userrole;
 
 import com.git.bds.nyc.constant.Constants;
-import com.git.bds.nyc.role.mapper.mp.SysRoleMapper;
-import com.git.bds.nyc.role.mapper.mp.SysUserRoleMapper;
 import com.git.bds.nyc.role.domain.SysRole;
 import com.git.bds.nyc.role.domain.SysUserRole;
 import com.git.bds.nyc.role.domain.dto.RoleDTO;
+import com.git.bds.nyc.role.mapper.mp.SysRoleMapper;
+import com.git.bds.nyc.role.mapper.mp.SysUserRoleMapper;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class SysUserRoleServiceImpl extends MPJBaseServiceImpl<SysUserRoleMapper
      */
     @Override
     public List<String> getRoleList(Object loginId) {
-        return sysRoleDao.selectJoinList(RoleDTO.class, new MPJLambdaWrapper<>()
+        return sysRoleDao.selectJoinList(RoleDTO.class, new MPJLambdaWrapper<SysRole>()
                 .selectAs(SysRole::getRoleName, Constants.ROLE)
                 .leftJoin(SysUserRole.class, SysUserRole::getRoleId, SysRole::getId)
                 .eq(SysUserRole::getUserId, loginId)).stream().map(RoleDTO::getRole).collect(Collectors.toList());

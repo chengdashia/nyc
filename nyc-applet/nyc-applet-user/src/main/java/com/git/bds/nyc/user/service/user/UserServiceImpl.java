@@ -88,7 +88,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
     @Override
     public List<ShoppingAddressDTO> getSelfShoppingAddress() {
        return this.baseMapper.selectJoinList(ShoppingAddressDTO.class,
-               new MPJLambdaWrapper<>()
+               new MPJLambdaWrapper<User>()
                        .select(ShoppingAddress::getId,
                                ShoppingAddress::getConsignee,
                                ShoppingAddress::getPhone,

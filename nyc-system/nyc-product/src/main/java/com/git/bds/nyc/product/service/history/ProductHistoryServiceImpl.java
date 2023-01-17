@@ -39,7 +39,7 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
         IPage<ProductCollectAndHistoryDTO> page;
         if(type == ProductType.FARMER_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductHistory>()
                             .select(ProductHistory::getProductId)
                             .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
                             .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
@@ -54,7 +54,7 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
                             .eq(ProductHistory::getProductType, type));
         }else if (type == ProductType.CORP_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductHistory>()
                             .select(ProductHistory::getProductId)
                             .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
                             .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
@@ -69,7 +69,7 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
                             .eq(ProductHistory::getProductType, type));
         }else {
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductHistory>()
                             .select(ProductHistory::getProductId)
                             .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
                             .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)

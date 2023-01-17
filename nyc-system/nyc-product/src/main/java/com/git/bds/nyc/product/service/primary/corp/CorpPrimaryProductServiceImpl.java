@@ -127,7 +127,7 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
     public IPage<PrimaryProductSelfDTO> getProductByPage(PageParam pageParam,int type){
        return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 PrimaryProductSelfDTO.class,
-                new MPJLambdaWrapper<>()
+                new MPJLambdaWrapper<CorpPrimaryProduct>()
                         .select(CorpPrimaryProduct::getId,
                                 CorpPrimaryProduct::getProductSpecies,
                                 CorpPrimaryProduct::getProductVariety,

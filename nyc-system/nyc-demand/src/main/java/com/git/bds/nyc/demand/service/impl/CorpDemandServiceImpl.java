@@ -48,9 +48,8 @@ public class CorpDemandServiceImpl extends MPJBaseServiceImpl<CorpDemandMapper, 
      */
     @Override
     public List<DemandDTO> homePageDemandsByPage(PageParam pageParam) {
-
         return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),DemandDTO.class,
-                new MPJLambdaWrapper<>()
+                new MPJLambdaWrapper<CorpDemand>()
                         .select(CorpDemand::getId
                                 , CorpDemand::getDemandSpecies
                                 , CorpDemand::getDemandVariety

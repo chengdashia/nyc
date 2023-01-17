@@ -37,7 +37,7 @@ public class AuditCommonServiceImpl implements AuditCommonService{
 
     private final CorpProcessingProductMapper corpProcessingProductMapper;
 
-    private final CorpDemandMapper demandMapper;
+    private final CorpDemandMapper corpDemandMapper;
 
     /**
      * 获取审核产品信息
@@ -51,7 +51,7 @@ public class AuditCommonServiceImpl implements AuditCommonService{
         List<AuditProductInfoDTO> infoDTOList = null;
         if(ProductType.FARMER_PRIMARY.getValue().equals(type)){
             infoDTOList = farmerPrimaryProductMapper.selectJoinList(AuditProductInfoDTO.class,
-                    new MPJLambdaWrapper<AuditProductInfoDTO>()
+                    new MPJLambdaWrapper<FarmerPrimaryProduct>()
                             .select(FarmerPrimaryProduct.class, i -> !i.getColumn().equals(FarmerPrimaryProduct.CONTACT_INFO_ID)
                                     && !i.getColumn().equals(FarmerPrimaryProduct.COOP_AUDIT_STATUS)
                                     && !i.getColumn().equals(FarmerPrimaryProduct.AUDIT_STATUS)
@@ -62,7 +62,7 @@ public class AuditCommonServiceImpl implements AuditCommonService{
                             .eq(FarmerPrimaryProduct::getId, id));
         }else if(ProductType.CORP_PRIMARY.getValue().equals(type)){
             infoDTOList = corpPrimaryProductMapper.selectJoinList(AuditProductInfoDTO.class,
-                    new MPJLambdaWrapper<AuditProductInfoDTO>()
+                    new MPJLambdaWrapper<CorpPrimaryProduct>()
                             .select(CorpPrimaryProduct.class, i -> !i.getColumn().equals(FarmerPrimaryProduct.CONTACT_INFO_ID)
                                     && !i.getColumn().equals(CorpPrimaryProduct.AUDIT_STATUS)
                                     && !i.getColumn().equals(CorpPrimaryProduct.DELETE_FLAG)
@@ -72,7 +72,7 @@ public class AuditCommonServiceImpl implements AuditCommonService{
                             .eq(CorpPrimaryProduct::getId, id));
         }else if(ProductType.CORP_PROCESSING.getValue().equals(type)){
             infoDTOList = corpProcessingProductMapper.selectJoinList(AuditProductInfoDTO.class,
-                    new MPJLambdaWrapper<AuditProductInfoDTO>()
+                    new MPJLambdaWrapper<CorpProcessingProduct>()
                             .select(CorpProcessingProduct.class, i -> !i.getColumn().equals(FarmerPrimaryProduct.CONTACT_INFO_ID)
                                     && !i.getColumn().equals(CorpProcessingProduct.AUDIT_STATUS)
                                     && !i.getColumn().equals(CorpProcessingProduct.DELETE_FLAG)
@@ -98,8 +98,8 @@ public class AuditCommonServiceImpl implements AuditCommonService{
      */
     @Override
     public DemandInfoDTO getAuditDemandInfo(Long id) {
-        return demandMapper.selectJoinOne(DemandInfoDTO.class,
-                new MPJLambdaWrapper<DemandInfoDTO>()
+        return corpDemandMapper.selectJoinOne(DemandInfoDTO.class,
+                new MPJLambdaWrapper<CorpDemand>()
                         .select(CorpDemand.class, i->!i.getColumn().equals(CorpDemand.USER_ID))
                         .eq(CorpDemand::getId,id)
         );

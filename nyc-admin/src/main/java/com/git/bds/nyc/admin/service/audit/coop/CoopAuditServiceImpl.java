@@ -19,6 +19,7 @@ import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapp
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author 成大事
  * @since 2023/1/5 15:46
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CoopAuditServiceImpl implements CoopAuditService{
@@ -49,13 +51,20 @@ public class CoopAuditServiceImpl implements CoopAuditService{
      */
     @Override
     public PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type) {
-        IPage<AuditProductDTO> page = coopAuditProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize(),false),
+
+        IPage<AuditProductDTO> page = coopAuditProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 AuditProductDTO.class,
-                new MPJLambdaWrapper<AuditProductDTO>()
+                new MPJLambdaWrapper<CoopAuditProduct>()
                         .select(CoopAuditProduct::getId, CoopAuditProduct::getProductId, CoopAuditProduct::getApplyTimes, CoopAuditProduct::getCreateTime)
                         .select(FarmerPrimaryProduct::getProductVariety, FarmerPrimaryProduct::getProductSpecies, FarmerPrimaryProduct::getProductCover)
                         .leftJoin(FarmerPrimaryProduct.class, FarmerPrimaryProduct::getId, CoopAuditProduct::getProductId)
                         .eq(CoopAuditProduct::getAuditStatus, type));
+
+        log.info("page.getTotal: "+page.getTotal());
+        log.info("page.getPages: "+page.getPages());
+        log.info("page.getSize: "+page.getSize());
+        log.info("page.getCurrent: "+page.getCurrent());
+
         return new PageResult<>(page.getRecords(),page.getTotal());
     }
 

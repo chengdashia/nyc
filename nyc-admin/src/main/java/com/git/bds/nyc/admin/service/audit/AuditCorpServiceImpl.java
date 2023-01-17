@@ -30,6 +30,7 @@ import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
 import com.git.bds.nyc.product.model.es.ProductEs;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author 成大事
  * @since 2023/1/5 16:03
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AuditCorpServiceImpl implements AuditCorpService{
@@ -67,12 +69,13 @@ public class AuditCorpServiceImpl implements AuditCorpService{
     public PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type) {
         IPage<AuditProductDTO> page = auditCorpProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize(),false),
                 AuditProductDTO.class,
-                new MPJLambdaWrapper<AuditProductDTO>()
+                new MPJLambdaWrapper<AuditCorpProduct>()
                         .select(AuditCorpProduct::getId, AuditCorpProduct::getProductId, AuditCorpProduct::getApplyTimes, AuditCorpProduct::getCreateTime)
                         .select(CorpPrimaryProduct::getProductVariety, CorpPrimaryProduct::getProductSpecies, CorpPrimaryProduct::getProductCover)
                         .leftJoin(CorpPrimaryProduct.class, CorpPrimaryProduct::getId, CoopAuditProduct::getProductId)
                         .eq(AuditCorpProduct::getAuditStatus, type));
-        return new PageResult<>(page.getRecords(),page.getTotal());
+        log.info("page:"  +page.getTotal());
+        return new PageResult<>(page.getRecords(),page.getCurrent());
     }
 
     /**

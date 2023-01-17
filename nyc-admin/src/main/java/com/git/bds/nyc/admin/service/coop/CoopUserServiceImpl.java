@@ -36,7 +36,7 @@ public class CoopUserServiceImpl extends MPJBaseServiceImpl<CoopUserMapper, Coop
 
         IPage<CoopUserDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 CoopUserDTO.class,
-                new MPJLambdaWrapper<CoopUserDTO>()
+                new MPJLambdaWrapper<CoopUser>()
                         .select(CoopUser::getUserId)
                         .select(User::getAvatar, User::getLoginTime)
                         .select(FarmerAuthentication::getRealName, FarmerAuthentication::getIdCartNum)

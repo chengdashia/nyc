@@ -43,7 +43,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
         IPage<ProductCollectAndHistoryDTO> page;
         if(type == ProductType.FARMER_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
                             .select(ProductCollection::getProductId)
                             .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
                             .selectAs(ProductCollection::getProductType, ProductCollectAndHistoryDTO.TYPE)
@@ -58,7 +58,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
                             .eq(ProductCollection::getProductType, type));
         }else if (type == ProductType.CORP_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
                             .select(ProductCollection::getProductId)
                             .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
                             .selectAs(ProductCollection::getProductType, ProductCollectAndHistoryDTO.TYPE)
@@ -73,7 +73,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
                             .eq(ProductCollection::getProductType, type));
         }else {
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<>()
+                    ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
                             .select(ProductCollection::getProductId)
                             .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
                             .selectAs(ProductCollection::getProductType, ProductCollectAndHistoryDTO.TYPE)
