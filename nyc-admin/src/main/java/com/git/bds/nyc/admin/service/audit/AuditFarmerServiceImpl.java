@@ -37,11 +37,8 @@ public class AuditFarmerServiceImpl implements AuditFarmerService{
 
     private final AuditFarmerProductMapper auditFarmerProductMapper;
     private final AuditFarmerDemandMapper auditFarmerDemandMapper;
-
     private final FarmerPrimaryProductMapper farmerPrimaryProductMapper;
-
     private final CorpDemandMapper demandMapper;
-
     private final ProductEsMapper productEsMapper;
 
 

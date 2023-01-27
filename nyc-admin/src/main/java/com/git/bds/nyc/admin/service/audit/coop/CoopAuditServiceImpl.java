@@ -58,13 +58,8 @@ public class CoopAuditServiceImpl implements CoopAuditService{
                         .select(CoopAuditProduct::getId, CoopAuditProduct::getProductId, CoopAuditProduct::getApplyTimes, CoopAuditProduct::getCreateTime)
                         .select(FarmerPrimaryProduct::getProductVariety, FarmerPrimaryProduct::getProductSpecies, FarmerPrimaryProduct::getProductCover)
                         .leftJoin(FarmerPrimaryProduct.class, FarmerPrimaryProduct::getId, CoopAuditProduct::getProductId)
-                        .eq(CoopAuditProduct::getAuditStatus, type));
-
-        log.info("page.getTotal: "+page.getTotal());
-        log.info("page.getPages: "+page.getPages());
-        log.info("page.getSize: "+page.getSize());
-        log.info("page.getCurrent: "+page.getCurrent());
-
+                        .eq(CoopAuditProduct::getAuditStatus, type)
+                        .orderByDesc(CoopAuditProduct::getCreateTime));
         return new PageResult<>(page.getRecords(),page.getTotal());
     }
 
