@@ -81,7 +81,7 @@ public class AuditCommonServiceImpl implements AuditCommonService{
                             .leftJoin(ProductPicture.class, ProductPicture::getProductId, CorpProcessingProduct::getId)
                             .eq(CorpProcessingProduct::getId, id));
         }
-        if(infoDTOList == null){
+        if(infoDTOList.isEmpty()){
             throw new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage());
         }
         List<String> collect = infoDTOList.stream().map(AuditProductInfoDTO::getPictureUrl).collect(Collectors.toList());
