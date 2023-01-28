@@ -8,20 +8,24 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
 import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
+import com.git.bds.nyc.enums.SysRole;
 import com.git.bds.nyc.exception.BusinessException;
+import com.git.bds.nyc.role.domain.SysUserRole;
+import com.git.bds.nyc.role.mapper.mp.SysUserRoleMapper;
 import com.git.bds.nyc.user.convert.UserConvert;
+import com.git.bds.nyc.user.mapper.mp.UserMapper;
 import com.git.bds.nyc.user.model.domain.User;
 import com.git.bds.nyc.user.model.dto.WxUserInfoDTO;
-import com.git.bds.nyc.user.mapper.mp.UserMapper;
 import com.git.bds.nyc.user.model.vo.LoginVO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -34,10 +38,13 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implements UserService {
 
-    @Resource
-    private WxMaService wxMaService;
+
+    private final WxMaService wxMaService;
+
+    private final SysUserRoleMapper sysUserRoleMapper;
 
 
     /**
@@ -66,8 +73,16 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
             WxMaUserInfo wxMaUserInfo = wxMaService.getUserService()
                     .getUserInfo(session.getSessionKey(), wxUserInfoDTO.getEncryptedData(), wxUserInfoDTO.getIv());
             user = UserConvert.INSTANCE.toUser(openid,wxMaUserInfo.getNickName(),wxMaUserInfo.getAvatarUrl());
-            this.baseMapper.insert(user);
-            WxMaConfigHolder.remove();//清理ThreadLocal
+            int insert = this.baseMapper.insert(user);
+            //清理ThreadLocal
+            WxMaConfigHolder.remove();
+            //给用户一个默认的身份
+            if(insert > 0){
+                SysUserRole sysUserRole = new SysUserRole()
+                        .setUserId(user.getId())
+                        .setRoleId(SysRole.VISITOR.getValue());
+                sysUserRoleMapper.insert(sysUserRole);
+            }
         }else {
             // 登录
             this.baseMapper.updateById(user);

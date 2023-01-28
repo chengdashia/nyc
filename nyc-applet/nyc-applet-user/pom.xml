@@ -33,6 +33,11 @@
             <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.git.bds</groupId>
+            <artifactId>nyc-role-permission</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>com.git.bds</groupId>
