@@ -30,17 +30,6 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
     List<FarmerPrimaryProduct> homePageProductsByPage(PageParam pageParam);
 
 
-    /**
-     * 获取产品信息
-     *
-     * @param id   商品id
-     * @param type
-     * @return {@link FarmerPrimaryProduct}
-     */
-    ProductInfoDTO getProductInfo(Long id, int type);
-
-
-
 
     /**
      * 根据id删除产品

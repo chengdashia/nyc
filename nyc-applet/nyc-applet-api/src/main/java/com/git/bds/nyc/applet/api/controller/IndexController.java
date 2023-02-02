@@ -27,6 +27,7 @@ import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.model.es.ProductEs;
+import com.git.bds.nyc.product.service.ProductService;
 import com.git.bds.nyc.product.service.collection.ProductCollectionService;
 import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
@@ -59,7 +60,7 @@ public class IndexController {
 
     private final AdvertisementService advertisementService;
 
-    private final FarmerPrimaryProductService productService;
+    private final FarmerPrimaryProductService farmerPrimaryProductService;
 
     private final ProductCollectionService productCollectionService;
 
@@ -68,6 +69,8 @@ public class IndexController {
     private final ProductEsMapper productEsMapper;
 
     private final CorpDemandService demandService;
+
+    private final ProductService productService;
 
     /**
      * 获取广告
@@ -94,7 +97,7 @@ public class IndexController {
     public R<List<ProductVO>> homePageProductsByPage(
             @Valid PageParam pageParam
     ){
-        List<FarmerPrimaryProduct> productList = productService.homePageProductsByPage(pageParam);
+        List<FarmerPrimaryProduct> productList = farmerPrimaryProductService.homePageProductsByPage(pageParam);
         return R.ok(ProductConvert.INSTANCE.toPrimaryProductVO(productList));
     }
 
@@ -168,6 +171,20 @@ public class IndexController {
             product.setIsCollection(CollectionType.IS_COLLECTION.getValue());
         }
         return R.ok(ProductConvert.INSTANCE.toPrimaryProductInfoVO(product));
+    }
+
+
+    @ApiOperation("获取商家电话")
+    @GetMapping("/getSellerTel/{type}/{id}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "path", example = "112345646545", required = true),
+            @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)
+    })
+    public String getSellerTel(
+            @PathVariable("id") Long id,
+            @PathVariable("type") int type
+    ){
+       return productService.getSellerTel(id,type);
     }
 
 
