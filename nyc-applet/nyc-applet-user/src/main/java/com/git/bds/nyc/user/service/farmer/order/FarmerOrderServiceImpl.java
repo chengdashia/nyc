@@ -1,6 +1,7 @@
 package com.git.bds.nyc.user.service.farmer.order;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.communal.mapper.mp.ContractOrderMapper;
@@ -106,7 +107,7 @@ public class FarmerOrderServiceImpl implements FarmerOrderService{
                     )
                     .eq(CorpPrimaryProduct::getId,productId)
             );
-            if(corpPrimaryProduct == null){
+            if(ObjectUtil.isNull(corpPrimaryProduct)){
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
             //如果库存量不够
