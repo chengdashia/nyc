@@ -47,7 +47,7 @@ public class SaTokenConfigure {
                 .setAuth(obj -> {
                     log.info("---------- 进入Sa-Token全局认证 -----------");
 
-                    // 登录认证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
+                    // //登录认证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
                     //SaRouter.match("/**")
                     //        .notMatch("/userInfo/loginByPassword")
                     //        .notMatch("/userInfo/registerByTel")

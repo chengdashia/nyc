@@ -68,11 +68,13 @@ public class FarmerOrderServiceImpl implements FarmerOrderService{
         BigDecimal unitPrice = null;
         String productSpecies = null;
         String productVariety = null;
-        Long buyerContactInfoId = null;
+        Long sellerContactInfoId = null;
+        Long sellerId = null;
         if(ProductType.FARMER_PRIMARY.getValue().equals(type)){
             FarmerPrimaryProduct farmerPrimaryProduct = farmerPrimaryProductMapper.selectOne(new LambdaQueryWrapper<FarmerPrimaryProduct>()
                     .select(
                             FarmerPrimaryProduct::getProductSpecies,
+                            FarmerPrimaryProduct::getUserId,
                             FarmerPrimaryProduct::getProductVariety,
                             FarmerPrimaryProduct::getProductPrice,
                             FarmerPrimaryProduct::getProductWeight,
@@ -85,17 +87,19 @@ public class FarmerOrderServiceImpl implements FarmerOrderService{
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
             //如果库存量不够
-            if(DecimalUtils.lessThan(farmerPrimaryProduct.getProductWeight(),orderWeight)){
+            if(Boolean.TRUE.equals(DecimalUtils.lessThan(farmerPrimaryProduct.getProductWeight(),orderWeight))){
                 throw new BusinessException(ResultCode.INSUFFICIENT_STOCK.getCode(),ResultCode.INSUFFICIENT_STOCK.getMessage());
             }
             unitPrice = farmerPrimaryProduct.getProductPrice();
             productSpecies = farmerPrimaryProduct.getProductSpecies();
             productVariety = farmerPrimaryProduct.getProductVariety();
-            buyerContactInfoId = farmerPrimaryProduct.getContactInfoId();
+            sellerContactInfoId = farmerPrimaryProduct.getContactInfoId();
+            sellerId = farmerPrimaryProduct.getUserId();
         }else if(ProductType.CORP_PRIMARY.getValue().equals(type)){
             CorpPrimaryProduct corpPrimaryProduct = corpPrimaryProductMapper.selectOne(new LambdaQueryWrapper<CorpPrimaryProduct>()
                     .select(
                             CorpPrimaryProduct::getProductSpecies,
+                            CorpPrimaryProduct::getUserId,
                             CorpPrimaryProduct::getProductVariety,
                             CorpPrimaryProduct::getProductPrice,
                             CorpPrimaryProduct::getProductWeight
@@ -106,17 +110,19 @@ public class FarmerOrderServiceImpl implements FarmerOrderService{
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
             //如果库存量不够
-            if(DecimalUtils.lessThan(corpPrimaryProduct.getProductWeight(),orderWeight)){
+            if(Boolean.TRUE.equals(DecimalUtils.lessThan(corpPrimaryProduct.getProductWeight(),orderWeight))){
                 throw new BusinessException(ResultCode.INSUFFICIENT_STOCK.getCode(),ResultCode.INSUFFICIENT_STOCK.getMessage());
             }
             unitPrice = corpPrimaryProduct.getProductPrice();
             productSpecies = corpPrimaryProduct.getProductSpecies();
             productVariety = corpPrimaryProduct.getProductVariety();
-            buyerContactInfoId = corpPrimaryProduct.getContactInfoId();
+            sellerContactInfoId = corpPrimaryProduct.getContactInfoId();
+            sellerId = corpPrimaryProduct.getUserId();
         }else if(ProductType.CORP_PROCESSING.getValue().equals(type)){
             CorpProcessingProduct corpProcessingProduct = corpProcessingProductMapper.selectOne(new LambdaQueryWrapper<CorpProcessingProduct>()
                     .select(
                             CorpProcessingProduct::getProductSpecies,
+                            CorpProcessingProduct::getUserId,
                             CorpProcessingProduct::getProductVariety,
                             CorpProcessingProduct::getProductPrice,
                             CorpProcessingProduct::getProductWeight
@@ -127,26 +133,27 @@ public class FarmerOrderServiceImpl implements FarmerOrderService{
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
             //如果库存量不够
-            if(DecimalUtils.lessThan(corpProcessingProduct.getProductWeight(),orderWeight)){
+            if(Boolean.TRUE.equals(DecimalUtils.lessThan(corpProcessingProduct.getProductWeight(),orderWeight))){
                 throw new BusinessException(ResultCode.INSUFFICIENT_STOCK.getCode(),ResultCode.INSUFFICIENT_STOCK.getMessage());
             }
             unitPrice = corpProcessingProduct.getProductPrice();
             productSpecies = corpProcessingProduct.getProductSpecies();
             productVariety = corpProcessingProduct.getProductVariety();
-            buyerContactInfoId = corpProcessingProduct.getContactInfoId();
+            sellerContactInfoId = corpProcessingProduct.getContactInfoId();
+            sellerId = corpProcessingProduct.getUserId();
         }
         //获取签名的字节流
         InputStream inputStream = Base64Util.generateImageStream(orderDTO.getBuyerSignature());
         String signPath = minioUtil.uploadSign(minioConfig.getBucketName(), inputStream, buyerId);
         ContractOrder contractOrder = new ContractOrder();
-        contractOrder.setSellerId(orderDTO.getSellerId());
+        contractOrder.setSellerId(sellerId);
         contractOrder.setBuyerId(buyerId);
         contractOrder.setProductId(productId);
         contractOrder.setProductSpecies(productSpecies);
         contractOrder.setProductVariety(productVariety);
         contractOrder.setType(type);
-        contractOrder.setSellerContactInfoId(orderDTO.getSellerContactInfoId());
-        contractOrder.setBuyerContactInfoId(buyerContactInfoId);
+        contractOrder.setSellerContactInfoId(sellerContactInfoId);
+        contractOrder.setBuyerContactInfoId(orderDTO.getBuyerContactInfoId());
         //买家签名地址
         contractOrder.setBuyerSignature(signPath);
         contractOrder.setUnitPrice(unitPrice);
