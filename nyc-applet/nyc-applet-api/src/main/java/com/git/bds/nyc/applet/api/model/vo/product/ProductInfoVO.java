@@ -49,6 +49,9 @@ public class ProductInfoVO implements Serializable {
     @ApiModelProperty("商品的发布时间")
     private LocalDateTime createTime;
 
+    @ApiModelProperty("商品的发布时间")
+    private LocalDateTime marketTime;
+
     @ApiModelProperty("商品图片列表")
     private List<String> imgList;
 

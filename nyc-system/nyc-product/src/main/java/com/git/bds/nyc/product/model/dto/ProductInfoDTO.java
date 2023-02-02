@@ -46,6 +46,9 @@ public class ProductInfoDTO {
     /** 创造时间 */
     private LocalDateTime createTime;
 
+    /** 上市时间 */
+    private LocalDateTime marketTime;
+
     /** 图片url */
     private String pictureUrl;
 

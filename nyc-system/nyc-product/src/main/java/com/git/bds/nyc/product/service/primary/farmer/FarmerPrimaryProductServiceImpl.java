@@ -78,8 +78,13 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
     }
 
     /**
+     * 获取产品信息
      * 其中condition是对入参进行判断，符合条件的缓存，不符合的不缓存。
      * 其中unless是对出参进行判断，符合条件的不缓存，不符合的缓存。
+     *
+     * @param id   身份证件
+     * @param type 类型
+     * @return {@link ProductInfoDTO}
      */
     @Override
     @Cacheable(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id  + #type",unless = "#result == null ")
@@ -91,6 +96,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                             FarmerPrimaryProduct::getProductCover,
                             FarmerPrimaryProduct::getProductRemark,
                             FarmerPrimaryProduct::getCreateTime,
+                            FarmerPrimaryProduct::getMarketTime,
                             FarmerPrimaryProduct::getProductProductionArea,
                             FarmerPrimaryProduct::getProductSpecies,
                             FarmerPrimaryProduct::getProductWeight,
@@ -107,6 +113,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                             CorpPrimaryProduct::getProductCover,
                             CorpPrimaryProduct::getProductRemark,
                             CorpPrimaryProduct::getCreateTime,
+                            CorpPrimaryProduct::getMarketTime,
                             CorpPrimaryProduct::getProductProductionArea,
                             CorpPrimaryProduct::getProductSpecies,
                             CorpPrimaryProduct::getProductWeight,
@@ -123,6 +130,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                             CorpProcessingProduct::getProductCover,
                             CorpProcessingProduct::getProductRemark,
                             CorpProcessingProduct::getCreateTime,
+                            CorpProcessingProduct::getMarketTime,
                             CorpProcessingProduct::getProductProductionArea,
                             CorpProcessingProduct::getProductSpecies,
                             CorpProcessingProduct::getProductWeight,
