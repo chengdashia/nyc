@@ -1,6 +1,5 @@
 package com.git.bds.nyc.corp.service;
 
-import com.git.bds.nyc.communal.model.dto.OrderDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 
 /**
@@ -34,12 +33,4 @@ public interface CorpService {
      * @return {@link Boolean}
      */
     Boolean deleteProductById(Long id, int type);
-
-    /**
-     * 下单
-     *
-     * @param orderDTO 订单dto
-     * @return {@link Boolean}
-     */
-    Boolean placeOrder(OrderDTO orderDTO);
 }
