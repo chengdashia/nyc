@@ -3,7 +3,9 @@ package com.git.bds.nyc.config.saToken;
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.filter.SaServletFilter;
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
+import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpLogic;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -67,7 +69,9 @@ public class SaTokenConfigure {
 
                     // 更多拦截处理方式，请参考“路由拦截式鉴权”章节
                     // 角色认证 -- 拦截以 admin 开头的路由，必须具备 admin 角色或者 super-admin 角色才可以通过认证
-                    //SaRouter.match("/admin/**", r -> StpUtil.checkRoleOr("admin", "super-admin"));
+                    SaRouter.match("/applet/order/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/coop/**", r -> StpUtil.checkRoleOr("coop"));
+                    SaRouter.match("/admin/**", r -> StpUtil.checkRoleOr("admin"));
 
                     // 权限认证 -- 不同模块认证不同权限
                     //SaRouter.match("/user/**", r -> StpUtil.checkPermission("user"));
