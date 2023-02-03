@@ -2,7 +2,6 @@ package com.git.bds.nyc.communal.mapper.mp;
 
 
 import com.git.bds.nyc.communal.model.domain.ContractOrder;
-import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,5 +16,4 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ContractOrderMapper extends MPJBaseMapper<ContractOrder> {
 
-    OrderDataDTO getQuantitiesOfVariousOrders(long userId);
 }

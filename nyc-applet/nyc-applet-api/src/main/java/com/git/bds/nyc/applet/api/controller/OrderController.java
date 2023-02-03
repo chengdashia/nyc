@@ -1,12 +1,11 @@
 package com.git.bds.nyc.applet.api.controller;
 
 import com.git.bds.nyc.applet.api.convert.OrderConvert;
-import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
-import com.git.bds.nyc.applet.api.model.vo.order.OrderDataVO;
 import com.git.bds.nyc.applet.api.model.vo.order.OrderVO;
 import com.git.bds.nyc.applet.api.service.order.OrderService;
 import com.git.bds.nyc.communal.model.domain.ContractOrder;
 import com.git.bds.nyc.communal.model.dto.OrderDTO;
+import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.R;
@@ -74,9 +73,9 @@ public class OrderController {
 
     @PostMapping("/getQuantitiesOfVariousOrders")
     @ApiOperation("查看自己订单模块的数据 成功或失败的个数")
-    public R<OrderDataVO> getQuantitiesOfVariousOrders(){
-        OrderDataDTO dataDTO = orderService.getQuantitiesOfVariousOrders();
-        return R.ok();
+    public R<OrderDataDTO> getQuantitiesOfVariousOrders(){
+        OrderDataDTO data = orderService.getQuantitiesOfVariousOrders();
+        return R.ok(data);
     }
 
 

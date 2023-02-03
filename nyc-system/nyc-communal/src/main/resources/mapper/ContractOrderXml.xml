@@ -34,16 +34,17 @@
         SELECT
             COUNT(*) AS num,
             CASE
-                when s.product_status = 0 THEN
-                    '预售'
-                WHEN s.product_status = 1 THEN
-                    '在售'
+                WHEN order_status = 1 THEN 'unSigned'
+                WHEN order_status = 2 THEN 'signed'
+                WHEN order_status = 3 THEN 'refuseToSign'
+                WHEN order_status = 4 THEN 'successfulTrade'
                 END
         FROM
-            farmer_primary_product s
-        WHERE user_id = #{userId}
+            contract_order
+        WHERE
+            seller_id = #{userId}
         GROUP BY
-            product_status;
+            order_status;
     </select>
 
 </mapper>

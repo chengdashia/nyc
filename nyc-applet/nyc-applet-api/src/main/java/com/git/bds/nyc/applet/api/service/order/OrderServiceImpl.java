@@ -3,12 +3,14 @@ package com.git.bds.nyc.applet.api.service.order;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import com.git.bds.nyc.communal.mapper.mp.ContractOrderMapper;
 import com.git.bds.nyc.communal.model.domain.ContractOrder;
 import com.git.bds.nyc.communal.model.dto.OrderDTO;
+import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import com.git.bds.nyc.communal.util.Base64Util;
+import com.git.bds.nyc.enums.OrderType;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
@@ -31,6 +33,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 成大事
@@ -197,7 +201,31 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public OrderDataDTO getQuantitiesOfVariousOrders() {
         long userId = StpUtil.getLoginIdAsLong();
-        contractOrderMapper.getQuantitiesOfVariousOrders(userId);
-        return null;
+        List<Map<String, Object>> maps = contractOrderMapper.selectMaps(new QueryWrapper<ContractOrder>()
+                .select("count(*) as nums,order_status")
+                .eq(ContractOrder.SELLER_ID, userId)
+                .groupBy(ContractOrder.ORDER_STATUS));
+        OrderDataDTO orderDataDTO = new OrderDataDTO();
+        for (Map<String, Object> map : maps) {
+            log.info(""+map);
+            if(ObjectUtil.equal(map.get("orderStatus"),OrderType.UNSIGNED.getValue())){
+                orderDataDTO.setUnSigned(Integer.parseInt(map.get("nums").toString()));
+                log.info("-UNSIGNED----"+ map.get("nums")+ Integer.parseInt(map.get("nums").toString()));
+            }
+            if(ObjectUtil.equal(map.get("orderStatus"),OrderType.SIGNED.getValue())){
+                orderDataDTO.setSigned(Integer.parseInt(map.get("nums").toString()));
+                log.info("-SIGNED----"  + map.get("nums")+ Integer.parseInt(map.get("nums").toString()));
+            }
+            if(ObjectUtil.equal(map.get("orderStatus"),OrderType.REFUSE_TO_SIGN.getValue())){
+                orderDataDTO.setRefuseToSign(Integer.parseInt(map.get("nums").toString()));
+                log.info("-REFUSE_TO_SIGN----"+ map.get("nums") + Integer.parseInt(map.get("nums").toString()));
+            }
+            if(ObjectUtil.equal(map.get("orderStatus"),OrderType.SUCCESSFUL_TRADE.getValue())){
+                orderDataDTO.setSuccessfulTrade(Integer.parseInt(map.get("nums").toString()));
+                log.info("-SUCCESSFUL_TRADE----"+ map.get("nums")+ Integer.parseInt(map.get("nums").toString()));
+            }
+        }
+        log.info(""+maps);
+        return orderDataDTO;
     }
 }
