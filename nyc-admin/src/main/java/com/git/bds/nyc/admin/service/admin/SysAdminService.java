@@ -20,11 +20,12 @@ public interface SysAdminService extends MPJBaseService<SysAdmin> {
     /**
      * 通过密码登录
      *
-     * @param account 账户
-     * @param password     密码
+     * @param account  账户
+     * @param password 密码
+     * @param type
      * @return {@link String}
      */
-    String loginByPwd(String account, String password);
+    String loginByPwd(String account, String password, int type);
 
     /**
      * 按页面获取用户

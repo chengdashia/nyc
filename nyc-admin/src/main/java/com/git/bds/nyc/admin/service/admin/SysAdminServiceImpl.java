@@ -1,6 +1,8 @@
 package com.git.bds.nyc.admin.service.admin;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,6 +14,7 @@ import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.result.ResultCode;
 import com.git.bds.nyc.role.domain.SysRole;
 import com.git.bds.nyc.role.domain.SysUserRole;
+import com.git.bds.nyc.role.mapper.mp.SysUserRoleMapper;
 import com.git.bds.nyc.user.model.domain.User;
 import com.git.bds.nyc.user.model.dto.UserDTO;
 import com.git.bds.nyc.user.mapper.mp.UserMapper;
@@ -39,23 +42,33 @@ public class SysAdminServiceImpl extends MPJBaseServiceImpl<SysAdminMapper, SysA
 
     private final UserMapper userMapper;
 
+    private final SysUserRoleMapper sysUserRoleMapper;
+
     /**
      * 通过密码登录
      *
-     * @param account 账户
-     * @param password     密码
+     * @param account  账户
+     * @param password 密码
+     * @param type 类型
      * @return {@link String}
      */
     @Override
-    public String loginByPwd(String account, String password) {
+    public String loginByPwd(String account, String password, int type) {
         SysAdmin admin = this.baseMapper.selectOne(new QueryWrapper<SysAdmin>()
                 .select(SysAdmin.ID, SysAdmin.PASSWORD)
                 .eq(SysAdmin.ACCOUNT, account));
         admin = Optional.ofNullable(admin)
                 .orElseThrow(() -> new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage()));
         if(admin.getPassword().equals(password)){
-            StpUtil.login(admin.getId());
-            return StpUtil.getTokenValue();
+            SysUserRole role = sysUserRoleMapper.selectOne(new LambdaQueryWrapper<SysUserRole>()
+                    .select(SysUserRole::getRoleId)
+                    .eq(SysUserRole::getUserId, admin.getId()));
+            if(ObjectUtil.equal(type,role.getRoleId())){
+                StpUtil.login(admin.getId());
+                return StpUtil.getTokenValue();
+            }else {
+                throw new BusinessException(ResultCode.NOT_ROLE.getCode(), ResultCode.NOT_ROLE.getMessage());
+            }
         }else {
             throw new BusinessException(ResultCode.PWD_ERROR.getCode(), ResultCode.PWD_ERROR.getMessage());
         }

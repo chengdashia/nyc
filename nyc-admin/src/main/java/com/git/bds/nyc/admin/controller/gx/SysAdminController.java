@@ -1,5 +1,6 @@
 package com.git.bds.nyc.admin.controller.gx;
 
+import com.git.bds.nyc.admin.enums.AdminType;
 import com.git.bds.nyc.admin.service.admin.SysAdminService;
 import com.git.bds.nyc.util.validate.phone.Phone;
 import io.swagger.annotations.Api;
@@ -45,7 +46,7 @@ public class SysAdminController {
             @RequestParam("account") @Phone String account,
             @RequestParam("password") @NotBlank(message = "密码不能为空") String password
     ){
-        return adminService.loginByPwd(account,password);
+        return adminService.loginByPwd(account,password, AdminType.ADMIN.getValue());
     }
 
 
