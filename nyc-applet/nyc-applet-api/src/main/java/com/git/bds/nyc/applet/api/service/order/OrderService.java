@@ -1,5 +1,6 @@
 package com.git.bds.nyc.applet.api.service.order;
 
+import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import com.git.bds.nyc.communal.model.domain.ContractOrder;
 import com.git.bds.nyc.communal.model.dto.OrderDTO;
 import com.git.bds.nyc.page.PageParam;
@@ -27,4 +28,11 @@ public interface OrderService {
      * @return {@link PageResult}<{@link ContractOrder}>
      */
     PageResult<ContractOrder> getOrderPage(PageParam pageParam, int type);
+
+    /**
+     * 获取各种订单数量
+     *
+     * @return {@link OrderDataDTO}
+     */
+    OrderDataDTO getQuantitiesOfVariousOrders();
 }

@@ -36,7 +36,7 @@ public class DemandCollection extends Model<DemandCollection> {
     @TableField("user_id")
     private Long userId;
 
-    @ApiModelProperty("收藏的商品的id")
+    @ApiModelProperty("收藏的需求的id")
     @TableField("demand_id")
     private Long demandId;
 

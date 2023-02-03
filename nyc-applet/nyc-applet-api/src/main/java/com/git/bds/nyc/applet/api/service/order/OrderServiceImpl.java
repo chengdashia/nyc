@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import com.git.bds.nyc.communal.mapper.mp.ContractOrderMapper;
 import com.git.bds.nyc.communal.model.domain.ContractOrder;
 import com.git.bds.nyc.communal.model.dto.OrderDTO;
@@ -186,5 +187,17 @@ public class OrderServiceImpl implements OrderService{
                         .eq(ContractOrder::getType, type)
                         .orderByAsc(ContractOrder::getCreateTime));
         return new PageResult<>(page.getRecords(),page.getTotal());
+    }
+
+    /**
+     * 获取各种订单数量
+     *
+     * @return {@link OrderDataDTO}
+     */
+    @Override
+    public OrderDataDTO getQuantitiesOfVariousOrders() {
+        long userId = StpUtil.getLoginIdAsLong();
+        contractOrderMapper.getQuantitiesOfVariousOrders(userId);
+        return null;
     }
 }

@@ -29,4 +29,21 @@
         id, seller_id, buyer_id, product_id, seller_contact_info_id, seller_signature, buyer_contact_info_id, buyer_signature, unit_price, order_status, order_weight, remark, contract_url, create_time, complete_time, fail_feedback
     </sql>
 
+    <!--获取各种订单的数据-->
+    <select id="getQuantitiesOfVariousOrders" resultType="com.git.bds.nyc.communal.model.dto.OrderDataDTO">
+        SELECT
+            COUNT(*) AS num,
+            CASE
+                when s.product_status = 0 THEN
+                    '预售'
+                WHEN s.product_status = 1 THEN
+                    '在售'
+                END
+        FROM
+            farmer_primary_product s
+        WHERE user_id = #{userId}
+        GROUP BY
+            product_status;
+    </select>
+
 </mapper>

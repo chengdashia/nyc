@@ -44,7 +44,7 @@ public class Advertisement extends Model<Advertisement> {
     @TableField("picture_url")
     private String pictureUrl;
 
-    @ApiModelProperty("注册时间")
+    @ApiModelProperty("添加时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
