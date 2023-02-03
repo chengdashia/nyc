@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.convert.demand;
+package com.git.bds.nyc.applet.api.convert;
 
 import com.git.bds.nyc.applet.api.model.vo.demand.DemandInfoVO;
 import com.git.bds.nyc.applet.api.model.vo.demand.DemandVO;

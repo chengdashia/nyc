@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.convert.product;
+package com.git.bds.nyc.applet.api.convert;
 
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductVO;

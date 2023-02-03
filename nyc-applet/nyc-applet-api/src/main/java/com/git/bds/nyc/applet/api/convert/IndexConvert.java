@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.convert.index;
+package com.git.bds.nyc.applet.api.convert;
 
 import com.git.bds.nyc.applet.api.model.vo.IndexAdvertisementVO;
 import com.git.bds.nyc.communal.model.domain.Advertisement;
