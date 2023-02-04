@@ -42,6 +42,12 @@
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-product</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.git.bds</groupId>
+                    <artifactId>nyc-communal</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
