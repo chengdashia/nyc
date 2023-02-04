@@ -1,8 +1,11 @@
 package com.git.bds.nyc.applet.api.convert;
 
+import com.git.bds.nyc.applet.api.model.vo.order.OrderDataVO;
 import com.git.bds.nyc.applet.api.model.vo.order.OrderVO;
 import com.git.bds.nyc.communal.model.domain.ContractOrder;
+import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -24,4 +27,17 @@ public interface OrderConvert {
      * @return {@link List}<{@link OrderVO}>
      */
     List<OrderVO> toOrderVO(List<ContractOrder> list);
+
+
+    /**
+     * 订购数据vo
+     *
+     * @param orderDataDTO 订单数据dto
+     * @return {@link OrderDataVO}
+     */
+    @Mapping(source = "unSigned",target = "unSigned",defaultValue = "0")
+    @Mapping(source = "signed",target = "signed",defaultValue = "0")
+    @Mapping(source = "refuseToSign",target = "refuseToSign",defaultValue = "0")
+    @Mapping(source = "successfulTrade",target = "successfulTrade",defaultValue = "0")
+    OrderDataVO toOrderDataVO(OrderDataDTO orderDataDTO);
 }
