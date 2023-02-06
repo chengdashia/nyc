@@ -45,7 +45,7 @@ public class AuditFarmerController {
      * @return {@link R}<{@link PageResult}<{@link AdvertisementVO}>>
      */
     @ApiOperation("供销社 分页获取农户发布的 需要审核的商品")
-    @GetMapping("/getPendingAuditProductByPage/{type}")
+    @PostMapping("/getPendingAuditProductByPage/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "type", value = "审核状态(-1：未审核；0：不通过；1：审核通过)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
