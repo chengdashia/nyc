@@ -23,6 +23,7 @@ import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.es.ProductEs;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author 成大事
  * @since 2023/1/5 16:04
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AuditFarmerServiceImpl implements AuditFarmerService{
@@ -91,14 +93,16 @@ public class AuditFarmerServiceImpl implements AuditFarmerService{
                             FarmerPrimaryProduct::getProductProductionArea,
                             FarmerPrimaryProduct::getProductCover,
                             FarmerPrimaryProduct::getAuditStatus,
-                            FarmerPrimaryProduct::getMarketTime,
+                            FarmerPrimaryProduct::getCreateTime,
                             FarmerPrimaryProduct::getMarketTime
                     )
                     .eq(FarmerPrimaryProduct::getId, statusDTO.getGoodsId()));
             ProductEs productEs = ProductConvert.INSTANCE.toProductEs(farmerPrimaryProduct, ProductType.FARMER_PRIMARY.getValue());
-            productEsMapper.insert(productEs);
+            log.info(""+productEs);
+            Integer insert = productEsMapper.insert(productEs);
+            return insert > 0;
         }
-        return true;
+        return false;
     }
 
     /**

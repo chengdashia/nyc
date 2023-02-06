@@ -133,7 +133,7 @@ public class IndexController {
             @PathVariable("key") String key
     ){
         LambdaEsQueryWrapper<ProductEs> wrapper = new LambdaEsQueryWrapper<>();
-        wrapper.matchPhrasePrefixQuery(ProductEs::getProductVariety,key);
+        wrapper.multiMatchQuery(ProductEs.SPECIES, ProductEs.VARIETY,key);
         return R.ok(productEsMapper.pageQuery(wrapper, pageParam.getPageNo().intValue(), pageParam.getPageSize().intValue()));
     }
 
