@@ -26,7 +26,7 @@ public interface ProductConvert {
      * @return {@link ProductEs}
      */
     @Mapping(source = "type",target = "type")
-    @Mapping(source = "farmerPrimaryProduct.productSpecies" + "-" +"farmerPrimaryProduct.productVariety",target = "productName")
+    @Mapping(expression = "java(farmerPrimaryProduct.getProductSpecies() + '-' +farmerPrimaryProduct.getProductVariety())",target = "productName")
     ProductEs toProductEs(FarmerPrimaryProduct farmerPrimaryProduct,int type);
 
 
