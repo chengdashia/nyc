@@ -53,7 +53,6 @@ public class AuditCorpController {
             @Validated @RequestBody PageParam pageParam,
             @PathVariable("type") @NotNull @Min(-1) @Max(1) Integer type
     ){
-        log.info("/???????");
         PageResult<AuditProductDTO> page = auditCorpService.getPendingAuditProductByPage(pageParam,type);
         List<AuditProductVO> userVOList = AuditConvert.INSTANCE.toAuditProductVOList(page.getList());
         return R.ok(new PageResult<>(userVOList,page.getTotal()));

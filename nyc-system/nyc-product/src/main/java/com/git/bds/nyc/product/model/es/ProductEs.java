@@ -34,10 +34,15 @@ public class ProductEs implements Serializable {
     @IndexField(fieldType = FieldType.TEXT,analyzer = Analyzer.IK_MAX_WORD,searchAnalyzer = Analyzer.IK_MAX_WORD)
     private String productSpecies;
 
-    /** 产品种类 */
+    /** 产品品类 */
     @HighLight
     @IndexField(fieldType = FieldType.TEXT,analyzer = Analyzer.IK_MAX_WORD,searchAnalyzer = Analyzer.IK_MAX_WORD)
     private String productVariety;
+
+    /** 产品名称 */
+    @HighLight
+    @IndexField(fieldType = FieldType.TEXT,analyzer = Analyzer.IK_MAX_WORD,searchAnalyzer = Analyzer.IK_MAX_WORD)
+    private String productName;
 
     /** 产品价格 */
     @IndexField(fieldType = FieldType.DOUBLE)
