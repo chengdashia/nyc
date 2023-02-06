@@ -30,17 +30,13 @@ public class ProductEs implements Serializable {
     private Long id;
 
     /** 产品种类 */
-    @HighLight
-    @IndexField(fieldType = FieldType.TEXT,analyzer = Analyzer.IK_MAX_WORD,searchAnalyzer = Analyzer.IK_MAX_WORD)
     private String productSpecies;
 
     /** 产品品类 */
-    @HighLight
-    @IndexField(fieldType = FieldType.TEXT,analyzer = Analyzer.IK_MAX_WORD,searchAnalyzer = Analyzer.IK_MAX_WORD)
     private String productVariety;
 
     /** 产品名称 */
-    @HighLight
+    @HighLight(preTag = "<span style='color:red'>",postTag = "</span>")
     @IndexField(fieldType = FieldType.TEXT,analyzer = Analyzer.IK_MAX_WORD,searchAnalyzer = Analyzer.IK_MAX_WORD)
     private String productName;
 
@@ -49,7 +45,6 @@ public class ProductEs implements Serializable {
     private BigDecimal productPrice;
 
     /** 产品生产区 */
-    @HighLight
     @IndexField(fieldType = FieldType.TEXT,analyzer = Analyzer.IK_MAX_WORD,searchAnalyzer = Analyzer.IK_MAX_WORD)
     private String productProductionArea;
 
@@ -74,7 +69,7 @@ public class ProductEs implements Serializable {
     @IndexField(fieldType = FieldType.INTEGER)
     private Integer type;
 
-
-    public static final String VARIETY = "productVariety";
-    public static final String SPECIES = "productSpecies";
+    //
+    //public static final String VARIETY = "productVariety";
+    //public static final String SPECIES = "productSpecies";
 }
