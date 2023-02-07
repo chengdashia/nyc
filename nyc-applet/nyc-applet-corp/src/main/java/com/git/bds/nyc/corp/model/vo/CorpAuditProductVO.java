@@ -33,10 +33,6 @@ public class CorpAuditProductVO implements Serializable {
     @ApiModelProperty("商品的封面图")
     private String productCover;
 
-    @ApiModelProperty("合作社审核状态(-1：未审核；0：不通过；1：审核通过)")
-    private Integer coopAuditStatus;
-
-
     @ApiModelProperty("供销社审核状态(-1：未审核；0：不通过；1：审核通过)")
     private Integer auditStatus;
 
