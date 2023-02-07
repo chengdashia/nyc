@@ -1,7 +1,9 @@
 package com.git.bds.nyc.applet.api.service;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.easyes.core.conditions.LambdaEsUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.git.bds.nyc.communal.mapper.mp.audit.AuditCorpProductMapper;
 import com.git.bds.nyc.communal.mapper.mp.audit.AuditFarmerProductMapper;
 import com.git.bds.nyc.communal.mapper.mp.audit.CoopAuditProductMapper;
@@ -23,6 +25,7 @@ import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
+import com.git.bds.nyc.product.model.es.ProductEs;
 import com.git.bds.nyc.result.ResultCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -170,6 +174,53 @@ public class MineServiceImpl implements MineService{
                    throw new BusinessException();
                }
 
+            }else {
+                throw new BusinessException(ResultCode.NOT_ROLE.getCode(),ResultCode.NOT_EXIST.getMessage());
+            }
+        }else {
+            throw new BusinessException(ResultCode.CAPTCHA_ERROR.getCode(), ResultCode.CAPTCHA_ERROR.getMessage());
+        }
+    }
+
+    /**
+     * 按id立即发布产品
+     *
+     * @param id   身份证件
+     * @param type 类型
+     * @return {@link Boolean}
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean releaseProductNowById(Long id, int type) {
+        List<String> roleList = StpUtil.getRoleList();
+        long userId = StpUtil.getLoginIdAsLong();
+        productEsMapper.update(null,new LambdaEsUpdateWrapper<ProductEs>()
+                .set(ProductEs::getMarketTime,LocalDateTime.now())
+                .eq(ProductEs::getId,id));
+        //如果是初级的
+        if(ProductType.PRIMARY.getValue().equals(type)){
+            //农户的
+            if(roleList.contains(RoleType.FARMER.getMsg())){
+                return farmerPrimaryProductMapper.update(null,new LambdaUpdateWrapper<FarmerPrimaryProduct>()
+                                .set(FarmerPrimaryProduct::getMarketTime, LocalDateTime.now())
+                                .eq(FarmerPrimaryProduct::getId,id)
+                        .eq(FarmerPrimaryProduct::getUserId, userId)) > 0;
+            }//公司
+            else if(roleList.contains(RoleType.COOP.getMsg())){
+                return corpPrimaryProductMapper.update(null,new LambdaUpdateWrapper<CorpPrimaryProduct>()
+                        .set(CorpPrimaryProduct::getMarketTime, LocalDateTime.now())
+                        .eq(CorpPrimaryProduct::getId,id)
+                        .eq(CorpPrimaryProduct::getUserId, userId)) > 0;
+
+            }else {
+                throw new BusinessException(ResultCode.NOT_ROLE.getCode(),ResultCode.NOT_EXIST.getMessage());
+            }
+        }else if(ProductType.PROCESSING.getValue().equals(type)){
+            if(roleList.contains(RoleType.COOP.getMsg())){
+                return corpProcessingProductMapper.update(null,new LambdaUpdateWrapper<CorpProcessingProduct>()
+                        .set(CorpProcessingProduct::getMarketTime, LocalDateTime.now())
+                        .eq(CorpProcessingProduct::getId,id)
+                        .eq(CorpProcessingProduct::getUserId, userId)) > 0;
             }else {
                 throw new BusinessException(ResultCode.NOT_ROLE.getCode(),ResultCode.NOT_EXIST.getMessage());
             }

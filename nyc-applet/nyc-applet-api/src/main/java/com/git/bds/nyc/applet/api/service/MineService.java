@@ -21,4 +21,13 @@ public interface MineService {
      * @return {@link Boolean}
      */
     Boolean delReleaseProductById(Long id, int type, int status);
+
+    /**
+     * 按id立即发布产品
+     *
+     * @param id   身份证件
+     * @param type 类型
+     * @return {@link Boolean}
+     */
+    Boolean releaseProductNowById(Long id, int type);
 }
