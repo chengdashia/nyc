@@ -188,9 +188,22 @@ public class AuditCorpServiceImpl implements AuditCorpService{
                     .eq(CorpDemand::getId, statusDTO.getGoodsId()));
             DemandEs demandEs = DemandConvert.INSTANCE.toDemandEs(corpDemand, DemandType.CORP_DEMAND.getValue());
             //将数据插入es
-            demandEsMapper.insert(demandEs);
+            return demandEsMapper.insert(demandEs) > 0;
         }
-        return true;
+        return false;
+    }
+
+    /**
+     * 删除公司主要产品
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean toDeleteCorpPrimaryProduct(Long id) {
+        return auditCorpProductMapper.delete(new LambdaQueryWrapper<AuditCorpProduct>()
+                .eq(AuditCorpProduct::getId,id)
+                .eq(AuditCorpProduct::getAuditStatus,AuditType.PASS)) > 0;
     }
 
 

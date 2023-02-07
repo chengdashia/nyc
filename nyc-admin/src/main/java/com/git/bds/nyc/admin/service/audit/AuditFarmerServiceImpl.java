@@ -120,4 +120,17 @@ public class AuditFarmerServiceImpl implements AuditFarmerService{
                         .set(AuditFarmerDemand::getAuditRemark,statusDTO.getRemark())
                         .eq(AuditFarmerDemand::getId,statusDTO.getId())) > 0;
     }
+
+    /**
+     * 删除农民初级产品
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean toDeleteFarmerPrimaryProduct(Long id) {
+        return auditFarmerProductMapper.delete(new LambdaQueryWrapper<AuditFarmerProduct>()
+                .eq(AuditFarmerProduct::getId,id)
+                .eq(AuditFarmerProduct::getAuditStatus,AuditType.PASS)) > 0;
+    }
 }

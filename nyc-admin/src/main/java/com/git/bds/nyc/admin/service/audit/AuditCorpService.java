@@ -44,4 +44,11 @@ public interface AuditCorpService {
      */
     Boolean toExamineCorpDemand(AuditStatusDTO statusDTO);
 
+    /**
+     * 删除公司初级产品
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    Boolean toDeleteCorpPrimaryProduct(Long id);
 }

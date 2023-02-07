@@ -34,4 +34,12 @@ public interface AuditFarmerService {
      * @return {@link Boolean}
      */
     Boolean toExamineDemand(AuditStatusDTO statusDTO);
+
+    /**
+     * 删除农民初级产品
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    Boolean toDeleteFarmerPrimaryProduct(Long id);
 }

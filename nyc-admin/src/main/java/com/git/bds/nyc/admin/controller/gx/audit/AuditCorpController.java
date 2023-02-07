@@ -100,4 +100,20 @@ public class AuditCorpController {
     ){
         return R.decide(auditCorpService.toExamineCorpDemand(statusDTO));
     }
+
+    /**
+     * 经销社删除 农户发布的初级农产品的审核信息
+     *
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation("经销社删除 农户发布的初级农产品的审核信息")
+    @DeleteMapping("/toDeleteCorpPrimaryProduct/{id}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "审核的id", dataTypeClass = Long.class, paramType = "path", example = "1", required = true)
+    })
+    public R<Boolean> toDeleteCorpPrimaryProduct(
+            @PathVariable("id") Long id
+    ){
+        return R.decide(auditCorpService.toDeleteCorpPrimaryProduct(id));
+    }
 }
