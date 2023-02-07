@@ -117,11 +117,11 @@ public class CorpProductController {
     @PostMapping("/getReleaseProductByPage/{type}")
     @ApiOperation("农户获取发布的初级产品（包括在售、预售） 分页")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型(-1:审核。0:在售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+            @ApiImplicitParam(name = "type", value = "类型(0：在售。1:预售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
     public R<PageResult<CorpReleasePrimaryProductVO>> getReleaseProductByPage(
             @Validated PageParam pageParam,
-            @PathVariable int type
+            @PathVariable @Min(0) @Max(1) int type
     ){
         PageResult<PrimaryProductSelfDTO> page = corpPrimaryProductService.getReleaseProductByPage(pageParam,type);
         List<CorpReleasePrimaryProductVO> corpReleasePrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpSelfPrimaryProductVO(page.getList());

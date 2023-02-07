@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -111,11 +113,11 @@ public class FarmerProductController {
     @PostMapping("/getReleaseProductByPage/{type}")
     @ApiOperation("农户获取发布的初级产品（包括在售、预售） 分页")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型(-1:审核。0:在售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+            @ApiImplicitParam(name = "type", value = "类型(0:在售,1:预售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
     public R<PageResult<FarmerReleasePrimaryProductVO>> getReleaseProductByPage(
             @Validated PageParam pageParam,
-            @PathVariable int type
+            @PathVariable @Min(0) @Max(1) int type
     ){
         PageResult<PrimaryProductSelfDTO> page = productService.getReleaseProductByPage(pageParam,type);
         List<FarmerReleasePrimaryProductVO> farmerReleasePrimaryProductVOList = FarmerProductConvert.INSTANCE.toFarmerSelfPrimaryProductVO(page.getList());
