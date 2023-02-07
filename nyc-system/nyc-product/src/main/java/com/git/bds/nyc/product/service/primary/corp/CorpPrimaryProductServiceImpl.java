@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.enums.AuditType;
+import com.git.bds.nyc.enums.ProductStatusType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
@@ -107,21 +108,43 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
      */
     @Override
     public PageResult<ProductReleaseDTO> getReleaseProductByPage(PageParam pageParam, int type) {
-        IPage<ProductReleaseDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                ProductReleaseDTO.class,
-                new MPJLambdaWrapper<CorpPrimaryProduct>()
-                        .select(CorpPrimaryProduct::getId,
-                                CorpPrimaryProduct::getProductSpecies,
-                                CorpPrimaryProduct::getProductVariety,
-                                CorpPrimaryProduct::getProductWeight,
-                                CorpPrimaryProduct::getProductPrice,
-                                CorpPrimaryProduct::getProductCover,
-                                CorpPrimaryProduct::getCreateTime
-                        )
-                        .eq(CorpPrimaryProduct::getProductStatus, type)
-                        .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
-                        .orderByDesc(CorpPrimaryProduct::getCreateTime));
-        return new PageResult<>(page.getRecords(),page.getTotal());
+        IPage<ProductReleaseDTO> page = null;
+        if(ProductStatusType.ON_SELL.getValue().equals(type)){
+            page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                    ProductReleaseDTO.class,
+                    new MPJLambdaWrapper<CorpPrimaryProduct>()
+                            .select(CorpPrimaryProduct::getId,
+                                    CorpPrimaryProduct::getProductSpecies,
+                                    CorpPrimaryProduct::getProductVariety,
+                                    CorpPrimaryProduct::getProductWeight,
+                                    CorpPrimaryProduct::getProductPrice,
+                                    CorpPrimaryProduct::getProductCover,
+                                    CorpPrimaryProduct::getCreateTime
+                            )
+                            .eq(CorpPrimaryProduct::getProductStatus, type)
+                            .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                            .orderByDesc(CorpPrimaryProduct::getCreateTime));
+        }else if(ProductStatusType.PRE_SELL.getValue().equals(type)){
+            page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                    ProductReleaseDTO.class,
+                    new MPJLambdaWrapper<CorpPrimaryProduct>()
+                            .select(CorpPrimaryProduct::getId,
+                                    CorpPrimaryProduct::getProductSpecies,
+                                    CorpPrimaryProduct::getProductVariety,
+                                    CorpPrimaryProduct::getProductWeight,
+                                    CorpPrimaryProduct::getProductPrice,
+                                    CorpPrimaryProduct::getProductCover,
+                                    CorpPrimaryProduct::getCreateTime,
+                                    CorpPrimaryProduct::getMarketTime
+                            )
+                            .eq(CorpPrimaryProduct::getProductStatus, type)
+                            .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                            .orderByDesc(CorpPrimaryProduct::getCreateTime));
+        }
+        if(ObjectUtil.isNotNull(page)){
+            return new PageResult<>(page.getRecords(),page.getTotal());
+        }
+        throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
     }
 
     /**

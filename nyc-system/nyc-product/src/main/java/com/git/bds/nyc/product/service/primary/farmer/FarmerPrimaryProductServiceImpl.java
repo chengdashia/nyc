@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.enums.AuditType;
+import com.git.bds.nyc.enums.ProductStatusType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
@@ -146,24 +147,43 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      */
     @Override
     public PageResult<ProductReleaseDTO> getReleaseProductByPage(PageParam pageParam, int type) {
-        IPage<ProductReleaseDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                ProductReleaseDTO.class,
-                new MPJLambdaWrapper<FarmerPrimaryProduct>()
-                        .select(FarmerPrimaryProduct::getId,
-                                FarmerPrimaryProduct::getProductSpecies,
-                                FarmerPrimaryProduct::getProductVariety,
-                                FarmerPrimaryProduct::getProductWeight,
-                                FarmerPrimaryProduct::getProductPrice,
-                                FarmerPrimaryProduct::getProductCover,
-                                FarmerPrimaryProduct::getCreateTime
-                        )
-                        .eq(FarmerPrimaryProduct::getProductStatus, type)
-                        .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
-                        .orderByDesc(FarmerPrimaryProduct::getCreateTime));
-        if(ObjectUtil.isNull(page)){
-            throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+        IPage<ProductReleaseDTO> page = null;
+        if(ProductStatusType.ON_SELL.getValue().equals(type)){
+            page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                    ProductReleaseDTO.class,
+                    new MPJLambdaWrapper<FarmerPrimaryProduct>()
+                            .select(FarmerPrimaryProduct::getId,
+                                    FarmerPrimaryProduct::getProductSpecies,
+                                    FarmerPrimaryProduct::getProductVariety,
+                                    FarmerPrimaryProduct::getProductWeight,
+                                    FarmerPrimaryProduct::getProductPrice,
+                                    FarmerPrimaryProduct::getProductCover,
+                                    FarmerPrimaryProduct::getCreateTime
+                            )
+                            .eq(FarmerPrimaryProduct::getProductStatus, type)
+                            .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                            .orderByDesc(FarmerPrimaryProduct::getCreateTime));
+        }else if(ProductStatusType.PRE_SELL.getValue().equals(type)){
+            page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                    ProductReleaseDTO.class,
+                    new MPJLambdaWrapper<FarmerPrimaryProduct>()
+                            .select(FarmerPrimaryProduct::getId,
+                                    FarmerPrimaryProduct::getProductSpecies,
+                                    FarmerPrimaryProduct::getProductVariety,
+                                    FarmerPrimaryProduct::getProductWeight,
+                                    FarmerPrimaryProduct::getProductPrice,
+                                    FarmerPrimaryProduct::getProductCover,
+                                    FarmerPrimaryProduct::getCreateTime,
+                                    FarmerPrimaryProduct::getMarketTime
+                            )
+                            .eq(FarmerPrimaryProduct::getProductStatus, type)
+                            .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                            .orderByDesc(FarmerPrimaryProduct::getCreateTime));
         }
-        return new PageResult<>(page.getRecords(),page.getTotal());
+        if(ObjectUtil.isNotNull(page)){
+            return new PageResult<>(page.getRecords(),page.getTotal());
+        }
+        throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
 
     }
 
