@@ -5,7 +5,7 @@ import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
-import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
+import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
 import com.github.yulichang.base.MPJBaseService;
 
@@ -36,9 +36,9 @@ public interface CorpPrimaryProductService extends MPJBaseService<CorpPrimaryPro
      *
      * @param pageParam 页面参数
      * @param type      类型
-     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
+     * @return {@link PageResult}<{@link ProductReleaseDTO}>
      */
-    PageResult<PrimaryProductSelfDTO> getReleaseProductByPage(PageParam pageParam, int type);
+    PageResult<ProductReleaseDTO> getReleaseProductByPage(PageParam pageParam, int type);
 
     /**
      * 按页面获取未经审核产品
@@ -46,5 +46,5 @@ public interface CorpPrimaryProductService extends MPJBaseService<CorpPrimaryPro
      * @param pageParam 页面参数
      * @return {@link PageResult}<{@link ProductAuditDTO}>
      */
-    PageResult<ProductAuditDTO> getUnauditedProductByPage(PageParam pageParam);
+    PageResult<ProductReleaseDTO> getUnauditedProductByPage(PageParam pageParam);
 }

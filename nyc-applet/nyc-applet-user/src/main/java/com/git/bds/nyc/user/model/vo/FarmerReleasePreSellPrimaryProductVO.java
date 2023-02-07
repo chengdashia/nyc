@@ -1,4 +1,4 @@
-package com.git.bds.nyc.corp.model.vo;
+package com.git.bds.nyc.user.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -9,11 +9,10 @@ import java.time.LocalDateTime;
 
 /**
  * @author 成大事
- * @since 2022/10/19 10:55
- * 用户公司做查看发布成功的商品
+ * @since 2022/10/19 11:38
  */
 @Data
-public class CorpReleasePrimaryProductVO implements Serializable {
+public class FarmerReleasePreSellPrimaryProductVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,4 +36,7 @@ public class CorpReleasePrimaryProductVO implements Serializable {
 
     @ApiModelProperty("发布时间")
     private LocalDateTime createTime;
+
+    @ApiModelProperty("上市时间")
+    private LocalDateTime marketTime;
 }

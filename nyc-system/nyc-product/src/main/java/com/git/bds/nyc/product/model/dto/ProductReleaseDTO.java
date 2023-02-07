@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * 用于查看自己发布的农产品
  */
 @Data
-public class PrimaryProductSelfDTO implements Serializable {
+public class ProductReleaseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,11 +31,21 @@ public class PrimaryProductSelfDTO implements Serializable {
     /** 产品价格 */
     private BigDecimal productPrice;
 
+    /** 合作社审核状态(-1：未审核；0：不通过；1：审核通过) */
+    private Integer coopAuditStatus;
+
+
+    /** 供销社审核状态(-1：未审核；0：不通过；1：审核通过) */
+    private Integer auditStatus;
+
     /** 产品封面 */
     private String productCover;
 
-    /** 创建时间 */
+    /** 发布时间 */
     private LocalDateTime createTime;
+
+    /** 上市时间 */
+    private LocalDateTime marketTime;
 
 
 }

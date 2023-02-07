@@ -18,7 +18,7 @@ import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapp
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
-import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
+import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
 import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.base.MPJBaseServiceImpl;
@@ -142,12 +142,12 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      *
      * @param pageParam 页面参数
      * @param type      类型
-     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
+     * @return {@link PageResult}<{@link ProductReleaseDTO}>
      */
     @Override
-    public PageResult<PrimaryProductSelfDTO> getReleaseProductByPage(PageParam pageParam, int type) {
-        IPage<PrimaryProductSelfDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                PrimaryProductSelfDTO.class,
+    public PageResult<ProductReleaseDTO> getReleaseProductByPage(PageParam pageParam, int type) {
+        IPage<ProductReleaseDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                ProductReleaseDTO.class,
                 new MPJLambdaWrapper<FarmerPrimaryProduct>()
                         .select(FarmerPrimaryProduct::getId,
                                 FarmerPrimaryProduct::getProductSpecies,
@@ -174,9 +174,9 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      * @return {@link PageResult}<{@link ProductAuditDTO}>
      */
     @Override
-    public PageResult<ProductAuditDTO> getUnauditedProductByPage(PageParam pageParam) {
-        IPage<ProductAuditDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
-                ProductAuditDTO.class,
+    public PageResult<ProductReleaseDTO> getUnauditedProductByPage(PageParam pageParam) {
+        IPage<ProductReleaseDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                ProductReleaseDTO.class,
                 new MPJLambdaWrapper<FarmerPrimaryProduct>()
                         .select(FarmerPrimaryProduct::getId,
                                 FarmerPrimaryProduct::getProductSpecies,

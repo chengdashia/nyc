@@ -1,4 +1,4 @@
-package com.git.bds.nyc.user.model.vo;
+package com.git.bds.nyc.corp.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -9,10 +9,12 @@ import java.time.LocalDateTime;
 
 /**
  * @author 成大事
- * @since 2023/2/7 16:44
+ * @since 2022/10/19 10:55
+ * 用户公司做查看发布成功的商品
  */
 @Data
-public class FarmerAuditPrimaryProductVO implements Serializable {
+public class CorpReleaseOnSellProductVO implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("商品id")
@@ -33,16 +35,6 @@ public class FarmerAuditPrimaryProductVO implements Serializable {
     @ApiModelProperty("商品的封面图")
     private String productCover;
 
-    @ApiModelProperty("合作社审核状态(-1：未审核；0：不通过；1：审核通过)")
-    private Integer coopAuditStatus;
-
-
-    @ApiModelProperty("供销社审核状态(-1：未审核；0：不通过；1：审核通过)")
-    private Integer auditStatus;
-
     @ApiModelProperty("发布时间")
     private LocalDateTime createTime;
-
-    @ApiModelProperty("上市时间")
-    private LocalDateTime marketTime;
 }

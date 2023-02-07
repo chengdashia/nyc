@@ -1,16 +1,19 @@
 package com.git.bds.nyc.user.controller.farmer;
 
+import com.git.bds.nyc.enums.ProductStatusType;
+import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
-import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
-import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
+import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
+import com.git.bds.nyc.result.ResultCode;
 import com.git.bds.nyc.user.convert.FarmerProductConvert;
 import com.git.bds.nyc.user.model.vo.FarmerAuditPrimaryProductVO;
-import com.git.bds.nyc.user.model.vo.FarmerReleasePrimaryProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerReleaseOnSellPrimaryProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerReleasePreSellPrimaryProductVO;
 import com.git.bds.nyc.user.service.farmer.FarmerService;
 import com.git.bds.nyc.user.valid.ValidGroup;
 import io.swagger.annotations.Api;
@@ -88,13 +91,13 @@ public class FarmerProductController {
     }
 
     /**
-     * del乘积
+     *根据id删除农产品
      *
-     * @param id 身份证件
+     * @param id 产品id
      * @return {@link R}<{@link Boolean}>
      */
     @PostMapping("/delProduct")
-    @ApiOperation("删除农产品")
+    @ApiOperation("根据id删除农产品")
     @ApiImplicitParam(name = "id", value = "产品id", required = true, example = "1", dataTypeClass = Long.class)
     public R<Boolean> delProduct(
             @NotNull @RequestParam("id") Long id
@@ -108,39 +111,34 @@ public class FarmerProductController {
      *
      * @param pageParam 页面参数
      * @param type      类型
-     * @return {@link R}<{@link PageResult}<{@link FarmerReleasePrimaryProductVO}>>
+     * @return {@link R}<{@link PageResult}<{@link FarmerReleaseOnSellPrimaryProductVO}>>
      */
     @PostMapping("/getReleaseProductByPage/{type}")
     @ApiOperation("农户获取发布的初级产品（包括在售、预售） 分页")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型(0:在售,1:预售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+            @ApiImplicitParam(name = "type", value = "类型(-1:审核,0:在售,1:预售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
-    public R<PageResult<FarmerReleasePrimaryProductVO>> getReleaseProductByPage(
+    public R<Object> getReleaseProductByPage(
             @Validated PageParam pageParam,
-            @PathVariable @Min(0) @Max(1) int type
+            @PathVariable @Min(-1) @Max(1) int type
     ){
-        PageResult<PrimaryProductSelfDTO> page = productService.getReleaseProductByPage(pageParam,type);
-        List<FarmerReleasePrimaryProductVO> farmerReleasePrimaryProductVOList = FarmerProductConvert.INSTANCE.toFarmerSelfPrimaryProductVO(page.getList());
-        return R.ok(new PageResult<>(farmerReleasePrimaryProductVOList,page.getTotal()));
+        PageResult<ProductReleaseDTO> page;
+        if(ProductStatusType.AUDIT.getValue().equals(type)){
+            page = productService.getUnauditedProductByPage(pageParam);
+            List<FarmerAuditPrimaryProductVO> list = FarmerProductConvert.INSTANCE.toFarmerAuditPreSellPrimaryProductVO(page.getList());
+            return R.ok(new PageResult<>(list,page.getTotal()));
+        }else if(ProductStatusType.ON_SELL.getValue().equals(type)){
+            page = productService.getReleaseProductByPage(pageParam,type);
+            List<FarmerReleaseOnSellPrimaryProductVO> list = FarmerProductConvert.INSTANCE.toFarmerReleaseOnSellPrimaryProductVO(page.getList());
+            return R.ok(new PageResult<>(list,page.getTotal()));
+        }else if(ProductStatusType.PRE_SELL.getValue().equals(type)){
+            page = productService.getReleaseProductByPage(pageParam,type);
+            List<FarmerReleasePreSellPrimaryProductVO> list = FarmerProductConvert.INSTANCE.toFarmerReleasePreSellPrimaryProductVO(page.getList());
+            return R.ok(new PageResult<>(list,page.getTotal()));
+        }else {
+            throw new BusinessException(ResultCode.CONSTRAINT_VIOLATION_EXCEPTION.getCode(),ResultCode.CONSTRAINT_VIOLATION_EXCEPTION.getMessage());
+        }
+
     }
-
-    /**
-     * 农户获取发布的初级产品审核中的产品 分页
-     *
-     * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link FarmerReleasePrimaryProductVO}>>
-     */
-    @PostMapping("/getUnauditedProductByPage/{type}")
-    @ApiOperation("农户获取发布的初级产品审核中的产品 分页")
-    public R<PageResult<FarmerAuditPrimaryProductVO>> getUnauditedProductByPage(
-            @Validated PageParam pageParam
-    ){
-        PageResult<ProductAuditDTO> page = productService.getUnauditedProductByPage(pageParam);
-        List<FarmerAuditPrimaryProductVO> farmerReleasePrimaryProductVOList = FarmerProductConvert.INSTANCE.toFarmerAuditPrimaryProductVO(page.getList());
-        return R.ok(new PageResult<>(farmerReleasePrimaryProductVOList,page.getTotal()));
-    }
-
-
-
 
 }

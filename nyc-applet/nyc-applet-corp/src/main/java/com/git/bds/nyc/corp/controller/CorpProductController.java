@@ -2,17 +2,20 @@ package com.git.bds.nyc.corp.controller;
 
 import com.git.bds.nyc.corp.convert.CorpProductConvert;
 import com.git.bds.nyc.corp.model.vo.CorpAuditProductVO;
-import com.git.bds.nyc.corp.model.vo.CorpReleasePrimaryProductVO;
+import com.git.bds.nyc.corp.model.vo.CorpReleaseOnSellProductVO;
+import com.git.bds.nyc.corp.model.vo.CorpReleasePreSellProductVO;
 import com.git.bds.nyc.corp.service.CorpService;
+import com.git.bds.nyc.enums.ProductStatusType;
+import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
-import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
-import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
+import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.service.primary.corp.CorpPrimaryProductService;
 import com.git.bds.nyc.product.valid.ValidGroup;
 import com.git.bds.nyc.result.R;
+import com.git.bds.nyc.result.ResultCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -109,44 +112,37 @@ public class CorpProductController {
 
 
     /**
-     * 农户获取发布的初级产品（包括在售、预售和审核中） 分页
+     * 公司获取发布的初级产品（包括在售、预售和审核中） 分页
      *
      * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link CorpReleasePrimaryProductVO}>>
+     * @return {@link R}<{@link PageResult}<{@link CorpReleaseOnSellProductVO}>>
      */
     @PostMapping("/getReleaseProductByPage/{type}")
-    @ApiOperation("农户获取发布的初级产品（包括在售、预售） 分页")
+    @ApiOperation("公司获取发布的初级产品（包括在售、预售和审核中） 分页")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型(0：在售。1:预售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+            @ApiImplicitParam(name = "type", value = "类型(-1:审核中,0：在售,1:预售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
-    public R<PageResult<CorpReleasePrimaryProductVO>> getReleaseProductByPage(
+    public R<Object> getReleaseProductByPage(
             @Validated PageParam pageParam,
-            @PathVariable @Min(0) @Max(1) int type
+            @PathVariable @Min(-1) @Max(1) int type
     ){
-        PageResult<PrimaryProductSelfDTO> page = corpPrimaryProductService.getReleaseProductByPage(pageParam,type);
-        List<CorpReleasePrimaryProductVO> corpReleasePrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpSelfPrimaryProductVO(page.getList());
-        return R.ok(new PageResult<>(corpReleasePrimaryProductVOList,page.getTotal()));
+        PageResult<ProductReleaseDTO> page;
+        if(ProductStatusType.AUDIT.getValue().equals(type)){
+            page = corpPrimaryProductService.getUnauditedProductByPage(pageParam);
+            List<CorpAuditProductVO> list = CorpProductConvert.INSTANCE.toCorpAuditPrimaryProductVO(page.getList());
+            return R.ok(new PageResult<>(list,page.getTotal()));
+        }else if(ProductStatusType.ON_SELL.getValue().equals(type)){
+            page = corpPrimaryProductService.getReleaseProductByPage(pageParam,type);
+            List<CorpReleaseOnSellProductVO> list = CorpProductConvert.INSTANCE.toCorpReleaseOnSellProductVO(page.getList());
+            return R.ok(new PageResult<>(list,page.getTotal()));
+        }else if(ProductStatusType.PRE_SELL.getValue().equals(type)){
+            page = corpPrimaryProductService.getReleaseProductByPage(pageParam,type);
+            List<CorpReleasePreSellProductVO> list = CorpProductConvert.INSTANCE.toCorpReleasePreSellProductVO(page.getList());
+            return R.ok(new PageResult<>(list,page.getTotal()));
+        }else {
+            throw new BusinessException(ResultCode.CONSTRAINT_VIOLATION_EXCEPTION.getCode(),ResultCode.CONSTRAINT_VIOLATION_EXCEPTION.getMessage());
+        }
     }
-
-
-    /**
-     * 农户获取发布的初级产品审核中的产品 分页
-     *
-     * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link CorpAuditProductVO}>>
-     */
-    @PostMapping("/getUnauditedProductByPage/{type}")
-    @ApiOperation("农户获取发布的初级产品审核中的产品 分页")
-    public R<PageResult<CorpAuditProductVO>> getUnauditedProductByPage(
-            @Validated PageParam pageParam
-    ){
-        PageResult<ProductAuditDTO> page = corpPrimaryProductService.getUnauditedProductByPage(pageParam);
-        List<CorpAuditProductVO> farmerReleasePrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpAuditPrimaryProductVO(page.getList());
-        return R.ok(new PageResult<>(farmerReleasePrimaryProductVOList,page.getTotal()));
-    }
-
-
-
 
 
 
