@@ -8,7 +8,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
 import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
-import com.git.bds.nyc.enums.SysRole;
+import com.git.bds.nyc.enums.RoleType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.role.domain.SysUserRole;
 import com.git.bds.nyc.role.mapper.mp.SysUserRoleMapper;
@@ -80,7 +80,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
             if(insert > 0){
                 SysUserRole sysUserRole = new SysUserRole()
                         .setUserId(user.getId())
-                        .setRoleId(SysRole.VISITOR.getValue());
+                        .setRoleId(RoleType.VISITOR.getValue());
                 sysUserRoleMapper.insert(sysUserRole);
             }
         }else {
