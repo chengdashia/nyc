@@ -148,7 +148,7 @@ public class IndexController {
     @PostMapping("/getProductInfo/{id}/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "path", example = "112345646545", required = true),
-            @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)
+            @ApiImplicitParam(name = "type", value = "类型(0：农户初级；1：公司初级；2：公司加工)", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)
     })
     public R<ProductInfoVO> getProductInfo(
             @PathVariable("id") Long id,

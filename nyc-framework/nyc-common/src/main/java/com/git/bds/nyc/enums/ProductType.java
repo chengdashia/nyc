@@ -5,6 +5,11 @@ package com.git.bds.nyc.enums;
  * @since 2022/10/26 10:55
  */
 public enum ProductType {
+
+    /** 初级 */
+    PRIMARY(0,"初级"),
+    /** 加工 */
+    PROCESSING(1,"加工"),
     /** 农户初级 */
     FARMER_PRIMARY(0,"农户初级"),
     /** 预售 */

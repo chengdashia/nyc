@@ -11,4 +11,14 @@ public interface MineService {
      * @return int
      */
     Long getNumberOfReleases();
+
+    /**
+     * 根据id删除发布的产品
+     *
+     * @param id     商品的id
+     * @param type   类型(0：初级、1:加工)
+     * @param status 状态(-1:审核,0:在售,1:预售)
+     * @return {@link Boolean}
+     */
+    Boolean delReleaseProductById(Long id, int type, int status);
 }
