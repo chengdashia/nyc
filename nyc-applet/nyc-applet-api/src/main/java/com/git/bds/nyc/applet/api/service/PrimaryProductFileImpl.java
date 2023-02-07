@@ -71,11 +71,26 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
     /**
      * 上传身份证img
      *
-     * @param uploadFiles 上载文件
-     * @return {@link List}<{@link String}>
+     * @param frontImg 身份证正面img
+     * @return {@link String}
      */
     @Override
-    public List<String> uploadIdCardImg(MultipartFile[] uploadFiles) {
+    @SneakyThrows
+    public String uploadIdCardFrontImg(MultipartFile frontImg) {
+        long userId = StpUtil.getLoginIdAsLong();
+        String idCardImg = minioUtil.uploadIdCardImg(minioConfig.getBucketName(), frontImg, userId);
+        log.info("身份证： "+idCardImg);
+        return null;
+    }
+
+    /**
+     * 上传身份证img
+     *
+     * @param backImg 身份证背面img
+     * @return {@link String}
+     */
+    @Override
+    public String uploadIdCardBackImg(MultipartFile backImg) {
         return null;
     }
 
@@ -86,7 +101,7 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
      * @return {@link List}<{@link String}>
      */
     @Override
-    public List<String> uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles) {
+    public String uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles) {
         return null;
     }
 
@@ -105,5 +120,7 @@ public class PrimaryProductFileImpl implements PrimaryProductFileService{
         }
         return minioUtil.uploadAvatar(minioConfig.getBucketName(),file, StpUtil.getLoginIdAsLong());
     }
+
+
 
 }

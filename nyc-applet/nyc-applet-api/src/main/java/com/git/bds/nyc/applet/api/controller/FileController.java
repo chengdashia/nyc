@@ -88,22 +88,39 @@ public class FileController {
     }
 
     /**
-     * 上传身份证img
+     * 上传身份证正面img
      *
-     * @param uploadFiles 上载文件
+     * @param frontImg 正面img
      * @return {@link R}<{@link List}<{@link String}>>
      */
     @SneakyThrows
-    @PostMapping("/uploadIdCardImg")
-    @ApiOperation(value = "上传身份证",notes = "游客通过上传身份证 进行认证")
+    @PostMapping("/uploadIdCardFrontImg")
+    @ApiOperation(value = "上传正面的身份证图片",notes = "游客通过上传身份证 进行认证")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "files", value = "图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
+            @ApiImplicitParam(name = "frontImg", value = "身份证正面的图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
     })
-    public R<List<String>> uploadIdCardImg(
-            @RequestPart("files") MultipartFile[] uploadFiles
+    public String uploadIdCardFrontImg(
+            @RequestPart("frontImg") MultipartFile frontImg
     ){
+        return productFileService.uploadIdCardFrontImg(frontImg);
+    }
 
-        return R.ok(productFileService.uploadIdCardImg(uploadFiles));
+    /**
+     * 上传身份证背面img
+     *
+     * @param backImg 后退img
+     * @return {@link R}<{@link List}<{@link String}>>
+     */
+    @SneakyThrows
+    @PostMapping("/uploadIdCardBackImg")
+    @ApiOperation(value = "上传背面的身份证图片",notes = "游客通过上传身份证 进行认证")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "backImg", value = "身份证背面的图片文件", required = true,dataTypeClass = MultipartFile.class,allowMultiple = true,paramType = "query")
+    })
+    public String uploadIdCardBackImg(
+            @RequestPart("backImg") MultipartFile backImg
+    ){
+        return productFileService.uploadIdCardBackImg(backImg);
     }
 
 

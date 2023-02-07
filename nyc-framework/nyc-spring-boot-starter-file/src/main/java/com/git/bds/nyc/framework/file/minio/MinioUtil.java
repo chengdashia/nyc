@@ -345,6 +345,19 @@ public class MinioUtil {
     }
 
     /**
+     * 获取身份证的路径
+     *
+     * @param file 文件
+     * @param id   上传者id
+     * @return {@link String}
+     */
+    public String getIdCardPath(MultipartFile file,Long id){
+        //获取文件后缀
+        String suffix = org.springframework.util.StringUtils.getFilenameExtension(file.getOriginalFilename());
+        return id + SEPARATOR + "idCard" + SEPARATOR + IdUtil.getSnowflakeNextId() + POINT + suffix;
+    }
+
+    /**
      * 获取签名路径
      *
      * @param id 上传者id
@@ -478,6 +491,35 @@ public class MinioUtil {
     public String uploadAvatar(String bucketName, MultipartFile file, Long id) throws Exception {
         //拼接路径
         String path = getAvatarPath(file,id);
+        String contentType = file.getContentType();
+        log.info("contentType:  "+contentType);
+        //获取流
+        InputStream inputStream = file.getInputStream();
+        //上传
+        minioClient.putObject(
+                PutObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(path)
+                        .contentType(contentType)
+                        .stream(inputStream, inputStream.available(), -1)
+                        .build());
+
+        return URL + path;
+    }
+
+
+    /**
+     * 上传身份证img
+     *
+     * @param bucketName 桶名
+     * @param id         身份证件
+     * @param file       文件
+     * @return {@link String}
+     * @throws Exception 例外
+     */
+    public String uploadIdCardImg(String bucketName, MultipartFile file, Long id) throws Exception {
+        //拼接路径
+        String path = getIdCardPath(file,id);
         String contentType = file.getContentType();
         log.info("contentType:  "+contentType);
         //获取流

@@ -30,10 +30,18 @@ public interface PrimaryProductFileService {
     /**
      * 上传身份证img
      *
-     * @param uploadFiles 上载文件
-     * @return {@link List}<{@link String}>
+     * @param frontImg 身份证正面img
+     * @return {@link String}
      */
-    List<String> uploadIdCardImg(MultipartFile[] uploadFiles);
+    String uploadIdCardFrontImg(MultipartFile frontImg);
+
+    /**
+     * 上传身份证回img
+     *
+     * @param backImg 身份证背面img
+     * @return {@link String}
+     */
+    String uploadIdCardBackImg(MultipartFile backImg);
 
     /**
      * 上载企业许可证img
@@ -41,7 +49,7 @@ public interface PrimaryProductFileService {
      * @param uploadFiles 上载文件
      * @return {@link List}<{@link String}>
      */
-    List<String> uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles);
+    String uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles);
 
     /**
      * 上传头像
@@ -50,4 +58,6 @@ public interface PrimaryProductFileService {
      * @return {@link String}
      */
     String uploadAvatar(MultipartFile file);
+
+
 }
