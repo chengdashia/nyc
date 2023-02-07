@@ -2,10 +2,12 @@ package com.git.bds.nyc.product.service.primary.corp;
 
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.git.bds.nyc.enums.ProductSellType;
+import com.git.bds.nyc.enums.AuditType;
+import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.page.PageParam;
@@ -14,9 +16,12 @@ import com.git.bds.nyc.product.convert.ProductConvert;
 import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
+import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
+import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
+import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
@@ -93,39 +98,17 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
         return true;
     }
 
-    /**
-     * 逐页销售产品
-     *
-     * @param pageParam 页面参数
-     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
-     */
-    @Override
-    public PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam) {
-        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.ON_SELL.getValue());
-        return new PageResult<>(page.getRecords(),page.getCurrent());
-    }
 
     /**
-     * 按页面获取预售产品
-     *
-     * @param pageParam 页面参数
-     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
-     */
-    @Override
-    public PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam) {
-        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.PRE_SELL.getValue());
-        return new PageResult<>(page.getRecords(),page.getCurrent());
-    }
-
-    /**
-     * 按页面获取产品
+     * 按页面获取发布产品
      *
      * @param pageParam 页面参数
      * @param type      类型
-     * @return {@link IPage}<{@link PrimaryProductSelfDTO}>
+     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
      */
-    public IPage<PrimaryProductSelfDTO> getProductByPage(PageParam pageParam,int type){
-       return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+    @Override
+    public PageResult<PrimaryProductSelfDTO> getReleaseProductByPage(PageParam pageParam, int type) {
+        IPage<PrimaryProductSelfDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 PrimaryProductSelfDTO.class,
                 new MPJLambdaWrapper<CorpPrimaryProduct>()
                         .select(CorpPrimaryProduct::getId,
@@ -139,6 +122,30 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
                         .eq(CorpPrimaryProduct::getProductStatus, type)
                         .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
                         .orderByDesc(CorpPrimaryProduct::getCreateTime));
+        return new PageResult<>(page.getRecords(),page.getTotal());
+    }
+
+    @Override
+    public PageResult<ProductAuditDTO> getUnauditedProductByPage(PageParam pageParam) {
+        IPage<ProductAuditDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                ProductAuditDTO.class,
+                new MPJLambdaWrapper<CorpPrimaryProduct>()
+                        .select(CorpPrimaryProduct::getId,
+                                CorpPrimaryProduct::getProductSpecies,
+                                CorpPrimaryProduct::getProductVariety,
+                                CorpPrimaryProduct::getProductWeight,
+                                CorpPrimaryProduct::getProductPrice,
+                                CorpPrimaryProduct::getProductCover,
+                                CorpPrimaryProduct::getAuditStatus,
+                                CorpPrimaryProduct::getCreateTime
+                        )
+                        .ne(CorpPrimaryProduct::getAuditStatus, AuditType.PASS.getValue())
+                        .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                        .orderByDesc(FarmerPrimaryProduct::getCreateTime));
+        if(ObjectUtil.isNull(page)){
+            throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+        }
+        return new PageResult<>(page.getRecords(),page.getTotal());
     }
 
 

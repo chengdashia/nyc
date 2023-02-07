@@ -1,10 +1,12 @@
 package com.git.bds.nyc.product.service.primary.farmer;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.git.bds.nyc.enums.ProductSellType;
+import com.git.bds.nyc.enums.AuditType;
+import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
@@ -17,6 +19,8 @@ import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
+import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
+import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
@@ -77,14 +81,14 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
      * @return {@link Boolean}
      */
     @Override
-    @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id",condition = "#result == true ")
+    @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY, key = "#id", condition = "#result == true ")
     public Boolean delProductById(Long id) {
         List<ProductPicture> productPictures = productPictureMapper.selectList(new LambdaQueryWrapper<ProductPicture>()
-                .select(ProductPicture::getPictureUrl,ProductPicture::getId)
+                .select(ProductPicture::getPictureUrl, ProductPicture::getId)
                 .eq(ProductPicture::getProductId, id));
         List<Long> imgIdList = productPictures.stream().map(ProductPicture::getId).collect(Collectors.toList());
         List<String> imgUrlList = productPictures.stream().map(ProductPicture::getPictureUrl).collect(Collectors.toList());
-        minioUtil.removeFiles(minioConfig.getBucketName(),imgUrlList);
+        minioUtil.removeFiles(minioConfig.getBucketName(), imgUrlList);
         productPictureMapper.deleteBatchIds(imgIdList);
         return this.baseMapper.deleteById(id) == 1;
     }
@@ -106,12 +110,12 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         Long productId = productDTO.getId();
         //封面
         String coverImg = productImgList.get(0);
-        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProductForUpdate(id,coverImg,productDTO);
+        FarmerPrimaryProduct product = ProductConvert.INSTANCE.toFarmerPrimaryProductForUpdate(id, coverImg, productDTO);
         //更新商品的信息
         this.baseMapper.updateById(product);
         //商品原始的图片的列表
         List<ProductPicture> productPictureList = productPictureMapper.selectList(new LambdaQueryWrapper<ProductPicture>()
-                .select(ProductPicture::getId,ProductPicture::getPictureUrl)
+                .select(ProductPicture::getId, ProductPicture::getPictureUrl)
                 .eq(ProductPicture::getProductId, productId));
         List<String> originImgList = productPictureList.stream().map(ProductPicture::getPictureUrl).collect(Collectors.toList());
         //新添加的商品的图片的列表
@@ -123,7 +127,7 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         List<Long> delImgIds = productPictureList.stream().filter(item -> delImgList.contains(item.getPictureUrl())).map(ProductPicture::getProductId).collect(Collectors.toList());
         productPictureMapper.deleteBatchIds(delImgIds);
         //minio 将其删除
-        minioUtil.removeFiles(minioConfig.getBucketName(),delImgList);
+        minioUtil.removeFiles(minioConfig.getBucketName(), delImgList);
 
         //新添加的图片的 将其添加
         for (String img : newImgList) {
@@ -133,20 +137,16 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
         return true;
     }
 
+    /**
+     * 按页面获取发布产品
+     *
+     * @param pageParam 页面参数
+     * @param type      类型
+     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
+     */
     @Override
-    public PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam) {
-        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.ON_SELL.getValue());
-        return new PageResult<>(page.getRecords(),(long) page.getRecords().size());
-    }
-
-    @Override
-    public PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam) {
-        IPage<PrimaryProductSelfDTO> page = getProductByPage(pageParam, ProductSellType.PRE_SELL.getValue());
-        return new PageResult<>(page.getRecords(),page.getCurrent());
-    }
-
-    public IPage<PrimaryProductSelfDTO> getProductByPage(PageParam pageParam, int type){
-        return this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+    public PageResult<PrimaryProductSelfDTO> getReleaseProductByPage(PageParam pageParam, int type) {
+        IPage<PrimaryProductSelfDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 PrimaryProductSelfDTO.class,
                 new MPJLambdaWrapper<FarmerPrimaryProduct>()
                         .select(FarmerPrimaryProduct::getId,
@@ -160,5 +160,43 @@ public class FarmerPrimaryProductServiceImpl extends MPJBaseServiceImpl<FarmerPr
                         .eq(FarmerPrimaryProduct::getProductStatus, type)
                         .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
                         .orderByDesc(FarmerPrimaryProduct::getCreateTime));
+        if(ObjectUtil.isNull(page)){
+            throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+        }
+        return new PageResult<>(page.getRecords(),page.getTotal());
+
     }
+
+    /**
+     * 按页面获取未经审核产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link ProductAuditDTO}>
+     */
+    @Override
+    public PageResult<ProductAuditDTO> getUnauditedProductByPage(PageParam pageParam) {
+        IPage<ProductAuditDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                ProductAuditDTO.class,
+                new MPJLambdaWrapper<FarmerPrimaryProduct>()
+                        .select(FarmerPrimaryProduct::getId,
+                                FarmerPrimaryProduct::getProductSpecies,
+                                FarmerPrimaryProduct::getProductVariety,
+                                FarmerPrimaryProduct::getProductWeight,
+                                FarmerPrimaryProduct::getProductPrice,
+                                FarmerPrimaryProduct::getProductCover,
+                                FarmerPrimaryProduct::getAuditStatus,
+                                FarmerPrimaryProduct::getCoopAuditStatus,
+                                FarmerPrimaryProduct::getCreateTime
+                        )
+                        .ne(FarmerPrimaryProduct::getAuditStatus, AuditType.PASS.getValue())
+                        .ne(FarmerPrimaryProduct::getCoopAuditStatus, AuditType.PASS.getValue())
+                        .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
+                        .orderByDesc(FarmerPrimaryProduct::getCreateTime));
+        if(ObjectUtil.isNull(page)){
+            throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+        }
+        return new PageResult<>(page.getRecords(),page.getTotal());
+    }
+
 }
+

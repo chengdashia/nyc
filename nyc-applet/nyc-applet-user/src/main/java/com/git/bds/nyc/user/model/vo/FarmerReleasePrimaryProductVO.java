@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @since 2022/10/19 11:38
  */
 @Data
-public class FarmerSelfPrimaryProductVO implements Serializable {
+public class FarmerReleasePrimaryProductVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

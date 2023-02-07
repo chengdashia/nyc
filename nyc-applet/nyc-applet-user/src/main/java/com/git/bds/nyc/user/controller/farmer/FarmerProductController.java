@@ -5,14 +5,17 @@ import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
+import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.convert.FarmerProductConvert;
-import com.git.bds.nyc.user.model.vo.FarmerSelfPrimaryProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerAuditPrimaryProductVO;
+import com.git.bds.nyc.user.model.vo.FarmerReleasePrimaryProductVO;
 import com.git.bds.nyc.user.service.farmer.FarmerService;
 import com.git.bds.nyc.user.valid.ValidGroup;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -97,37 +100,44 @@ public class FarmerProductController {
         return R.decide(productService.delProductById(id));
     }
 
+
     /**
-     * 逐页销售产品
+     * 农户获取发布的初级产品（包括在售、预售和审核中） 分页
      *
      * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link FarmerSelfPrimaryProductVO}>>
+     * @param type      类型
+     * @return {@link R}<{@link PageResult}<{@link FarmerReleasePrimaryProductVO}>>
      */
-    @PostMapping("/getOnSellProductByPage")
-    @ApiOperation("农户获取发布的在售的初级产品 分页")
-    public R<PageResult<FarmerSelfPrimaryProductVO>> getOnSellProductByPage(
-            @Validated PageParam pageParam
+    @PostMapping("/getReleaseProductByPage/{type}")
+    @ApiOperation("农户获取发布的初级产品（包括在售、预售） 分页")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "type", value = "类型(-1:审核。0:在售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+    })
+    public R<PageResult<FarmerReleasePrimaryProductVO>> getReleaseProductByPage(
+            @Validated PageParam pageParam,
+            @PathVariable int type
     ){
-        PageResult<PrimaryProductSelfDTO> onSellProductByPage = productService.getOnSellProductByPage(pageParam);
-        List<FarmerSelfPrimaryProductVO> selfPrimaryProductVOList = FarmerProductConvert.INSTANCE.toFarmerSelfPrimaryProductVO(onSellProductByPage.getList());
-        return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
+        PageResult<PrimaryProductSelfDTO> page = productService.getReleaseProductByPage(pageParam,type);
+        List<FarmerReleasePrimaryProductVO> farmerReleasePrimaryProductVOList = FarmerProductConvert.INSTANCE.toFarmerSelfPrimaryProductVO(page.getList());
+        return R.ok(new PageResult<>(farmerReleasePrimaryProductVOList,page.getTotal()));
     }
 
     /**
-     * 按页面获取预售产品
+     * 农户获取发布的初级产品审核中的产品 分页
      *
      * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link FarmerSelfPrimaryProductVO}>>
+     * @return {@link R}<{@link PageResult}<{@link FarmerReleasePrimaryProductVO}>>
      */
-    @PostMapping("/getPreSellProductByPage")
-    @ApiOperation("个人获取发布的预售的初级产品 分页")
-    public R<PageResult<FarmerSelfPrimaryProductVO>> getPreSellProductByPage(
+    @PostMapping("/getUnauditedProductByPage/{type}")
+    @ApiOperation("农户获取发布的初级产品审核中的产品 分页")
+    public R<PageResult<FarmerAuditPrimaryProductVO>> getUnauditedProductByPage(
             @Validated PageParam pageParam
     ){
-        PageResult<PrimaryProductSelfDTO> onSellProductByPage = productService.getPreSellProductByPage(pageParam);
-        List<FarmerSelfPrimaryProductVO> selfPrimaryProductVOList = FarmerProductConvert.INSTANCE.toFarmerSelfPrimaryProductVO(onSellProductByPage.getList());
-        return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
+        PageResult<ProductAuditDTO> page = productService.getUnauditedProductByPage(pageParam);
+        List<FarmerAuditPrimaryProductVO> farmerReleasePrimaryProductVOList = FarmerProductConvert.INSTANCE.toFarmerAuditPrimaryProductVO(page.getList());
+        return R.ok(new PageResult<>(farmerReleasePrimaryProductVOList,page.getTotal()));
     }
+
 
 
 

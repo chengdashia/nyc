@@ -8,12 +8,10 @@ import java.time.LocalDateTime;
 
 /**
  * @author 成大事
- * @since 2022/10/19 10:45
- * 用于查看自己发布的农产品
+ * @since 2023/2/7 16:49
  */
 @Data
-public class PrimaryProductSelfDTO implements Serializable {
-
+public class ProductAuditDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**商品id**/
@@ -34,8 +32,14 @@ public class PrimaryProductSelfDTO implements Serializable {
     /** 产品封面 */
     private String productCover;
 
+    /** 合作社审核状态(-1：未审核；0：不通过；1：审核通过) */
+    private Integer coopAuditStatus;
+
+
+    /** 供销社审核状态(-1：未审核；0：不通过；1：审核通过) */
+    private Integer auditStatus;
+
     /** 创建时间 */
     private LocalDateTime createTime;
-
 
 }

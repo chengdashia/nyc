@@ -3,10 +3,9 @@ package com.git.bds.nyc.product.service.primary.farmer;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
-import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
+import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
 import com.github.yulichang.base.MPJBaseService;
 
 import java.util.List;
@@ -47,19 +46,21 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
      */
     Boolean modifyProductInfo(PrimaryProductModifyDTO productDTO);
 
-    /**
-     * 按页面销售产品
-     *
-     * @param pageParam 页面参数
-     * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
-     */
-    PageResult<PrimaryProductSelfDTO> getOnSellProductByPage(PageParam pageParam);
 
     /**
-     * 按页面获取预售产品
+     * 按类型获取发布产品 分页
      *
      * @param pageParam 页面参数
+     * @param type      类型
      * @return {@link PageResult}<{@link PrimaryProductSelfDTO}>
      */
-    PageResult<PrimaryProductSelfDTO> getPreSellProductByPage(PageParam pageParam);
+    PageResult<PrimaryProductSelfDTO> getReleaseProductByPage(PageParam pageParam, int type);
+
+    /**
+     * 按页面获取未经审核产品
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link ProductAuditDTO}>
+     */
+    PageResult<ProductAuditDTO> getUnauditedProductByPage(PageParam pageParam);
 }

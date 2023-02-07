@@ -1,13 +1,15 @@
 package com.git.bds.nyc.corp.controller;
 
 import com.git.bds.nyc.corp.convert.CorpProductConvert;
-import com.git.bds.nyc.corp.model.vo.CorpSelfPrimaryProductVO;
+import com.git.bds.nyc.corp.model.vo.CorpAuditProductVO;
+import com.git.bds.nyc.corp.model.vo.CorpReleasePrimaryProductVO;
 import com.git.bds.nyc.corp.service.CorpService;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.PrimaryProductSelfDTO;
+import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
 import com.git.bds.nyc.product.service.primary.corp.CorpPrimaryProductService;
 import com.git.bds.nyc.product.valid.ValidGroup;
 import com.git.bds.nyc.result.R;
@@ -105,37 +107,48 @@ public class CorpProductController {
         return R.decide(corpService.deleteProductById(id,type));
     }
 
-    /**
-     * 公司获取发布的在售的初级产品 分页
-     *
-     * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link CorpSelfPrimaryProductVO}>>
-     */
-    @PostMapping("/getOnSellProductByPage")
-    @ApiOperation("公司获取发布的在售的初级产品 分页")
-    public R<PageResult<CorpSelfPrimaryProductVO>> getOnSellProductByPage(
-            @Validated PageParam pageParam
-    ){
-        PageResult<PrimaryProductSelfDTO> onSellProductByPage = corpPrimaryProductService.getOnSellProductByPage(pageParam);
-        List<CorpSelfPrimaryProductVO> selfPrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpSelfPrimaryProductVO(onSellProductByPage.getList());
-        return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
-    }
 
     /**
-     * 公司获取发布的预售的初级产品 分页
+     * 农户获取发布的初级产品（包括在售、预售和审核中） 分页
      *
      * @param pageParam 页面参数
-     * @return {@link R}<{@link PageResult}<{@link CorpSelfPrimaryProductVO}>>
+     * @return {@link R}<{@link PageResult}<{@link CorpReleasePrimaryProductVO}>>
      */
-    @PostMapping("/getPreSellProductByPage")
-    @ApiOperation("公司获取发布的预售的初级产品 分页")
-    public R<PageResult<CorpSelfPrimaryProductVO>> getPreSellProductByPage(
+    @PostMapping("/getReleaseProductByPage/{type}")
+    @ApiOperation("农户获取发布的初级产品（包括在售、预售） 分页")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "type", value = "类型(-1:审核。0:在售)", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
+    })
+    public R<PageResult<CorpReleasePrimaryProductVO>> getReleaseProductByPage(
+            @Validated PageParam pageParam,
+            @PathVariable int type
+    ){
+        PageResult<PrimaryProductSelfDTO> page = corpPrimaryProductService.getReleaseProductByPage(pageParam,type);
+        List<CorpReleasePrimaryProductVO> corpReleasePrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpSelfPrimaryProductVO(page.getList());
+        return R.ok(new PageResult<>(corpReleasePrimaryProductVOList,page.getTotal()));
+    }
+
+
+    /**
+     * 农户获取发布的初级产品审核中的产品 分页
+     *
+     * @param pageParam 页面参数
+     * @return {@link R}<{@link PageResult}<{@link CorpAuditProductVO}>>
+     */
+    @PostMapping("/getUnauditedProductByPage/{type}")
+    @ApiOperation("农户获取发布的初级产品审核中的产品 分页")
+    public R<PageResult<CorpAuditProductVO>> getUnauditedProductByPage(
             @Validated PageParam pageParam
     ){
-        PageResult<PrimaryProductSelfDTO> onSellProductByPage = corpPrimaryProductService.getPreSellProductByPage(pageParam);
-        List<CorpSelfPrimaryProductVO> selfPrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpSelfPrimaryProductVO(onSellProductByPage.getList());
-        return R.ok(new PageResult<>(selfPrimaryProductVOList,onSellProductByPage.getTotal()));
+        PageResult<ProductAuditDTO> page = corpPrimaryProductService.getUnauditedProductByPage(pageParam);
+        List<CorpAuditProductVO> farmerReleasePrimaryProductVOList = CorpProductConvert.INSTANCE.toCorpAuditPrimaryProductVO(page.getList());
+        return R.ok(new PageResult<>(farmerReleasePrimaryProductVOList,page.getTotal()));
     }
+
+
+
+
+
 
 
 }

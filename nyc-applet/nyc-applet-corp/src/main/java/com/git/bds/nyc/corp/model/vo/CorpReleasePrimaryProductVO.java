@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * 用户公司做查看发布成功的商品
  */
 @Data
-public class CorpSelfPrimaryProductVO implements Serializable {
+public class CorpReleasePrimaryProductVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
