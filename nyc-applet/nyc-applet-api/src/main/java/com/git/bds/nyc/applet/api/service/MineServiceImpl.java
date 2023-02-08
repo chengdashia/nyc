@@ -136,7 +136,7 @@ public class MineServiceImpl implements MineService{
         numberOfReleaseDTO.setOnSellNum(onSellNum);
         numberOfReleaseDTO.setPreSellNum(preSellNum);
         numberOfReleaseDTO.setAuditNum(auditNum.intValue());
-        numberOfReleaseDTO.setTotalNum(onSellNum + preSellNum);
+        numberOfReleaseDTO.setTotalNum(onSellNum + preSellNum + auditNum.intValue());
         return numberOfReleaseDTO;
     }
 
