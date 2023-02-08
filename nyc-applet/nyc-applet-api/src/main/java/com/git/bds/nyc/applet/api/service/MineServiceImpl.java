@@ -2,20 +2,25 @@ package com.git.bds.nyc.applet.api.service;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.easyes.core.conditions.LambdaEsUpdateWrapper;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
 import com.git.bds.nyc.communal.mapper.mp.audit.AuditCorpProductMapper;
 import com.git.bds.nyc.communal.mapper.mp.audit.AuditFarmerProductMapper;
 import com.git.bds.nyc.communal.mapper.mp.audit.CoopAuditProductMapper;
 import com.git.bds.nyc.communal.model.domain.audit.AuditCorpProduct;
 import com.git.bds.nyc.communal.model.domain.audit.AuditFarmerProduct;
 import com.git.bds.nyc.communal.model.domain.audit.CoopAuditProduct;
+import com.git.bds.nyc.enums.AuditType;
 import com.git.bds.nyc.enums.ProductStatusType;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.enums.RoleType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
+import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.mapper.mp.CorpProcessingProductMapper;
 import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
@@ -30,11 +35,13 @@ import com.git.bds.nyc.result.ResultCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -73,21 +80,64 @@ public class MineServiceImpl implements MineService{
      * @return {@link Long}
      */
     @Override
-    public Long getNumberOfReleases() {
+    public NumberOfReleaseDTO getNumberOfReleases(int type) {
         List<String> roleList = StpUtil.getRoleList();
         long userId = StpUtil.getLoginIdAsLong();
-        if(roleList.contains(RoleType.FARMER.getMsg())){
-            return farmerPrimaryProductMapper.selectCount(new LambdaQueryWrapper<FarmerPrimaryProduct>()
-                    .eq(FarmerPrimaryProduct::getUserId, userId));
-        }else if(roleList.contains(RoleType.COOP.getMsg())){
-            Long primaryNum = corpPrimaryProductMapper.selectCount(new LambdaQueryWrapper<CorpPrimaryProduct>()
-                    .eq(CorpPrimaryProduct::getUserId, userId));
-            Long processingNum = corpProcessingProductMapper.selectCount(new LambdaQueryWrapper<CorpProcessingProduct>()
-                    .eq(CorpProcessingProduct::getUserId, userId));
-            return primaryNum + processingNum;
+        List<Map<String, Object>> maps;
+        String productStatus = "product_status";
+        String nums = "nums";
+        Long auditNum;
+        int onSellNum = 0,preSellNum = 0;
+        if(ProductType.PRIMARY.getValue().equals(type)){
+            //农户
+            if(roleList.contains(RoleType.FARMER.getMsg())){
+                maps = farmerPrimaryProductMapper.selectMaps(new QueryWrapper<FarmerPrimaryProduct>()
+                        .select("count(*) as nums,product_status")
+                        .groupBy(productStatus)
+                        .eq(FarmerPrimaryProduct.USER_ID, userId));
+                auditNum = farmerPrimaryProductMapper.selectCount(new LambdaQueryWrapper<FarmerPrimaryProduct>()
+                        .eq(FarmerPrimaryProduct::getUserId, userId)
+                        .ne(FarmerPrimaryProduct::getCoopAuditStatus, AuditType.PASS.getValue())
+                        .ne(FarmerPrimaryProduct::getAuditStatus, AuditType.PASS.getValue()));
+            }else if(roleList.contains(RoleType.COOP.getMsg())){
+                maps = corpPrimaryProductMapper.selectMaps(new QueryWrapper<CorpPrimaryProduct>()
+                        .select("count(*) as nums,product_status")
+                        .groupBy(productStatus)
+                        .eq(CorpPrimaryProduct.USER_ID, userId));
+                auditNum = corpPrimaryProductMapper.selectCount(new LambdaQueryWrapper<CorpPrimaryProduct>()
+                        .eq(CorpPrimaryProduct::getUserId, userId)
+                        .ne(CorpPrimaryProduct::getAuditStatus, AuditType.PASS.getValue()));
+            }else {
+                throw new BusinessException(ResultCode.NOT_ROLE.getCode(),ResultCode.NOT_EXIST.getMessage());
+            }
+        }else if(ProductType.PROCESSING.getValue().equals(type)){
+            maps = corpProcessingProductMapper.selectMaps(new QueryWrapper<CorpProcessingProduct>()
+                    .select("count(*) as nums,product_status")
+                    .groupBy(productStatus)
+                    .eq(CorpProcessingProduct.USER_ID, userId));
+            auditNum = corpProcessingProductMapper.selectCount(new LambdaQueryWrapper<CorpProcessingProduct>()
+                    .eq(CorpProcessingProduct::getUserId, userId)
+                    .ne(CorpProcessingProduct::getAuditStatus, AuditType.PASS.getValue()));
         }else {
-            throw new BusinessException(ResultCode.NOT_ROLE.getCode(),ResultCode.NOT_EXIST.getMessage());
+            throw new BusinessException(ResultCode.CAPTCHA_ERROR.getCode(), ResultCode.CAPTCHA_ERROR.getMessage());
         }
+        if (ObjectUtil.isNull(maps)){
+            throw new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage());
+        }
+        NumberOfReleaseDTO numberOfReleaseDTO = new NumberOfReleaseDTO();
+        for (Map<String, Object> map : maps) {
+            if(ObjectUtil.equal(map.get(productStatus),ProductStatusType.ON_SELL.getValue())){
+                onSellNum = Integer.parseInt(map.get(nums).toString());
+            }
+            if(ObjectUtil.equal(map.get(productStatus),ProductStatusType.PRE_SELL.getValue())){
+                preSellNum = Integer.parseInt(map.get(nums).toString());
+            }
+        }
+        numberOfReleaseDTO.setOnSellNum(onSellNum);
+        numberOfReleaseDTO.setPreSellNum(preSellNum);
+        numberOfReleaseDTO.setAuditNum(auditNum.intValue());
+        numberOfReleaseDTO.setTotalNum(onSellNum + preSellNum);
+        return numberOfReleaseDTO;
     }
 
     /**
@@ -100,6 +150,7 @@ public class MineServiceImpl implements MineService{
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY, key = "#id", condition = "#result == true ")
     public Boolean delReleaseProductById(Long id, int type, int status) {
         List<String> roleList = StpUtil.getRoleList();
         long userId = StpUtil.getLoginIdAsLong();

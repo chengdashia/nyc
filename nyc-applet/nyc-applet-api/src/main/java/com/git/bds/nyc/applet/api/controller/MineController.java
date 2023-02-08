@@ -1,5 +1,8 @@
 package com.git.bds.nyc.applet.api.controller;
 
+import com.git.bds.nyc.applet.api.convert.MineConvert;
+import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
+import com.git.bds.nyc.applet.api.model.vo.NumberOfReleaseVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
 import com.git.bds.nyc.applet.api.service.MineService;
 import com.git.bds.nyc.result.R;
@@ -31,9 +34,16 @@ public class MineController {
     private final MineService mineService;
 
     @ApiOperation("获取发布的数量")
-    @GetMapping("/getNumberOfReleases")
-    public R<Long> getNumberOfReleases(){
-        return R.ok(mineService.getNumberOfReleases());
+    @GetMapping("/getNumberOfReleases/{type}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "type", value = "类型(0：初级、1:加工)", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)
+    })
+    public R<NumberOfReleaseVO> getNumberOfReleases(
+            @PathVariable("type") @Min(0) @Max(1) int type
+    ){
+        NumberOfReleaseDTO numberOfReleaseDTO = mineService.getNumberOfReleases(type);
+        NumberOfReleaseVO numberOfReleaseVO = MineConvert.INSTANCE.toNumberOfReleaseVO(numberOfReleaseDTO);
+        return R.ok(numberOfReleaseVO);
     }
 
 

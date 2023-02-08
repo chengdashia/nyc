@@ -1,16 +1,20 @@
 package com.git.bds.nyc.applet.api.service;
 
+import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
+
 /**
  * @author 成大事
  * @since 2023/2/7 20:43
  */
 public interface MineService {
+
     /**
-     * 获取发布数量
+     * 获取发布次数
      *
-     * @return int
+     * @param type 类型
+     * @return {@link NumberOfReleaseDTO}
      */
-    Long getNumberOfReleases();
+    NumberOfReleaseDTO getNumberOfReleases(int type);
 
     /**
      * 根据id删除发布的产品

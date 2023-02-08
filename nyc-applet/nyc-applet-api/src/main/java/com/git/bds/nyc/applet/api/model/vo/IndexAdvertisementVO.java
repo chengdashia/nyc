@@ -1,7 +1,8 @@
 package com.git.bds.nyc.applet.api.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -9,8 +10,11 @@ import java.io.Serializable;
  * @author 成大事
  * @since 2023/1/4 20:38
  */
-@Data
+@Getter
+@Setter
 public class IndexAdvertisementVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("广告id")
     private Long id;
