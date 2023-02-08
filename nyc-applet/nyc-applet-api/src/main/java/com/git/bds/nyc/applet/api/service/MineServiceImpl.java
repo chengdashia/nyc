@@ -87,7 +87,8 @@ public class MineServiceImpl implements MineService{
         String productStatus = "product_status";
         String nums = "nums";
         Long auditNum;
-        int onSellNum = 0,preSellNum = 0;
+        int onSellNum = 0;
+        int preSellNum = 0;
         if(ProductType.PRIMARY.getValue().equals(type)){
             //农户
             if(roleList.contains(RoleType.FARMER.getMsg())){
@@ -125,11 +126,12 @@ public class MineServiceImpl implements MineService{
             throw new BusinessException(ResultCode.NOT_EXIST.getCode(), ResultCode.NOT_EXIST.getMessage());
         }
         NumberOfReleaseDTO numberOfReleaseDTO = new NumberOfReleaseDTO();
+        log.info(""+maps);
         for (Map<String, Object> map : maps) {
-            if(ObjectUtil.equal(map.get(productStatus),ProductStatusType.ON_SELL.getValue())){
+            if(ObjectUtil.equal(map.get("productStatus"),ProductStatusType.ON_SELL.getValue())){
                 onSellNum = Integer.parseInt(map.get(nums).toString());
             }
-            if(ObjectUtil.equal(map.get(productStatus),ProductStatusType.PRE_SELL.getValue())){
+            if(ObjectUtil.equal(map.get("productStatus"),ProductStatusType.PRE_SELL.getValue())){
                 preSellNum = Integer.parseInt(map.get(nums).toString());
             }
         }
