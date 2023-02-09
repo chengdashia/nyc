@@ -3,35 +3,37 @@ package com.git.bds.nyc.product.service.primary.corp;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.git.bds.nyc.enums.AuditType;
 import com.git.bds.nyc.enums.ProductStatusType;
+import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
+import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.convert.ProductConvert;
+import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
-import com.git.bds.nyc.product.model.domain.ProductPicture;
-import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
+import com.git.bds.nyc.product.model.dto.ProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
+import com.git.bds.nyc.product.service.productpicture.ProductPictureService;
 import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -48,6 +50,10 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
 
     private final ProductPictureMapper productPictureMapper;
 
+    private final ProductPictureService productPictureService;
+
+    private final ProductEsMapper productEsMapper;
+
     private final MinioConfig minioConfig;
 
     private final MinioUtil minioUtil;
@@ -59,43 +65,31 @@ public class CorpPrimaryProductServiceImpl extends MPJBaseServiceImpl<CorpPrimar
      * @param productDTO 产品dto
      * @return {@link Boolean}
      */
-    @Transactional(rollbackFor = Exception.class)
     @Override
-    public Boolean modifyProductInfo(PrimaryProductModifyDTO productDTO) {
-
+    @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY, key = "#productDTO.getId()", condition = "#result == true ")
+    public Boolean modifyProductInfo(ProductModifyDTO productDTO) {
         //用户id
-        long id = StpUtil.getLoginIdAsLong();
+        long userId = StpUtil.getLoginIdAsLong();
         //商品新的图片列表
-        List<String> productImgList = productDTO.getProductImgList();
+        List<String> productNewImgList = productDTO.getProductImgList();
         //商品id
         Long productId = productDTO.getId();
         //封面
-        String coverImg = productImgList.get(0);
-        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProductForUpdate(id,coverImg,productDTO);
+        String coverImg = productNewImgList.get(0);
+        CorpPrimaryProduct product = ProductConvert.INSTANCE.toCorpPrimaryProductForUpdate(userId, coverImg, productDTO);
         //更新商品的信息
-        this.baseMapper.updateById(product);
-        //商品原始的图片的列表
-        List<ProductPicture> productPictureList = productPictureMapper.selectList(new LambdaQueryWrapper<ProductPicture>()
-                        .select(ProductPicture::getId,ProductPicture::getPictureUrl)
-                .eq(ProductPicture::getProductId, productId));
-        List<String> originImgList = productPictureList.stream().map(ProductPicture::getPictureUrl).collect(Collectors.toList());
-        //新添加的商品的图片的列表
-        List<String> newImgList = productImgList.stream().filter(item -> !originImgList.contains(item)).collect(Collectors.toList());
-        //需要删除的商品图片的列表
-        List<String> delImgList = originImgList.stream().filter(item -> !productImgList.contains(item)).collect(Collectors.toList());
-
-        //需要删除的图片的id
-        List<Long> delImgIds = productPictureList.stream().filter(item -> delImgList.contains(item.getPictureUrl())).map(ProductPicture::getProductId).collect(Collectors.toList());
-        productPictureMapper.deleteBatchIds(delImgIds);
-        //minio 将其删除
-        minioUtil.removeFiles(minioConfig.getBucketName(),delImgList);
-
-        //新添加的图片的 将其添加
-        for (String img : newImgList) {
-            ProductPicture productPicture = new ProductPicture().setProductId(productId).setPictureUrl(img);
-            productPictureMapper.insert(productPicture);
+        int update = this.baseMapper.updateById(product);
+        //如果商品表的数据更新成功 则进行下一步
+        if(update == 1){
+            //如果不是审核 。则需要更新es上的数据
+            if(!ProductStatusType.AUDIT.getValue().equals(productDTO.getType())){
+                //更新es上的
+                productEsMapper.updateById(ProductConvert.INSTANCE.toProductEs(product, ProductType.FARMER_PRIMARY.getValue()));
+            }
+            return productPictureService.updateProductPicture(productId,productNewImgList);
         }
-        return true;
+        return false;
     }
 
 

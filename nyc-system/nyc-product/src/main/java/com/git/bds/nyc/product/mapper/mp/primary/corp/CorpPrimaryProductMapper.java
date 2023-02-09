@@ -2,7 +2,7 @@ package com.git.bds.nyc.product.mapper.mp.primary.corp;
 
 
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
-import com.git.bds.nyc.product.model.dto.PrimaryProductUpdateDTO;
+import com.git.bds.nyc.product.model.dto.ProductUpdateDTO;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,6 +22,6 @@ public interface CorpPrimaryProductMapper extends MPJBaseMapper<CorpPrimaryProdu
      * @param primaryProductUpdateDTO 更新数据
      * @return {@link  Boolean}
      */
-    Boolean updateAuditStatus(PrimaryProductUpdateDTO primaryProductUpdateDTO);
+    Boolean updateAuditStatus(ProductUpdateDTO primaryProductUpdateDTO);
 
 }

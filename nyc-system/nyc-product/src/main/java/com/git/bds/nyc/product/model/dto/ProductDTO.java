@@ -4,9 +4,7 @@ package com.git.bds.nyc.product.model.dto;
 import com.git.bds.nyc.product.valid.ValidGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.*;
@@ -22,7 +20,7 @@ import java.util.List;
 @ApiModel(value = "数据源(新增时使用)")
 @Data
 @Accessors(chain = true)
-public class PrimaryProductDTO {
+public class ProductDTO {
 
     @NotNull(groups = {ValidGroup.PreSale.class,ValidGroup.OnSell.class})
     @ApiModelProperty("联系信息(即发布人的联系方式，发货地址等)")

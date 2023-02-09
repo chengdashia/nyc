@@ -19,7 +19,7 @@ import java.io.Serializable;
 @ApiModel(value = "更新初级产品审核状态(更新时使用)")
 @Data
 @Accessors(chain = true)
-public class PrimaryProductUpdateDTO implements Serializable {
+public class ProductUpdateDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull(message = "Id can't be NULL")

@@ -3,23 +3,19 @@ package com.git.bds.nyc.corp.service;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.git.bds.nyc.communal.mapper.mp.ContractOrderMapper;
 import com.git.bds.nyc.communal.service.audit.AuditCorpProductService;
 import com.git.bds.nyc.enums.AuditType;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
-import com.git.bds.nyc.framework.file.minio.MinioConfig;
-import com.git.bds.nyc.framework.file.minio.MinioUtil;
 import com.git.bds.nyc.product.convert.ProductConvert;
 import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
 import com.git.bds.nyc.product.mapper.mp.CorpProcessingProductMapper;
 import com.git.bds.nyc.product.mapper.mp.ProductPictureMapper;
 import com.git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper;
-import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.CorpPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.model.dto.ProductDTO;
 import com.git.bds.nyc.result.ResultCode;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -47,15 +43,8 @@ public class CropServiceImpl implements CorpService{
 
     private final CorpProcessingProductMapper corpProcessingProductMapper;
 
-    private final FarmerPrimaryProductMapper farmerPrimaryProductMapper;
-
-    private final MinioUtil minioUtil;
-
-    private final MinioConfig minioConfig;
-
     private final ProductEsMapper productEsMapper;
 
-    private final ContractOrderMapper contractOrderMapper;
 
     /**
      * 发售在售产品
@@ -66,7 +55,7 @@ public class CropServiceImpl implements CorpService{
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Boolean releaseOnSellProduct(PrimaryProductDTO productDTO) {
+    public Boolean releaseOnSellProduct(ProductDTO productDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         //新的图片列表
@@ -93,7 +82,7 @@ public class CropServiceImpl implements CorpService{
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Boolean releasePreSellProduct(PrimaryProductDTO productDTO) {
+    public Boolean releasePreSellProduct(ProductDTO productDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();

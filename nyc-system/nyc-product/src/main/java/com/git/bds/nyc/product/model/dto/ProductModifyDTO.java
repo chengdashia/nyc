@@ -15,8 +15,7 @@ import java.util.List;
  * @since 2022/10/17 18:27
  */
 @Data
-public class PrimaryProductModifyDTO implements Serializable {
-
+public class ProductModifyDTO implements Serializable {
 
     @NotNull(groups = {ValidGroup.PreSale.class,ValidGroup.OnSell.class})
     @ApiModelProperty("商品id")
@@ -32,7 +31,7 @@ public class PrimaryProductModifyDTO implements Serializable {
     private String productSpecies;
 
     @NotNull(groups = {ValidGroup.PreSale.class,ValidGroup.OnSell.class})
-    @NotBlank(message = "种类名不能为空",groups = {ValidGroup.PreSale.class,ValidGroup.OnSell.class})
+    @NotBlank(message = "品类名不能为空",groups = {ValidGroup.PreSale.class,ValidGroup.OnSell.class})
     @ApiModelProperty("品种")
     private String productVariety;
 
@@ -65,4 +64,12 @@ public class PrimaryProductModifyDTO implements Serializable {
     @Future(groups = {ValidGroup.PreSale.class})
     @ApiModelProperty("上市时间，用于预售")
     private LocalDateTime marketTime;
+
+
+    @NotNull(groups = {ValidGroup.PreSale.class,ValidGroup.OnSell.class})
+    @Min(value = -1,message = "状态有误",groups = {ValidGroup.OnSell.class,ValidGroup.PreSale.class})
+    @Max(value = 1,message = "状态有误",groups = {ValidGroup.OnSell.class,ValidGroup.PreSale.class})
+    @ApiModelProperty("状态（-1:预售 0：在售  1：预售）")
+    private Integer type;
+
 }

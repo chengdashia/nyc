@@ -69,7 +69,4 @@ public class ProductEs implements Serializable {
     @IndexField(fieldType = FieldType.INTEGER)
     private Integer type;
 
-    //
-    //public static final String VARIETY = "productVariety";
-    //public static final String SPECIES = "productSpecies";
 }

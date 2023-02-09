@@ -2,6 +2,7 @@ package com.git.bds.nyc.product.service.processing;
 
 
 import com.git.bds.nyc.product.model.domain.CorpProcessingProduct;
+import com.git.bds.nyc.product.model.dto.ProductModifyDTO;
 import com.github.yulichang.base.MPJBaseService;
 
 /**
@@ -14,4 +15,11 @@ import com.github.yulichang.base.MPJBaseService;
  */
 public interface CorpProcessingProductService extends MPJBaseService<CorpProcessingProduct> {
 
+    /**
+     * 修改产品信息
+     *
+     * @param productDTO 产品dto
+     * @return {@link Boolean}
+     */
+    Boolean modifyProductInfo(ProductModifyDTO productDTO);
 }

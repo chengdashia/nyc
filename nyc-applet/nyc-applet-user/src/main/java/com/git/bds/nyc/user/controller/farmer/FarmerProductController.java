@@ -4,8 +4,8 @@ import com.git.bds.nyc.enums.ProductStatusType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
-import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
+import com.git.bds.nyc.product.model.dto.ProductDTO;
+import com.git.bds.nyc.product.model.dto.ProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.service.primary.farmer.FarmerPrimaryProductService;
 import com.git.bds.nyc.result.R;
@@ -57,7 +57,7 @@ public class FarmerProductController {
     @PostMapping("/releaseOnSellProduct")
     @ApiOperation("发布初级在售农产品")
     public R<Boolean> releaseOnSellProduct(
-           @Validated({ValidGroup.OnSell.class}) @RequestBody PrimaryProductDTO productDTO
+           @Validated({ValidGroup.OnSell.class}) @RequestBody ProductDTO productDTO
     ){
         return R.decide(farmerService.releaseOnSellProduct(productDTO));
     }
@@ -71,7 +71,7 @@ public class FarmerProductController {
     @PostMapping("/releasePreSellProduct")
     @ApiOperation("发布初级预售农产品")
     public R<Boolean> releasePreSellProduct(
-            @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
+            @Validated({ValidGroup.PreSale.class}) @RequestBody ProductDTO productDTO
     ){
         return R.decide(farmerService.releasePreSellProduct(productDTO));
     }
@@ -85,7 +85,7 @@ public class FarmerProductController {
     @PostMapping("/modifyProductInfo")
     @ApiOperation("修改农产品信息")
     public R<Boolean> modifyProductInfo(
-            @Validated({com.git.bds.nyc.product.valid.ValidGroup.All.class}) @RequestBody PrimaryProductModifyDTO productDTO
+            @Validated({com.git.bds.nyc.product.valid.ValidGroup.All.class}) @RequestBody ProductModifyDTO productDTO
     ){
         return R.decide(productService.modifyProductInfo(productDTO));
     }

@@ -3,7 +3,7 @@ package com.git.bds.nyc.product.service.primary.farmer;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
-import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
+import com.git.bds.nyc.product.model.dto.ProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.model.dto.ProductAuditDTO;
 import com.github.yulichang.base.MPJBaseService;
@@ -44,7 +44,7 @@ public interface FarmerPrimaryProductService extends MPJBaseService<FarmerPrimar
      * @param productDTO 产品dto
      * @return {@link Boolean}
      */
-    Boolean modifyProductInfo(PrimaryProductModifyDTO productDTO);
+    Boolean modifyProductInfo(ProductModifyDTO productDTO);
 
 
     /**

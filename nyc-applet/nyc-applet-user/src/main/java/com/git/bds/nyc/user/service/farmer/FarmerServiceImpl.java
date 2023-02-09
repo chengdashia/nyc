@@ -7,7 +7,7 @@ import com.git.bds.nyc.product.convert.ProductConvert;
 import com.git.bds.nyc.product.mapper.mp.primary.farmer.FarmerPrimaryProductMapper;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.model.dto.ProductDTO;
 import com.git.bds.nyc.product.service.productpicture.ProductPictureService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ public class FarmerServiceImpl implements FarmerService{
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Boolean releaseOnSellProduct(PrimaryProductDTO productDTO) {
+    public Boolean releaseOnSellProduct(ProductDTO productDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();
@@ -69,7 +69,7 @@ public class FarmerServiceImpl implements FarmerService{
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Boolean releasePreSellProduct(PrimaryProductDTO productDTO) {
+    public Boolean releasePreSellProduct(ProductDTO productDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         long productId = IdUtil.getSnowflakeNextId();
         List<String> productImgList = productDTO.getProductImgList();

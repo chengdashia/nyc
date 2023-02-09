@@ -9,10 +9,11 @@ import com.git.bds.nyc.enums.ProductStatusType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
-import com.git.bds.nyc.product.model.dto.PrimaryProductModifyDTO;
+import com.git.bds.nyc.product.model.dto.ProductDTO;
+import com.git.bds.nyc.product.model.dto.ProductModifyDTO;
 import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.service.primary.corp.CorpPrimaryProductService;
+import com.git.bds.nyc.product.service.processing.CorpProcessingProductService;
 import com.git.bds.nyc.product.valid.ValidGroup;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.result.ResultCode;
@@ -38,14 +39,15 @@ import java.util.List;
  * @author chnnc
  * @since 2022-10-15 18:50:50
  */
-@Api(tags = "公司初级农产品")
+@Api(tags = "公司 关于农产品的接口")
 @Validated
 @RestController
-@RequestMapping("/corpPrimaryProduct")
+@RequestMapping("/corpProduct")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CorpProductController {
 
     private final CorpPrimaryProductService corpPrimaryProductService;
+    private final CorpProcessingProductService corpProcessingProductService;
 
     private final CorpService corpService;
 
@@ -58,7 +60,7 @@ public class CorpProductController {
     @PostMapping("/releaseOnSellProduct")
     @ApiOperation("发布初级在售农产品")
     public R<Boolean> releaseOnSellProduct(
-            @Validated({ValidGroup.OnSell.class}) @RequestBody PrimaryProductDTO productDTO
+            @Validated({ValidGroup.OnSell.class}) @RequestBody ProductDTO productDTO
     ){
         return R.decide(corpService.releaseOnSellProduct(productDTO));
     }
@@ -72,23 +74,38 @@ public class CorpProductController {
     @PostMapping("/releasePreSellProduct")
     @ApiOperation("发布初级预售农产品")
     public R<Boolean> releasePreSellProduct(
-            @Validated({ValidGroup.PreSale.class}) @RequestBody PrimaryProductDTO productDTO
+            @Validated({ValidGroup.PreSale.class}) @RequestBody ProductDTO productDTO
     ){
         return R.decide(corpService.releasePreSellProduct(productDTO));
     }
 
     /**
-     * 修改产品信息
+     * 修改公司发布的初级农产品详细信息
      *
      * @param productDTO 产品dto
      * @return {@link R}<{@link Boolean}>
      */
-    @PostMapping("/modifyProductInfo")
-    @ApiOperation("修改农产品信息")
-    public R<Boolean> modifyProductInfo(
-            @Validated({ValidGroup.All.class}) @RequestBody PrimaryProductModifyDTO productDTO
+    @PostMapping("/modifyPrimaryProductInfo")
+    @ApiOperation("修改公司发布的初级农产品详细信息")
+    public R<Boolean> modifyPrimaryProductInfo(
+            @Validated({ValidGroup.All.class}) @RequestBody ProductModifyDTO productDTO
     ){
         return R.decide(corpPrimaryProductService.modifyProductInfo(productDTO));
+    }
+
+
+    /**
+     * 修改公司发布的加工农产品详细信息
+     *
+     * @param productDTO 产品dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @PostMapping("/modifyProcessingProductInfo")
+    @ApiOperation("修改公司发布的初级农产品详细信息")
+    public R<Boolean> modifyProcessingProductInfo(
+            @Validated({ValidGroup.All.class}) @RequestBody ProductModifyDTO productDTO
+    ){
+        return R.decide(corpProcessingProductService.modifyProductInfo(productDTO));
     }
 
     /**
@@ -98,7 +115,7 @@ public class CorpProductController {
      * @return {@link = R<Boolean>}
      */
     @DeleteMapping("/delete/{type}/{id}")
-    @ApiOperation("根据id删除初级农产品数据")
+    @ApiOperation("根据id删除农产品数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "id主键", dataTypeClass = Long.class, paramType = "path", example = "123456", required = true),
             @ApiImplicitParam(name = "type", value = "id主键", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)

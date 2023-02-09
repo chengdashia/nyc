@@ -1,6 +1,6 @@
 package com.git.bds.nyc.user.service.farmer;
 
-import com.git.bds.nyc.product.model.dto.PrimaryProductDTO;
+import com.git.bds.nyc.product.model.dto.ProductDTO;
 
 /**
  * @author 成大事
@@ -14,7 +14,7 @@ public interface FarmerService {
      * @param productDTO 产品dto
      * @return {@link Boolean}
      */
-    Boolean releaseOnSellProduct(PrimaryProductDTO productDTO);
+    Boolean releaseOnSellProduct(ProductDTO productDTO);
 
 
     /**
@@ -23,5 +23,5 @@ public interface FarmerService {
      * @param productDTO 产品dto
      * @return {@link Boolean}
      */
-    Boolean releasePreSellProduct(PrimaryProductDTO productDTO);
+    Boolean releasePreSellProduct(ProductDTO productDTO);
 }
