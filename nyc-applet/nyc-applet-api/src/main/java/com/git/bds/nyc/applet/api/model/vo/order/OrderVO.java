@@ -33,4 +33,7 @@ public class OrderVO implements Serializable {
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
+
+    @ApiModelProperty("类型（0:农户初级、1:公司初级、2:公司加工、3:农户需求、4:公司需求）")
+    private Integer type;
 }

@@ -35,4 +35,12 @@ public interface OrderService {
      * @return {@link OrderDataDTO}
      */
     OrderDataDTO getQuantitiesOfVariousOrders();
+
+    /**
+     * 按页面获取我订单
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link ContractOrder}>
+     */
+    PageResult<ContractOrder> getMyOrderByPage(PageParam pageParam);
 }

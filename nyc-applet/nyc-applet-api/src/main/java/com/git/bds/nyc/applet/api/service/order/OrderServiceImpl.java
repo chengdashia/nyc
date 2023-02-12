@@ -30,6 +30,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -63,8 +64,9 @@ public class OrderServiceImpl implements OrderService{
      * @param orderDTO 订单dto
      * @return {@link Boolean}
      */
-    @SneakyThrows
     @Override
+    @SneakyThrows
+    @Transactional(rollbackFor = Exception.class)
     public Boolean placeOrder(OrderDTO orderDTO) {
         //买家id
         long buyerId = StpUtil.getLoginIdAsLong();
@@ -185,9 +187,10 @@ public class OrderServiceImpl implements OrderService{
                                 ContractOrder::getProductSpecies,
                                 ContractOrder::getProductVariety,
                                 ContractOrder::getOrderWeight,
-                                ContractOrder::getCreateTime
+                                ContractOrder::getCreateTime,
+                                ContractOrder::getType
                         )
-                        .eq(ContractOrder::getBuyerId, StpUtil.getLoginIdAsLong())
+                        .eq(ContractOrder::getSellerId, StpUtil.getLoginIdAsLong())
                         .eq(ContractOrder::getType, type)
                         .orderByAsc(ContractOrder::getCreateTime));
         return new PageResult<>(page.getRecords(),page.getTotal());
@@ -227,5 +230,29 @@ public class OrderServiceImpl implements OrderService{
         }
         log.info(""+maps);
         return orderDataDTO;
+    }
+
+    /**
+     * 按页面获取我订单
+     *
+     * @param pageParam 页面参数
+     * @return {@link PageResult}<{@link ContractOrder}>
+     */
+    @Override
+    public PageResult<ContractOrder> getMyOrderByPage(PageParam pageParam) {
+        Page<ContractOrder> page = contractOrderMapper.selectPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
+                new LambdaQueryWrapper<ContractOrder>()
+                        .select(
+                                ContractOrder::getId,
+                                ContractOrder::getProductId,
+                                ContractOrder::getProductSpecies,
+                                ContractOrder::getProductVariety,
+                                ContractOrder::getOrderWeight,
+                                ContractOrder::getCreateTime,
+                                ContractOrder::getType
+                        )
+                        .eq(ContractOrder::getBuyerId, StpUtil.getLoginIdAsLong())
+                        .orderByAsc(ContractOrder::getCreateTime));
+        return new PageResult<>(page.getRecords(),page.getTotal());
     }
 }

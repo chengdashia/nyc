@@ -5,9 +5,9 @@ import cn.easyes.core.biz.PageInfo;
 import cn.easyes.core.conditions.LambdaEsQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.git.bds.nyc.applet.api.convert.DemandConvert;
-import com.git.bds.nyc.applet.api.model.vo.*;
 import com.git.bds.nyc.applet.api.convert.IndexConvert;
 import com.git.bds.nyc.applet.api.convert.ProductConvert;
+import com.git.bds.nyc.applet.api.model.vo.IndexAdvertisementVO;
 import com.git.bds.nyc.applet.api.model.vo.demand.DemandInfoVO;
 import com.git.bds.nyc.applet.api.model.vo.demand.DemandVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
@@ -145,7 +145,7 @@ public class IndexController {
      * @return {@link R}<{@link ProductInfoVO}>
      */
     @ApiOperation("商品的详细数据集")
-    @PostMapping("/getProductInfo/{id}/{type}")
+    @PostMapping("/getProductInfo/{type}/{id}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "path", example = "112345646545", required = true),
             @ApiImplicitParam(name = "type", value = "类型(0：农户初级；1：公司初级；2：公司加工)", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)

@@ -52,6 +52,22 @@ public class OrderController {
         return R.decide(orderService.placeOrder(orderDTO));
     }
 
+
+    /**
+     * 查看自己下单别人产品的订单list 分页
+     *
+     * @return {@link R}<{@link Boolean}>
+     */
+    @PostMapping("/getMyOrderByPage")
+    @ApiOperation("查看自己下单别人产品的订单list 分页")
+    public R<PageResult<OrderVO>> getMyOrderByPage(
+            @RequestBody @Validated PageParam pageParam
+    ){
+        PageResult<ContractOrder> page = orderService.getMyOrderByPage(pageParam);
+        List<OrderVO> list = OrderConvert.INSTANCE.toOrderVO(page.getList());
+        return R.ok(new PageResult<>(list,page.getTotal()));
+    }
+
     /**
      * 查看别人 下单自己产品的订单list
      *
