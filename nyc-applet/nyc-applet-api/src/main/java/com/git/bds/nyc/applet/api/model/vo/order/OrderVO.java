@@ -26,7 +26,7 @@ public class OrderVO implements Serializable {
     private String productSpecies;
 
     @ApiModelProperty("产品种类")
-    private String productVarieties;
+    private String productVariety;
 
     @ApiModelProperty("订单重量")
     private BigDecimal orderWeight;
