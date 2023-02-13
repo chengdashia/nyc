@@ -114,7 +114,7 @@ public class OrderController {
      * @return {@link R}<{@link Boolean}>
      */
     @PostMapping("/delOrderById/{type}/{id}")
-    @ApiOperation("查看订单详情")
+    @ApiOperation("删除订单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "type", value = "类型(3:拒绝签字、4:交易成功", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true),
             @ApiImplicitParam(name = "id", value = "订单id", dataTypeClass = Long.class, paramType = "path", example = "1", required = true)
