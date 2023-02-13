@@ -6,8 +6,6 @@ import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.binarywang.wx.miniapp.util.WxMaConfigHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
-import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
 import com.git.bds.nyc.enums.RoleType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.role.domain.SysUserRole;
@@ -18,15 +16,12 @@ import com.git.bds.nyc.user.model.domain.User;
 import com.git.bds.nyc.user.model.dto.WxUserInfoDTO;
 import com.git.bds.nyc.user.model.vo.LoginVO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
-import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * <p>
@@ -95,24 +90,6 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
         return login;
     }
 
-    /**
-     * 获取自助购物地址
-     *
-     * @return {@link List}<{@link ShoppingAddressDTO}>
-     */
-    @Override
-    public List<ShoppingAddressDTO> getSelfShoppingAddress() {
-       return this.baseMapper.selectJoinList(ShoppingAddressDTO.class,
-               new MPJLambdaWrapper<User>()
-                       .select(ShoppingAddress::getId,
-                               ShoppingAddress::getConsignee,
-                               ShoppingAddress::getPhone,
-                               ShoppingAddress::getLocation,
-                               ShoppingAddress::getDetailedAddress,
-                               ShoppingAddress::getIsDefault)
-                       .leftJoin(ShoppingAddress.class,ShoppingAddress::getUserId,User::getId)
-                       .eq(ShoppingAddress::getUserId,StpUtil.getLoginIdAsLong()));
-    }
 
 
 }

@@ -3,9 +3,13 @@ package com.git.bds.nyc.communal.convert;
 import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
 import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
 import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
+import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
+import com.git.bds.nyc.communal.model.vo.ShoppingAddressVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * @author 成大事
@@ -36,4 +40,13 @@ public interface AddressConvert {
      */
     @Mapping(source = "userId",target = "userId")
     ShoppingAddress toShoppingAddress(AddressModifyDTO addressModifyDTO, long userId);
+
+
+    /**
+     * 购物狂
+     *
+     * @param list 列表
+     * @return {@link List}<{@link ShoppingAddressVO}>
+     */
+    List<ShoppingAddressVO> toShoppingVOList(List<ShoppingAddressDTO> list);
 }
