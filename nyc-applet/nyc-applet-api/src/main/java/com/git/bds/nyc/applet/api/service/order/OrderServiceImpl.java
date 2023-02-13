@@ -267,4 +267,32 @@ public class OrderServiceImpl implements OrderService{
                         .orderByAsc(ContractOrder::getCreateTime));
         return new PageResult<>(page.getRecords(),page.getTotal());
     }
+
+    /**
+     * 按id获取订单信息
+     *
+     * @param id 订单id
+     * @return {@link ContractOrder}
+     */
+    @Override
+    public ContractOrder getOrderInfoById(Long id) {
+        return contractOrderMapper.selectOne(new QueryWrapper<ContractOrder>()
+                .select(ContractOrder.class,
+                        i->!i.getColumn().equals(ContractOrder.ID))
+                .eq(ContractOrder.ID,id));
+    }
+
+    /**
+     * 按id删除订单
+     *
+     * @param type 类型
+     * @param id   身份证件
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean delOrderById(int type, Long id) {
+        return contractOrderMapper.delete(new LambdaQueryWrapper<ContractOrder>()
+                .eq(ContractOrder::getId,id)
+                .eq(ContractOrder::getOrderStatus,type)) > 0;
+    }
 }

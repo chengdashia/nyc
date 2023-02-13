@@ -53,6 +53,8 @@ public class OrderController {
     }
 
 
+
+
     /**
      * 查看自己下单别人产品的订单list 分页
      *
@@ -85,6 +87,44 @@ public class OrderController {
         PageResult<ContractOrder> page = orderService.getOrderPage(pageParam, type);
         List<OrderVO> list = OrderConvert.INSTANCE.toOrderVO(page.getList());
         return R.ok(new PageResult<>(list,page.getTotal()));
+    }
+
+
+    /**
+     * 查看订单详情
+     *
+     * @return {@link R}<{@link Boolean}>
+     */
+    @PostMapping("/getOrderInfoById/{id}")
+    @ApiOperation("查看订单详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "订单id", dataTypeClass = Long.class, paramType = "path", example = "1", required = true)
+    })
+    public R<ContractOrder> getOrderInfoById(
+            @PathVariable("id") Long id
+    ){
+        ContractOrder contractOrder = orderService.getOrderInfoById(id);
+        return R.ok(contractOrder);
+    }
+
+
+    /**
+     * 删除订单
+     *
+     * @return {@link R}<{@link Boolean}>
+     */
+    @PostMapping("/delOrderById/{type}/{id}")
+    @ApiOperation("查看订单详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "type", value = "类型(3:拒绝签字、4:交易成功", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true),
+            @ApiImplicitParam(name = "id", value = "订单id", dataTypeClass = Long.class, paramType = "path", example = "1", required = true)
+
+    })
+    public R<Boolean> delOrderById(
+            @PathVariable("type") @Min(value = 3,message = "类型错误！！！") @Max(value = 4,message = "类型错误！！！") int type,
+            @PathVariable("id") Long id
+    ){
+       return R.decide( orderService.delOrderById(type,id) );
     }
 
 

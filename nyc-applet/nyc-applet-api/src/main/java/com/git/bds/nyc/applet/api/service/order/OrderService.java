@@ -43,4 +43,21 @@ public interface OrderService {
      * @return {@link PageResult}<{@link ContractOrder}>
      */
     PageResult<ContractOrder> getMyOrderByPage(PageParam pageParam);
+
+    /**
+     * 按id获取订单信息
+     *
+     * @param id 订单id
+     * @return {@link ContractOrder}
+     */
+    ContractOrder getOrderInfoById(Long id);
+
+    /**
+     * 按id删除订单
+     *
+     * @param type 类型
+     * @param id   订单
+     * @return {@link Boolean}
+     */
+    Boolean delOrderById(int type, Long id);
 }
