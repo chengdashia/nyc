@@ -293,6 +293,7 @@ public class OrderServiceImpl implements OrderService{
      * @return {@link Boolean}
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean delOrderById(int type, Long id) {
         ContractOrder contractOrder = contractOrderMapper.selectOne(new LambdaQueryWrapper<ContractOrder>()
                         .select(ContractOrder::getContractUrl,ContractOrder::getBuyerSignature,ContractOrder::getSellerSignature)
