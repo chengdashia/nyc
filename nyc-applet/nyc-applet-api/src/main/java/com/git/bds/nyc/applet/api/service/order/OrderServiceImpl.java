@@ -76,6 +76,7 @@ public class OrderServiceImpl implements OrderService{
         BigDecimal unitPrice = null;
         String productSpecies = null;
         String productVariety = null;
+        String productCover = null;
         Long sellerContactInfoId = null;
         Long sellerId = null;
         if(ProductType.FARMER_PRIMARY.getValue().equals(type)){
@@ -86,7 +87,8 @@ public class OrderServiceImpl implements OrderService{
                             FarmerPrimaryProduct::getProductVariety,
                             FarmerPrimaryProduct::getProductPrice,
                             FarmerPrimaryProduct::getProductWeight,
-                            FarmerPrimaryProduct::getContactInfoId
+                            FarmerPrimaryProduct::getContactInfoId,
+                            FarmerPrimaryProduct::getProductCover
                     )
                     .eq(FarmerPrimaryProduct::getId,productId)
             );
@@ -101,6 +103,7 @@ public class OrderServiceImpl implements OrderService{
             unitPrice = farmerPrimaryProduct.getProductPrice();
             productSpecies = farmerPrimaryProduct.getProductSpecies();
             productVariety = farmerPrimaryProduct.getProductVariety();
+            productCover = farmerPrimaryProduct.getProductCover();
             sellerContactInfoId = farmerPrimaryProduct.getContactInfoId();
             sellerId = farmerPrimaryProduct.getUserId();
         }else if(ProductType.CORP_PRIMARY.getValue().equals(type)){
@@ -110,7 +113,8 @@ public class OrderServiceImpl implements OrderService{
                             CorpPrimaryProduct::getUserId,
                             CorpPrimaryProduct::getProductVariety,
                             CorpPrimaryProduct::getProductPrice,
-                            CorpPrimaryProduct::getProductWeight
+                            CorpPrimaryProduct::getProductWeight,
+                            CorpPrimaryProduct::getProductCover
                     )
                     .eq(CorpPrimaryProduct::getId,productId)
             );
@@ -124,6 +128,7 @@ public class OrderServiceImpl implements OrderService{
             unitPrice = corpPrimaryProduct.getProductPrice();
             productSpecies = corpPrimaryProduct.getProductSpecies();
             productVariety = corpPrimaryProduct.getProductVariety();
+            productCover = corpPrimaryProduct.getProductCover();
             sellerContactInfoId = corpPrimaryProduct.getContactInfoId();
             sellerId = corpPrimaryProduct.getUserId();
         }else if(ProductType.CORP_PROCESSING.getValue().equals(type)){
@@ -133,7 +138,8 @@ public class OrderServiceImpl implements OrderService{
                             CorpProcessingProduct::getUserId,
                             CorpProcessingProduct::getProductVariety,
                             CorpProcessingProduct::getProductPrice,
-                            CorpProcessingProduct::getProductWeight
+                            CorpProcessingProduct::getProductWeight,
+                            CorpProcessingProduct::getProductCover
                     )
                     .eq(CorpProcessingProduct::getId,productId)
             );
@@ -147,6 +153,7 @@ public class OrderServiceImpl implements OrderService{
             unitPrice = corpProcessingProduct.getProductPrice();
             productSpecies = corpProcessingProduct.getProductSpecies();
             productVariety = corpProcessingProduct.getProductVariety();
+            productCover = corpProcessingProduct.getProductCover();
             sellerContactInfoId = corpProcessingProduct.getContactInfoId();
             sellerId = corpProcessingProduct.getUserId();
         }
@@ -159,6 +166,7 @@ public class OrderServiceImpl implements OrderService{
         contractOrder.setProductId(productId);
         contractOrder.setProductSpecies(productSpecies);
         contractOrder.setProductVariety(productVariety);
+        contractOrder.setProductCover(productCover);
         contractOrder.setType(type);
         contractOrder.setSellerContactInfoId(sellerContactInfoId);
         contractOrder.setBuyerContactInfoId(orderDTO.getBuyerContactInfoId());
@@ -186,6 +194,7 @@ public class OrderServiceImpl implements OrderService{
                                 ContractOrder::getProductId,
                                 ContractOrder::getProductSpecies,
                                 ContractOrder::getProductVariety,
+                                ContractOrder::getProductCover,
                                 ContractOrder::getOrderWeight,
                                 ContractOrder::getCreateTime,
                                 ContractOrder::getType
@@ -247,6 +256,7 @@ public class OrderServiceImpl implements OrderService{
                                 ContractOrder::getProductId,
                                 ContractOrder::getProductSpecies,
                                 ContractOrder::getProductVariety,
+                                ContractOrder::getProductCover,
                                 ContractOrder::getOrderWeight,
                                 ContractOrder::getCreateTime,
                                 ContractOrder::getType

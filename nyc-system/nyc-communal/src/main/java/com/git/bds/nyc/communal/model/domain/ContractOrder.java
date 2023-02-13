@@ -52,6 +52,10 @@ public class ContractOrder extends Model<ContractOrder> {
     @TableField("product_variety")
     private String productVariety;
 
+    @ApiModelProperty("产品图片")
+    @TableField("product_cover")
+    private String productCover;
+
     @ApiModelProperty("产品类型")
     @TableField("type")
     private Integer type;

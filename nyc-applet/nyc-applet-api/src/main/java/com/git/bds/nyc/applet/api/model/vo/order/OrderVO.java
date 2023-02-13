@@ -28,6 +28,9 @@ public class OrderVO implements Serializable {
     @ApiModelProperty("产品种类")
     private String productVariety;
 
+    @ApiModelProperty("产品封面图")
+    private String productCover;
+
     @ApiModelProperty("订单重量")
     private BigDecimal orderWeight;
 
