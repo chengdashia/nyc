@@ -126,12 +126,12 @@ public class AddressController {
 
 
     /**
-     * 根据id查看地址信息
+     * 根据地址id查看地址信息
      *
      * @param id 地址id
      * @return {@link R}<{@link Boolean}>
      */
-    @ApiOperation(value = "删除 收货地址")
+    @ApiOperation(value = "根据地址id 查看 地址信息")
     @PostMapping("/getAddressInfoById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
@@ -143,12 +143,12 @@ public class AddressController {
     }
 
     /**
-     * del自购地址
+     * 根据地址id 删除 收货地址
      *
      * @param id 地址id
      * @return {@link R}<{@link Boolean}>
      */
-    @ApiOperation(value = "根据地址id删除 收货地址")
+    @ApiOperation(value = "根据地址id 删除 收货地址")
     @PostMapping("/delAddressById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
