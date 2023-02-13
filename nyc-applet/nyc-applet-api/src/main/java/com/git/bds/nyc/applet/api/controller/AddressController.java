@@ -3,6 +3,7 @@ package com.git.bds.nyc.applet.api.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.git.bds.nyc.communal.model.vo.AddressInfoVO;
 import com.git.bds.nyc.communal.model.vo.ShoppingAddressVO;
 import com.git.bds.nyc.applet.api.service.address.AddressService;
 import com.git.bds.nyc.communal.convert.AddressConvert;
@@ -125,17 +126,36 @@ public class AddressController {
 
 
     /**
-     * del自购地址
+     * 根据id查看地址信息
      *
-     * @param id 身份证件
+     * @param id 地址id
      * @return {@link R}<{@link Boolean}>
      */
     @ApiOperation(value = "删除 收货地址")
-    @PostMapping("/delSelfShoppingAddress")
+    @PostMapping("/getAddressInfoById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
     })
-    public R<Boolean> delSelfShoppingAddress(@RequestParam("id") @NotNull Long id){
-        return R.decide(shoppingAddressService.removeById(id));
+    public R<AddressInfoVO> getAddressInfoById(@RequestParam("id") @NotNull Long id){
+        ShoppingAddress address = shoppingAddressService.getAddressInfoById(id);
+        AddressInfoVO addressInfoVO = AddressConvert.INSTANCE.toAddressInfoVO(address);
+        return R.ok(addressInfoVO);
+    }
+
+    /**
+     * del自购地址
+     *
+     * @param id 地址id
+     * @return {@link R}<{@link Boolean}>
+     */
+    @ApiOperation(value = "根据地址id删除 收货地址")
+    @PostMapping("/delAddressById")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "收货地址id", dataTypeClass = Long.class, paramType = "query", example = "1", required = true)
+    })
+    public R<Boolean> delAddressById(@RequestParam("id") @NotNull Long id){
+        return R.decide(shoppingAddressService.remove(new LambdaQueryWrapper<ShoppingAddress>()
+                .eq(ShoppingAddress::getId,id)
+                .eq(ShoppingAddress::getUserId,StpUtil.getLoginIdAsLong())));
     }
 }

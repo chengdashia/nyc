@@ -4,6 +4,7 @@ import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
 import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
 import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
 import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
+import com.git.bds.nyc.communal.model.vo.AddressInfoVO;
 import com.git.bds.nyc.communal.model.vo.ShoppingAddressVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -49,4 +50,13 @@ public interface AddressConvert {
      * @return {@link List}<{@link ShoppingAddressVO}>
      */
     List<ShoppingAddressVO> toShoppingVOList(List<ShoppingAddressDTO> list);
+
+
+    /**
+     * 到地址info vo
+     *
+     * @param address 住址
+     * @return {@link AddressInfoVO}
+     */
+    AddressInfoVO toAddressInfoVO(ShoppingAddress address);
 }

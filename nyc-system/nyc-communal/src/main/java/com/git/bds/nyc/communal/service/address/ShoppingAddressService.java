@@ -14,4 +14,11 @@ import com.github.yulichang.base.MPJBaseService;
  */
 public interface ShoppingAddressService extends MPJBaseService<ShoppingAddress> {
 
+    /**
+     * 按id获取地址信息
+     *
+     * @param id 身份证件
+     * @return {@link ShoppingAddress}
+     */
+    ShoppingAddress getAddressInfoById(Long id);
 }
