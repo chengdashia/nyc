@@ -476,7 +476,7 @@ public class MinioUtil {
                         .object(signPath)
                         .stream(inputStream, inputStream.available(), -1)
                         .build());
-        return signPath;
+        return URL + signPath;
     }
 
     /**
