@@ -197,6 +197,7 @@ public class OrderServiceImpl implements OrderService{
                                 ContractOrder::getProductCover,
                                 ContractOrder::getOrderWeight,
                                 ContractOrder::getCreateTime,
+                                ContractOrder::getOrderStatus,
                                 ContractOrder::getType
                         )
                         .eq(ContractOrder::getSellerId, StpUtil.getLoginIdAsLong())
@@ -259,6 +260,7 @@ public class OrderServiceImpl implements OrderService{
                                 ContractOrder::getProductCover,
                                 ContractOrder::getOrderWeight,
                                 ContractOrder::getCreateTime,
+                                ContractOrder::getOrderStatus,
                                 ContractOrder::getType
                         )
                         .eq(ContractOrder::getBuyerId, StpUtil.getLoginIdAsLong())

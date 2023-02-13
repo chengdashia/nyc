@@ -34,9 +34,14 @@ public class OrderVO implements Serializable {
     @ApiModelProperty("订单重量")
     private BigDecimal orderWeight;
 
+    @ApiModelProperty("类型（0:农户初级、1:公司初级、2:公司加工、3:农户需求、4:公司需求）")
+    private Integer type;
+
+    @ApiModelProperty("订单状态（1，待签字 2 ；已签字，3，拒绝签字，4交易成功）")
+    private Integer orderStatus;
+
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("类型（0:农户初级、1:公司初级、2:公司加工、3:农户需求、4:公司需求）")
-    private Integer type;
+
 }
