@@ -34,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -293,8 +294,15 @@ public class OrderServiceImpl implements OrderService{
      */
     @Override
     public Boolean delOrderById(int type, Long id) {
-        return contractOrderMapper.delete(new LambdaQueryWrapper<ContractOrder>()
-                .eq(ContractOrder::getId,id)
-                .eq(ContractOrder::getOrderStatus,type)) > 0;
+        ContractOrder contractOrder = contractOrderMapper.selectOne(new LambdaQueryWrapper<ContractOrder>()
+                        .select(ContractOrder::getContractUrl,ContractOrder::getBuyerSignature,ContractOrder::getSellerSignature)
+                .eq(ContractOrder::getId, id)
+                .eq(ContractOrder::getOrderStatus, type));
+        if(contractOrder == null){
+            throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+        }
+        List<String> imgList = Arrays.asList(contractOrder.getBuyerSignature(), contractOrder.getSellerSignature(), contractOrder.getContractUrl());
+        minioUtil.removeFiles(minioConfig.getBucketName(),imgList);
+        return contractOrder.deleteById(id);
     }
 }
