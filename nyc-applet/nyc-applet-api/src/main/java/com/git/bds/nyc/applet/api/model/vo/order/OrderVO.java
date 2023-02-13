@@ -34,6 +34,9 @@ public class OrderVO implements Serializable {
     @ApiModelProperty("订单重量")
     private BigDecimal orderWeight;
 
+    @ApiModelProperty("单价")
+    private BigDecimal unitPrice;
+
     @ApiModelProperty("类型（0:农户初级、1:公司初级、2:公司加工、3:农户需求、4:公司需求）")
     private Integer type;
 

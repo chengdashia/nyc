@@ -195,6 +195,7 @@ public class OrderServiceImpl implements OrderService{
                                 ContractOrder::getProductSpecies,
                                 ContractOrder::getProductVariety,
                                 ContractOrder::getProductCover,
+                                ContractOrder::getUnitPrice,
                                 ContractOrder::getOrderWeight,
                                 ContractOrder::getCreateTime,
                                 ContractOrder::getOrderStatus,
@@ -260,6 +261,7 @@ public class OrderServiceImpl implements OrderService{
                                 ContractOrder::getProductCover,
                                 ContractOrder::getOrderWeight,
                                 ContractOrder::getCreateTime,
+                                ContractOrder::getUnitPrice,
                                 ContractOrder::getOrderStatus,
                                 ContractOrder::getType
                         )
