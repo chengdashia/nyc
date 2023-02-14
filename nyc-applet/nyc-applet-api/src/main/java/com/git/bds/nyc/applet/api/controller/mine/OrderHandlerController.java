@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller.personal;
+package com.git.bds.nyc.applet.api.controller.mine;
 
 import com.git.bds.nyc.applet.api.convert.OrderConvert;
 import com.git.bds.nyc.applet.api.model.vo.order.OrderDataVO;
@@ -28,13 +28,13 @@ import java.util.List;
  * @author 成大事
  * @since 2023/2/3 16:21
  */
-@Api(tags = "订单模块")
+@Api(tags = "订单处理模块")
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/applet/order")
+@RequestMapping("/applet/mine/orderHandler")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class OrderController {
+public class OrderHandlerController {
 
     private final OrderService orderService;
 
@@ -52,23 +52,6 @@ public class OrderController {
         return R.decide(orderService.placeOrder(orderDTO));
     }
 
-
-
-
-    /**
-     * 查看自己下单别人产品的订单list 分页
-     *
-     * @return {@link R}<{@link Boolean}>
-     */
-    @PostMapping("/getMyOrderByPage")
-    @ApiOperation("查看自己下单别人产品的订单list 分页")
-    public R<PageResult<OrderVO>> getMyOrderByPage(
-            @RequestBody @Validated PageParam pageParam
-    ){
-        PageResult<ContractOrder> page = orderService.getMyOrderByPage(pageParam);
-        List<OrderVO> list = OrderConvert.INSTANCE.toOrderVO(page.getList());
-        return R.ok(new PageResult<>(list,page.getTotal()));
-    }
 
     /**
      * 查看别人 下单自己产品的订单list

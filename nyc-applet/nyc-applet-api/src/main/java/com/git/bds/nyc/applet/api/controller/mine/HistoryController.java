@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller.personal;
+package com.git.bds.nyc.applet.api.controller.mine;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -31,7 +31,7 @@ import java.util.List;
 @Api(tags = "浏览记录接口管理")
 @Validated
 @RestController
-@RequestMapping("/applet/history")
+@RequestMapping("/applet/mine/history")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class HistoryController {
 

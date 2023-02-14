@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller.personal;
+package com.git.bds.nyc.applet.api.controller.mine;
 
 import com.git.bds.nyc.applet.api.convert.MineConvert;
 import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
@@ -27,7 +27,7 @@ import javax.validation.constraints.Min;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/applet/release")
+@RequestMapping("/applet/mine/release")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ReleaseController {
 

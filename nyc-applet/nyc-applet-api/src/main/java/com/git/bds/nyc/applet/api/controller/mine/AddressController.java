@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller.personal;
+package com.git.bds.nyc.applet.api.controller.mine;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -38,7 +38,7 @@ import java.util.List;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/applet/address")
+@RequestMapping("/applet/mine/address")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AddressController {
 
