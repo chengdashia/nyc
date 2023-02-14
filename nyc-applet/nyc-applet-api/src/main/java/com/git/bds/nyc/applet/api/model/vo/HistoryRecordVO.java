@@ -1,7 +1,8 @@
-package com.git.bds.nyc.corp.model.vo;
+package com.git.bds.nyc.applet.api.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,14 +10,16 @@ import java.time.LocalDateTime;
 
 /**
  * @author 成大事
- * @since 2022/10/26 11:32
+ * @since 2023/2/14 20:50
  */
-@Data
-public class CorpProductVO implements Serializable {
+@Getter
+@Setter
+public class HistoryRecordVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("产品id")
     private Long productId;
-
     @ApiModelProperty("类型")
     private Integer type;
 
@@ -38,6 +41,6 @@ public class CorpProductVO implements Serializable {
     @ApiModelProperty("封面图")
     private String coverImg;
 
-    @ApiModelProperty("收藏时间")
-    private LocalDateTime collectionTime;
+    @ApiModelProperty("浏览时间")
+    private LocalDateTime browseTime;
 }

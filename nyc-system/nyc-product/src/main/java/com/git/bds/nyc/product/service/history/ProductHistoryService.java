@@ -24,7 +24,7 @@ public interface ProductHistoryService extends MPJBaseService<ProductHistory> {
      * @param type      类型
      * @return {@link PageResult}<{@link ProductCollectAndHistoryDTO}>
      */
-    PageResult<ProductCollectAndHistoryDTO> getProductHistoryByPage(PageParam pageParam, int type);
+    PageResult<ProductCollectAndHistoryDTO> getBrowsingRecordPageByType(PageParam pageParam, int type);
 
     /**
      * 添加浏览历史记录

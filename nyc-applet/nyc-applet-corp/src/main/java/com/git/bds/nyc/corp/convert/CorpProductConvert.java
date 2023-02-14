@@ -1,10 +1,8 @@
 package com.git.bds.nyc.corp.convert;
 
 import com.git.bds.nyc.corp.model.vo.CorpAuditProductVO;
-import com.git.bds.nyc.corp.model.vo.CorpProductVO;
 import com.git.bds.nyc.corp.model.vo.CorpReleaseOnSellProductVO;
 import com.git.bds.nyc.corp.model.vo.CorpReleasePreSellProductVO;
-import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -45,13 +43,6 @@ public interface CorpProductConvert {
      */
     List<CorpAuditProductVO> toCorpAuditPrimaryProductVO(List<ProductReleaseDTO> list);
 
-    /**
-     * 至产品集合vo
-     *
-     * @param list 列表
-     * @return {@link List}<{@link CorpProductVO}>
-     */
-    List<CorpProductVO> toProductVO(List<ProductCollectAndHistoryDTO> list);
 
 
 }

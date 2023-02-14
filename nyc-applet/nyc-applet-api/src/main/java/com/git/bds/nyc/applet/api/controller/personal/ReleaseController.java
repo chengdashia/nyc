@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller;
+package com.git.bds.nyc.applet.api.controller.personal;
 
 import com.git.bds.nyc.applet.api.convert.MineConvert;
 import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
@@ -23,13 +23,13 @@ import javax.validation.constraints.Min;
  * @author 成大事
  * @since 2023/2/7 20:41
  */
-@Api(tags = "个人中心接口")
+@Api(tags = "发布管理接口")
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/applet/mine")
+@RequestMapping("/applet/release")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class MineController {
+public class ReleaseController {
 
     private final MineService mineService;
 

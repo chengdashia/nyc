@@ -18,6 +18,7 @@ import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -38,14 +39,14 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
      * @return {@link PageResult}<{@link ProductCollectAndHistoryDTO}>
      */
     @Override
-    public PageResult<ProductCollectAndHistoryDTO> getProductCollectsByPage(PageParam pageParam, int type) {
+    public PageResult<ProductCollectAndHistoryDTO> getCollectionRecordsPageByType(PageParam pageParam, int type) {
         long userId = StpUtil.getLoginIdAsLong();
         IPage<ProductCollectAndHistoryDTO> page;
         if(type == ProductType.FARMER_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
                             .select(ProductCollection::getProductId)
-                            .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.CREATE_TIME)
                             .selectAs(ProductCollection::getProductType, ProductCollectAndHistoryDTO.TYPE)
                             .selectAs(FarmerPrimaryProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
                             .selectAs(FarmerPrimaryProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
@@ -60,7 +61,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
                             .select(ProductCollection::getProductId)
-                            .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.CREATE_TIME)
                             .selectAs(ProductCollection::getProductType, ProductCollectAndHistoryDTO.TYPE)
                             .selectAs(CorpPrimaryProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
                             .selectAs(CorpPrimaryProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
@@ -75,7 +76,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
                             .select(ProductCollection::getProductId)
-                            .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductCollection::getCreateTime, ProductCollectAndHistoryDTO.CREATE_TIME)
                             .selectAs(ProductCollection::getProductType, ProductCollectAndHistoryDTO.TYPE)
                             .selectAs(CorpProcessingProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
                             .selectAs(CorpProcessingProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
@@ -98,6 +99,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
      * @return {@link Boolean}
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addProductCollection(Long id, int type) {
         ProductCollection productCollection = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCollection>()
                 .select()

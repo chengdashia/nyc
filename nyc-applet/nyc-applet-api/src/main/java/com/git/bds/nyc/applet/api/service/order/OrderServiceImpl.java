@@ -97,6 +97,10 @@ public class OrderServiceImpl implements OrderService{
             if(farmerPrimaryProduct == null){
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
+            //不能下单自己发布的
+            if(farmerPrimaryProduct.getUserId().equals(buyerId)){
+                throw new BusinessException(ResultCode.NOT_BUY_MYSELF.getCode(), ResultCode.NOT_BUY_MYSELF.getMessage());
+            }
             //如果库存量不够
             if(Boolean.TRUE.equals(DecimalUtils.lessThan(farmerPrimaryProduct.getProductWeight(),orderWeight))){
                 throw new BusinessException(ResultCode.INSUFFICIENT_STOCK.getCode(),ResultCode.INSUFFICIENT_STOCK.getMessage());
@@ -122,6 +126,10 @@ public class OrderServiceImpl implements OrderService{
             if(ObjectUtil.isNull(corpPrimaryProduct)){
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
+            //不能下单自己发布的
+            if(corpPrimaryProduct.getUserId().equals(buyerId)){
+                throw new BusinessException(ResultCode.NOT_BUY_MYSELF.getCode(), ResultCode.NOT_BUY_MYSELF.getMessage());
+            }
             //如果库存量不够
             if(Boolean.TRUE.equals(DecimalUtils.lessThan(corpPrimaryProduct.getProductWeight(),orderWeight))){
                 throw new BusinessException(ResultCode.INSUFFICIENT_STOCK.getCode(),ResultCode.INSUFFICIENT_STOCK.getMessage());
@@ -146,6 +154,10 @@ public class OrderServiceImpl implements OrderService{
             );
             if(corpProcessingProduct == null){
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+            }
+            //不能下单自己发布的
+            if(corpProcessingProduct.getUserId().equals(buyerId)){
+                throw new BusinessException(ResultCode.NOT_BUY_MYSELF.getCode(), ResultCode.NOT_BUY_MYSELF.getMessage());
             }
             //如果库存量不够
             if(Boolean.TRUE.equals(DecimalUtils.lessThan(corpProcessingProduct.getProductWeight(),orderWeight))){

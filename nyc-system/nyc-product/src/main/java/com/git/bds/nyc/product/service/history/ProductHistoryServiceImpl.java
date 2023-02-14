@@ -34,14 +34,14 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
      * @return {@link PageResult}<{@link ProductCollectAndHistoryDTO}>
      */
     @Override
-    public PageResult<ProductCollectAndHistoryDTO> getProductHistoryByPage(PageParam pageParam, int type) {
+    public PageResult<ProductCollectAndHistoryDTO> getBrowsingRecordPageByType(PageParam pageParam, int type) {
         long userId = StpUtil.getLoginIdAsLong();
         IPage<ProductCollectAndHistoryDTO> page;
         if(type == ProductType.FARMER_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductHistory>()
                             .select(ProductHistory::getProductId)
-                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.CREATE_TIME)
                             .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
                             .selectAs(FarmerPrimaryProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
                             .selectAs(FarmerPrimaryProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
@@ -56,7 +56,7 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductHistory>()
                             .select(ProductHistory::getProductId)
-                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.CREATE_TIME)
                             .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
                             .selectAs(CorpPrimaryProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
                             .selectAs(CorpPrimaryProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)
@@ -71,7 +71,7 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductHistory>()
                             .select(ProductHistory::getProductId)
-                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.COLLECTION_TIME)
+                            .selectAs(ProductHistory::getCreateTime, ProductCollectAndHistoryDTO.CREATE_TIME)
                             .selectAs(ProductHistory::getProductType, ProductCollectAndHistoryDTO.TYPE)
                             .selectAs(CorpProcessingProduct::getProductPrice, ProductCollectAndHistoryDTO.PRICE)
                             .selectAs(CorpProcessingProduct::getProductCover, ProductCollectAndHistoryDTO.COVER_URL)

@@ -1,7 +1,8 @@
-package com.git.bds.nyc.user.model.vo;
+package com.git.bds.nyc.applet.api.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,10 +10,11 @@ import java.time.LocalDateTime;
 
 /**
  * @author 成大事
- * @since 2022/10/26 14:24
+ * @since 2023/2/14 20:50
  */
-@Data
-public class FarmerProductVO implements Serializable {
+@Getter
+@Setter
+public class CollectionRecordVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

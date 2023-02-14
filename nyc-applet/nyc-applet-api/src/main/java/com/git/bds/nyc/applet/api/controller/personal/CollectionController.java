@@ -1,16 +1,14 @@
-package com.git.bds.nyc.corp.controller;
+package com.git.bds.nyc.applet.api.controller.personal;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.git.bds.nyc.corp.convert.CorpProductConvert;
-import com.git.bds.nyc.corp.model.vo.CorpProductVO;
+import com.git.bds.nyc.applet.api.convert.CollectionConvert;
+import com.git.bds.nyc.applet.api.model.vo.CollectionRecordVO;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
-import com.git.bds.nyc.product.model.domain.ProductHistory;
 import com.git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import com.git.bds.nyc.product.service.collection.ProductCollectionService;
-import com.git.bds.nyc.product.service.history.ProductHistoryService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -28,60 +26,39 @@ import java.util.List;
 
 /**
  * @author 成大事
- * @since 2022/10/26 10:43
+ * @since 2023/2/14 20:37
  */
-@Api(tags = "公司产品的 浏览记录和收藏记录")
+@Api(tags = "收藏记录接口管理")
 @Validated
 @RestController
-@RequestMapping("/corpHistoryCollection")
+@RequestMapping("/applet/collection")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class CorpHistoryCollectionController {
-
-    private final ProductHistoryService productHistoryService;
+public class CollectionController {
 
     private final ProductCollectionService collectionService;
 
-    @ApiOperation(value = "查看收藏的农产品",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
-    @PostMapping("/getProductCollectsByPage/{type}")
+
+    /**
+     * 根据类型分页查看产品的收藏记录
+     *
+     * @param pageParam 页面参数
+     * @param type      类型 产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)
+     * @return {@link R}<{@link PageResult}<{@link CollectionRecordVO}>>
+     */
+    @ApiOperation(value = "根据类型分页查看产品的收藏记录",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
+    @PostMapping("/getCollectionRecordsPageByType/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
     })
-    public R<PageResult<CorpProductVO>> getProductCollectsByPage(
+    public R<PageResult<CollectionRecordVO>> getCollectionRecordsPageByType(
             @RequestBody PageParam pageParam,
             @PathVariable("type") @Min(0) @Max(2) int type
     ){
-        PageResult<ProductCollectAndHistoryDTO> page = collectionService.getProductCollectsByPage(pageParam, type);
-        List<CorpProductVO> productCollectionVOList = CorpProductConvert.INSTANCE.toProductVO(page.getList());
-        return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
+        PageResult<ProductCollectAndHistoryDTO> page = collectionService.getCollectionRecordsPageByType(pageParam, type);
+        List<CollectionRecordVO> collectionRecordVOList = CollectionConvert.INSTANCE.toCollectionRecordVO(page.getList());
+        return R.ok(new PageResult<>(collectionRecordVOList,page.getTotal()));
     }
 
-    @ApiOperation(value = "查看产品的浏览记录",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
-    @PostMapping("/getProductHistoryByPage/{type}")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true)
-    })
-    public R<PageResult<CorpProductVO>> getProductHistoryByPage(
-            @RequestBody PageParam pageParam,
-            @PathVariable("type") @Min(0) @Max(2) int type
-    ){
-        PageResult<ProductCollectAndHistoryDTO> page = productHistoryService.getProductHistoryByPage(pageParam, type);
-        List<CorpProductVO> productCollectionVOList = CorpProductConvert.INSTANCE.toProductVO(page.getList());
-        return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
-    }
-
-
-    @ApiOperation("删除浏览记录")
-    @PostMapping("/delBrowsingRecord")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
-    })
-    public R<Boolean> delBrowsingRecord(
-            @RequestParam("id") @NotNull Long productId
-    ){
-        return R.decide(productHistoryService.remove(new LambdaQueryWrapper<ProductHistory>()
-                .eq(ProductHistory::getId,productId)
-                .eq(ProductHistory::getUserId, StpUtil.getLoginIdAsLong())));
-    }
 
     /**
      * 添加产品集合
@@ -105,13 +82,13 @@ public class CorpHistoryCollectionController {
 
 
     /**
-     * 取消产品集合
+     * 根据产品id取消收藏
      *
      * @param productId 产品id
      * @return {@link R}<{@link Boolean}>
      */
-    @ApiOperation("产品  取消收藏")
-    @PostMapping("/cancelProductCollection")
+    @ApiOperation("根据产品id取消收藏")
+    @PostMapping("/cancelCollectionById")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "productId", value = "产品的id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true)
     })
@@ -122,6 +99,4 @@ public class CorpHistoryCollectionController {
                 .eq(ProductCollection::getProductId,productId)
                 .eq(ProductCollection::getUserId, StpUtil.getLoginIdAsLong())));
     }
-
-
 }

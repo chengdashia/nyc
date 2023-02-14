@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller;
+package com.git.bds.nyc.applet.api.controller.personal;
 
 import com.git.bds.nyc.applet.api.convert.OrderConvert;
 import com.git.bds.nyc.applet.api.model.vo.order.OrderDataVO;

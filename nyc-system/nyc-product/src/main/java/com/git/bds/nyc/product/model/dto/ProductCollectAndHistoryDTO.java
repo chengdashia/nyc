@@ -39,7 +39,7 @@ public class ProductCollectAndHistoryDTO {
     private String area;
 
     /** 收藏时间 */
-    private LocalDateTime collectionTime;
+    private LocalDateTime createTime;
 
 
     public static final String PRODUCT_ID = "id";
@@ -50,6 +50,7 @@ public class ProductCollectAndHistoryDTO {
     public static final String WEIGHT = "weight";
     public static final String VARIETIES = "varieties";
     public static final String COVER_URL = "coverImg";
-    public static final String COLLECTION_TIME = "collectionTime";
+
+    public static final String CREATE_TIME = "createTime";
 
 }

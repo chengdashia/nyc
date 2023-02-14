@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller;
+package com.git.bds.nyc.applet.api.controller.personal;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

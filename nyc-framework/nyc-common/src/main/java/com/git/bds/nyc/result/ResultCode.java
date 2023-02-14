@@ -34,6 +34,8 @@ public enum ResultCode {
     NOT_LOGIN(401, "登录过期。或token无效！"),
     /** 角色异常 **/
     NOT_ROLE(401, "角色异常！"),
+    /** 不能下单自己发布的产品 **/
+    NOT_BUY_MYSELF(401, "不能下单自己发布的产品！"),
     /**权限不够**/
     NOT_PERMISSION(401, "权限不够！"),
     /**权限不够**/
