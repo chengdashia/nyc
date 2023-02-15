@@ -61,7 +61,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class ReleaseServiceImpl implements ReleaseService {
+public class ReleaseManageServiceImpl implements ReleaseManageService {
 
     private final FarmerPrimaryProductMapper farmerPrimaryProductMapper;
 

@@ -5,7 +5,6 @@ import com.git.bds.nyc.applet.api.model.vo.order.OrderDataVO;
 import com.git.bds.nyc.applet.api.model.vo.order.OrderVO;
 import com.git.bds.nyc.applet.api.service.order.OrderService;
 import com.git.bds.nyc.communal.model.domain.ContractOrder;
-import com.git.bds.nyc.communal.model.dto.OrderDTO;
 import com.git.bds.nyc.communal.model.dto.OrderDataDTO;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
@@ -39,19 +38,7 @@ public class OrderHandlerController {
 
     private final OrderService orderService;
 
-    /**
-     * 下单
-     *
-     * @param orderDTO 订单dto
-     * @return {@link R}<{@link Boolean}>
-     */
-    @PostMapping("/placeOrder")
-    @ApiOperation("下订单")
-    public R<Boolean> placeOrder(
-            @RequestBody @Validated OrderDTO orderDTO
-    ){
-        return R.decide(orderService.placeOrder(orderDTO));
-    }
+
 
 
     /**

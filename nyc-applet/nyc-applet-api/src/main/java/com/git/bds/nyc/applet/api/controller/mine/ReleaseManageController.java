@@ -8,7 +8,7 @@ import com.git.bds.nyc.applet.api.model.vo.product.AuditPrimaryProductVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ReleaseOnSellPrimaryProductVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ReleasePreSellPrimaryProductVO;
-import com.git.bds.nyc.applet.api.service.ReleaseService;
+import com.git.bds.nyc.applet.api.service.ReleaseManageService;
 import com.git.bds.nyc.enums.ProductStatusType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;
@@ -44,7 +44,7 @@ import java.util.List;
 public class ReleaseManageController {
 
 
-    private final ReleaseService releaseService;
+    private final ReleaseManageService releaseService;
 
     /**
      * 根据类型获取发布的数量

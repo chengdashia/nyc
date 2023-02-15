@@ -4,6 +4,8 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.git.bds.nyc.applet.api.convert.ProductConvert;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
+import com.git.bds.nyc.applet.api.service.order.OrderService;
+import com.git.bds.nyc.communal.model.dto.OrderDTO;
 import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
@@ -32,6 +34,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/applet/index/details")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class DetailsController {
+
+    private final OrderService orderService;
 
     private final ProductCollectionService productCollectionService;
 
@@ -88,6 +92,21 @@ public class DetailsController {
             @PathVariable("type") int type
     ){
         return productService.getSellerTel(id,type);
+    }
+
+
+    /**
+     * 下单
+     *
+     * @param orderDTO 订单dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @PostMapping("/placeOrder")
+    @ApiOperation("下订单")
+    public R<Boolean> placeOrder(
+            @RequestBody @Validated OrderDTO orderDTO
+    ){
+        return R.decide(orderService.placeOrder(orderDTO));
     }
 
 }
