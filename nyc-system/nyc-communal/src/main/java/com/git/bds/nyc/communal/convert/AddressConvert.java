@@ -2,8 +2,8 @@ package com.git.bds.nyc.communal.convert;
 
 import com.git.bds.nyc.communal.model.domain.Address;
 import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
-import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
 import com.git.bds.nyc.communal.model.dto.AddressDTO;
+import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
 import com.git.bds.nyc.communal.model.vo.AddressInfoVO;
 import com.git.bds.nyc.communal.model.vo.AddressVO;
 import org.mapstruct.Mapper;

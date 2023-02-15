@@ -1,5 +1,6 @@
 package com.git.bds.nyc.communal.mapper.mp;
 
+
 import com.git.bds.nyc.communal.model.domain.Address;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,17 +12,19 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author 成大事
- * @since 2022-11-14 15:09:55
+ * @since 2023-02-15 13:50:16
  */
 @Mapper
 public interface AddressMapper extends MPJBaseMapper<Address> {
 
+
     /**
      * 修改默认地址
      *
-     * @param id     新的默认地址的id
+     * @param id     身份证件
      * @param userId 用户id
-     * @return int 受影响的行数
+     * @return int
      */
     int modifyDefaultAddress(@Param("id") Long id,@Param("userId") Long userId);
+
 }

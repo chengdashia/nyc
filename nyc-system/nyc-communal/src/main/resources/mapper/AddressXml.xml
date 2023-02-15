@@ -10,13 +10,14 @@
         <result column="phone" property="phone" />
         <result column="location" property="location" />
         <result column="detailed_address" property="detailedAddress" />
-        <result column="is_default" property="isDefault"/>
+        <result column="is_default" property="isDefault" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, user_id, consignee, phone, location, detailed_address, is_default
     </sql>
+
     <update id="modifyDefaultAddress">
         UPDATE address
         SET is_default =
@@ -27,6 +28,5 @@
         WHERE
             user_id = #{userId};
     </update>
-
 
 </mapper>

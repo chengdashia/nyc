@@ -4,7 +4,7 @@ import com.git.bds.nyc.applet.api.convert.MineConvert;
 import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
 import com.git.bds.nyc.applet.api.model.vo.NumberOfReleaseVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
-import com.git.bds.nyc.applet.api.service.MineService;
+import com.git.bds.nyc.applet.api.service.ReleaseService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -31,7 +31,7 @@ import javax.validation.constraints.Min;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ReleaseController {
 
-    private final MineService mineService;
+    private final ReleaseService releaseService;
 
     /**
      * 根据类型获取发布的数量
@@ -47,7 +47,7 @@ public class ReleaseController {
     public R<NumberOfReleaseVO> getNumberOfReleases(
             @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type
     ){
-        NumberOfReleaseDTO numberOfReleaseDTO = mineService.getNumberOfReleases(type);
+        NumberOfReleaseDTO numberOfReleaseDTO = releaseService.getNumberOfReleases(type);
         NumberOfReleaseVO numberOfReleaseVO = MineConvert.INSTANCE.toNumberOfReleaseVO(numberOfReleaseDTO);
         return R.ok(numberOfReleaseVO);
     }
@@ -72,7 +72,7 @@ public class ReleaseController {
             @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type,
             @PathVariable("status") @Min(value = -1,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int status
     ){
-        return R.ok(mineService.delReleaseProductById(id,type,status));
+        return R.ok(releaseService.delReleaseProductById(id,type,status));
     }
 
 
@@ -93,6 +93,6 @@ public class ReleaseController {
             @PathVariable("id") Long id,
             @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type
     ){
-        return R.ok(mineService.releaseProductNowById(id,type));
+        return R.ok(releaseService.releaseProductNowById(id,type));
     }
 }

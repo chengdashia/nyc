@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 成大事
- * @since 2022-11-14 15:09:55
+ * @since 2023-02-15 13:50:16
  */
 @Getter
 @Setter
@@ -71,7 +71,7 @@ public class Address extends Model<Address> {
 
     public static final String DETAILED_ADDRESS = "detailed_address";
 
-    public static final String isDEFAULT = "is_default";
+    public static final String IS_DEFAULT = "is_default";
 
     @Override
     public Serializable pkVal() {

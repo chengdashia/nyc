@@ -1,7 +1,6 @@
 package com.git.bds.nyc.product.service;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.git.bds.nyc.communal.model.domain.Address;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
@@ -14,6 +13,7 @@ import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductPicture;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.model.dto.PhoneDTO;
+import com.git.bds.nyc.communal.model.domain.Address;
 import com.git.bds.nyc.result.ResultCode;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +25,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+
+
 
 /**
  * @author 成大事

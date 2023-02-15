@@ -30,8 +30,7 @@ public class MybatisPlusGeneration {
 
         //表名集合
         List<String> tables = new ArrayList<>();
-        tables.add("farmer_authentication");
-        tables.add("corp_authentication");
+        tables.add("Address");
 
         FastAutoGenerator.create(url, username, password)
                 //全局配置

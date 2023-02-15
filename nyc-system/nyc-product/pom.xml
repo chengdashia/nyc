@@ -42,6 +42,7 @@
             <artifactId>nyc-communal</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>com.git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-es</artifactId>

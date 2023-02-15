@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 公司认证表 前端控制器
+ * 收货地址表（也可用于发布商品和需求的时候用作发货地址表） 前端控制器
  * </p>
  *
  * @author 成大事
- * @since 2023-01-11 10:06:59
+ * @since 2023-02-15 13:50:16
  */
 @RestController
-@RequestMapping("/corpAuthentication")
-public class CorpAuthenticationController {
+@RequestMapping("/address")
+public class AddressController {
 
 }

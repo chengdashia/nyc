@@ -14,7 +14,7 @@ import java.util.List;
  * </p>
  *
  * @author 成大事
- * @since 2022-11-14 15:09:55
+ * @since 2023-02-15 13:50:16
  */
 public interface AddressService extends MPJBaseService<Address> {
 
@@ -48,4 +48,5 @@ public interface AddressService extends MPJBaseService<Address> {
      * @return {@link List}<{@link AddressDTO}>
      */
     List<AddressDTO> getMyAddress();
+
 }

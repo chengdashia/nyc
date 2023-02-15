@@ -24,7 +24,7 @@ import java.util.List;
  * </p>
  *
  * @author 成大事
- * @since 2022-11-14 15:09:55
+ * @since 2023-02-15 13:50:16
  */
 @Service
 public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Address> implements AddressService {
@@ -38,10 +38,10 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
     @Override
     public Address getAddressInfoById(Long id) {
         return this.baseMapper.selectOne(new LambdaQueryWrapper<Address>()
-                        .select(Address::getConsignee,
-                                Address::getPhone,
-                                Address::getLocation,
-                                Address::getDetailedAddress)
+                .select(Address::getConsignee,
+                        Address::getPhone,
+                        Address::getLocation,
+                        Address::getDetailedAddress)
                 .eq(Address::getId,id));
     }
 
@@ -57,13 +57,13 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
         long userId = StpUtil.getLoginIdAsLong();
         List<Address> list = this.baseMapper.selectList(new LambdaQueryWrapper<Address>()
                 .eq(Address::getUserId, userId));
-        Address shoppingAddress;
+        Address address;
         if(list.isEmpty()){
-            shoppingAddress = AddressConvert.INSTANCE.toAddress(addressAddDTO, userId, DefaultType.IS_DEFAULT.getValue());
+            address = AddressConvert.INSTANCE.toAddress(addressAddDTO, userId, DefaultType.IS_DEFAULT.getValue());
         }else {
-            shoppingAddress = AddressConvert.INSTANCE.toAddress(addressAddDTO, userId, DefaultType.NOT_DEFAULT.getValue());
+            address = AddressConvert.INSTANCE.toAddress(addressAddDTO, userId, DefaultType.NOT_DEFAULT.getValue());
         }
-        return this.baseMapper.insert(shoppingAddress) > 0;
+        return this.baseMapper.insert(address) > 0;
     }
 
     /**
@@ -113,4 +113,5 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
                                 Address::getIsDefault)
                         .eq(Address::getUserId, StpUtil.getLoginIdAsLong()));
     }
+
 }

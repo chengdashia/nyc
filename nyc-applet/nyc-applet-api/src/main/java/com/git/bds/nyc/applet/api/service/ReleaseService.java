@@ -6,7 +6,7 @@ import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
  * @author 成大事
  * @since 2023/2/7 20:43
  */
-public interface MineService {
+public interface ReleaseService {
 
     /**
      * 获取发布次数
