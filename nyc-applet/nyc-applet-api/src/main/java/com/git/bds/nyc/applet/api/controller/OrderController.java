@@ -39,12 +39,12 @@ public class OrderController {
      *
      * @return {@link R}<{@link Boolean}>
      */
-    @PostMapping("/getMyOrderByPage")
+    @PostMapping("/getMyOrderPage")
     @ApiOperation("查看自己下单别人产品的订单list 分页")
     public R<PageResult<OrderVO>> getMyOrderByPage(
             @RequestBody @Validated PageParam pageParam
     ){
-        PageResult<ContractOrder> page = orderService.getMyOrderByPage(pageParam);
+        PageResult<ContractOrder> page = orderService.getMyOrderPage(pageParam);
         List<OrderVO> list = OrderConvert.INSTANCE.toOrderVO(page.getList());
         return R.ok(new PageResult<>(list,page.getTotal()));
     }

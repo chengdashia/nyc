@@ -33,13 +33,19 @@ public class ReleaseController {
 
     private final MineService mineService;
 
-    @ApiOperation("获取发布的数量")
+    /**
+     * 根据类型获取发布的数量
+     *
+     * @param type 类型
+     * @return {@link R}<{@link NumberOfReleaseVO}>
+     */
+    @ApiOperation("根据类型获取发布的数量")
     @GetMapping("/getNumberOfReleases/{type}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "type", value = "类型(0：初级、1:加工)", dataTypeClass = Integer.class, paramType = "path", example = "0", required = true)
     })
     public R<NumberOfReleaseVO> getNumberOfReleases(
-            @PathVariable("type") @Min(0) @Max(1) int type
+            @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type
     ){
         NumberOfReleaseDTO numberOfReleaseDTO = mineService.getNumberOfReleases(type);
         NumberOfReleaseVO numberOfReleaseVO = MineConvert.INSTANCE.toNumberOfReleaseVO(numberOfReleaseDTO);
@@ -63,8 +69,8 @@ public class ReleaseController {
     })
     public R<Boolean> delReleaseProductById(
             @PathVariable("id") Long id,
-            @PathVariable("type") @Min(0) @Max(1) int type,
-            @PathVariable("status") @Min(-1) @Max(1) int status
+            @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type,
+            @PathVariable("status") @Min(value = -1,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int status
     ){
         return R.ok(mineService.delReleaseProductById(id,type,status));
     }
@@ -85,7 +91,7 @@ public class ReleaseController {
     })
     public R<Boolean> releaseProductNowById(
             @PathVariable("id") Long id,
-            @PathVariable("type") @Min(0) @Max(1) int type
+            @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type
     ){
         return R.ok(mineService.releaseProductNowById(id,type));
     }

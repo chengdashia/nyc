@@ -56,7 +56,8 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
                             .selectAs(FarmerPrimaryProduct::getProductVariety, ProductCollectAndHistoryDTO.VARIETIES)
                             .leftJoin(FarmerPrimaryProduct.class, FarmerPrimaryProduct::getId, ProductCollection::getProductId)
                             .eq(ProductCollection::getUserId, userId)
-                            .eq(ProductCollection::getProductType, type));
+                            .eq(ProductCollection::getProductType, type)
+                            .orderByDesc(ProductCollection::getCreateTime));
         }else if (type == ProductType.CORP_PRIMARY.getValue()){
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
@@ -71,7 +72,8 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
                             .selectAs(CorpPrimaryProduct::getProductVariety, ProductCollectAndHistoryDTO.VARIETIES)
                             .leftJoin(CorpPrimaryProduct.class, CorpPrimaryProduct::getId, ProductCollection::getProductId)
                             .eq(ProductCollection::getUserId, userId)
-                            .eq(ProductCollection::getProductType, type));
+                            .eq(ProductCollection::getProductType, type)
+                            .orderByDesc(ProductCollection::getCreateTime));
         }else {
             page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                     ProductCollectAndHistoryDTO.class, new MPJLambdaWrapper<ProductCollection>()
@@ -86,7 +88,8 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
                             .selectAs(CorpProcessingProduct::getProductVariety, ProductCollectAndHistoryDTO.VARIETIES)
                             .leftJoin(CorpProcessingProduct.class, CorpProcessingProduct::getId, ProductCollection::getProductId)
                             .eq(ProductCollection::getUserId, userId)
-                            .eq(ProductCollection::getProductType, type));
+                            .eq(ProductCollection::getProductType, type)
+                            .orderByDesc(ProductCollection::getCreateTime));
         }
         return new PageResult<>(page.getRecords(),page.getSize());
     }

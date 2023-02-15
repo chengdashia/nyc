@@ -42,7 +42,7 @@ public interface OrderService {
      * @param pageParam 页面参数
      * @return {@link PageResult}<{@link ContractOrder}>
      */
-    PageResult<ContractOrder> getMyOrderByPage(PageParam pageParam);
+    PageResult<ContractOrder> getMyOrderPage(PageParam pageParam);
 
     /**
      * 按id获取订单信息

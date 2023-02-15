@@ -61,13 +61,13 @@ public class CollectionController {
 
 
     /**
-     * 添加产品集合
+     * 通过产品id添加收藏
      *
      * @param id   身份证件
      * @param type 类型
      * @return {@link R}<{@link Boolean}>
      */
-    @ApiOperation(value = "产品  添加收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
+    @ApiOperation(value = "通过产品id添加收藏",notes = "产品分农户初级农产品(0) 公司初级农产品(1) 公司加工农产品(2)")
     @PostMapping("/addProductCollection")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "产品id", dataTypeClass = Long.class, paramType = "query", example = "112345646545", required = true),

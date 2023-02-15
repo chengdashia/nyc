@@ -1,11 +1,11 @@
 package com.git.bds.nyc.communal.convert;
 
-import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
+import com.git.bds.nyc.communal.model.domain.Address;
 import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
 import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
-import com.git.bds.nyc.communal.model.dto.ShoppingAddressDTO;
+import com.git.bds.nyc.communal.model.dto.AddressDTO;
 import com.git.bds.nyc.communal.model.vo.AddressInfoVO;
-import com.git.bds.nyc.communal.model.vo.ShoppingAddressVO;
+import com.git.bds.nyc.communal.model.vo.AddressVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -26,10 +26,12 @@ public interface AddressConvert {
      *
      * @param addressAddDTO 地址添加数据
      * @param userId        用户id
-     * @return {@link ShoppingAddress}
+     * @param type          类型
+     * @return {@link Address}
      */
     @Mapping(source = "userId",target = "userId")
-    ShoppingAddress toShoppingAddress(AddressAddDTO addressAddDTO, long userId);
+    @Mapping(source = "type",target = "isDefault")
+    Address toAddress(AddressAddDTO addressAddDTO, long userId, int type);
 
 
     /**
@@ -37,19 +39,19 @@ public interface AddressConvert {
      *
      * @param userId           用户id
      * @param addressModifyDTO 地址修改dto
-     * @return {@link ShoppingAddress}
+     * @return {@link Address}
      */
     @Mapping(source = "userId",target = "userId")
-    ShoppingAddress toShoppingAddress(AddressModifyDTO addressModifyDTO, long userId);
+    Address toAddress(AddressModifyDTO addressModifyDTO, long userId);
 
 
     /**
      * 购物狂
      *
      * @param list 列表
-     * @return {@link List}<{@link ShoppingAddressVO}>
+     * @return {@link List}<{@link AddressVO}>
      */
-    List<ShoppingAddressVO> toShoppingVOList(List<ShoppingAddressDTO> list);
+    List<AddressVO> toVOList(List<AddressDTO> list);
 
 
     /**
@@ -58,5 +60,5 @@ public interface AddressConvert {
      * @param address 住址
      * @return {@link AddressInfoVO}
      */
-    AddressInfoVO toAddressInfoVO(ShoppingAddress address);
+    AddressInfoVO toAddressInfoVO(Address address);
 }

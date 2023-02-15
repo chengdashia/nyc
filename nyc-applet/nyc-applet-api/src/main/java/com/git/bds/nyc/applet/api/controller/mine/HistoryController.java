@@ -54,8 +54,8 @@ public class HistoryController {
             @PathVariable("type") @Min(0) @Max(2) int type
     ){
         PageResult<ProductCollectAndHistoryDTO> page = historyService.getBrowsingRecordPageByType(pageParam, type);
-        List<HistoryRecordVO> productCollectionVOList = HistoryConvert.INSTANCE.toHistoryRecordVO(page.getList());
-        return R.ok(new PageResult<>(productCollectionVOList,page.getTotal()));
+        List<HistoryRecordVO> historyRecordVOList = HistoryConvert.INSTANCE.toHistoryRecordVO(page.getList());
+        return R.ok(new PageResult<>(historyRecordVOList,page.getTotal()));
     }
 
 

@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource:
-    username: nyc               #数据库的用户名
-    password: mysql729         #数据库的密码
+    username: DONG(hLrOX97vAYpm+ustU38mvTAcoyotlkai)               #数据库的用户名
+    password: DONG(CZQBQvx6ZF5SsDWJiDVX6+ttIp9HllOMomH4keXBJ4k=)         #数据库的密码
     url: jdbc:mysql://82.157.157.133:3306/nyc?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8   #url
     driver-class-name: com.mysql.cj.jdbc.Driver             #数据库的驱动
     type: com.alibaba.druid.pool.DruidDataSource  # 指定数据源类型
@@ -55,7 +55,7 @@ spring:
         #true代表开启管理平台false表示关闭这个功能
         enabled: true
           # 这么写会使用默认的过滤器 如果filters和filter都指定了那么filter必须设置enabled:true才生效
-          #比如 下边的filter不生效
+        #比如 下边的filter不生效
         #filters: stat
         #filter:
         #stat:

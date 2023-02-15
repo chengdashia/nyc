@@ -47,7 +47,7 @@ public class MyJasyptConfig {
         config.setStringOutputType("base64");
         encryptor.setConfig(config);
         //===================================
-        String encrypt = encryptor.encrypt("root");
+        String encrypt = encryptor.encrypt("nyc");
         String encrypt2 = encryptor.encrypt("mysql729");
         //String decrypt = encryptor.decrypt("ZxY08m8wOk4qE/cTEgfzhRbYQlxKg5mhG+kZ6P5lc0MQwy87Z3MouPFWyVGlGyPf");
         //String decrypt2 = encryptor.decrypt("vtK/ygFJN1togHuUS17IbKsc6QQtyK2L2huyXLMmsc9vRQE0zCU+Qo5zQy0FfkQs");

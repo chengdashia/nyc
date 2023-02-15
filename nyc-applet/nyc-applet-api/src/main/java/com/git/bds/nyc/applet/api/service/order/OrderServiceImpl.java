@@ -263,7 +263,7 @@ public class OrderServiceImpl implements OrderService{
      * @return {@link PageResult}<{@link ContractOrder}>
      */
     @Override
-    public PageResult<ContractOrder> getMyOrderByPage(PageParam pageParam) {
+    public PageResult<ContractOrder> getMyOrderPage(PageParam pageParam) {
         Page<ContractOrder> page = contractOrderMapper.selectPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 new LambdaQueryWrapper<ContractOrder>()
                         .select(

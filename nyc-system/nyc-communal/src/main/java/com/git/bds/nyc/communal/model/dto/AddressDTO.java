@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @since 2022/11/14 15:40
  */
 @Data
-public class ShoppingAddressDTO implements Serializable {
+public class AddressDTO implements Serializable {
 
     /**地址id*/
     private Long id;

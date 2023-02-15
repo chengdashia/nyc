@@ -1,7 +1,7 @@
 package com.git.bds.nyc.product.service;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.git.bds.nyc.communal.model.domain.ShoppingAddress;
+import com.git.bds.nyc.communal.model.domain.Address;
 import com.git.bds.nyc.enums.ProductType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.framework.redis.constant.RedisConstants;
@@ -125,25 +125,25 @@ public class ProductServiceImpl implements ProductService{
         PhoneDTO phone;
         if(Objects.equals(type, ProductType.FARMER_PRIMARY.getValue())){
             phone = farmerPrimaryProductMapper.selectJoinOne(PhoneDTO.class, new MPJLambdaWrapper<FarmerPrimaryProduct>()
-                    .select(ShoppingAddress::getPhone)
-                    .leftJoin(ShoppingAddress.class, ShoppingAddress::getId, FarmerPrimaryProduct::getContactInfoId)
+                    .select(Address::getPhone)
+                    .leftJoin(Address.class, Address::getId, FarmerPrimaryProduct::getContactInfoId)
                     .eq(FarmerPrimaryProduct::getId, id));
             if(ObjectUtil.isNull(phone)) {
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
         }else if(Objects.equals(type, ProductType.CORP_PRIMARY.getValue())){
             phone = corpPrimaryProductMapper.selectJoinOne(PhoneDTO.class, new MPJLambdaWrapper<CorpPrimaryProduct>()
-                    .select(ShoppingAddress::getPhone)
-                    .leftJoin(ShoppingAddress.class, ShoppingAddress::getId, CorpPrimaryProduct::getContactInfoId)
+                    .select(Address::getPhone)
+                    .leftJoin(Address.class, Address::getId, CorpPrimaryProduct::getContactInfoId)
                     .eq(CorpPrimaryProduct::getId, id));
             if(ObjectUtil.isNull(phone)) {
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }
         }else if(Objects.equals(type, ProductType.CORP_PROCESSING.getValue())){
             phone = corpProcessingProductMapper.selectJoinOne(PhoneDTO.class, new MPJLambdaWrapper<CorpProcessingProduct>()
-                    .select(ShoppingAddress::getPhone)
-                    .leftJoin(ShoppingAddress.class, ShoppingAddress::getId, CorpProcessingProduct::getContactInfoId)
-                    .eq(ShoppingAddress::getId, id));
+                    .select(Address::getPhone)
+                    .leftJoin(Address.class, Address::getId, CorpProcessingProduct::getContactInfoId)
+                    .eq(Address::getId, id));
             if(ObjectUtil.isNull(phone)) {
                 throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
             }

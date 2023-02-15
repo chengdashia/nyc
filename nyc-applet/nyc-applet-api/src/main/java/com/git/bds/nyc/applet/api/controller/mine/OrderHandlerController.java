@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -65,7 +66,7 @@ public class OrderHandlerController {
     })
     public R<PageResult<OrderVO>> getOrderPage(
             @RequestBody @Validated PageParam pageParam,
-            @PathVariable("type")@Min(1)@Max(4) int type
+            @PathVariable("type") @Min(value = 1,message = "类型错误！！！") @Max(value = 4,message = "类型错误") int type
     ){
         PageResult<ContractOrder> page = orderService.getOrderPage(pageParam, type);
         List<OrderVO> list = OrderConvert.INSTANCE.toOrderVO(page.getList());
@@ -74,17 +75,17 @@ public class OrderHandlerController {
 
 
     /**
-     * 查看订单详情
+     * 根据订单id查看订单详情
      *
      * @return {@link R}<{@link Boolean}>
      */
     @PostMapping("/getOrderInfoById/{id}")
-    @ApiOperation("查看订单详情")
+    @ApiOperation("根据订单id查看订单详情")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "订单id", dataTypeClass = Long.class, paramType = "path", example = "1", required = true)
     })
     public R<ContractOrder> getOrderInfoById(
-            @PathVariable("id") Long id
+            @PathVariable("id") @NotNull Long id
     ){
         ContractOrder contractOrder = orderService.getOrderInfoById(id);
         return R.ok(contractOrder);
@@ -92,12 +93,12 @@ public class OrderHandlerController {
 
 
     /**
-     * 删除订单
+     * 根据订单id删除订单
      *
      * @return {@link R}<{@link Boolean}>
      */
     @PostMapping("/delOrderById/{type}/{id}")
-    @ApiOperation("删除订单")
+    @ApiOperation(value = "根据订单id删除订单",notes = "类型只能有这两种(3:拒绝签字、4:交易成功)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "type", value = "类型(3:拒绝签字、4:交易成功", dataTypeClass = Integer.class, paramType = "path", example = "1", required = true),
             @ApiImplicitParam(name = "id", value = "订单id", dataTypeClass = Long.class, paramType = "path", example = "1", required = true)

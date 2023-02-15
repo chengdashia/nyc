@@ -24,9 +24,9 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("shopping_address")
-@ApiModel(value = "ShoppingAddress对象", description = "收货地址表（也可用于发布商品和需求的时候用作发货地址表）")
-public class ShoppingAddress extends Model<ShoppingAddress> {
+@TableName("address")
+@ApiModel(value = "Address对象", description = "收货地址表（也可用于发布商品和需求的时候用作发货地址表）")
+public class Address extends Model<Address> {
 
     private static final long serialVersionUID = 1L;
 

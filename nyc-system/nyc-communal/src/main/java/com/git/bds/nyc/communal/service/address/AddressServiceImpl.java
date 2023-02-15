@@ -1,0 +1,116 @@
+package com.git.bds.nyc.communal.service.address;
+
+
+import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.git.bds.nyc.communal.convert.AddressConvert;
+import com.git.bds.nyc.communal.mapper.mp.AddressMapper;
+import com.git.bds.nyc.communal.model.domain.Address;
+import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
+import com.git.bds.nyc.communal.model.dto.AddressDTO;
+import com.git.bds.nyc.enums.DefaultType;
+import com.git.bds.nyc.exception.BusinessException;
+import com.git.bds.nyc.result.ResultCode;
+import com.github.yulichang.base.MPJBaseServiceImpl;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+/**
+ * <p>
+ * 收货地址表（也可用于发布商品和需求的时候用作发货地址表） 服务实现类
+ * </p>
+ *
+ * @author 成大事
+ * @since 2022-11-14 15:09:55
+ */
+@Service
+public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Address> implements AddressService {
+
+    /**
+     * 按id获取地址信息
+     *
+     * @param id 地址id
+     * @return {@link Address}
+     */
+    @Override
+    public Address getAddressInfoById(Long id) {
+        return this.baseMapper.selectOne(new LambdaQueryWrapper<Address>()
+                        .select(Address::getConsignee,
+                                Address::getPhone,
+                                Address::getLocation,
+                                Address::getDetailedAddress)
+                .eq(Address::getId,id));
+    }
+
+    /**
+     * 添加地址
+     *
+     * @param addressAddDTO 地址添加数据
+     * @return {@link Boolean}
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean addAddress(AddressAddDTO addressAddDTO) {
+        long userId = StpUtil.getLoginIdAsLong();
+        List<Address> list = this.baseMapper.selectList(new LambdaQueryWrapper<Address>()
+                .eq(Address::getUserId, userId));
+        Address shoppingAddress;
+        if(list.isEmpty()){
+            shoppingAddress = AddressConvert.INSTANCE.toAddress(addressAddDTO, userId, DefaultType.IS_DEFAULT.getValue());
+        }else {
+            shoppingAddress = AddressConvert.INSTANCE.toAddress(addressAddDTO, userId, DefaultType.NOT_DEFAULT.getValue());
+        }
+        return this.baseMapper.insert(shoppingAddress) > 0;
+    }
+
+    /**
+     * 修改默认地址
+     *
+     * @param id 身份证件
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean modifyDefaultAddress(Long id) {
+        long userId = StpUtil.getLoginIdAsLong();
+        Address one = this.baseMapper.selectOne(new LambdaQueryWrapper<Address>()
+                .eq(Address::getId, id)
+                .eq(Address::getUserId, userId));
+        if(one == null){
+            throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
+        }
+
+        ////将原来默认的置于非默认
+        //this.baseMapper.update(null,new LambdaUpdateWrapper<Address>()
+        //        .set(Address::getIsDefault, DefaultType.NOT_DEFAULT.getValue())
+        //        .eq(Address::getUserId, userId)
+        //        .eq(Address::getIsDefault,DefaultType.IS_DEFAULT.getValue()));
+        //
+        ////将新选择的置为默认
+        //this.baseMapper.update(null,new LambdaUpdateWrapper<Address>()
+        //        .set(Address::getIsDefault, DefaultType.IS_DEFAULT.getValue())
+        //        .eq(Address::getUserId, userId)
+        //        .eq(Address::getId, id));
+        return this.baseMapper.modifyDefaultAddress(id,userId) > 0;
+    }
+
+    /**
+     * 获取我的地址列表
+     *
+     * @return {@link List}<{@link AddressDTO}>
+     */
+    @Override
+    public List<AddressDTO> getMyAddress() {
+        return this.baseMapper.selectJoinList(AddressDTO.class,
+                new MPJLambdaWrapper<Address>()
+                        .select(Address::getId,
+                                Address::getConsignee,
+                                Address::getPhone,
+                                Address::getLocation,
+                                Address::getDetailedAddress,
+                                Address::getIsDefault)
+                        .eq(Address::getUserId, StpUtil.getLoginIdAsLong()));
+    }
+}

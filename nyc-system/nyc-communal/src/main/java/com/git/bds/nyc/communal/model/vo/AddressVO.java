@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @since 2022/11/14 15:35
  */
 @Data
-public class ShoppingAddressVO implements Serializable {
+public class AddressVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

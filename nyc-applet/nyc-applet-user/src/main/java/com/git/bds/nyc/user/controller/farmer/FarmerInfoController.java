@@ -2,7 +2,6 @@ package com.git.bds.nyc.user.controller.farmer;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.git.bds.nyc.communal.service.address.ShoppingAddressService;
 import com.git.bds.nyc.result.R;
 import com.git.bds.nyc.user.model.domain.User;
 import com.git.bds.nyc.user.model.dto.UserWxInfoDTO;
@@ -31,10 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class FarmerInfoController {
 
     private final UserService userService;
-
-
-    private final ShoppingAddressService shoppingAddressService;
-
 
 
     /**
