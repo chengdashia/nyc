@@ -61,7 +61,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @return {@link List}<{@link Advertisement}>
      */
     @Override
-    @Cacheable(value = RedisConstants.REDIS_ADVERTISEMENT_KEY,key= RedisConstants.REDIS_ADVERTISEMENT_KEY,unless = "#result == null ")
+    @Cacheable(value = RedisConstants.REDIS_ADVERTISEMENT_KEY,unless = "#result == null ")
     public List<Advertisement> getAdvertisements() {
         return this.baseMapper.selectList(new QueryWrapper<Advertisement>()
                 .select(Advertisement.class,i -> !Advertisement.UPDATE_TIME.equals(i.getColumn()))

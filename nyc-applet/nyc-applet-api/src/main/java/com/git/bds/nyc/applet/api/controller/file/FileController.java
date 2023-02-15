@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.controller;
+package com.git.bds.nyc.applet.api.controller.file;
 
 
 import com.git.bds.nyc.applet.api.service.AppletFileService;
