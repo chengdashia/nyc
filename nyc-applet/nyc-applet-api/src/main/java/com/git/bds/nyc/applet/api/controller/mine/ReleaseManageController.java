@@ -8,7 +8,7 @@ import com.git.bds.nyc.applet.api.model.vo.product.AuditPrimaryProductVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ReleaseOnSellPrimaryProductVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ReleasePreSellPrimaryProductVO;
-import com.git.bds.nyc.applet.api.service.ReleaseManageService;
+import com.git.bds.nyc.applet.api.service.releasemanage.ReleaseManageService;
 import com.git.bds.nyc.enums.ProductStatusType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.page.PageParam;

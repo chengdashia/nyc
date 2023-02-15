@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.service;
+package com.git.bds.nyc.applet.api.service.releasemanage;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.easyes.core.conditions.LambdaEsUpdateWrapper;

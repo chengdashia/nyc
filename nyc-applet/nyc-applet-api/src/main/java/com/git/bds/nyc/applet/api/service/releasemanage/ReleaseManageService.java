@@ -1,4 +1,4 @@
-package com.git.bds.nyc.applet.api.service;
+package com.git.bds.nyc.applet.api.service.releasemanage;
 
 import com.git.bds.nyc.applet.api.model.dto.NumberOfReleaseDTO;
 import com.git.bds.nyc.page.PageParam;

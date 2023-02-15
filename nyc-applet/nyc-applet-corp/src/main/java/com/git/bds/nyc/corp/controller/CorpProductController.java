@@ -1,7 +1,6 @@
 package com.git.bds.nyc.corp.controller;
 
 import com.git.bds.nyc.corp.service.CorpService;
-import com.git.bds.nyc.product.model.dto.ProductDTO;
 import com.git.bds.nyc.product.model.dto.ProductModifyDTO;
 import com.git.bds.nyc.product.service.processing.CorpProcessingProductService;
 import com.git.bds.nyc.product.valid.ValidGroup;
@@ -37,35 +36,6 @@ public class CorpProductController {
     private final CorpProcessingProductService corpProcessingProductService;
 
     private final CorpService corpService;
-
-    /**
-     * 发布 在售初级产品
-     *
-     * @param productDTO 产品dto
-     * @return {@link R}<{@link Object}>
-     */
-    @PostMapping("/releaseOnSellProduct")
-    @ApiOperation("发布初级在售农产品")
-    public R<Boolean> releaseOnSellProduct(
-            @Validated({ValidGroup.OnSell.class}) @RequestBody ProductDTO productDTO
-    ){
-        return R.decide(corpService.releaseOnSellProduct(productDTO));
-    }
-
-    /**
-     * 发布预售产品
-     *
-     * @param productDTO 产品dto
-     * @return {@link R}<{@link Boolean}>
-     */
-    @PostMapping("/releasePreSellProduct")
-    @ApiOperation("发布初级预售农产品")
-    public R<Boolean> releasePreSellProduct(
-            @Validated({ValidGroup.PreSale.class}) @RequestBody ProductDTO productDTO
-    ){
-        return R.decide(corpService.releasePreSellProduct(productDTO));
-    }
-
 
 
     /**

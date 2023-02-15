@@ -24,18 +24,16 @@ public interface ProductConvert {
     /**
      * 农民初级产品
      *
-     * @param productId  产品id
      * @param userId     用户id
      * @param coverImg   封面img
      * @param productDTO 产品dto
      * @return {@link FarmerPrimaryProduct}
      */
     @Mappings({
-            @Mapping(source = "productId",target = "id"),
             @Mapping(source = "userId",target = "userId"),
             @Mapping(source = "coverImg",target = "productCover")
     })
-    FarmerPrimaryProduct toFarmerPrimaryProduct(Long productId, Long userId, String coverImg, ProductDTO productDTO);
+    FarmerPrimaryProduct toFarmerPrimaryProduct(Long userId, String coverImg, ProductDTO productDTO);
 
     /**
      * 农民初级产品 修改的时候
@@ -53,18 +51,16 @@ public interface ProductConvert {
     /**
      * 公司初级产品
      *
-     * @param productId  产品id
      * @param userId     用户id
      * @param coverImg   封面img
      * @param productDTO 产品dto
      * @return {@link FarmerPrimaryProduct}
      */
     @Mappings({
-            @Mapping(source = "productId",target = "id"),
             @Mapping(source = "userId",target = "userId"),
             @Mapping(source = "coverImg",target = "productCover")
     })
-    CorpPrimaryProduct toCorpPrimaryProduct(Long productId, Long userId, String coverImg, ProductDTO productDTO);
+    CorpPrimaryProduct toCorpPrimaryProduct(Long userId, String coverImg, ProductDTO productDTO);
 
 
     /**
