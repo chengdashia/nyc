@@ -20,31 +20,4 @@ import com.github.yulichang.base.MPJBaseService;
  */
 public interface CorpPrimaryProductService extends MPJBaseService<CorpPrimaryProduct> {
 
-
-    /**
-     * 修改产品信息
-     *
-     * @param productDTO 产品dto
-     * @return {@link Boolean}
-     */
-    Boolean modifyProductInfo(ProductModifyDTO productDTO);
-
-
-
-    /**
-     * 按类型获取发布产品 分页
-     *
-     * @param pageParam 页面参数
-     * @param type      类型
-     * @return {@link PageResult}<{@link ProductReleaseDTO}>
-     */
-    PageResult<ProductReleaseDTO> getReleaseProductByPage(PageParam pageParam, int type);
-
-    /**
-     * 按页面获取未经审核产品
-     *
-     * @param pageParam 页面参数
-     * @return {@link PageResult}<{@link ProductAuditDTO}>
-     */
-    PageResult<ProductReleaseDTO> getUnauditedProductByPage(PageParam pageParam);
 }

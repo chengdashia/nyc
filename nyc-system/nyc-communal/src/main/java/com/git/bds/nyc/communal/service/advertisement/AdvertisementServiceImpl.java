@@ -10,12 +10,14 @@ import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.git.bds.nyc.enums.AdvertisementType;
 import com.git.bds.nyc.framework.file.minio.MinioConfig;
 import com.git.bds.nyc.framework.file.minio.MinioUtil;
+import com.git.bds.nyc.framework.redis.constant.RedisConstants;
 import com.git.bds.nyc.page.PageParam;
 import com.git.bds.nyc.page.PageResult;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,6 +61,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @return {@link List}<{@link Advertisement}>
      */
     @Override
+    @Cacheable(value = RedisConstants.REDIS_ADVERTISEMENT_KEY,key= RedisConstants.REDIS_ADVERTISEMENT_KEY,unless = "#result == null ")
     public List<Advertisement> getAdvertisements() {
         return this.baseMapper.selectList(new QueryWrapper<Advertisement>()
                 .select(Advertisement.class,i -> !Advertisement.UPDATE_TIME.equals(i.getColumn()))

@@ -6,6 +6,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.binarywang.wx.miniapp.util.WxMaConfigHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.git.bds.nyc.enums.RoleType;
 import com.git.bds.nyc.exception.BusinessException;
 import com.git.bds.nyc.role.domain.SysUserRole;
@@ -13,6 +14,7 @@ import com.git.bds.nyc.role.mapper.mp.SysUserRoleMapper;
 import com.git.bds.nyc.user.convert.UserConvert;
 import com.git.bds.nyc.user.mapper.mp.UserMapper;
 import com.git.bds.nyc.user.model.domain.User;
+import com.git.bds.nyc.user.model.dto.UserViewDTO;
 import com.git.bds.nyc.user.model.dto.WxUserInfoDTO;
 import com.git.bds.nyc.user.model.vo.LoginVO;
 import com.github.yulichang.base.MPJBaseServiceImpl;
@@ -90,6 +92,20 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
         return login;
     }
 
+    /**
+     * 修改用户视图信息
+     *
+     * @param userViewDTO 用户视图dto
+     * @return {@link Boolean}
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean modifyUserViewInfo(UserViewDTO userViewDTO) {
+        return this.baseMapper.update(null,new UpdateWrapper<User>()
+                .set(User.AVATAR, userViewDTO.getAvatarUrl())
+                .set(User.USER_SCREEN_NAME, userViewDTO.getNickName())
+                .eq(User.USER_ID,StpUtil.getLoginIdAsLong())) > 0;
+    }
 
 
 }

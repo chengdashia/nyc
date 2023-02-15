@@ -18,4 +18,7 @@ public class RedisConstants {
     public static final String REDIS_REVIEW_KEY="review";
     public static final String REDIS_USER_KEY="user";
     public static final String REDIS_PRODUCT_IMAGE_KEY="productImage";
+
+
+    public static final String REDIS_ADVERTISEMENT_KEY="advertisement";
 }

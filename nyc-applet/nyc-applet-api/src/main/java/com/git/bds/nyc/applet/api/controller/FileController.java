@@ -1,7 +1,7 @@
 package com.git.bds.nyc.applet.api.controller;
 
 
-import com.git.bds.nyc.applet.api.service.PrimaryProductFileService;
+import com.git.bds.nyc.applet.api.service.AppletFileService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -21,15 +21,15 @@ import java.util.List;
  * @author 成大事
  * @since 2022/9/15 19:50
  */
-@Api(tags = "文件上传")
+@Api(tags = "文件管理接口")
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/applet/file")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FileController {
 
-    private final PrimaryProductFileService productFileService;
+    private final AppletFileService productFileService;
 
 
     /**

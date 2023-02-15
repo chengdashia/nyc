@@ -11,7 +11,6 @@ import com.git.bds.nyc.applet.api.model.vo.IndexAdvertisementVO;
 import com.git.bds.nyc.applet.api.model.vo.demand.DemandInfoVO;
 import com.git.bds.nyc.applet.api.model.vo.demand.DemandVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
-import com.git.bds.nyc.applet.api.model.vo.product.ProductVO;
 import com.git.bds.nyc.communal.model.domain.Advertisement;
 import com.git.bds.nyc.communal.service.advertisement.AdvertisementService;
 import com.git.bds.nyc.demand.model.dto.DemandDTO;
@@ -23,7 +22,6 @@ import com.git.bds.nyc.page.PageResponse;
 import com.git.bds.nyc.page.PageResult;
 import com.git.bds.nyc.page.PageUtil;
 import com.git.bds.nyc.product.mapper.ee.ProductEsMapper;
-import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
 import com.git.bds.nyc.product.model.es.ProductEs;
@@ -85,21 +83,6 @@ public class IndexController {
         return R.ok(voList);
     }
 
-
-    /**
-     * 主页产品（按页面）
-     *
-     * @param pageParam 页面参数
-     * @return {@link R}<{@link List}<{@link ProductVO}>>
-     */
-    @ApiOperation("首页商品数据")
-    @GetMapping("/getProductData")
-    public R<List<ProductVO>> homePageProductsByPage(
-            @Valid PageParam pageParam
-    ){
-        List<FarmerPrimaryProduct> productList = farmerPrimaryProductService.homePageProductsByPage(pageParam);
-        return R.ok(ProductConvert.INSTANCE.toPrimaryProductVO(productList));
-    }
 
     /**
      * 主页产品按页面按es

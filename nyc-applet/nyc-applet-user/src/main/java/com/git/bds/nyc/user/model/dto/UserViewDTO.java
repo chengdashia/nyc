@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 2022/12/15 18:35
  */
 @Data
-public class UserWxInfoDTO implements Serializable {
+public class UserViewDTO implements Serializable {
 
     @ApiModelProperty("用户微信头像地址")
     @NotNull

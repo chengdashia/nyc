@@ -1,9 +1,9 @@
 package com.git.bds.nyc.applet.api.convert;
 
-import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
-import com.git.bds.nyc.applet.api.model.vo.product.ProductVO;
+import com.git.bds.nyc.applet.api.model.vo.product.*;
 import com.git.bds.nyc.product.model.domain.FarmerPrimaryProduct;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
+import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 import com.git.bds.nyc.product.model.es.ProductEs;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -42,6 +42,34 @@ public interface ProductConvert {
      * @return {@link List}<{@link ProductEs}>
      */
     List<ProductEs> toProductEs(List<FarmerPrimaryProduct> product);
+
+
+
+    /**
+     * 农民发布销售初级产品vo
+     *
+     * @param list 列表
+     * @return {@link List}<{@link ReleaseOnSellPrimaryProductVO}>
+     */
+    List<ReleaseOnSellPrimaryProductVO> toReleaseOnSellPrimaryProductVO(List<ProductReleaseDTO> list);
+
+
+    /**
+     * 向农民发布预售初级产品vo
+     *
+     * @param list 列表
+     * @return {@link List}<{@link ReleasePreSellPrimaryProductVO}>
+     */
+    List<ReleasePreSellPrimaryProductVO> toReleasePreSellPrimaryProductVO(List<ProductReleaseDTO> list);
+
+
+    /**
+     * 向农民审计预售初级产品vo
+     *
+     * @param list 列表
+     * @return {@link List}<{@link AuditPrimaryProductVO}>
+     */
+    List<AuditPrimaryProductVO> toAuditPreSellPrimaryProductVO(List<ProductReleaseDTO> list);
 
 
 }

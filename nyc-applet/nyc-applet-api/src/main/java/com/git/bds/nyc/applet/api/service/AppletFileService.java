@@ -9,7 +9,7 @@ import java.util.List;
  * @since 2022/9/16 19:50
  */
 
-public interface PrimaryProductFileService {
+public interface AppletFileService {
 
     /**
      * 上载图片

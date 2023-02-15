@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class PrimaryProductFileImpl implements PrimaryProductFileService{
+public class AppletFileImpl implements AppletFileService {
 
 
     private final MinioUtil minioUtil;
