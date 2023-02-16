@@ -1,21 +1,21 @@
-package com.git.bds.nyc.communal.model.vo;
+package com.git.bds.nyc.applet.api.model.vo.address;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 /**
  * @author 成大事
- * @since 2022/11/14 15:35
+ * @since 2023/2/13 17:02
  */
-@Data
-public class AddressVO implements Serializable {
+@Getter
+@Setter
+public class AddressInfoVO implements Serializable {
+
 
     private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty("地址id")
-    private Long id;
 
     @ApiModelProperty("收货人")
     private String consignee;
@@ -29,6 +29,4 @@ public class AddressVO implements Serializable {
     @ApiModelProperty("详细地址(在所在地区的基础上)")
     private String detailedAddress;
 
-    @ApiModelProperty("默认(0:非默认；1:默认)")
-    private Integer isDefault;
 }
