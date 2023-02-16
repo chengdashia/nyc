@@ -1,12 +1,12 @@
-package com.git.bds.nyc.admin.controller.gx;
+package git.bds.nyc.admin.controller.gx;
 
-import com.git.bds.nyc.admin.convert.AdminConvert;
-import com.git.bds.nyc.admin.model.vo.UserVO;
-import com.git.bds.nyc.admin.service.admin.SysAdminService;
-import com.git.bds.nyc.page.PageParam;
-import com.git.bds.nyc.page.PageResult;
-import com.git.bds.nyc.result.R;
-import com.git.bds.nyc.user.model.dto.UserDTO;
+import git.bds.nyc.admin.convert.AdminConvert;
+import git.bds.nyc.admin.model.vo.UserVO;
+import git.bds.nyc.admin.service.admin.SysAdminService;
+import git.bds.nyc.page.PageParam;
+import git.bds.nyc.page.PageResult;
+import git.bds.nyc.result.R;
+import git.bds.nyc.user.model.dto.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

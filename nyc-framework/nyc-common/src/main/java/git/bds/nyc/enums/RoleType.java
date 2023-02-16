@@ -1,4 +1,4 @@
-package com.git.bds.nyc.enums;
+package git.bds.nyc.enums;
 
 /**
  * @author 成大事
