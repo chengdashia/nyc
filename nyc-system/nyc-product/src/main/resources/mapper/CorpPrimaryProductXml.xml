@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper">
+<mapper namespace="git.bds.nyc.product.mapper.mp.primary.corp.CorpPrimaryProductMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.git.bds.nyc.product.model.domain.CorpPrimaryProduct">
+    <resultMap id="BaseResultMap" type="git.bds.nyc.product.model.domain.CorpPrimaryProduct">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="contact_info_id" property="contactInfoId"/>
@@ -35,7 +35,7 @@
             product_id =  #{primaryProductUpdateDTO.id}
     </update>
     <!-- 分页查询数据 -->
-    <select id="findPage" resultType="com.git.bds.nyc.product.model.domain.CorpPrimaryProduct">
+    <select id="findPage" resultType="git.bds.nyc.product.model.domain.CorpPrimaryProduct">
         SELECT * FROM corp_primary_product t1
         <where>
             <if test="param.productStatus">AND t1.product_status = #{param.productStatus}</if>

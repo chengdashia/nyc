@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.git.bds.nyc.communal.mapper.mp.ContractOrderMapper">
+<mapper namespace="git.bds.nyc.communal.mapper.mp.ContractOrderMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.git.bds.nyc.communal.model.domain.ContractOrder">
+    <resultMap id="BaseResultMap" type="git.bds.nyc.communal.model.domain.ContractOrder">
         <id column="id" property="id" />
         <result column="seller_id" property="sellerId" />
         <result column="buyer_id" property="buyerId" />
@@ -30,7 +30,7 @@
     </sql>
 
     <!--获取各种订单的数据-->
-    <select id="getQuantitiesOfVariousOrders" resultType="com.git.bds.nyc.communal.model.dto.OrderDataDTO">
+    <select id="getQuantitiesOfVariousOrders" resultType="git.bds.nyc.communal.model.dto.OrderDataDTO">
         SELECT
             COUNT(*) AS num,
             CASE
