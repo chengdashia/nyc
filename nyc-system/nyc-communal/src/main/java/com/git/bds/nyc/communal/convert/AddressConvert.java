@@ -2,15 +2,10 @@ package com.git.bds.nyc.communal.convert;
 
 import com.git.bds.nyc.communal.model.domain.Address;
 import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
-import com.git.bds.nyc.communal.model.dto.AddressDTO;
 import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
-import com.git.bds.nyc.communal.model.vo.AddressInfoVO;
-import com.git.bds.nyc.communal.model.vo.AddressVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * @author 成大事
@@ -44,21 +39,4 @@ public interface AddressConvert {
     @Mapping(source = "userId",target = "userId")
     Address toAddress(AddressModifyDTO addressModifyDTO, long userId);
 
-
-    /**
-     * 购物狂
-     *
-     * @param list 列表
-     * @return {@link List}<{@link AddressVO}>
-     */
-    List<AddressVO> toVOList(List<AddressDTO> list);
-
-
-    /**
-     * 到地址info vo
-     *
-     * @param address 住址
-     * @return {@link AddressInfoVO}
-     */
-    AddressInfoVO toAddressInfoVO(Address address);
 }

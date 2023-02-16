@@ -2,13 +2,14 @@ package com.git.bds.nyc.applet.api.controller.mine;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.git.bds.nyc.applet.api.convert.ApiAddressConvert;
+import com.git.bds.nyc.applet.api.model.vo.address.AddressInfoVO;
+import com.git.bds.nyc.applet.api.model.vo.address.AddressVO;
 import com.git.bds.nyc.communal.convert.AddressConvert;
 import com.git.bds.nyc.communal.model.domain.Address;
 import com.git.bds.nyc.communal.model.dto.AddressAddDTO;
 import com.git.bds.nyc.communal.model.dto.AddressDTO;
 import com.git.bds.nyc.communal.model.dto.AddressModifyDTO;
-import com.git.bds.nyc.applet.api.model.vo.address.AddressInfoVO;
-import com.git.bds.nyc.applet.api.model.vo.address.AddressVO;
 import com.git.bds.nyc.communal.service.address.AddressService;
 import com.git.bds.nyc.result.R;
 import io.swagger.annotations.Api;
@@ -50,7 +51,7 @@ public class AddressController {
     @PostMapping("/getMyAddress")
     public R<List<AddressVO>> getMyAddress(){
         List<AddressDTO> addressDTOList = addressService.getMyAddress();
-        return R.ok(AddressConvert.INSTANCE.toVOList(addressDTOList));
+        return R.ok(ApiAddressConvert.INSTANCE.toVOList(addressDTOList));
     }
 
     /**
@@ -114,7 +115,7 @@ public class AddressController {
     })
     public R<AddressInfoVO> getAddressInfoById(@RequestParam("id") @NotNull Long id){
         Address address = addressService.getAddressInfoById(id);
-        AddressInfoVO addressInfoVO = AddressConvert.INSTANCE.toAddressInfoVO(address);
+        AddressInfoVO addressInfoVO = ApiAddressConvert.INSTANCE.toAddressInfoVO(address);
         return R.ok(addressInfoVO);
     }
 
