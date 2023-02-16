@@ -1,10 +1,10 @@
-package com.git.bds.nyc.admin.service.admin;
+package git.bds.nyc.admin.service.admin;
 
-import com.git.bds.nyc.admin.model.domain.SysAdmin;
-import com.git.bds.nyc.page.PageParam;
-import com.git.bds.nyc.page.PageResult;
+import git.bds.nyc.admin.model.domain.SysAdmin;
+import git.bds.nyc.page.PageParam;
+import git.bds.nyc.page.PageResult;
 
-import com.git.bds.nyc.user.model.dto.UserDTO;
+import git.bds.nyc.user.model.dto.UserDTO;
 import com.github.yulichang.base.MPJBaseService;
 
 /**

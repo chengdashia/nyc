@@ -1,6 +1,6 @@
-package com.git.bds.nyc.admin.mapper.mp;
+package git.bds.nyc.admin.mapper.mp;
 
-import com.git.bds.nyc.admin.model.domain.SysAdmin;
+import git.bds.nyc.admin.model.domain.SysAdmin;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

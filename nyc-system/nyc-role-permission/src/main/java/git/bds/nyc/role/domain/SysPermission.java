@@ -1,4 +1,4 @@
-package com.git.bds.nyc.role.domain;
+package git.bds.nyc.role.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -23,9 +23,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("sys_role_permission")
-@ApiModel(value = "SysRolePermission对象", description = "")
-public class SysRolePermission extends Model<SysRolePermission> {
+@TableName("sys_permission")
+@ApiModel(value = "SysPermission对象", description = "")
+public class SysPermission extends Model<SysPermission> {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,20 +33,20 @@ public class SysRolePermission extends Model<SysRolePermission> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("角色id")
-    @TableField("role_id")
-    private Integer roleId;
+    @ApiModelProperty("权限名称")
+    @TableField("permission_name")
+    private String permissionName;
 
-    @ApiModelProperty("权限id")
-    @TableField("permission_id")
-    private Integer permissionId;
+    @ApiModelProperty("权限描述")
+    @TableField("description")
+    private String description;
 
 
     public static final String ID = "id";
 
-    public static final String ROLE_ID = "role_id";
+    public static final String PERMISSION_NAME = "permission_name";
 
-    public static final String PERMISSION_ID = "permission_id";
+    public static final String DESCRIPTION = "description";
 
     @Override
     public Serializable pkVal() {

@@ -1,6 +1,6 @@
-package com.git.bds.nyc.role.service.rolepermission;
+package git.bds.nyc.role.service.rolepermission;
 
-import com.git.bds.nyc.role.domain.SysRolePermission;
+import git.bds.nyc.role.domain.SysRolePermission;
 import com.github.yulichang.base.MPJBaseService;
 
 import java.util.List;

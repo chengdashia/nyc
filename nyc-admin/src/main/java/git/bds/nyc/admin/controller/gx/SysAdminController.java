@@ -1,8 +1,8 @@
-package com.git.bds.nyc.admin.controller.gx;
+package git.bds.nyc.admin.controller.gx;
 
-import com.git.bds.nyc.admin.enums.AdminType;
-import com.git.bds.nyc.admin.service.admin.SysAdminService;
-import com.git.bds.nyc.util.validate.phone.Phone;
+import git.bds.nyc.admin.enums.AdminType;
+import git.bds.nyc.admin.service.admin.SysAdminService;
+import git.bds.nyc.util.validate.phone.Phone;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

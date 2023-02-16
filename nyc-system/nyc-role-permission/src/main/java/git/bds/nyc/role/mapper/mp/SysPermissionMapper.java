@@ -1,6 +1,6 @@
-package com.git.bds.nyc.role.mapper.mp;
+package git.bds.nyc.role.mapper.mp;
 
-import com.git.bds.nyc.role.domain.SysRole;
+import git.bds.nyc.role.domain.SysPermission;
 import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-08-17 20:46:59
  */
 @Mapper
-public interface SysRoleMapper extends MPJBaseMapper<SysRole> {
+public interface SysPermissionMapper extends MPJBaseMapper<SysPermission> {
 
 }
