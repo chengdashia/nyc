@@ -1,4 +1,4 @@
-package com.git.bds.nyc.result;
+package git.bds.nyc.result;
 
 import lombok.Getter;
 

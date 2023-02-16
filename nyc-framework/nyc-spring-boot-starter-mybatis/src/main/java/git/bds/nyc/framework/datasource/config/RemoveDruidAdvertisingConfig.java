@@ -1,7 +1,7 @@
-package com.git.bds.nyc.framework.datasource.config;
+package git.bds.nyc.framework.datasource.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
-import com.git.bds.nyc.framework.datasource.core.DruidAdRemoveFilter;
+import git.bds.nyc.framework.datasource.core.DruidAdRemoveFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

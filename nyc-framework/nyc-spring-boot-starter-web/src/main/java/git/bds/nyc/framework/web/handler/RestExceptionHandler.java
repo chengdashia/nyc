@@ -1,12 +1,12 @@
-package com.git.bds.nyc.framework.web.handler;
+package git.bds.nyc.framework.web.handler;
 
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.NotPermissionException;
 import cn.dev33.satoken.exception.NotRoleException;
-import com.git.bds.nyc.exception.BusinessException;
-import com.git.bds.nyc.result.R;
-import com.git.bds.nyc.result.ResultCode;
+import git.bds.nyc.exception.BusinessException;
+import git.bds.nyc.result.R;
+import git.bds.nyc.result.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
