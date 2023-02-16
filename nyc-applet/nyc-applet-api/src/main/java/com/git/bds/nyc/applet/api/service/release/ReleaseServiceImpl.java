@@ -44,7 +44,7 @@ public class ReleaseServiceImpl implements ReleaseService {
     private final AuditCorpProductService auditCorpProductService;
 
     /**
-     * 发售在售产品
+     * 发布初级农产品
      *
      * @param productDTO 产品dto
      * @return {@link Boolean}

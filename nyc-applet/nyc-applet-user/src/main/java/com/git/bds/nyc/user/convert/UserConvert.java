@@ -12,8 +12,9 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper
 public interface UserConvert {
-   UserConvert INSTANCE =  Mappers.getMapper(UserConvert.class);
 
+
+   UserConvert INSTANCE =  Mappers.getMapper(UserConvert.class);
 
     /**
      * 用户

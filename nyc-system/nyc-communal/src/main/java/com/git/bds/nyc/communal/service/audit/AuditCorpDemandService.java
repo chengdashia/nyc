@@ -14,4 +14,13 @@ import com.github.yulichang.base.MPJBaseService;
  */
 public interface AuditCorpDemandService extends MPJBaseService<AuditCorpDemand> {
 
+    /**
+     * 添加审核
+     *
+     * @param id        身份证件
+     * @param demandId 需求id
+     * @return {@link Boolean}
+     */
+    Boolean addAudit(long id, long demandId);
+
 }

@@ -2,10 +2,15 @@ package com.git.bds.nyc.applet.api.controller.index;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.git.bds.nyc.applet.api.convert.DemandConvert;
 import com.git.bds.nyc.applet.api.convert.ProductConvert;
+import com.git.bds.nyc.applet.api.model.vo.demand.DemandInfoVO;
 import com.git.bds.nyc.applet.api.model.vo.product.ProductInfoVO;
+import com.git.bds.nyc.applet.api.service.demand.DemandService;
 import com.git.bds.nyc.applet.api.service.order.OrderService;
 import com.git.bds.nyc.communal.model.dto.OrderDTO;
+import com.git.bds.nyc.demand.model.dto.DemandInfoDTO;
+import com.git.bds.nyc.demand.model.dto.DemandModifyDTO;
 import com.git.bds.nyc.enums.CollectionType;
 import com.git.bds.nyc.product.model.domain.ProductCollection;
 import com.git.bds.nyc.product.model.dto.ProductInfoDTO;
@@ -42,6 +47,8 @@ public class DetailsController {
     private final ProductHistoryService productHistoryService;
 
     private final ProductService productService;
+
+    private final DemandService demandService;
 
 
     /**
@@ -107,6 +114,37 @@ public class DetailsController {
             @RequestBody @Validated OrderDTO orderDTO
     ){
         return R.decide(orderService.placeOrder(orderDTO));
+    }
+
+
+    /**
+     * 根据需求id获取需求的详细数据集
+     *
+     * @param id 需求id
+     * @return {@link R}<{@link DemandInfoVO}>
+     */
+    @ApiOperation("根据需求id获取需求的详细数据集")
+    @GetMapping("/getDemandInfoById/{id}")
+    @ApiImplicitParam(name = "id", value = "需求id", required = true, dataTypeClass = Long.class)
+    public R<DemandInfoVO> getDemandInfoById(
+            @PathVariable("id") Long id
+    ){
+        DemandInfoDTO product = demandService.getDemandInfoById(id);
+        return R.ok(DemandConvert.INSTANCE.toDemandInfoVO(product));
+    }
+
+    /**
+     * 修改发布的需求信息
+     *
+     * @param demandModifyDTO 需求修改dto
+     * @return {@link R}<{@link Boolean}>
+     */
+    @PostMapping("/modifyDemandInfo")
+    @ApiOperation("修改发布的需求信息")
+    public R<Boolean> modifyDemandInfo(
+            @Validated @RequestBody DemandModifyDTO demandModifyDTO
+    ){
+        return R.decide(demandService.modifyDemandInfo(demandModifyDTO));
     }
 
 }

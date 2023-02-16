@@ -21,12 +21,10 @@ public interface DemandCovert {
      *
      * @param demandAddDTO 需求操作数据
      * @param userId           用户id
-     * @param demandId         需求id
      * @return {@link CorpDemand}
      */
     @Mapping(source = "userId",target = "userId")
-    @Mapping(source = "demandId",target = "id")
-    CorpDemand toDemandForAdd(DemandAddDTO demandAddDTO, Long userId, Long demandId);
+    CorpDemand toDemandForAdd(DemandAddDTO demandAddDTO, Long userId);
 
     /**
      * 要求修改

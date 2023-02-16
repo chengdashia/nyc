@@ -9,7 +9,7 @@ import com.git.bds.nyc.product.model.dto.ProductDTO;
 public interface ReleaseService {
 
     /**
-     * 发布 在售产品
+     * 发布初级农产品
      *
      * @param productDTO 产品dto
      * @return {@link Boolean}

@@ -19,4 +19,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuditCorpDemandServiceImpl extends MPJBaseServiceImpl<AuditCorpDemandMapper, AuditCorpDemand> implements AuditCorpDemandService {
 
+
+    /**
+     * 添加审核
+     *
+     * @param id        身份证件
+     * @param demandId 产品id
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean addAudit(long id, long demandId) {
+        AuditCorpDemand auditCorpDemand = new AuditCorpDemand().setUserId(id).setDemandId(demandId);
+        return this.baseMapper.insert(auditCorpDemand) > 0;
+    }
 }
