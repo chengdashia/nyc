@@ -1,4 +1,4 @@
-package com.git.bds.nyc.admin.model.domain;
+package git.bds.nyc.admin.model.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

@@ -1,4 +1,4 @@
-package com.git.bds.nyc.gen.screw;
+package git.bds.nyc.gen.screw;
 
 
 import cn.smallbun.screw.core.Configuration;
@@ -7,7 +7,7 @@ import cn.smallbun.screw.core.engine.EngineFileType;
 import cn.smallbun.screw.core.engine.EngineTemplateType;
 import cn.smallbun.screw.core.execute.DocumentationExecute;
 import cn.smallbun.screw.core.process.ProcessConfig;
-import com.git.bds.nyc.constant.Constants;
+import git.bds.nyc.constant.Constants;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 

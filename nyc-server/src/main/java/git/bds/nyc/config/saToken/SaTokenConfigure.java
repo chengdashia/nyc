@@ -1,4 +1,4 @@
-package com.git.bds.nyc.config.saToken;
+package git.bds.nyc.config.saToken;
 
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.filter.SaServletFilter;

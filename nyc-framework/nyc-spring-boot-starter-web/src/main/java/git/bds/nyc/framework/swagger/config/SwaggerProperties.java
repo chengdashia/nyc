@@ -1,4 +1,4 @@
-package com.git.bds.nyc.framework.swagger.config;
+package git.bds.nyc.framework.swagger.config;
 
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.License;

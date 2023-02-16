@@ -1,4 +1,4 @@
-package com.git.bds.nyc.framework.swagger.config;
+package git.bds.nyc.framework.swagger.config;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import lombok.RequiredArgsConstructor;
@@ -78,7 +78,7 @@ public class SwaggerConfig {
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.**.controller
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.applet.api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("git.bds.nyc.applet.api.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -94,7 +94,7 @@ public class SwaggerConfig {
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.**.controller
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.user.controller"))
+                .apis(RequestHandlerSelectors.basePackage("git.bds.nyc.user.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -109,7 +109,7 @@ public class SwaggerConfig {
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.**.controller
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.corp.controller"))
+                .apis(RequestHandlerSelectors.basePackage("git.bds.nyc.corp.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -124,7 +124,7 @@ public class SwaggerConfig {
                 .enable(enable)
                 .select()
                 // 设置扫描包的地址 : com.**.controller
-                .apis(RequestHandlerSelectors.basePackage("com.git.bds.nyc.admin.controller"))
+                .apis(RequestHandlerSelectors.basePackage("git.bds.nyc.admin.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

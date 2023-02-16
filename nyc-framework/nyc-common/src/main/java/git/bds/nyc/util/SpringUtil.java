@@ -1,4 +1,4 @@
-package com.git.bds.nyc.util;
+package git.bds.nyc.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

@@ -1,4 +1,4 @@
-package com.git.bds.nyc.framework.swagger.core;
+package git.bds.nyc.framework.swagger.core;
 
 import cn.hutool.core.util.ReflectUtil;
 import org.springframework.beans.BeansException;

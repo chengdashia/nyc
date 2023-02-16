@@ -1,4 +1,4 @@
-package com.git.bds.nyc.framework.annotation;
+package git.bds.nyc.framework.annotation;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;
