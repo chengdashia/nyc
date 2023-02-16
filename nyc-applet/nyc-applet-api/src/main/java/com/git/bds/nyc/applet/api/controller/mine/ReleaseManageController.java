@@ -44,7 +44,7 @@ import java.util.List;
 public class ReleaseManageController {
 
 
-    private final ReleaseManageService releaseService;
+    private final ReleaseManageService releaseManageService;
 
     /**
      * 根据类型获取发布的数量
@@ -60,7 +60,7 @@ public class ReleaseManageController {
     public R<NumberOfReleaseVO> getNumberOfReleases(
             @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type
     ){
-        NumberOfReleaseDTO numberOfReleaseDTO = releaseService.getNumberOfReleases(type);
+        NumberOfReleaseDTO numberOfReleaseDTO = releaseManageService.getNumberOfReleases(type);
         NumberOfReleaseVO numberOfReleaseVO = MineConvert.INSTANCE.toNumberOfReleaseVO(numberOfReleaseDTO);
         return R.ok(numberOfReleaseVO);
     }
@@ -84,15 +84,15 @@ public class ReleaseManageController {
     ){
         PageResult<ProductReleaseDTO> page;
         if(ProductStatusType.AUDIT.getValue().equals(type)){
-            page = releaseService.getUnauditedProductByPage(pageParam);
+            page = releaseManageService.getUnauditedProductByPage(pageParam);
             List<AuditPrimaryProductVO> list = ProductConvert.INSTANCE.toAuditPreSellPrimaryProductVO(page.getList());
             return R.ok(new PageResult<>(list,page.getTotal()));
         }else if(ProductStatusType.ON_SELL.getValue().equals(type)){
-            page = releaseService.getReleaseProductByPage(pageParam,type);
+            page = releaseManageService.getReleaseProductByPage(pageParam,type);
             List<ReleaseOnSellPrimaryProductVO> list = ProductConvert.INSTANCE.toReleaseOnSellPrimaryProductVO(page.getList());
             return R.ok(new PageResult<>(list,page.getTotal()));
         }else if(ProductStatusType.PRE_SELL.getValue().equals(type)){
-            page = releaseService.getReleaseProductByPage(pageParam,type);
+            page = releaseManageService.getReleaseProductByPage(pageParam,type);
             List<ReleasePreSellPrimaryProductVO> list = ProductConvert.INSTANCE.toReleasePreSellPrimaryProductVO(page.getList());
             return R.ok(new PageResult<>(list,page.getTotal()));
         }else {
@@ -121,7 +121,7 @@ public class ReleaseManageController {
             @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type,
             @PathVariable("status") @Min(value = -1,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int status
     ){
-        return R.ok(releaseService.delReleaseProductById(id,type,status));
+        return R.ok(releaseManageService.delReleaseProductById(id,type,status));
     }
 
 
@@ -136,7 +136,7 @@ public class ReleaseManageController {
     public R<Boolean> modifyProductInfo(
             @Validated({com.git.bds.nyc.product.valid.ValidGroup.All.class}) @RequestBody ProductModifyDTO productDTO
     ){
-        return R.decide(releaseService.modifyProductInfo(productDTO));
+        return R.decide(releaseManageService.modifyProductInfo(productDTO));
     }
 
 
@@ -157,6 +157,6 @@ public class ReleaseManageController {
             @PathVariable("id") Long id,
             @PathVariable("type") @Min(value = 0,message = "类型错误！！！") @Max(value = 1,message = "类型错误！！！") int type
     ){
-        return R.ok(releaseService.releaseProductNowById(id,type));
+        return R.ok(releaseManageService.releaseProductNowById(id,type));
     }
 }

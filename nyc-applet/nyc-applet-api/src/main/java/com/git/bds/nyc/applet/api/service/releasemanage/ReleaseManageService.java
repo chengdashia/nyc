@@ -14,7 +14,7 @@ import com.git.bds.nyc.product.model.dto.ProductReleaseDTO;
 public interface ReleaseManageService {
 
     /**
-     * 获取发布次数
+     * 获取不同类型的发布个数
      *
      * @param type 类型
      * @return {@link NumberOfReleaseDTO}

@@ -181,6 +181,8 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
                                         FarmerPrimaryProduct::getCreateTime
                                 )
                                 .eq(FarmerPrimaryProduct::getProductStatus, type)
+                                .eq(FarmerPrimaryProduct::getAuditStatus, AuditType.PASS.getValue())
+                                .eq(FarmerPrimaryProduct::getCoopAuditStatus, AuditType.PASS.getValue())
                                 .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
                                 .orderByDesc(FarmerPrimaryProduct::getCreateTime));
             }//如果是公司
@@ -197,6 +199,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
                                         CorpPrimaryProduct::getCreateTime
                                 )
                                 .eq(CorpPrimaryProduct::getProductStatus, type)
+                                .eq(CorpPrimaryProduct::getAuditStatus, AuditType.PASS.getValue())
                                 .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
                                 .orderByDesc(CorpPrimaryProduct::getCreateTime));
             }else {
@@ -218,6 +221,8 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
                                         FarmerPrimaryProduct::getMarketTime
                                 )
                                 .eq(FarmerPrimaryProduct::getProductStatus, type)
+                                .eq(FarmerPrimaryProduct::getAuditStatus, AuditType.PASS.getValue())
+                                .eq(FarmerPrimaryProduct::getCoopAuditStatus, AuditType.PASS.getValue())
                                 .eq(FarmerPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
                                 .orderByDesc(FarmerPrimaryProduct::getCreateTime));
             }//如果是公司
@@ -235,6 +240,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
                                         CorpPrimaryProduct::getMarketTime
                                 )
                                 .eq(CorpPrimaryProduct::getProductStatus, type)
+                                .eq(CorpPrimaryProduct::getAuditStatus, AuditType.PASS.getValue())
                                 .eq(CorpPrimaryProduct::getUserId, StpUtil.getLoginIdAsLong())
                                 .orderByDesc(CorpPrimaryProduct::getCreateTime));
             } else {
