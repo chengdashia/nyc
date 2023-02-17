@@ -28,7 +28,7 @@ public class AuditCorpProductServiceImpl extends MPJBaseServiceImpl<AuditCorpPro
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addAudit(long userId, long productId) {
         AuditCorpProduct auditCorpProduct = new AuditCorpProduct().setUserId(userId).setProductId(productId);
         return this.baseMapper.insert(auditCorpProduct) > 0;

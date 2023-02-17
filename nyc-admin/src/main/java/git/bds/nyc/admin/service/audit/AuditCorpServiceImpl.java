@@ -66,6 +66,7 @@ public class AuditCorpServiceImpl implements AuditCorpService{
      * @return {@link PageResult}<{@link AuditProductDTO}>
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type) {
         IPage<AuditProductDTO> page = auditCorpProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 AuditProductDTO.class,

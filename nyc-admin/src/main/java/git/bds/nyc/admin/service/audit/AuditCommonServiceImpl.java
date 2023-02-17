@@ -19,6 +19,7 @@ import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +48,7 @@ public class AuditCommonServiceImpl implements AuditCommonService{
      * @return {@link AuditProductInfoDTO}
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public AuditProductInfoDTO getAuditProductInfo(Long id, Integer type) {
         List<AuditProductInfoDTO> infoDTOList = null;
         if(ProductType.FARMER_PRIMARY.getValue().equals(type)){
@@ -97,6 +99,7 @@ public class AuditCommonServiceImpl implements AuditCommonService{
      * @return {@link DemandInfoDTO}
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public DemandInfoDTO getAuditDemandInfo(Long id) {
         return corpDemandMapper.selectJoinOne(DemandInfoDTO.class,
                 new MPJLambdaWrapper<CorpDemand>()

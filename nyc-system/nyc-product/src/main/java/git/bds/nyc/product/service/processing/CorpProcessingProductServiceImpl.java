@@ -45,7 +45,7 @@ public class CorpProcessingProductServiceImpl extends MPJBaseServiceImpl<CorpPro
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY, key = "#productDTO.getId()", condition = "#result == true ")
     public Boolean modifyProductInfo(ProductModifyDTO productDTO) {
         //用户id

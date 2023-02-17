@@ -38,7 +38,7 @@ public class SysUserRoleServiceImpl extends MPJBaseServiceImpl<SysUserRoleMapper
      * @return 角色列表
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<String> getRoleList(Object loginId) {
         return sysRoleDao.selectJoinList(RoleDTO.class, new MPJLambdaWrapper<SysRole>()
                 .selectAs(SysRole::getRoleName, Constants.ROLE)

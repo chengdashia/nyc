@@ -48,7 +48,7 @@ public class ReleaseServiceImpl implements ReleaseService {
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean releaseProduct(ProductDTO productDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         //获取角色列表

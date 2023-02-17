@@ -53,6 +53,7 @@ public class AuditFarmerServiceImpl implements AuditFarmerService{
      * @return {@link PageResult}<{@link AuditProductDTO}>
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type) {
         IPage<AuditProductDTO> page = auditFarmerProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 AuditProductDTO.class,
@@ -128,6 +129,7 @@ public class AuditFarmerServiceImpl implements AuditFarmerService{
      * @return {@link Boolean}
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean toDeleteFarmerPrimaryProduct(Long id) {
         return auditFarmerProductMapper.delete(new LambdaQueryWrapper<AuditFarmerProduct>()
                 .eq(AuditFarmerProduct::getId,id)

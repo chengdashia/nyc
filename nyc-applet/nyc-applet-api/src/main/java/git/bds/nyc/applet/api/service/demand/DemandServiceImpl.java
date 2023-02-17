@@ -47,7 +47,7 @@ public class DemandServiceImpl implements DemandService {
      * @return {@link List}<{@link DemandDTO}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<DemandDTO> homePageDemandsByPage(PageParam pageParam) {
         return corpDemandMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),DemandDTO.class,
                 new MPJLambdaWrapper<CorpDemand>()
@@ -68,7 +68,7 @@ public class DemandServiceImpl implements DemandService {
      * @return {@link DemandInfoDTO}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public DemandInfoDTO getDemandInfoById(Long id) {
         return corpDemandMapper.selectJoinOne(DemandInfoDTO.class,
                 new MPJQueryWrapper<CorpDemand>()
@@ -84,7 +84,7 @@ public class DemandServiceImpl implements DemandService {
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean releaseDemand(DemandAddDTO demandAddDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         List<String> roleList = StpUtil.getRoleList();
@@ -104,7 +104,7 @@ public class DemandServiceImpl implements DemandService {
      */
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean modifyDemandInfo(DemandModifyDTO demandModifyDTO) {
         CorpDemand demand = DemandCovert.INSTANCE.toDemandForModify(demandModifyDTO, StpUtil.getLoginIdAsLong());
         return corpDemandMapper.updateById(demand) > 0;
@@ -117,7 +117,7 @@ public class DemandServiceImpl implements DemandService {
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean delDemandById(Long id) {
         String demandCover = corpDemandMapper.selectOne(new LambdaQueryWrapper<CorpDemand>()
                 .select(CorpDemand::getDemandCover)

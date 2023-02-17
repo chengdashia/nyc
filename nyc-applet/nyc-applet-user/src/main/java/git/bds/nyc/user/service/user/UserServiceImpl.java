@@ -50,9 +50,9 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
      * @param wxUserInfoDTO WX用户信息DTO
      * @return {@link WxMaJscode2SessionResult}
      */
-    @SneakyThrows
-    @Transactional
     @Override
+    @SneakyThrows
+    @Transactional(rollbackFor = Exception.class)
     public LoginVO login(WxUserInfoDTO wxUserInfoDTO) {
         User user;
         WxMaJscode2SessionResult session = wxMaService.getUserService().getSessionInfo(wxUserInfoDTO.getCode());
@@ -99,7 +99,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean modifyUserViewInfo(UserViewDTO userViewDTO) {
         return this.baseMapper.update(null,new UpdateWrapper<User>()
                 .set(User.AVATAR, userViewDTO.getAvatarUrl())

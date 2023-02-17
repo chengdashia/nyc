@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService{
      */
     @Override
     @SneakyThrows
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean placeOrder(OrderDTO orderDTO) {
         //买家id
         long buyerId = StpUtil.getLoginIdAsLong();
@@ -199,7 +199,7 @@ public class OrderServiceImpl implements OrderService{
      * @return {@link PageResult}<{@link ContractOrder}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<ContractOrder> getOrderPage(PageParam pageParam, int type) {
         Page<ContractOrder> page = contractOrderMapper.selectPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 new LambdaQueryWrapper<ContractOrder>()
@@ -227,7 +227,7 @@ public class OrderServiceImpl implements OrderService{
      * @return {@link OrderDataDTO}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public OrderDataDTO getQuantitiesOfVariousOrders() {
         long userId = StpUtil.getLoginIdAsLong();
         List<Map<String, Object>> maps = contractOrderMapper.selectMaps(new QueryWrapper<ContractOrder>()
@@ -265,7 +265,7 @@ public class OrderServiceImpl implements OrderService{
      * @return {@link PageResult}<{@link ContractOrder}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<ContractOrder> getMyOrderPage(PageParam pageParam) {
         Page<ContractOrder> page = contractOrderMapper.selectPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 new LambdaQueryWrapper<ContractOrder>()
@@ -293,7 +293,7 @@ public class OrderServiceImpl implements OrderService{
      * @return {@link ContractOrder}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ContractOrder getOrderInfoById(Long id) {
         return contractOrderMapper.selectOne(new QueryWrapper<ContractOrder>()
                 .select(ContractOrder.class,
@@ -309,7 +309,7 @@ public class OrderServiceImpl implements OrderService{
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean delOrderById(int type, Long id) {
         ContractOrder contractOrder = contractOrderMapper.selectOne(new LambdaQueryWrapper<ContractOrder>()
                         .select(ContractOrder::getContractUrl,ContractOrder::getBuyerSignature,ContractOrder::getSellerSignature)

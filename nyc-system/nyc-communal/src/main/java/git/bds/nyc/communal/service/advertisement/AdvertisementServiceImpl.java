@@ -48,7 +48,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @return {@link PageResult}<{@link Advertisement}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<Advertisement> getAdvertisementsByPage(PageParam pageParam) {
         Page<Advertisement> page = this.baseMapper.selectPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 new QueryWrapper<Advertisement>()
@@ -63,7 +63,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @return {@link List}<{@link Advertisement}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Cacheable(value = RedisConstants.REDIS_ADVERTISEMENT_KEY,unless = "#result == null ")
     public List<Advertisement> getAdvertisements() {
         return this.baseMapper.selectList(new QueryWrapper<Advertisement>()
@@ -80,7 +80,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @throws Exception 例外
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean releaseAdvertisement(String title, MultipartFile file) throws Exception {
         String pictureUrl = minioUtil.uploadAdvertisementPicture(minioConfig.getBucketName(), file);
         Advertisement advertisement = new Advertisement()
@@ -100,7 +100,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @throws Exception 例外
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean modifyAdvertisementById(Long id,String title,MultipartFile file) throws Exception {
         Advertisement advertisement = this.baseMapper.selectOne(new LambdaQueryWrapper<Advertisement>().eq(Advertisement::getId, id));
         //删除原来的图片
@@ -119,7 +119,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean delAdvertisementById(Long id) {
         Advertisement advertisement = this.baseMapper.selectOne(new LambdaQueryWrapper<Advertisement>()
                         .select(Advertisement::getPictureUrl)
@@ -138,7 +138,7 @@ public class AdvertisementServiceImpl extends MPJBaseServiceImpl<AdvertisementMa
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean modifyAdvertisementStatusById(Long id, Integer status) {
         return this.baseMapper.update(null,new LambdaUpdateWrapper<Advertisement>()
                 .set(Advertisement::getStatus,status)

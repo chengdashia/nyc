@@ -92,7 +92,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
      * @return {@link Long}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public NumberOfReleaseDTO getNumberOfReleases(int type) {
         List<String> roleList = StpUtil.getRoleList();
         long userId = StpUtil.getLoginIdAsLong();
@@ -163,7 +163,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
      * @return {@link PageResult}<{@link ProductReleaseDTO}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<ProductReleaseDTO> getReleaseProductByPage(PageParam pageParam, int type) {
         IPage<ProductReleaseDTO> page = null;
         //获取用户角色列表
@@ -266,7 +266,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
      * @return {@link PageResult}<{@link ProductAuditDTO}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<ProductReleaseDTO> getUnauditedProductByPage(PageParam pageParam) {
         //获取用户角色列表
         List<String> roleList = StpUtil.getRoleList();
@@ -323,7 +323,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY, key = "#productDTO.getId()", condition = "#result == true ")
     public Boolean modifyProductInfo(ProductModifyDTO productDTO) {
         //用户id
@@ -375,7 +375,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = RedisConstants.REDIS_PRODUCT_KEY, key = "#id", condition = "#result == true ")
     public Boolean delReleaseProductById(Long id, int type, int status) {
         List<String> roleList = StpUtil.getRoleList();
@@ -467,7 +467,7 @@ public class ReleaseManageServiceImpl implements ReleaseManageService {
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean releaseProductNowById(Long id, int type) {
         List<String> roleList = StpUtil.getRoleList();
         long userId = StpUtil.getLoginIdAsLong();

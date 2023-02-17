@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService{
      * @return {@link ProductInfoDTO}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Cacheable(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id  + #type",unless = "#result == null ")
     public ProductInfoDTO getProductInfo(Long id, int type) {
         List<ProductInfoDTO> productInfoDTOList ;
@@ -126,7 +126,7 @@ public class ProductServiceImpl implements ProductService{
      * @return {@link String}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String getSellerTel(Long id, int type) {
         PhoneDTO phone;
         if(Objects.equals(type, ProductType.FARMER_PRIMARY.getValue())){

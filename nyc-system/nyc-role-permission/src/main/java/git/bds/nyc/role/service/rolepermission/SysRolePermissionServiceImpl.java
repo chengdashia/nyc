@@ -30,7 +30,7 @@ public class SysRolePermissionServiceImpl extends MPJBaseServiceImpl<SysRolePerm
      * @return {@link List}<{@link String}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<String> getPermissionList(Object loginId) {
         return sysRolePermissionDao.getPermissionList(loginId);
     }

@@ -6,6 +6,7 @@ import git.bds.nyc.communal.model.domain.audit.AuditCorpDemand;
 import git.bds.nyc.communal.service.audit.AuditCorpDemandService;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -28,6 +29,7 @@ public class AuditCorpDemandServiceImpl extends MPJBaseServiceImpl<AuditCorpDema
      * @return {@link Boolean}
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addAudit(long id, long demandId) {
         AuditCorpDemand auditCorpDemand = new AuditCorpDemand().setUserId(id).setDemandId(demandId);
         return this.baseMapper.insert(auditCorpDemand) > 0;

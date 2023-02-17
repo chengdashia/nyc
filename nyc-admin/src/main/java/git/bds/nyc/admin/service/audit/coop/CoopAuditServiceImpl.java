@@ -50,6 +50,7 @@ public class CoopAuditServiceImpl implements CoopAuditService{
      * @return {@link PageResult}<{@link AuditProductDTO}>
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<AuditProductDTO> getPendingAuditProductByPage(PageParam pageParam, Integer type) {
 
         IPage<AuditProductDTO> page = coopAuditProductMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),

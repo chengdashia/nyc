@@ -36,7 +36,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link Address}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Address getAddressInfoById(Long id) {
         return this.baseMapper.selectOne(new LambdaQueryWrapper<Address>()
                 .select(Address::getConsignee,
@@ -53,7 +53,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addAddress(AddressAddDTO addressAddDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         List<Address> list = this.baseMapper.selectList(new LambdaQueryWrapper<Address>()
@@ -74,7 +74,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean modifyDefaultAddress(Long id) {
         long userId = StpUtil.getLoginIdAsLong();
         Address one = this.baseMapper.selectOne(new LambdaQueryWrapper<Address>()
@@ -92,7 +92,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link List}<{@link AddressDTO}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<AddressDTO> getMyAddress() {
         return this.baseMapper.selectJoinList(AddressDTO.class,
                 new MPJLambdaWrapper<Address>()

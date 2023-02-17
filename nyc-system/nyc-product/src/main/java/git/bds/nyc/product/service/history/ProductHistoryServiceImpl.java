@@ -14,6 +14,7 @@ import git.bds.nyc.product.mapper.mp.ProductHistoryMapper;
 import git.bds.nyc.product.model.domain.*;
 import git.bds.nyc.product.model.dto.ProductCollectAndHistoryDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -34,6 +35,7 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
      * @return {@link PageResult}<{@link ProductCollectAndHistoryDTO}>
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<ProductCollectAndHistoryDTO> getBrowsingRecordPageByType(PageParam pageParam, int type) {
         long userId = StpUtil.getLoginIdAsLong();
         IPage<ProductCollectAndHistoryDTO> page;
@@ -90,6 +92,7 @@ public class ProductHistoryServiceImpl extends MPJBaseServiceImpl<ProductHistory
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addBrowsingHistory(long userId, Long id, int type) {
         ProductHistory one = this.baseMapper.selectOne(new QueryWrapper<ProductHistory>()
                 .select(ProductHistory.ID)

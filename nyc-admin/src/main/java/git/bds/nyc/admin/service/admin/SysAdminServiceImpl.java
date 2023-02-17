@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -53,6 +54,7 @@ public class SysAdminServiceImpl extends MPJBaseServiceImpl<SysAdminMapper, SysA
      * @return {@link String}
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String loginByPwd(String account, String password, int type) {
         SysAdmin admin = this.baseMapper.selectOne(new QueryWrapper<SysAdmin>()
                 .select(SysAdmin.ID, SysAdmin.PASSWORD)
@@ -81,6 +83,7 @@ public class SysAdminServiceImpl extends MPJBaseServiceImpl<SysAdminMapper, SysA
      * @return {@link PageResult}<{@link UserDTO}>
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<UserDTO> getUserByPage(PageParam pageParam) {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(pageParam.getPageNo(),
                         pageParam.getPageSize()), UserDTO.class,
@@ -94,6 +97,7 @@ public class SysAdminServiceImpl extends MPJBaseServiceImpl<SysAdminMapper, SysA
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<UserDTO> getRolesByPage(PageParam pageParam) {
         return null;
     }

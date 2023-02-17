@@ -41,7 +41,7 @@ public class AppletFileServiceImpl implements AppletFileService {
      */
     @Override
     @SneakyThrows
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<String> uploadProductImg(MultipartFile[] files) {
         for (MultipartFile uploadFile : files) {
             String fileType = FileTypeUtil.getType(uploadFile.getInputStream());
@@ -60,7 +60,7 @@ public class AppletFileServiceImpl implements AppletFileService {
      */
     @Override
     @SneakyThrows
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<String> uploadDemandImg(MultipartFile[] files) {
         for (MultipartFile uploadFile : files) {
             String fileType = FileTypeUtil.getType(uploadFile.getInputStream());
@@ -79,7 +79,7 @@ public class AppletFileServiceImpl implements AppletFileService {
      */
     @Override
     @SneakyThrows
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String uploadIdCardFrontImg(MultipartFile frontImg) {
         long userId = StpUtil.getLoginIdAsLong();
         String idCardImg = minioUtil.uploadIdCardImg(minioConfig.getBucketName(), frontImg, userId);
@@ -94,7 +94,7 @@ public class AppletFileServiceImpl implements AppletFileService {
      * @return {@link String}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String uploadIdCardBackImg(MultipartFile backImg) {
         return null;
     }
@@ -106,7 +106,7 @@ public class AppletFileServiceImpl implements AppletFileService {
      * @return {@link List}<{@link String}>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles) {
         return null;
     }
@@ -119,7 +119,7 @@ public class AppletFileServiceImpl implements AppletFileService {
      */
     @Override
     @SneakyThrows
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String uploadAvatar(MultipartFile file) {
         String fileType = FileTypeUtil.getType(file.getInputStream());
         if(!FileTypeUtils.SUFFIX.contains(fileType)){

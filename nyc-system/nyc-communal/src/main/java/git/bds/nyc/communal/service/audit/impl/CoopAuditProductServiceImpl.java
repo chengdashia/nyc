@@ -27,7 +27,7 @@ public class CoopAuditProductServiceImpl extends MPJBaseServiceImpl<CoopAuditPro
      * @return {@link Boolean}
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addAudit(long id, long productId) {
         CoopAuditProduct coopAuditProduct = new CoopAuditProduct().setUserId(id).setProductId(productId);
         return this.baseMapper.insert(coopAuditProduct) > 0;

@@ -12,6 +12,7 @@ import git.bds.nyc.user.model.domain.User;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -32,8 +33,8 @@ public class CoopUserServiceImpl extends MPJBaseServiceImpl<CoopUserMapper, Coop
      * @return {@link PageResult}<{@link CoopUserDTO}>
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public PageResult<CoopUserDTO> getSubordinateFarmerByCoopId(PageParam pageParam, Long id) {
-
         IPage<CoopUserDTO> page = this.baseMapper.selectJoinPage(new Page<>(pageParam.getPageNo(), pageParam.getPageSize()),
                 CoopUserDTO.class,
                 new MPJLambdaWrapper<CoopUser>()
