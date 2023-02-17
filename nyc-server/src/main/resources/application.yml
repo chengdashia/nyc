@@ -50,6 +50,7 @@ spring:
 
 # MyBatis Plus 的配置项
 mybatis-plus:
+
   # 不支持多包, 如有需要可在注解配置 或 提升扫包等级
   # 例如 com.**.**.mapper
   mapperPackage: git.bds.nyc.**.mapper
@@ -71,7 +72,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
   global-config:
     # 是否打印 Logo banner
-    banner: true
+    banner: false
     db-config:
       # 主键类型
       # AUTO 自增 NONE 空 INPUT 用户输入 ASSIGN_ID 雪花 ASSIGN_UUID 唯一 UUID
@@ -87,7 +88,9 @@ mybatis-plus:
       updateStrategy: NOT_NULL
       # 字段验证策略之 select,在 select 的时候的字段验证策略既 wrapper 根据内部 entity 生成的 where 条件
       where-strategy: NOT_NULL
-
+# 不打印banner
+mybatis-plus-join:
+  banner: false
 # MinIO 配置
 minio:
   endpoint: http://82.157.157.133:9000      # MinIO服务地址

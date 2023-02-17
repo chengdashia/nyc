@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.git.bds</groupId>
+    <groupId>git.bds</groupId>
     <artifactId>nyc</artifactId>
     <version>${revision}</version>
 
@@ -42,7 +42,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>

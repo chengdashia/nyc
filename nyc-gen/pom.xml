@@ -5,7 +5,7 @@
 
     <parent>
        <artifactId>nyc</artifactId>
-        <groupId>com.git.bds</groupId>
+        <groupId>git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
@@ -20,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
         </dependency>
 

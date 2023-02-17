@@ -5,7 +5,7 @@
 
     <parent>
         <artifactId>nyc</artifactId>
-        <groupId>com.git.bds</groupId>
+        <groupId>git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
@@ -30,13 +30,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-applet-user</artifactId>
         </dependency>
 
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-role-permission</artifactId>
         </dependency>
 
@@ -46,18 +46,18 @@
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-applet-corp</artifactId>
         </dependency>
 
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-admin</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-applet-api</artifactId>
         </dependency>
 

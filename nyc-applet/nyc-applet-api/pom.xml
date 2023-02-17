@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.git.bds</groupId>
+        <groupId>git.bds</groupId>
         <artifactId>nyc-applet</artifactId>
         <version>${revision}</version>
     </parent>
@@ -19,16 +19,16 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-product</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>com.git.bds</groupId>
+                    <groupId>git.bds</groupId>
                     <artifactId>nyc-communal</artifactId>
                 </exclusion>
             </exclusions>
@@ -36,17 +36,17 @@
 
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-demand</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-file</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-communal</artifactId>
         </dependency>
     </dependencies>

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>nyc-framework</artifactId>
-        <groupId>com.git.bds</groupId>
+        <groupId>git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
@@ -17,7 +17,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-common</artifactId>
         </dependency>
         <!--excel-->

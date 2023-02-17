@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.git.bds</groupId>
+        <groupId>git.bds</groupId>
         <artifactId>nyc-system</artifactId>
         <version>${revision}</version>
     </parent>
@@ -17,27 +17,27 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-common</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-redis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-file</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-es</artifactId>
         </dependency>
     </dependencies>

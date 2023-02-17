@@ -5,7 +5,7 @@
 
     <parent>
         <artifactId>nyc-applet</artifactId>
-        <groupId>com.git.bds</groupId>
+        <groupId>git.bds</groupId>
         <version>${revision}</version>
     </parent>
 
@@ -22,34 +22,34 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-common</artifactId>
         </dependency>
         
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-spring-boot-starter-web</artifactId>
         </dependency>
 
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-product</artifactId>
             <exclusions>
                 <exclusion>
-                    <groupId>com.git.bds</groupId>
+                    <groupId>git.bds</groupId>
                     <artifactId>nyc-communal</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-demand</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.git.bds</groupId>
+            <groupId>git.bds</groupId>
             <artifactId>nyc-communal</artifactId>
         </dependency>
 

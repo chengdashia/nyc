@@ -134,6 +134,7 @@ sa-token:
   # 是否输出操作日志
   is-log: false
 
+
 # 指定bean
 jasypt:
   encryptor:

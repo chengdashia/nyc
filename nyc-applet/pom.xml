@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>nyc</artifactId>
-        <groupId>com.git.bds</groupId>
+        <groupId>git.bds</groupId>
         <version>${revision}</version>
     </parent>
 

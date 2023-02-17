@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.git.bds</groupId>
+    <groupId>git.bds</groupId>
     <artifactId>nyc-dependencies</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -92,129 +92,129 @@
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-applet-api</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-admin</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-applet</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-applet-user</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-applet-corp</artifactId>
                 <version>${revision}</version>
             </dependency>
 
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-gen</artifactId>
                 <version>${revision}</version>
             </dependency>
 
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-framework</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-common</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-role-permission</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-product</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-demand</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-communal</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-mybatis</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-es</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-web</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-excel</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-redis</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-file</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-biz-sms</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.git.bds</groupId>
+                <groupId>git.bds</groupId>
                 <artifactId>nyc-spring-boot-starter-itext</artifactId>
                 <version>${revision}</version>
             </dependency>
