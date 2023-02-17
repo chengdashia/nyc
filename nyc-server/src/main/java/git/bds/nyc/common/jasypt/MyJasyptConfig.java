@@ -47,14 +47,16 @@ public class MyJasyptConfig {
         config.setStringOutputType("base64");
         encryptor.setConfig(config);
         //===================================
-        String encrypt = encryptor.encrypt("nyc");
-        String encrypt2 = encryptor.encrypt("mysql729");
-        //String decrypt = encryptor.decrypt("ZxY08m8wOk4qE/cTEgfzhRbYQlxKg5mhG+kZ6P5lc0MQwy87Z3MouPFWyVGlGyPf");
-        //String decrypt2 = encryptor.decrypt("vtK/ygFJN1togHuUS17IbKsc6QQtyK2L2huyXLMmsc9vRQE0zCU+Qo5zQy0FfkQs");
-        System.out.println(encrypt);
-        System.out.println(encrypt2);
-        //System.out.println(decrypt);
-        //System.out.println(decrypt2);
+        String root = encryptor.encrypt("nyc");
+        String pwd = encryptor.encrypt("mysql729");
+        String appid = encryptor.encrypt("wx2b1b9f396a67b94c");
+        String secret = encryptor.encrypt("b76856231c6db17c47e3e88779c95889");
+        String redisPwd = encryptor.encrypt("12345678");
+        System.out.println("root = " + root);
+        System.out.println("pwd = " + pwd);
+        System.out.println("appid = " + appid);
+        System.out.println("secret = " + secret);
+        System.out.println("redisPwd = " + redisPwd);
 
     }
 

@@ -105,8 +105,8 @@ minio:
 wx:
   miniapp:
     configs:
-      - appid: wx2b1b9f396a67b94c  #微信小程序的appid
-        secret: b76856231c6db17c47e3e88779c95889 #微信小程序的Secret
+      - appid: DONG(QPngbvzvlj3m0688AEMS8m5wW4g3QUNYssC5OEWd5JubYUcSkgoGHA==)  #微信小程序的appid
+        secret: DONG(u9AG4X0Rv0Z3U9watef25HSCEIWAp5XeYJoyXJfP/QUoQpL/4rM/HEby9vMGnR168Gfy5khxpwI=) #微信小程序的Secret
         token: bigdatastudio666 #微信小程序消息服务器配置的token
         aesKey: 38iWpSLrffHLNdw1740GiZlYFIIZL5Kjd1hYSvmfhtF #微信小程序消息服务器配置的EncodingAESKey
         msgDataFormat: JSON
