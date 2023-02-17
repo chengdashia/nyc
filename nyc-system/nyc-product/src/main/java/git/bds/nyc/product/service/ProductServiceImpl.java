@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +53,7 @@ public class ProductServiceImpl implements ProductService{
      * @return {@link ProductInfoDTO}
      */
     @Override
+    @Transactional
     @Cacheable(value = RedisConstants.REDIS_PRODUCT_KEY,key="#id  + #type",unless = "#result == null ")
     public ProductInfoDTO getProductInfo(Long id, int type) {
         List<ProductInfoDTO> productInfoDTOList ;
@@ -124,6 +126,7 @@ public class ProductServiceImpl implements ProductService{
      * @return {@link String}
      */
     @Override
+    @Transactional
     public String getSellerTel(Long id, int type) {
         PhoneDTO phone;
         if(Objects.equals(type, ProductType.FARMER_PRIMARY.getValue())){

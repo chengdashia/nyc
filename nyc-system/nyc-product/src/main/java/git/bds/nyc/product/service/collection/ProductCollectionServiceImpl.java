@@ -39,6 +39,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
      * @return {@link PageResult}<{@link ProductCollectAndHistoryDTO}>
      */
     @Override
+    @Transactional
     public PageResult<ProductCollectAndHistoryDTO> getCollectionRecordsPageByType(PageParam pageParam, int type) {
         long userId = StpUtil.getLoginIdAsLong();
         IPage<ProductCollectAndHistoryDTO> page;
@@ -102,7 +103,7 @@ public class ProductCollectionServiceImpl extends MPJBaseServiceImpl<ProductColl
      * @return {@link Boolean}
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public Boolean addProductCollection(Long id, int type) {
         ProductCollection productCollection = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCollection>()
                 .select()

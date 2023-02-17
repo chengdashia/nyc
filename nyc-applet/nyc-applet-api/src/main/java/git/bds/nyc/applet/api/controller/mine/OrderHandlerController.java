@@ -32,7 +32,7 @@ import java.util.List;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/applet/mine/orderHandler")
+@RequestMapping("/applet/mine/order-handler")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class OrderHandlerController {
 

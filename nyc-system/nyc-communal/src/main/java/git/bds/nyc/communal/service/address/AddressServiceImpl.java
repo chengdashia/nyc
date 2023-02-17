@@ -36,6 +36,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link Address}
      */
     @Override
+    @Transactional
     public Address getAddressInfoById(Long id) {
         return this.baseMapper.selectOne(new LambdaQueryWrapper<Address>()
                 .select(Address::getConsignee,
@@ -52,7 +53,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link Boolean}
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public Boolean addAddress(AddressAddDTO addressAddDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         List<Address> list = this.baseMapper.selectList(new LambdaQueryWrapper<Address>()
@@ -73,6 +74,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link Boolean}
      */
     @Override
+    @Transactional
     public Boolean modifyDefaultAddress(Long id) {
         long userId = StpUtil.getLoginIdAsLong();
         Address one = this.baseMapper.selectOne(new LambdaQueryWrapper<Address>()
@@ -81,18 +83,6 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
         if(one == null){
             throw new BusinessException(ResultCode.NOT_EXIST.getCode(),ResultCode.NOT_EXIST.getMessage());
         }
-
-        ////将原来默认的置于非默认
-        //this.baseMapper.update(null,new LambdaUpdateWrapper<Address>()
-        //        .set(Address::getIsDefault, DefaultType.NOT_DEFAULT.getValue())
-        //        .eq(Address::getUserId, userId)
-        //        .eq(Address::getIsDefault,DefaultType.IS_DEFAULT.getValue()));
-        //
-        ////将新选择的置为默认
-        //this.baseMapper.update(null,new LambdaUpdateWrapper<Address>()
-        //        .set(Address::getIsDefault, DefaultType.IS_DEFAULT.getValue())
-        //        .eq(Address::getUserId, userId)
-        //        .eq(Address::getId, id));
         return this.baseMapper.modifyDefaultAddress(id,userId) > 0;
     }
 
@@ -102,6 +92,7 @@ public class AddressServiceImpl extends MPJBaseServiceImpl<AddressMapper, Addres
      * @return {@link List}<{@link AddressDTO}>
      */
     @Override
+    @Transactional
     public List<AddressDTO> getMyAddress() {
         return this.baseMapper.selectJoinList(AddressDTO.class,
                 new MPJLambdaWrapper<Address>()

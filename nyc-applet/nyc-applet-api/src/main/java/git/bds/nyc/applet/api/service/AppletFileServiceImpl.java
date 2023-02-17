@@ -13,6 +13,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class AppletFileImpl implements AppletFileService {
+public class AppletFileServiceImpl implements AppletFileService {
 
 
     private final MinioUtil minioUtil;
@@ -38,8 +39,9 @@ public class AppletFileImpl implements AppletFileService {
      * @param files 文件夹
      * @return {@link List}<{@link String}>
      */
-    @SneakyThrows
     @Override
+    @SneakyThrows
+    @Transactional
     public List<String> uploadProductImg(MultipartFile[] files) {
         for (MultipartFile uploadFile : files) {
             String fileType = FileTypeUtil.getType(uploadFile.getInputStream());
@@ -56,8 +58,9 @@ public class AppletFileImpl implements AppletFileService {
      * @param files 上载文件
      * @return {@link List}<{@link String}>
      */
-    @SneakyThrows
     @Override
+    @SneakyThrows
+    @Transactional
     public List<String> uploadDemandImg(MultipartFile[] files) {
         for (MultipartFile uploadFile : files) {
             String fileType = FileTypeUtil.getType(uploadFile.getInputStream());
@@ -76,6 +79,7 @@ public class AppletFileImpl implements AppletFileService {
      */
     @Override
     @SneakyThrows
+    @Transactional
     public String uploadIdCardFrontImg(MultipartFile frontImg) {
         long userId = StpUtil.getLoginIdAsLong();
         String idCardImg = minioUtil.uploadIdCardImg(minioConfig.getBucketName(), frontImg, userId);
@@ -90,6 +94,7 @@ public class AppletFileImpl implements AppletFileService {
      * @return {@link String}
      */
     @Override
+    @Transactional
     public String uploadIdCardBackImg(MultipartFile backImg) {
         return null;
     }
@@ -101,6 +106,7 @@ public class AppletFileImpl implements AppletFileService {
      * @return {@link List}<{@link String}>
      */
     @Override
+    @Transactional
     public String uploadEnterpriseLicenseImg(MultipartFile[] uploadFiles) {
         return null;
     }
@@ -113,6 +119,7 @@ public class AppletFileImpl implements AppletFileService {
      */
     @Override
     @SneakyThrows
+    @Transactional
     public String uploadAvatar(MultipartFile file) {
         String fileType = FileTypeUtil.getType(file.getInputStream());
         if(!FileTypeUtils.SUFFIX.contains(fileType)){

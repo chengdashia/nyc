@@ -6,6 +6,7 @@ import git.bds.nyc.communal.model.domain.audit.CoopAuditProduct;
 import git.bds.nyc.communal.service.audit.CoopAuditProductService;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -26,6 +27,7 @@ public class CoopAuditProductServiceImpl extends MPJBaseServiceImpl<CoopAuditPro
      * @return {@link Boolean}
      */
     @Override
+    @Transactional
     public Boolean addAudit(long id, long productId) {
         CoopAuditProduct coopAuditProduct = new CoopAuditProduct().setUserId(id).setProductId(productId);
         return this.baseMapper.insert(coopAuditProduct) > 0;

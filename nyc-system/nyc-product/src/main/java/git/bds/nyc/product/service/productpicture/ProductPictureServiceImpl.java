@@ -34,7 +34,7 @@ public class ProductPictureServiceImpl extends MPJBaseServiceImpl<ProductPicture
     private final MinioUtil minioUtil;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public Boolean updateProductPicture(Long productId,List<String> productNewImgList) {
         //商品原始的图片的列表
         List<ProductPicture> productPictureList = this.baseMapper.selectList(new LambdaQueryWrapper<ProductPicture>()

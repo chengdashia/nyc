@@ -39,8 +39,6 @@ public class ReleaseServiceImpl implements ReleaseService {
 
     private final CoopAuditProductService coopAuditProductService;
 
-    private final AuditCorpProductMapper auditCorpProductMapper;
-
     private final AuditCorpProductService auditCorpProductService;
 
     /**
@@ -49,8 +47,8 @@ public class ReleaseServiceImpl implements ReleaseService {
      * @param productDTO 产品dto
      * @return {@link Boolean}
      */
-    @Transactional(rollbackFor = Exception.class)
     @Override
+    @Transactional
     public Boolean releaseProduct(ProductDTO productDTO) {
         long userId = StpUtil.getLoginIdAsLong();
         //获取角色列表

@@ -51,7 +51,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
      * @return {@link WxMaJscode2SessionResult}
      */
     @SneakyThrows
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     @Override
     public LoginVO login(WxUserInfoDTO wxUserInfoDTO) {
         User user;
@@ -99,7 +99,7 @@ public class UserServiceImpl extends MPJBaseServiceImpl<UserMapper, User> implem
      * @return {@link Boolean}
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public Boolean modifyUserViewInfo(UserViewDTO userViewDTO) {
         return this.baseMapper.update(null,new UpdateWrapper<User>()
                 .set(User.AVATAR, userViewDTO.getAvatarUrl())

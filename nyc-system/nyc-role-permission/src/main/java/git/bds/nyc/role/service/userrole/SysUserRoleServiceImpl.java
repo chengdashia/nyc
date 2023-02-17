@@ -10,6 +10,7 @@ import com.github.yulichang.base.MPJBaseServiceImpl;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -37,6 +38,7 @@ public class SysUserRoleServiceImpl extends MPJBaseServiceImpl<SysUserRoleMapper
      * @return 角色列表
      */
     @Override
+    @Transactional
     public List<String> getRoleList(Object loginId) {
         return sysRoleDao.selectJoinList(RoleDTO.class, new MPJLambdaWrapper<SysRole>()
                 .selectAs(SysRole::getRoleName, Constants.ROLE)

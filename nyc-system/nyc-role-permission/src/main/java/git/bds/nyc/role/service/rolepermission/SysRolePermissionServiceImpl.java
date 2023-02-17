@@ -4,6 +4,7 @@ import git.bds.nyc.role.mapper.mp.SysRolePermissionMapper;
 import git.bds.nyc.role.domain.SysRolePermission;
 import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,6 +30,7 @@ public class SysRolePermissionServiceImpl extends MPJBaseServiceImpl<SysRolePerm
      * @return {@link List}<{@link String}>
      */
     @Override
+    @Transactional
     public List<String> getPermissionList(Object loginId) {
         return sysRolePermissionDao.getPermissionList(loginId);
     }

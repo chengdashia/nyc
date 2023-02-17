@@ -3,7 +3,9 @@ package git.bds.nyc.config.saToken;
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.filter.SaServletFilter;
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple;
+import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpLogic;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -48,26 +50,23 @@ public class SaTokenConfigure {
                     log.info("---------- 进入Sa-Token全局认证 -----------");
 
                     // //登录认证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
-                    //SaRouter.match("/**")
-                    //        .notMatch("/userInfo/loginByPassword")
-                    //        .notMatch("/userInfo/registerByTel")
-                    //        .notMatch("/userInfo/registerByMail")
-                    //        .notMatch("/userInfo/loginByVerificationCode")
-                    //        .notMatch("/userInfo/loginByMail")
-                    //        .notMatch("/captcha/sendSmsCaptcha")
-                    //        .notMatch("/fileInfo/getFIieRandomTen")
-                    //        .notMatch("/fileInfo/getFIieTopTen")
-                    //        .notMatch("/fileInfo/getFileInfoListByPage")
-                    //
-                    //        .notMatch("/fileUpload/*")
-                    //
-                    //        .notMatch("/captcha/*")
-                    //        .notMatch("/mail/*")
-                    //        .check(r-> StpUtil.checkLogin());
+                    SaRouter.match("/**")
+                            .notMatch("/applet/user/login")
+                            .notMatch("/applet/index/advertisement/**")
+                            .notMatch("/applet/index/**")
+                            .notMatch("/applet/index/details/**")
+                            .check(r-> StpUtil.checkLogin());
 
                     // 更多拦截处理方式，请参考“路由拦截式鉴权”章节
                     // 角色认证 -- 拦截以 admin 开头的路由，必须具备 admin 角色或者 super-admin 角色才可以通过认证
-                    //SaRouter.match("/applet/order/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/mine/release-manage/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/mine/address/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/mine/collection/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/mine/history/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/mine/order-handler/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/mine/demand-handler/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/order/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
+                    SaRouter.match("/applet/index/release/**", r -> StpUtil.checkRoleOr("corp", "farmer"));
                     //SaRouter.match("/coop/**", r -> StpUtil.checkRoleOr("coop"));
                     //SaRouter.match("/admin/**", r -> StpUtil.checkRoleOr("admin"));
 
